@@ -13,7 +13,7 @@ $active_gradient: linear-gradient(to right, $accent, lighten($accent, 4%));
 
 $border_opacity: 97;
 $border_color: transparentize($fg_color, $border_opacity/100);
-$border_width: 0px;
+$border_width: 1px;
 $border: $border_width solid $border_color;
 
 $shadow: rgba(0,0,0,.6);
