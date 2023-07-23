@@ -13,9 +13,9 @@ class SettingsService extends Service {
     constructor() {
         super();
 
-        exec('swww init');
+        // exec('swww init');
         this.setupStyle();
-        this.setupWallpaper();
+        // this.setupWallpaper();
         this.setupDarkmode();
     }
 

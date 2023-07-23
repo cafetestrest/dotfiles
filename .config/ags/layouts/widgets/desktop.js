@@ -11,20 +11,20 @@ Widget.widgets['desktop'] = props => Widget({
         halign: 'center',
         hexpand: true,
         children: [
-            {
-                type: 'box',
-                className: 'clock-box',
-                children: [{
-                    type: 'clock',
-                    className: 'clock',
-                    format: '%H:%M',
-                }],
-            },
-            {
-                type: 'clock',
-                className: 'date',
-                format: '%B %e. %A',
-            },
+            // {
+            //     type: 'box',
+            //     className: 'clock-box',
+            //     children: [{
+            //         type: 'clock',
+            //         className: 'clock',
+            //         format: '%H:%M',
+            //     }],
+            // },
+            // {
+            //     type: 'clock',
+            //     className: 'date',
+            //     format: '%B %e. %A',
+            // },
         ],
     }],
 });

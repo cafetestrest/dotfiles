@@ -1,4 +1,6 @@
-$float: 5px;
+// $float: 5px;
+$float: .5px;
+$workspaceBorder: 3px;
 
 @mixin panel_button($flat: false, $reactive: true){
     @include accs_button($flat, $reactive);
@@ -71,7 +73,7 @@ $float: 5px;
     }
 
     .workspaces {
-        border: $float solid transparent;
+        border: $workspaceBorder solid transparent;
 
         .eventbox {
             @include button;

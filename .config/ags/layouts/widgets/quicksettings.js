@@ -121,41 +121,41 @@ const systemBox = {
                 sysBtn('system-shutdown-symbolic', 'Shutdown', 'shutdown'),
             ],
         },
-        {
-            type: 'overlay',
-            className: 'battery',
-            connections: [[Battery, d => {
-                d.toggleClassName('half', Battery.percent < 46);
-            }]],
-            children: [
-                { type: 'battery/progress' },
-                {
-                    type: 'dynamic',
-                    halign: 'center',
-                    items: [
-                        {
-                            value: true, widget: {
-                                type: 'font-icon',
-                                className: 'icon',
-                                icon: '󱐋',
-                            },
-                        },
-                        {
-                            value: false, widget: {
-                                type: 'label',
-                                className: 'percent',
-                                connections: [[Battery, l => {
-                                    l.label = `${Battery.percent}%`;
-                                }]],
-                            },
-                        },
-                    ],
-                    connections: [[Battery, d => {
-                        d.update(v => v === (Battery.charging || Battery.charged));
-                    }]],
-                },
-            ],
-        },
+        // {
+        //     type: 'overlay',
+        //     className: 'battery',
+        //     connections: [[Battery, d => {
+        //         d.toggleClassName('half', Battery.percent < 46);
+        //     }]],
+        //     children: [
+        //         { type: 'battery/progress' },
+        //         {
+        //             type: 'dynamic',
+        //             halign: 'center',
+        //             items: [
+        //                 {
+        //                     value: true, widget: {
+        //                         type: 'font-icon',
+        //                         className: 'icon',
+        //                         icon: '󱐋',
+        //                     },
+        //                 },
+        //                 {
+        //                     value: false, widget: {
+        //                         type: 'label',
+        //                         className: 'percent',
+        //                         connections: [[Battery, l => {
+        //                             l.label = `${Battery.percent}%`;
+        //                         }]],
+        //                     },
+        //                 },
+        //             ],
+        //             connections: [[Battery, d => {
+        //                 d.update(v => v === (Battery.charging || Battery.charged));
+        //             }]],
+        //         },
+        //     ],
+        // },
     ],
 };
 
@@ -353,7 +353,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
             ],
         },
         volume,
-        brightness,
+        // brightness,
         {
             type: 'box',
             className: 'toggles-box',
@@ -362,7 +362,8 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     type: 'box',
                     orientation: 'vertical',
                     className: 'arrow-toggles',
-                    children: [networkToggle, bluetoothToggle],
+                    // children: [networkToggle, bluetoothToggle],
+                    children: [bluetoothToggle],
                 },
                 {
                     type: 'box',
@@ -372,14 +373,14 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     hexpand: false,
                     children: [
                         // remove asus toggles if you are not on an asus laptop
-                        { type: 'box', children: [asusmodeToggle, asusctlToggle, darkmodeToggle] },
+                        { type: 'box', children: [darkmodeToggle] },
                         { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
                     ],
                 },
             ],
         },
         appmixer,
-        networkSelection,
+        // networkSelection,
         bluetoothSelection,
         {
             type: 'media/popup-content',
@@ -407,8 +408,8 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
-            { type: 'asusctl/profile-indicator', balanced: null },
-            { type: 'asusctl/mode-indicator', hybrid: null },
+            // { type: 'asusctl/profile-indicator', balanced: null },
+            // { type: 'asusctl/mode-indicator', hybrid: null },
             { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },
             {
@@ -429,14 +430,14 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             { type: 'bluetooth/indicator', disabled: null },
             { type: 'network/indicator' },
             { type: 'audio/speaker-indicator' },
-            {
-                type: 'hover-revealer',
-                indicator: { type: 'battery/indicator', className: 'battery' },
-                child: { type: 'battery/level-label' },
-                connection: [Battery, revealer => {
-                    revealer.reveal_child = Battery.percent < 100;
-                }],
-            },
+            // {
+            //     type: 'hover-revealer',
+            //     indicator: { type: 'battery/indicator', className: 'battery' },
+            //     child: { type: 'battery/level-label' },
+            //     connection: [Battery, revealer => {
+            //         revealer.reveal_child = Battery.percent < 100;
+            //     }],
+            // },
         ],
     },
 });
