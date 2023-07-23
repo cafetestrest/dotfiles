@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+pkill eww
+# pkill myshell
+pkill $(ps aux | grep myshell | awk 'FNR == 1 {print $2}')
+eww daemon
+ 
+# HDMI=$(hyprctl monitors -j | jq .[1].name)
+# if [[ $HDMI == '"HDMI-A-1"' ]]; then
+#     # open both monitor stuff
+# else
+#     # open main monitror stuff
+# fi
+
+eww open bar
+# eww open dock
+# eww open desktop
+
+# sleep 1
+eww open notifications_popup
+# eww inspector
+
+$HOME/.config/eww/scripts/myshell/./myshell --eww --file
+
+
+# sleep 1
+# eww state
