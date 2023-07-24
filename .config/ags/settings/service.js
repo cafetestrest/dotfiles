@@ -37,6 +37,10 @@ class SettingsService extends Service {
         this._dialog.show_all();
     }
 
+    getNightlight() {
+        return Settings.instance.settings.nightlight || defaults.nightlight;
+    }
+
     setSetting(name, value) {
         const settings = this.settings;
         settings[name] = value;
@@ -146,6 +150,12 @@ var Settings = class Settings {
 
     static get preferredMpris() { return Settings.instance.settings.preferredMpris || defaults.preferredMpris; }
     static set preferredMpris(v) { Settings.instance.setSetting('preferredMpris', v); }
+
+    static get nightlight() { return Settings.instance.getNightlight(); }
+    static set nightlight(v) { Settings.instance.setSetting('nightlight', v); }
+
+    static get swayidle() { return Settings.instance.settings.swayidle || defaults.swayidle; }
+    static set swayidle(v) { Settings.instance.setSetting('swayidle', v); }
 
     static get avatar() { return Settings.instance.settings.avatar || defaults.avatar; }
     static set avatar(v) { Settings.instance.setSetting('avatar', v); }

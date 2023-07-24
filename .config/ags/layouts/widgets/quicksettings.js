@@ -1,6 +1,6 @@
 const { Widget, Service, App } = ags;
 const { Bluetooth, Battery, Audio, Settings, Network } = ags.Service;
-const { execAsync, timeout } = ags.Utils;
+const { execAsync, exec, timeout } = ags.Utils;
 
 class QSMenu extends Service {
     static { Service.register(this); }
@@ -289,6 +289,16 @@ const darkmodeToggle = smallToggle(
     'darkmode/indicator',
 );
 
+const nightlightToggle = smallToggle(
+    'nightlight/toggle',
+    'nightlight/indicator',
+);
+
+const swayidleToggle = smallToggle(
+    'swayidle/toggle',
+    'swayidle/indicator',
+);
+
 const asusctlToggle = smallToggle(
     'asusctl/profile-toggle',
     'asusctl/profile-indicator',
@@ -373,7 +383,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     hexpand: false,
                     children: [
                         // remove asus toggles if you are not on an asus laptop
-                        { type: 'box', children: [darkmodeToggle] },
+                        { type: 'box', children: [swayidleToggle, nightlightToggle, darkmodeToggle] },
                         { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
                     ],
                 },
@@ -409,7 +419,8 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
         type: 'box',
         children: [
             // { type: 'asusctl/profile-indicator', balanced: null },
-            // { type: 'asusctl/mode-indicator', hybrid: null },
+            { type: 'nightlight/indicator'},
+            { type: 'swayidle/indicator'},
             { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },
             {
