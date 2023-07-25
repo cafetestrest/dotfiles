@@ -5,12 +5,25 @@ class NightlightService extends Service {
     static { Service.register(this); }
 
     checkMode() {
-        this._mode = exec('pidof wlsunset') ? false : true;
+        console.log("1st-mode: " + this._mode)
+
+        // this._mode = exec('pidof wlsunset') ? false : true;
+
+        // if (false === this._mode) {
+        //     execAsync(['bash', '-c', "killall wlsunset"])
+        // } else {
+        //     execAsync(['bash', '-c', "wlsunset -t 3500 -S 06:00 -s 06:01"])
+        // }
 
         if (false === this._mode) {
-            execAsync(['bash', '-c', "killall wlsunset"])
-        } else {
             execAsync(['bash', '-c', "wlsunset -t 3500 -S 06:00 -s 06:01"])
+            this._mode = 'auto';
+        } else if (true === this._mode) {
+            execAsync(['bash', '-c', "killall wlsunset"])
+            this._mode = false;
+        } else {
+            execAsync(['bash', '-c', "wlsunset -t 3500 -S 07:00 -s 19:00"])
+            this._mode = true;
         }
 
         this.emit('changed');
