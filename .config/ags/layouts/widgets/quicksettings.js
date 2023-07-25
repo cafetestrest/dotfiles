@@ -289,9 +289,9 @@ const darkmodeToggle = smallToggle(
     'darkmode/indicator',
 );
 
-const swayidleToggle = smallToggle(
-    'swayidle/toggle',
-    'swayidle/indicator',
+const idleToggle = smallToggle(
+    'idle/toggle',
+    'idle/indicator',
 );
 
 const asusctlToggle = smallToggle(
@@ -383,7 +383,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     hexpand: false,
                     children: [
                         // remove asus toggles if you are not on an asus laptop
-                        { type: 'box', children: [swayidleToggle, nightlightToggle, darkmodeToggle] },
+                        { type: 'box', children: [idleToggle, nightlightToggle, darkmodeToggle] },
                         { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
                     ],
                 },
@@ -420,7 +420,7 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
         children: [
             // { type: 'asusctl/profile-indicator', balanced: null },
             { type: 'nightlight/mode-indicator'},
-            { type: 'swayidle/indicator'},
+            { type: 'idle/indicator'},
             { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },
             {
