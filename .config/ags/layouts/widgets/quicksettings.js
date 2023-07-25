@@ -289,11 +289,6 @@ const darkmodeToggle = smallToggle(
     'darkmode/indicator',
 );
 
-const nightlightToggle = smallToggle(
-    'nightlight/toggle',
-    'nightlight/indicator',
-);
-
 const swayidleToggle = smallToggle(
     'swayidle/toggle',
     'swayidle/indicator',
@@ -307,6 +302,11 @@ const asusctlToggle = smallToggle(
 const asusmodeToggle = smallToggle(
     'asusctl/mode-toggle',
     'asusctl/mode-indicator',
+);
+
+const nightlightToggle = smallToggle(
+    'nightlight/mode-toggle',
+    'nightlight/mode-indicator',
 );
 
 const appmixerToggle = {
@@ -419,7 +419,7 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
         type: 'box',
         children: [
             // { type: 'asusctl/profile-indicator', balanced: null },
-            { type: 'nightlight/indicator'},
+            { type: 'nightlight/mode-indicator'},
             { type: 'swayidle/indicator'},
             { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },

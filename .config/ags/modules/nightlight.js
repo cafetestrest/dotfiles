@@ -1,34 +1,55 @@
-const { Widget } = ags;
-const { Settings } = ags.Service;
+const { Service, Widget } = ags;
 const { exec, execAsync } = ags.Utils;
 
-Widget.widgets['nightlight/toggle'] = props => Widget({
+class NightlightService extends Service {
+    static { Service.register(this); }
+
+    checkMode() {
+        this._mode = exec('pidof wlsunset') ? false : true;
+
+        if (false === this._mode) {
+            execAsync(['bash', '-c', "killall wlsunset"])
+        } else {
+            execAsync(['bash', '-c', "wlsunset -t 3500 -S 06:00 -s 06:01"])
+        }
+
+        this.emit('changed');
+    }
+
+    constructor() {
+        super();
+
+        this._mode = exec('pidof wlsunset') ? 'auto' : false;
+    }
+
+    get mode() { return this._mode; }
+}
+
+class Nightlight {
+    static { Service.export(this, 'Nightlight'); }
+    static instance = new NightlightService;
+    static checkMode() { Nightlight.instance.checkMode(); }
+    static get mode() { return Nightlight.instance.mode; }
+}
+
+Widget.widgets['nightlight/mode-toggle'] = props => Widget({
     ...props,
     type: 'button',
-    hexpand: true,
-    onClick: () => {
-        Settings.nightlight = !Settings.nightlight
-        if (Settings.nightlight) {
-            execAsync(['bash', '-c', "wlsunset -t 3500 -S 06:00 -s 06:01"])
-        } else {
-            execAsync(['bash', '-c', "killall -9 wlsunset"])
-        }
-    },
-    connections: [[Settings, button => {
-        button.toggleClassName('on ', Settings.nightlight);
+    onClick: Nightlight.checkMode,
+    connections: [[Nightlight, button => {
+        button.toggleClassName('on', Nightlight.mode === true || Nightlight.profile === false);
     }]],
 });
 
-Widget.widgets['nightlight/indicator'] = props => Widget({
+Widget.widgets['nightlight/mode-indicator'] = props => Widget({
     ...props,
     type: 'dynamic',
     items: [
-        { value: true, widget: { type: 'icon', icon: 'night-light-symbolic' } },
+        // { value: true, widget: { type: 'icon', icon: 'daytime-sunset-symbolic' } },
+        { value: true, widget: { type: 'font-icon', icon: '' } },
         { value: false, widget: { type: 'icon', icon: 'night-light-disabled-symbolic' } },
+        { value: 'auto', widget: { type: 'icon', icon: 'night-light-symbolic' } },
+        
     ],
-    connections: [[Settings, dynamic => {
-        dynamic.update(value => {
-            return value === Settings.nightlight
-        });
-    }]],
+    connections: [[Nightlight, w => w.update(v => v === Nightlight.mode)]],
 });
