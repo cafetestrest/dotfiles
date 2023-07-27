@@ -11,6 +11,7 @@ class System extends Service {
 
     static action(action) {
         const cmd = {
+            'Lock': 'gtklock -d',
             'Sleep': 'systemctl suspend',
             'Reboot': 'systemctl reboot',
             'Log Out': `loginctl kill-user ${USER}`,
@@ -45,6 +46,7 @@ Widget.widgets['powermenu/popup-content'] = () => Widget({
     homogeneous: true,
     className: 'powermenu',
     children: [
+        button('system-lock-screen-symbolic', 'Lock'),
         button('weather-clear-night-symbolic', 'Sleep'),
         button('system-reboot-symbolic', 'Reboot'),
         button('system-log-out-symbolic', 'Log Out'),
@@ -84,7 +86,10 @@ Widget.widgets['powermenu/verification'] = () => Widget({
                 {
                     type: 'button',
                     child: 'Yes',
-                    onClick: () => exec(System.instance._action.cmd),
+                    onClick: () => {
+                        App.toggleWindow('verification')
+                        exec(System.instance._action.cmd)
+                    },
                 },
             ],
         },
