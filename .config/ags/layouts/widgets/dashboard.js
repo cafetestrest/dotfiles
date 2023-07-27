@@ -1,6 +1,6 @@
 const { App, Widget } = ags;
 
-Widget.widgets['dashboard/panel-button'] = ({ format = '%H:%M:%S  %A %d.', ...props }) => Widget({
+Widget.widgets['dashboard/panel-button'] = ({ format = '%H:%M:%S  %a %b %e', ...props }) => Widget({
     ...props,
     type: 'button',
     className: 'dashboard panel-button',
