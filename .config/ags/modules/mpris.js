@@ -53,7 +53,7 @@ Widget.widgets['mpris/blurred-cover-art'] = ({ player = prefer, ...props }) => W
         const blurred = blurredPath +
             url.substring(MEDIA_CACHE_PATH.length);
 
-        if (GLib.file_test(blurred, GLib.FileTest.EXISTS)){
+        if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
             box.setStyle(`background-image: url("${blurred}")`);
             return;
         }
@@ -115,7 +115,7 @@ Widget.widgets['mpris/player-icon'] = ({ symbolic = false, player = prefer, ...p
 Widget.widgets['mpris/volume-slider'] = ({ player = prefer, ...props }) => Widget({
     ...props,
     type: 'slider',
-    onChange: value => {
+    onChange: (_w, value) => {
         const mpris = Mpris.getPlayer(player);
         if (mpris && mpris.volume >= 0)
             Mpris.getPlayer(player).volume = value;
@@ -145,7 +145,7 @@ Widget.widgets['mpris/volume-icon'] = ({ player = prefer, items }) => Widget({
         const mpris = Mpris.getPlayer(player);
         dynamic.visible = mpris?.volume >= 0;
         const value = mpris?.volume || 0;
-        dynamic.update(threshold => threshold <= value*100);
+        dynamic.update(threshold => threshold <= value * 100);
     }]],
 });
 
@@ -157,7 +157,7 @@ Widget.widgets['mpris/position-slider'] = ({ player = prefer, ...props }) => {
         const mpris = Mpris.getPlayer(player);
         slider.visible = mpris?.length > 0;
         if (mpris && mpris.length > 0)
-            slider.adjustment.value = mpris.position/mpris.length;
+            slider.adjustment.value = mpris.position / mpris.length;
     };
     return Widget({
         ...props,
@@ -165,7 +165,7 @@ Widget.widgets['mpris/position-slider'] = ({ player = prefer, ...props }) => {
         onChange: value => {
             const mpris = Mpris.getPlayer(player);
             if (mpris && mpris.length >= 0)
-                Mpris.getPlayer(player).position = mpris.length*value;
+                Mpris.getPlayer(player).position = mpris.length * value;
         },
         connections: [
             [Mpris, update],
