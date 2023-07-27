@@ -418,11 +418,6 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
-            // { type: 'asusctl/profile-indicator', balanced: null },
-            { type: 'nightlight/mode-indicator'},
-            { type: 'idle/indicator'},
-            { type: 'audio/microphone-mute-indicator', unmuted: null },
-            { type: 'notifications/dnd-indicator', noisy: null },
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {
@@ -438,6 +433,11 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
                     box.visible = Bluetooth.connectedDevices.size > 0;
                 }]],
             },
+            // { type: 'asusctl/profile-indicator', balanced: null },
+            { type: 'nightlight/mode-indicator'},
+            { type: 'idle/indicator'},
+            { type: 'audio/microphone-mute-indicator', unmuted: null },
+            { type: 'notifications/dnd-indicator', noisy: null },
             { type: 'bluetooth/indicator', disabled: null },
             { type: 'network/indicator' },
             { type: 'audio/speaker-indicator' },
