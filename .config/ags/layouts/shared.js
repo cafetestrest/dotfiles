@@ -1,3 +1,4 @@
+const { exec, execAsync } = ags.Utils;
 /* exported notifications, desktop, corners, indicator, dock, separator,
             launcher applauncher, overview, powermenu, verification*/
 
@@ -48,7 +49,10 @@ var launcher = (size = ags.Utils.getConfig()?.baseIconSize || 16) => ({
     connections: [[ags.App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'overview' && visible);
     }]],
-    onClick: () => ags.App.toggleWindow('overview'),
+    onClick: () => {
+        // ags.App.toggleWindow('overview')
+        execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"])
+    },
     child: { type: 'distro-icon', size },
 });
 
