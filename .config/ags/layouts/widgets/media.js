@@ -129,10 +129,22 @@ Widget.widgets['media/panel-indicator'] = ({
             if (!mpris)
                 return;
 
-            if (revealer._current === mpris.trackTitle)
+            function truncateString(inputString, maxLength) {
+                if (!inputString) {
+                    return '';
+                }
+
+                if (inputString.length > maxLength) {
+                    return inputString.slice(0, maxLength);
+                } else {
+                    return inputString;
+                }
+            }
+
+            if (revealer._current === truncateString(mpris.trackTitle, 50))
                 return;
 
-            revealer._current = mpris.trackTitle;
+            revealer._current = truncateString(mpris.trackTitle, 50);
             revealer.reveal_child = true;
             timeout(3000, () => {
                 revealer.reveal_child = false;

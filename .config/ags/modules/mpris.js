@@ -69,7 +69,19 @@ Widget.widgets['mpris/title-label'] = ({ player = prefer, ...props }) => Widget(
     ...props,
     type: 'label',
     connections: [[Mpris, label => {
-        label.label = Mpris.getPlayer(player)?.trackTitle || '';
+        function truncateString(inputString, maxLength) {
+            if (!inputString) {
+                return '';
+            }
+
+            if (inputString.length > maxLength) {
+                return inputString.slice(0, maxLength);
+            } else {
+                return inputString;
+            }
+        }
+        
+        label.label = truncateString(Mpris.getPlayer(player)?.trackTitle, 50) || '';
     }]],
 });
 
