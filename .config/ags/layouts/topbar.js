@@ -44,8 +44,8 @@ const left = {
         launcher(),
         separator,
         { type: 'workspaces', className: 'workspaces' },
-        separator,
-        { type: 'client', className: 'client panel-button' },
+        // separator,
+        // { type: 'client', className: 'client panel-button' },
         { type: 'media/panel-indicator', className: 'media panel-button', hexpand: true, halign: 'end' },
     ],
 };
@@ -64,7 +64,7 @@ const right = {
     children: [
         { type: 'notifications/panel-indicator', direction: 'right', className: 'notifications panel-button' },
         { type: 'box', hexpand: true },
-        { type: 'recorder/indicator-button', className: 'recorder panel-button' },
+        // { type: 'recorder/indicator-button', className: 'recorder panel-button' },
         // { type: 'nightlight', className: 'nightlight panel-button' },
         { type: 'colorpicker', className: 'colorpicker panel-button' },
         // { type: 'swayidle', className: 'swayidle panel-button' },
@@ -94,9 +94,9 @@ const bar = monitor => ({
 /* exported windows */
 var windows = [
     ...ags.Service.Hyprland.HyprctlGet('monitors').map(({ id }) => ([
-        dock(id),
+        // dock(id),
         notifications(id),
-        desktop(id),
+        // desktop(id),
         bar(id),
         ...corners(id),
     ])).flat(),
