@@ -6,13 +6,13 @@ class NightlightService extends Service {
 
     checkMode() {
         if (false === this._mode) {
-            execAsync(['bash', '-c', "wlsunset -t 3500 -S 06:00 -s 06:01"])
+            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh enable"])
             this._mode = 'auto';
         } else if (true === this._mode) {
-            execAsync(['bash', '-c', "killall wlsunset"])
+            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh disable"])
             this._mode = false;
         } else {
-            execAsync(['bash', '-c', "wlsunset -t 3500 -S 07:00 -s 19:00"])
+            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh automatic"])
             this._mode = true;
         }
 
