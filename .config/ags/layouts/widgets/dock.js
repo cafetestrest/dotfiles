@@ -105,7 +105,13 @@ Widget.widgets['dock'] = ({
         {
             type: 'hyprland/taskbar',
             orientation,
-            skip: ['discord', 'caprine', 'nautilus', 'spotify', 'transmission'],
+            skip: [
+                'discord',
+                'caprine',
+                'nautilus',
+                'spotify',
+                'transmission',
+            ],
             item: ({ iconName }, { address, title }) => ({
                 ..._appButton(iconSize, iconName),
                 tooltip: title,
