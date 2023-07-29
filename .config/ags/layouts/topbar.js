@@ -67,6 +67,7 @@ const right = {
         // { type: 'recorder/indicator-button', className: 'recorder panel-button' },
         { type: 'colorpicker', className: 'colorpicker panel-button' },
         { type: 'screenshot', className: 'screenshot panel-button' },
+        { type: 'clipboard', className: 'clipboard panel-button' },
         separator,
         { type: 'quicksettings/panel-button' },
         separator,
