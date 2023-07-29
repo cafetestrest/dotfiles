@@ -250,6 +250,22 @@ const usageMemory = {
     ],
 };
 
+const usageStorage = {
+    type: 'box',
+    className: 'usagestorage-box',
+    halign: 'end',
+    children: [
+        {
+            type: 'usagestorage-indicator',
+        },
+        ' ',
+        {
+            type: 'usagestorage',
+        },
+        // '%',
+    ],
+};
+
 const brightness = {
     type: 'box',
     className: 'brightness',
@@ -471,6 +487,7 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
         children: [
             usageCpu,
             usageMemory,
+            usageStorage,
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {

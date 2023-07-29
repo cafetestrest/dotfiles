@@ -40,8 +40,8 @@ const { exec, execAsync } = ags.Utils;
 Widget.widgets['usagecpu'] = props => Widget({
     ...props,
     type: 'label',
-    connections: [[15000, label => execAsync(['bash', '-c', "top -bn 1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"], time => {
-        label.label = time.trim();
+    connections: [[15000, label => execAsync(['bash', '-c', "top -bn 1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"], value => {
+        label.label = value.trim();
     })]],
 });
 
@@ -54,8 +54,8 @@ Widget.widgets['usagecpu-indicator'] = props => Widget({
 Widget.widgets['usagememory'] = props => Widget({
     ...props,
     type: 'label',
-    connections: [[15000, label => execAsync(['bash', '-c', "free --giga -h | grep 'Mem' | awk '{print $3}'"], time => {
-        label.label = time.trim();
+    connections: [[15000, label => execAsync(['bash', '-c', "free --giga -h | grep 'Mem' | awk '{print $3}'"], percentage => {
+        label.label = percentage.trim();
     })]],
 });
 
@@ -63,4 +63,18 @@ Widget.widgets['usagememory-indicator'] = props => Widget({
     ...props,
     type: 'font-icon',
     icon: '︁',
+});
+
+Widget.widgets['usagestorage'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[600000, label => execAsync(['bash', '-c', "df -h / | awk 'NR==2 {print $5}'"], percentage => {
+        label.label = percentage.trim();
+    })]],
+});
+
+Widget.widgets['usagestorage-indicator'] = props => Widget({
+    ...props,
+    type: 'icon',
+    icon: 'drive-harddisk-solidstate-symbolic',
 });
