@@ -218,6 +218,22 @@ const speaker = {
     ],
 };
 
+const cpuUsage = {
+    type: 'box',
+    className: 'cpuusage-box',
+    halign: 'end',
+    children: [
+        {
+            type: 'usagecpu-indicator',
+        },
+        // ' ',
+        {
+            type: 'usagecpu',
+        },
+        // '%',
+    ],
+};
+
 const brightness = {
     type: 'box',
     className: 'brightness',
@@ -437,6 +453,7 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
+            cpuUsage,
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {
