@@ -218,17 +218,33 @@ const speaker = {
     ],
 };
 
-const cpuUsage = {
+const usageCpu = {
     type: 'box',
-    className: 'cpuusage-box',
+    className: 'usagecpu-box',
     halign: 'end',
     children: [
         {
             type: 'usagecpu-indicator',
         },
-        // ' ',
+        ' ',
         {
             type: 'usagecpu',
+        },
+        // '%',
+    ],
+};
+
+const usageMemory = {
+    type: 'box',
+    className: 'usagememory-box',
+    halign: 'end',
+    children: [
+        {
+            type: 'usagememory-indicator',
+        },
+        ' ',
+        {
+            type: 'usagememory',
         },
         // '%',
     ],
@@ -453,7 +469,8 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
-            cpuUsage,
+            usageCpu,
+            usageMemory,
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {
