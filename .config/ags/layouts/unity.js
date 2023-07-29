@@ -58,6 +58,7 @@ const right = {
         { type: 'notifications/panel-indicator', className: 'notifications panel-button' },
         { type: 'recorder/indicator-button', className: 'recorder panel-button' },
         { type: 'colorpicker', className: 'colorpicker panel-button' },
+        { type: 'screenshot', className: 'screenshot panel-button' },
         separator,
         { type: 'quicksettings/panel-button' },
         separator,
