@@ -105,10 +105,16 @@ Widget.widgets['mpris/player-icon'] = ({ symbolic = false, player = prefer, ...p
     ...props,
     type: 'icon',
     connections: [[Mpris, icon => {
-        const name = `${Mpris.getPlayer(player)?.entry}${symbolic ? '-symbolic' : ''}`;
+        const mpris = Mpris.getPlayer(player);
+        const name = `${mpris?.entry}${symbolic ? '-symbolic' : ''}`;
         lookUpIcon(name)
             ? icon.icon_name = name
             : icon.icon_name = 'audio-x-generic-symbolic';
+
+        //check if media is playing, if not them remove media icon
+        if (mpris && mpris.position && mpris.position === -1) {
+            icon.icon_name = null;
+        }
     }]],
 });
 
