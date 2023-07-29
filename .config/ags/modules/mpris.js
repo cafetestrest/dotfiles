@@ -201,6 +201,11 @@ Widget.widgets['mpris/position-label'] = ({ player = prefer, ...props }) => {
             ? label.label = _lengthStr(mpris.position)
             : label.visible = mpris;
 
+        // checks if the mpris position is -1, if so means that player has stopped playing, label (elapsed time) should be null
+        if (mpris && mpris.position && mpris.position === -1) {
+            label.label = null;
+        }
+
         return true;
     };
 
@@ -222,6 +227,11 @@ Widget.widgets['mpris/length-label'] = ({ player = prefer, ...props }) => Widget
         mpris && mpris.length > 0
             ? label.label = _lengthStr(mpris.length)
             : label.visible = mpris;
+
+        // checks if the mpris position is -1, if so means that player has stopped playing, label (total time) should be null
+        if (mpris && mpris.position && mpris.position === -1) {
+            label.label = null;
+        }
     }]],
 });
 
