@@ -230,7 +230,7 @@ const usageCpu = {
         {
             type: 'usagecpu',
         },
-        // '%',
+        '%',
     ],
 };
 
