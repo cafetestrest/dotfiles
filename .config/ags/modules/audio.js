@@ -91,7 +91,7 @@ Widget.widgets['audio/microphone-mute-indicator'] = ({
 Widget.widgets['audio/microphone-mute-toggle'] = props => Widget({
     ...props,
     type: 'button',
-    onClick: 'pactl set-source-mute @DEFAULT_SOURCE@ toggle',
+    onClick: 'pamixer --default-source -t',
     connections: [[Audio, button => {
         if (!Audio.microphone)
             return;

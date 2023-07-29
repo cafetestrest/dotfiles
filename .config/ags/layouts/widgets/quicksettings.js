@@ -171,7 +171,7 @@ const volume = {
                 {
                     type: 'button',
                     child: { type: 'audio/speaker-type-indicator' },
-                    onClick: 'pactl set-sink-mute @DEFAULT_SINK@ toggle',
+                    onClick: 'pamixer --default-source -t',
                 },
                 { className: 'slider', type: 'audio/speaker-slider', hexpand: true },
                 { type: 'box', children: [{ type: 'audio/speaker-percent-label' }, '%'] },
