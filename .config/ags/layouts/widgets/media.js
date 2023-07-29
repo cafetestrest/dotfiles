@@ -120,7 +120,7 @@ Widget.widgets['media/panel-indicator'] = ({
             type: 'box',
             children: [
                 { type: 'mpris/artist-label', className: 'artist', player },
-                ' - ',
+                ' ',
                 { type: 'mpris/title-label', className: 'title', player },
             ],
         },

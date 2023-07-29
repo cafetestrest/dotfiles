@@ -202,6 +202,22 @@ const volume = {
     ],
 };
 
+const speaker = {
+    type: 'box',
+    className: 'speaker-box',
+    halign: 'end',
+    children: [
+        {
+            type: 'audio/speaker-indicator',
+        },
+        ' ',
+        {
+            type: 'audio/speaker-percent-label',
+        },
+        '%',
+    ],
+};
+
 const brightness = {
     type: 'box',
     className: 'brightness',
@@ -443,7 +459,8 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             { type: 'notifications/dnd-indicator', noisy: null },
             { type: 'bluetooth/indicator', disabled: null },
             { type: 'network/indicator' },
-            { type: 'audio/speaker-indicator' },
+            // { type: 'audio/speaker-indicator' },
+            speaker
             // {
             //     type: 'hover-revealer',
             //     indicator: { type: 'battery/indicator', className: 'battery' },
