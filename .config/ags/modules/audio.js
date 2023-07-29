@@ -5,7 +5,7 @@ const iconSubstitute = item => {
     const substitues = [
         { from: 'audio-headset-bluetooth', to: 'audio-headphones-symbolic' },
         { from: 'audio-card-analog-usb', to: 'audio-speakers-symbolic' },
-        { from: 'audio-card-analog-pci', to: 'audio-card-symbolic' },
+        { from: 'audio-card-analog-pci', to: 'audio-volume-high-symbolic' },
     ];
 
     for (const { from, to } of substitues) {
