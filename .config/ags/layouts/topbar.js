@@ -36,13 +36,14 @@ const quicksettings = {
 // bar
 const { launcher } = imports.layouts.shared;
 const separator = { type: 'separator', valign: 'center' };
+const separatorinvisible = { type: 'separator-invisible', valign: 'center' };
 
 const left = {
     type: 'box',
     className: 'left',
     children: [
         launcher(),
-        separator,
+        separatorinvisible,
         // { type: 'workspaces', className: 'workspaces' },
         // separator,
         { type: 'workspaces-custom', className: 'workspaces' },
@@ -70,9 +71,9 @@ const right = {
         { type: 'screenshot', className: 'screenshot panel-button' },
         { type: 'clipboard', className: 'clipboard panel-button' },
         { type: 'note', className: 'note panel-button'},
-        separator,
+        separatorinvisible,
         { type: 'quicksettings/panel-button' },
-        separator,
+        separatorinvisible,
         { type: 'powermenu/panel-button' },
     ],
 };

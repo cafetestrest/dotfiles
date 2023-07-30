@@ -49,6 +49,12 @@ $workspaceBorder: 3px;
         min-width: 5px;
     }
 
+    .separator-invisible {
+        background-color: transparent;
+        min-height: 5px;
+        min-width: 5px;
+    }
+
     .launcher {
         color: transparentize($accent, 0.2);
 

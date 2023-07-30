@@ -8,6 +8,12 @@ Widget.widgets['separator'] = props => Widget({
     className: 'separator',
 });
 
+Widget.widgets['separator-invisible'] = props => Widget({
+    ...props,
+    type: 'box',
+    className: 'separator-invisible',
+});
+
 Widget.widgets['font-icon'] = ({
     icon,
     size = getConfig().baseIconSize || 16,
