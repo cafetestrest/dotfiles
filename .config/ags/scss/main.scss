@@ -12,6 +12,7 @@
 @import './widgets/dashboard';
 @import './widgets/bar';
 @import './widgets/settings';
+@import './widgets/workspaces';
 
 tooltip {
     @include tooltip;

@@ -43,8 +43,9 @@ const left = {
     children: [
         launcher(),
         separator,
-        { type: 'workspaces', className: 'workspaces' },
+        // { type: 'workspaces', className: 'workspaces' },
         // separator,
+        { type: 'workspaces-custom', className: 'workspaces' },
         // { type: 'client', className: 'client panel-button' },
         { type: 'media/panel-indicator', className: 'media panel-button', hexpand: true, halign: 'end' },
     ],

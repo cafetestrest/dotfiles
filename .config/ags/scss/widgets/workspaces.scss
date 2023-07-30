@@ -1,0 +1,26 @@
+.workspaces-custom button {
+    background-color: transparent;
+    color: #eeeeee;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 6px;
+}
+
+// on hover
+.workspaces-custom button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #eeeeee;
+}
+
+// on click
+.workspaces-custom button:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #eeeeee;
+}
+
+// current one
+.workspaces-custom button.focused {
+    // border-bottom: 3px solid aqua;
+    background-color: #ffffff;
+    color: #000000;
+}
