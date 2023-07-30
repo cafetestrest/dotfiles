@@ -68,6 +68,7 @@ const right = {
         { type: 'colorpicker', className: 'colorpicker panel-button' },
         { type: 'screenshot', className: 'screenshot panel-button' },
         { type: 'clipboard', className: 'clipboard panel-button' },
+        { type: 'note', className: 'note panel-button'},
         separator,
         { type: 'quicksettings/panel-button' },
         separator,
