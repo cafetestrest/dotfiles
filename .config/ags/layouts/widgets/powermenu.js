@@ -22,9 +22,10 @@ class System extends Service {
             error(`There is no ${action} system action`);
 
         App.getWindow('powermenu').hide();
-        App.getWindow('verification').show();
+        // App.getWindow('verification').show();
         System.instance._action = { cmd, action };
-        System.instance.emit('changed');
+        // System.instance.emit('changed');
+        exec(System.instance._action.cmd)
     }
 }
 
