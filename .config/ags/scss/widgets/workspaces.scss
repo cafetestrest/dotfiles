@@ -1,6 +1,6 @@
 .workspaces-custom button {
     background-color: transparent;
-    color: #eeeeee;
+    color: $fg-color;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 6px;
@@ -20,7 +20,6 @@
 
 // current one
 .workspaces-custom button.focused {
-    // border-bottom: 3px solid aqua;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: $fg_color;;
+    color: $bg_color;
 }
