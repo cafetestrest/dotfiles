@@ -22,6 +22,7 @@ Widget.widgets['workspaces'] = props => Widget({
             active: {
                 type: 'eventbox',
                 child: indicator,
+                onClick: () => print('hello'),
             },
             occupied: indicator,
             empty: indicator,

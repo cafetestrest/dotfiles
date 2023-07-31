@@ -8,9 +8,9 @@ var defaults = {
     nightlight: false,
     swayidle: false,
     preferredMpris: 'spotify',
+    layout: 'topbar',
     userName: USER,
     style: {
-        layout: 'topbar',
         floating_bar: false,
         wm_gaps: 16,
         spacing: 9,
