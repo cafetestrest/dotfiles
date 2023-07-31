@@ -485,9 +485,6 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
-            usageCpu,
-            usageMemory,
-            usageStorage,
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {
@@ -522,4 +519,28 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             // },
         ],
     },
+});
+
+Widget.widgets['usageCpu'] = () => Widget({
+    type: 'box',
+    className: 'panel-button',
+    children: [
+        usageCpu,
+    ],
+});
+
+Widget.widgets['usageMemory'] = () => Widget({
+    type: 'box',
+    className: 'panel-button',
+    children: [
+        usageMemory,
+    ],
+});
+
+Widget.widgets['usageStorage'] = () => Widget({
+    type: 'box',
+    className: 'panel-button',
+    children: [
+        usageStorage,
+    ],
 });
