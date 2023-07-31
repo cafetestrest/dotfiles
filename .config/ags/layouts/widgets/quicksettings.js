@@ -490,10 +490,15 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
                 connections: [[Bluetooth, box => {
                     box.get_children().forEach(ch => ch.destroy());
                     for (const [, device] of Bluetooth.connectedDevices) {
+                        batteryPercentage = device.batteryPercentage;
+
                         box.add(Widget({
-                            type: 'hover-revealer',
-                            indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-                            child: { type: 'label', label: device.name },
+                            type: 'box',
+                            // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+                            children: [
+                                { type: 'icon', icon: device.iconName + '-symbolic', },
+                                { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
+                            ],
                         }));
                     }
                     box.show_all();
