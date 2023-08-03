@@ -20,6 +20,19 @@ const dashboard = {
     },
 };
 
+const weather = {
+    name: 'weather',
+    popup: true,
+    focusable: true,
+    anchor: ['top'],
+    child: {
+        type: 'layout',
+        layout: 'top',
+        window: 'weather',
+        child: { type: 'weather/popup-content' },
+    },
+};
+
 const quicksettings = {
     name: 'quicksettings',
     popup: true,
@@ -57,6 +70,7 @@ const center = {
     className: 'center',
     children: [
         { type: 'dashboard/panel-button' },
+        { type: 'weather/panel-button' },
     ],
 };
 
@@ -106,5 +120,6 @@ var windows = [
         bar(id),
     ])).flat(),
     dashboard,
+    weather,
     quicksettings,
 ];
