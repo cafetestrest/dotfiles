@@ -19,11 +19,7 @@ class WeatherService extends Service {
     }
 
     get temperatureWeather() { return this._temperatureWeather; }
-    setTemperatureWeather(temp) {
-        if (temp) {
-            this._temperatureWeather = temp
-        }
-    }
+    setTemperatureWeather(temp) { this._temperatureWeather = temp; }
 
     get tooltip() { return this._tooltip; }
     setTooltip(text) { this._tooltip = text }
@@ -43,24 +39,6 @@ class Weather {
     static setTooltip(text) { Weather.instance.setTooltip(text); }
 }
 
-Widget.widgets['weather/temperature'] = props => Widget({
-    ...props,
-    type: 'label',
-    connections: [[15000, label => {
-        if (!Weather.temperatureWeather) {
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"])
-        }
-
-        if (Weather.temperatureWeather) {
-            label.label = Weather.temperatureWeather.toString()
-            Weather.setIconWeather(label.label.charAt(0))
-        } else {
-            label.label = ''
-        }
-    }
-    ]],
-});
-
 const once = (widget, callback) => {
     if (!widget._first) {
         return widget._first = true;
@@ -68,6 +46,18 @@ const once = (widget, callback) => {
 
     callback(widget);
 };
+
+Widget.widgets['weather/temperature'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[15000, label => {
+        if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
+            label.label = Weather.temperatureWeather.toString()
+            Weather.setIconWeather(label.label.charAt(0))
+        }
+    }
+    ]],
+});
 
 Widget.widgets['weather/panel-button'] = props => Widget({
     ...props,
@@ -108,6 +98,14 @@ Widget.widgets['tooltip'] = props => Widget({
     }]],
 });
 
+Widget.widgets['reset-timer'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[600000, label => {
+        execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"])
+    }]],
+});
+
 Widget.widgets['weather/forecast'] = props => Widget({
     ...props,
     type: 'box',
@@ -120,6 +118,7 @@ Widget.widgets['weather/forecast'] = props => Widget({
             halign: 'center',
             children: [
                 { type: 'tooltip' },
+                { type: 'reset-timer' },
             ],
         }
     ],
