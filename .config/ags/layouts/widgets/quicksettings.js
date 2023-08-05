@@ -465,29 +465,29 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             // ] : []),
             { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },
-            {
-                type: 'box',
-                connections: [[Bluetooth, box => {
-                    box.get_children().forEach(ch => ch.destroy());
-                    for (const [, device] of Bluetooth.connectedDevices) {
-                        batteryPercentage = device.batteryPercentage;
+            // {
+            //     type: 'box',
+            //     connections: [[Bluetooth, box => {
+            //         box.get_children().forEach(ch => ch.destroy());
+            //         for (const [, device] of Bluetooth.connectedDevices) {
+            //             batteryPercentage = device.batteryPercentage;
 
-                        box.add(Widget({
-                            // type: 'hover-revealer',
-                            // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-                            // child: { type: 'label', label: device.name },
-                            type: 'box',
-                            // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-                            children: [
-                                { type: 'icon', icon: device.iconName + '-symbolic', },
-                                { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
-                            ],
-                        }));
-                    }
-                    box.show_all();
-                    box.visible = Bluetooth.connectedDevices.size > 0;
-                }]],
-            },
+            //             box.add(Widget({
+            //                 // type: 'hover-revealer',
+            //                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+            //                 // child: { type: 'label', label: device.name },
+            //                 type: 'box',
+            //                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+            //                 children: [
+            //                     { type: 'icon', icon: device.iconName + '-symbolic', },
+            //                     { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
+            //                 ],
+            //             }));
+            //         }
+            //         box.show_all();
+            //         box.visible = Bluetooth.connectedDevices.size > 0;
+            //     }]],
+            // },
             { type: 'nightlight/mode-indicator'},
             { type: 'idle/indicator'},
             { type: 'notifications/dnd-indicator', noisy: null },
@@ -531,4 +531,29 @@ Widget.widgets['usageStorage'] = () => Widget({
     children: [
         usageStorage,
     ],
+});
+
+Widget.widgets['bluetooth/devices'] = () => Widget({
+    type: 'box',
+    className: 'bluetooth devices',
+    connections: [[Bluetooth, box => {
+        box.get_children().forEach(ch => ch.destroy());
+        for (const [, device] of Bluetooth.connectedDevices) {
+            batteryPercentage = device.batteryPercentage;
+
+            box.add(Widget({
+                // type: 'hover-revealer',
+                // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+                // child: { type: 'label', label: device.name },
+                type: 'box',
+                // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+                children: [
+                    { type: 'icon', icon: device.iconName + '-symbolic', },
+                    { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
+                ],
+            }));
+        }
+        box.show_all();
+        box.visible = Bluetooth.connectedDevices.size > 0;
+    }]],
 });
