@@ -39,18 +39,10 @@ class Weather {
     static setTooltip(text) { Weather.instance.setTooltip(text); }
 }
 
-const once = (widget, callback) => {
-    if (!widget._first) {
-        return widget._first = true;
-    }
-
-    callback(widget);
-};
-
 Widget.widgets['weather/temperature'] = props => Widget({
     ...props,
     type: 'label',
-    connections: [[15000, label => {
+    connections: [[5000, label => {
         if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
             label.label = Weather.temperatureWeather.toString()
             Weather.setIconWeather(label.label.charAt(0))
@@ -62,16 +54,10 @@ Widget.widgets['weather/temperature'] = props => Widget({
 Widget.widgets['weather/panel-button'] = props => Widget({
     ...props,
     type: 'button',
-    className: null !== Weather.temperatureWeather ? 'weather panel-button' : 'weather-none',
+    className: 'weather panel-button',
     onClick: () => App.toggleWindow('weather'),
     connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'weather' && visible);
-        
-        if (win && true !== btn._first) {
-            btn.toggleClassName('panel-button', true)
-
-            once(btn, btn => {})
-        }
     }]],
     child: {
         type: 'box',
