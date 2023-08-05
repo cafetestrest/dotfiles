@@ -7,15 +7,12 @@ class WeatherService extends Service {
     constructor() {
         super();
         this._temperatureWeather = null;
-        this._iconWeather = null;
         this._tooltip = null;
+        // this._iconWeather = null;
     }
 
-    get iconWeather() { return this._iconWeather; }
-    setIconWeather(icon) {
-        if (icon) {
-            this._iconWeather = icon
-        }
+    get weatherData() {
+        execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"])
     }
 
     get temperatureWeather() { return this._temperatureWeather; }
@@ -26,14 +23,20 @@ class WeatherService extends Service {
 
     get tooltip() { return this._tooltip; }
     setTooltip(text) { this._tooltip = text }
+
+    // get iconWeather() { return this._iconWeather; }
+    // setIconWeather(icon) {
+    //     if (icon) {
+    //         this._iconWeather = icon
+    //     }
+    // }
 }
 
 class Weather {
     static { Service.export(this, 'Weather'); }
     static instance = new WeatherService;
 
-    static get iconWeather() { return Weather.instance.iconWeather; }
-    static setIconWeather(icon) { Weather.instance.setIconWeather(icon); }
+    static get weatherData() { return Weather.instance.weatherData; }
 
     static get temperatureWeather() { return Weather.instance.temperatureWeather; }
     static setTemperatureWeather(temp) { 
@@ -42,6 +45,9 @@ class Weather {
 
     static get tooltip() { return Weather.instance.tooltip; }
     static setTooltip(text) { Weather.instance.setTooltip(text); }
+
+    // static get iconWeather() { return Weather.instance.iconWeather; }
+    // static setIconWeather(icon) { Weather.instance.setIconWeather(icon); }
 }
 
 Widget.widgets['weather/temperature'] = props => Widget({
@@ -107,7 +113,7 @@ Widget.widgets['reset-timer'] = props => Widget({
     ...props,
     type: 'label',
     connections: [[600000, label => {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"])
+        Weather.weatherData
     }]],
 });
 
@@ -142,9 +148,27 @@ Widget.widgets['weather/popup-content'] = () => Widget({
                     type: 'weather/forecast',
                     className: 'datemenu',
                 },
+                {
+                    type: 'weather/refresh-button',
+                    className: 'header panel-button',
+                },
             ],
         },
     ],
+});
+
+Widget.widgets['weather/refresh-button'] = props => Widget({
+    ...props,
+    type: 'button',
+    className: 'refresh panel-button',
+    child: {
+        type: 'icon',
+        icon: 'view-refresh-symbolic',
+        halign: 'end',
+    },
+    onClick: () => {
+        Weather.weatherData
+    },
 });
 
 // Widget.widgets['weather/icon-indicator'] = props => Widget({
