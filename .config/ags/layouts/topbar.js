@@ -47,38 +47,28 @@ const quicksettings = {
 };
 
 // bar
-const { launcher } = imports.layouts.shared;
+const { launcher, bar } = imports.layouts.shared;
 const separator = { type: 'separator', valign: 'center' };
 const separatorinvisible = { type: 'separator-invisible', valign: 'center' };
 
-const left = {
-    type: 'box',
-    className: 'left',
-    children: [
+const panel = bar({
+    anchor: ['top', 'left', 'right'],
+    start: [
         launcher(),
-        separatorinvisible,
-        // { type: 'workspaces', className: 'workspaces' },
         // separator,
-        { type: 'workspaces-custom', className: 'workspaces' },
+        // { type: 'workspaces', className: 'workspaces panel-button' },
+        // separator,
         // { type: 'client', className: 'client panel-button' },
+        separatorinvisible,
+        { type: 'workspaces-custom', className: 'workspaces' },
         { type: 'media/panel-indicator', className: 'media panel-button', hexpand: true, halign: 'end' },
     ],
-};
-
-const center = {
-    type: 'box',
-    className: 'center',
-    children: [
+    center: [
         { type: 'dashboard/panel-button' },
         { type: 'weather/temperature' },
     ],
-};
-
-const right = {
-    type: 'box',
-    className: 'right',
-    children: [
-        { type: 'notifications/panel-indicator', direction: 'right', className: 'notifications panel-button' },
+    end: [
+        { type: 'notifications/panel-indicator', direction: 'right', className: 'notifications panel-button', hexpand: true },
         { type: 'box', hexpand: true },
         { type: 'usageCpu' },
         { type: 'usageMemory' },
@@ -89,25 +79,10 @@ const right = {
         { type: 'clipboard', className: 'clipboard panel-button' },
         { type: 'note', className: 'note panel-button'},
         { type: 'quicksettings/panel-button' },
+        // separator,
         separatorinvisible,
         { type: 'powermenu/panel-button' },
     ],
-};
-
-const bar = monitor => ({
-    name: `bar${monitor}`,
-    monitor,
-    anchor: ['top', 'left', 'right'],
-    exclusive: true,
-    child: {
-        type: 'centerbox',
-        className: 'panel',
-        children: [
-            left,
-            center,
-            right,
-        ],
-    },
 });
 
 /* exported windows */
@@ -117,7 +92,7 @@ var windows = [
         notifications(id),
         // desktop(id),
         ...corners(id),
-        bar(id),
+        panel(id),
     ])).flat(),
     dashboard,
     weather,

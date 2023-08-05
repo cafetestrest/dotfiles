@@ -1,17 +1,15 @@
-const { exec, USER } = ags.Utils;
+const { USER } = ags.Utils;
 
 /* exported defaults */
 var defaults = {
     avatar: `/home/${USER}/Pictures/avatars/donna.jpg`,
     wallpaper: `/home/${USER}/Pictures/Wallpapers/kitty/kittyb2.jpeg`,
     darkmode: true,
-    nightlight: false,
-    swayidle: false,
     preferredMpris: 'spotify',
-    layout: 'topbar',
     userName: USER,
     style: {
-        floating_bar: false,
+        layout: 'topbar',
+        bar_style: 'normal',
         wm_gaps: 16,
         spacing: 9,
         radii: 7,

@@ -33,16 +33,16 @@ class SettingsService extends Service {
     }
 
     openSettings() {
-        if (this._dialog)
-            this._dialog.hide();
+        if (!this._dialog) {
+            this._dialog = imports.settings.dialog.dialog();
+            this._dialog.connect('delete-event', () => {
+                this._dialog.hide();
+                return true;
+            });
+        }
 
-        this._dialog = imports.settings.dialog.dialog();
-        this._dialog.connect('destroy', () => this._dialog = null);
+        this._dialog.hide();
         this._dialog.show_all();
-    }
-
-    getNightlight() {
-        return Settings.instance.settings.nightlight || defaults.nightlight;
     }
 
     setSetting(name, value) {
@@ -57,11 +57,6 @@ class SettingsService extends Service {
 
         if (name === 'wallpaper')
             this.setupWallpaper();
-
-        if (name === 'layout' && !this._notifSent) {
-            execAsync(['notify-send', 'Setting layout needs an Ags restart to take effect'], print, print);
-            this._notifSent = true;
-        }
     }
 
     getStyle(prop) {
@@ -76,8 +71,17 @@ class SettingsService extends Service {
         this.setSetting('style', style);
         this.setupStyle();
 
-        if (prop === 'floating_bar')
+        if (prop === 'bar_style') {
             this.setupHyprland();
+
+            if (value !== 'normal')
+                this.setStyle('screen_corners', false);
+        }
+
+        if (prop === 'layout' && !this._notifSent) {
+            execAsync(['notify-desktop', 'Setting layout needs an Ags restart to take effect']);
+            this._notifSent = true;
+        }
     }
 
     setupHyprland() {
@@ -89,9 +93,12 @@ class SettingsService extends Service {
             }
         }
 
+        exec('hyprctl keyword layerrule "ignorealpha 0, powermenu"');
+        exec('hyprctl keyword layerrule "ignorealpha 0, verification"');
+
         ags.Service.Hyprland.HyprctlGet('monitors').forEach(({ name }) => {
-            if (this.getStyle('floating_bar') == true) {
-                const layout = this.settings.layout || defaults.layout;
+            if (this.getStyle('bar_style') !== 'normal') {
+                const layout = this.getStyle('layout');
                 switch (layout) {
                 case 'topbar':
                 case 'unity':
@@ -122,7 +129,7 @@ class SettingsService extends Service {
         ['wm_gaps', 'spacing', 'radii', 'border_width']
             .forEach(v => sed(v, 'variables', `${check(style[v], defs[v])}px`));
 
-        ['accent', 'accent_fg', 'bg', 'border_opacity', 'widget_opacity', 'screen_corners', 'floating_bar']
+        ['accent', 'accent_fg', 'bg', 'border_opacity', 'widget_opacity', 'screen_corners', 'bar_style', 'layout']
             .forEach(v => sed(v, 'variables', check(style[v], defs[v])));
 
         sed('active_gradient', 'variables', `linear-gradient(${style.active_gradient || defs.active_gradient})`);
@@ -174,8 +181,8 @@ class SettingsService extends Service {
 
     get darkmode() {
         return typeof this.settings.darkmode === 'boolean'
-        ? this.settings.darkmode
-        : defaults.darkmode;
+            ? this.settings.darkmode
+            : defaults.darkmode;
     }
 }
 
@@ -196,17 +203,8 @@ var Settings = class Settings {
     static get wallpaper() { return Settings.instance.settings.wallpaper || defaults.wallpaper; }
     static set wallpaper(v) { Settings.instance.setSetting('wallpaper', v); }
 
-    static get layout() { return Settings.instance.settings.layout || defaults.layout; }
-    static set layout(v) { Settings.instance.setSetting('layout', v); }
-
     static get preferredMpris() { return Settings.instance.settings.preferredMpris || defaults.preferredMpris; }
     static set preferredMpris(v) { Settings.instance.setSetting('preferredMpris', v); }
-
-    static get nightlight() { return Settings.instance.getNightlight(); }
-    static set nightlight(v) { Settings.instance.setSetting('nightlight', v); }
-
-    static get swayidle() { return Settings.instance.settings.swayidle || defaults.swayidle; }
-    static set swayidle(v) { Settings.instance.setSetting('swayidle', v); }
 
     static get avatar() { return Settings.instance.settings.avatar || defaults.avatar; }
     static set avatar(v) { Settings.instance.setSetting('avatar', v); }

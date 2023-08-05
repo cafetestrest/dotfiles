@@ -18,8 +18,8 @@ const _appButton = (iconSize, icon) => ({
                 {
                     type: 'box',
                     className: 'indicator',
-                    valign: Settings.layout === 'unity' ? 'center' : 'end',
-                    halign: Settings.layout === 'unity' ? 'start' : 'center',
+                    valign: Settings.getStyle('layout') === 'unity' ? 'center' : 'end',
+                    halign: Settings.getStyle('layout') === 'unity' ? 'start' : 'center',
                 },
             ],
         }],
@@ -28,6 +28,7 @@ const _appButton = (iconSize, icon) => ({
 
 const _pins = ({ iconSize, list, orientation }) => ({
     type: 'box',
+    className: 'pins',
     homogeneous: true,
     orientation,
     children: list
@@ -92,12 +93,14 @@ Widget.widgets['dock'] = ({
                 ['caprine'],
                 ['discord'],
                 ['transmission'],
+                ['bottles'],
             ],
         }),
         {
             type: 'box',
             valign: 'center',
             className: 'separator',
+            halign: 'center',
             connections: [[Hyprland, box => {
                 box.visible = box.get_parent().get_children()[launcher ? 3 : 2].get_children().length > 0;
             }]],

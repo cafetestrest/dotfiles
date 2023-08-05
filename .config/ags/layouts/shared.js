@@ -1,6 +1,6 @@
 const { exec, execAsync } = ags.Utils;
 /* exported notifications, desktop, corners, indicator, dock, separator,
-            launcher applauncher, overview, powermenu, verification*/
+            launcher bar applauncher, overview, powermenu, verification*/
 
 // static
 var notifications = (monitor, transition, anchor) => ({
@@ -54,6 +54,22 @@ var launcher = (size = ags.Utils.getConfig()?.baseIconSize || 16) => ({
         execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"])
     },
     child: { type: 'distro-icon', size },
+});
+
+var bar = ({ anchor, start, center, end }) => monitor => ({
+    name: `bar${monitor}`,
+    monitor,
+    anchor,
+    exclusive: true,
+    child: {
+        type: 'centerbox',
+        className: 'panel',
+        children: [
+            { className: 'start', type: 'box', children: start },
+            { className: 'center', type: 'box', children: center },
+            { className: 'end', type: 'box', children: end },
+        ],
+    },
 });
 
 //popups

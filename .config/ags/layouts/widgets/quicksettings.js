@@ -1,6 +1,6 @@
 const { Widget, Service, App } = ags;
 const { Bluetooth, Battery, Audio, Settings, Network } = ags.Service;
-const { execAsync, exec, timeout } = ags.Utils;
+const { execAsync, timeout } = ags.Utils;
 
 class QSMenu extends Service {
     static { Service.register(this); }
@@ -121,41 +121,7 @@ const systemBox = {
                 sysBtn('system-shutdown-symbolic', 'Shutdown', 'shutdown'),
             ],
         },
-        // {
-        //     type: 'overlay',
-        //     className: 'battery',
-        //     connections: [[Battery, d => {
-        //         d.toggleClassName('half', Battery.percent < 46);
-        //     }]],
-        //     children: [
-        //         { type: 'battery/progress' },
-        //         {
-        //             type: 'dynamic',
-        //             halign: 'center',
-        //             items: [
-        //                 {
-        //                     value: true, widget: {
-        //                         type: 'font-icon',
-        //                         className: 'icon',
-        //                         icon: '󱐋',
-        //                     },
-        //                 },
-        //                 {
-        //                     value: false, widget: {
-        //                         type: 'label',
-        //                         className: 'percent',
-        //                         connections: [[Battery, l => {
-        //                             l.label = `${Battery.percent}%`;
-        //                         }]],
-        //                     },
-        //                 },
-        //             ],
-        //             connections: [[Battery, d => {
-        //                 d.update(v => v === (Battery.charging || Battery.charged));
-        //             }]],
-        //         },
-        //     ],
-        // },
+        // { type: 'battery/progress' },
     ],
 };
 
@@ -448,6 +414,14 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     className: 'small-toggles',
                     vexpand: true,
                     hexpand: false,
+                    // children: ags.Service.Asusctl?.available
+                    //     ? [
+                    //         { type: 'box', children: [asusmodeToggle, asusctlToggle, darkmodeToggle] },
+                    //         { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
+                    //     ] : [
+                    //         { type: 'box', children: [dndToggle, darkmodeToggle] },
+                    //         { type: 'box', children: [appmixerToggle, muteToggle] },
+                    //     ],
                     children: [
                         // remove asus toggles if you are not on an asus laptop
                         { type: 'box', children: [idleToggle, nightlightToggle, darkmodeToggle] },
@@ -485,6 +459,12 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
     child: {
         type: 'box',
         children: [
+            // ...(ags.Service.Asusctl?.available ? [
+            //     { type: 'asusctl/profile-indicator', balanced: null },
+            //     { type: 'asusctl/mode-indicator', hybrid: null },
+            // ] : []),
+            { type: 'audio/microphone-mute-indicator', unmuted: null },
+            { type: 'notifications/dnd-indicator', noisy: null },
             {
                 type: 'box',
                 connections: [[Bluetooth, box => {
@@ -493,6 +473,9 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
                         batteryPercentage = device.batteryPercentage;
 
                         box.add(Widget({
+                            // type: 'hover-revealer',
+                            // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+                            // child: { type: 'label', label: device.name },
                             type: 'box',
                             // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
                             children: [
@@ -505,23 +488,23 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
                     box.visible = Bluetooth.connectedDevices.size > 0;
                 }]],
             },
-            // { type: 'asusctl/profile-indicator', balanced: null },
             { type: 'nightlight/mode-indicator'},
             { type: 'idle/indicator'},
             { type: 'notifications/dnd-indicator', noisy: null },
             { type: 'bluetooth/indicator', disabled: null },
             { type: 'network/indicator' },
             // { type: 'audio/speaker-indicator' },
-            { type: 'audio/microphone-mute-indicator', unmuted: null },
-            speaker
             // {
             //     type: 'hover-revealer',
+            //     direction: 'right',
             //     indicator: { type: 'battery/indicator', className: 'battery' },
             //     child: { type: 'battery/level-label' },
             //     connection: [Battery, revealer => {
             //         revealer.reveal_child = Battery.percent < 100;
             //     }],
             // },
+            { type: 'audio/microphone-mute-indicator', unmuted: null },
+            speaker
         ],
     },
 });
