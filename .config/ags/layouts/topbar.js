@@ -20,6 +20,19 @@ const dashboard = {
     },
 };
 
+const notificationsPopup = {
+    name: 'notificationsPopup',
+    popup: true,
+    focusable: true,
+    anchor: ['top'],
+    child: {
+        type: 'layout',
+        layout: 'top',
+        window: 'notificationsPopup',
+        child: { type: 'notifications/popup-content' },
+    },
+};
+
 const weather = {
     name: 'weather',
     popup: true,
@@ -71,9 +84,10 @@ const panel = bar({
         separatorinvisible,
         separatorinvisible,
         { type: 'weather/temperature' },
+        { type: 'notifications/panel-button' },
     ],
     end: [
-        { type: 'notifications/panel-indicator', direction: 'right', className: 'notifications panel-button', hexpand: true },
+        // { type: 'notifications/panel-indicator', direction: 'right', className: 'notifications panel-button', hexpand: true },
         { type: 'box', hexpand: true },
         { type: 'usageCpu' },
         { type: 'usageMemory' },
@@ -108,5 +122,6 @@ var windows = [
     ])).flat(),
     dashboard,
     weather,
+    notificationsPopup,
     quicksettings,
 ];

@@ -1,4 +1,4 @@
-const { Widget } = ags;
+const { App, Widget } = ags;
 const { Notifications } = ags.Service;
 const { timeout } = ags.Utils;
 
@@ -66,4 +66,47 @@ Widget.widgets['notifications/panel-indicator'] = ({ direction = 'left', ...prop
             }]],
         },
     }],
+});
+
+Widget.widgets['notifications/panel-button'] = props => Widget({
+    ...props,
+    type: 'button',
+    className: 'notifications-button panel-button',
+    onClick: () => App.toggleWindow('notificationsPopup'),
+    connections: [[App, (btn, win, visible) => {
+        btn.toggleClassName('active', win === 'notificationsPopup' && visible);
+    }]],
+    child: { type: 'notifications/panel-indicator', direction: 'right', hexpand: true },
+});
+
+Widget.widgets['notifications/popup-content'] = () => Widget({
+    type: 'box',
+    className: 'notifications-popup',
+    vexpand: false,
+    children: [
+        {
+            type: 'box',
+            className: 'notifications',
+            orientation: 'vertical',
+            children: [
+                {
+                    type: 'notifications/header',
+                    className: 'header',
+                },
+                {
+                    type: 'box',
+                    className: 'notification-list-box',
+                    children: [{
+                        type: 'wallpaper',
+                        children: [{
+                            type: 'notifications/list',
+                            className: 'notification-list',
+                            vexpand: true,
+                            hexpand: true,
+                        }],
+                    }],
+                },
+            ],
+        },
+    ],
 });

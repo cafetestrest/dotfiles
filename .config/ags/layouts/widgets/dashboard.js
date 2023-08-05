@@ -29,33 +29,33 @@ Widget.widgets['dashboard/popup-content'] = () => Widget({
                 },
             ],
         },
-        {
-            type: 'separator',
-            vexpand: true,
-        },
-        {
-            type: 'box',
-            className: 'notifications',
-            orientation: 'vertical',
-            children: [
-                {
-                    type: 'notifications/header',
-                    className: 'header',
-                },
-                {
-                    type: 'box',
-                    className: 'notification-list-box',
-                    children: [{
-                        type: 'wallpaper',
-                        children: [{
-                            type: 'notifications/list',
-                            className: 'notification-list',
-                            vexpand: true,
-                            hexpand: true,
-                        }],
-                    }],
-                },
-            ],
-        },
+        // {
+        //     type: 'separator',
+        //     vexpand: true,
+        // },
+        // {
+        //     type: 'box',
+        //     className: 'notifications',
+        //     orientation: 'vertical',
+        //     children: [
+        //         {
+        //             type: 'notifications/header',
+        //             className: 'header',
+        //         },
+        //         {
+        //             type: 'box',
+        //             className: 'notification-list-box',
+        //             children: [{
+        //                 type: 'wallpaper',
+        //                 children: [{
+        //                     type: 'notifications/list',
+        //                     className: 'notification-list',
+        //                     vexpand: true,
+        //                     hexpand: true,
+        //                 }],
+        //             }],
+        //         },
+        //     ],
+        // },
     ],
 });

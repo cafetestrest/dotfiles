@@ -1,4 +1,7 @@
-window#dashboard .dashboard {
+window#dashboard .dashboard,
+window#notifications .notifications,
+window#notificationsPopup .notifications-popup,
+window#weather .weather {
     @include floating_widget;
 
     .notifications {
@@ -57,4 +60,8 @@ window#dashboard .dashboard {
         min-height: 140px;
         margin-top: $spacing;
     }
+}
+
+window#notificationsPopup .notifications-popup {
+    min-height: 450px;
 }
