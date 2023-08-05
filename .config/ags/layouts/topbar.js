@@ -70,7 +70,7 @@ const center = {
     className: 'center',
     children: [
         { type: 'dashboard/panel-button' },
-        { type: 'weather/panel-button' },
+        { type: 'weather/temperature' },
     ],
 };
 

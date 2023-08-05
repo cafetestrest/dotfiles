@@ -19,7 +19,10 @@ class WeatherService extends Service {
     }
 
     get temperatureWeather() { return this._temperatureWeather; }
-    setTemperatureWeather(temp) { this._temperatureWeather = temp; }
+    setTemperatureWeather(temp) {
+        this._temperatureWeather = temp;
+        this.emit('changed');
+    }
 
     get tooltip() { return this._tooltip; }
     setTooltip(text) { this._tooltip = text }
@@ -33,7 +36,9 @@ class Weather {
     static setIconWeather(icon) { Weather.instance.setIconWeather(icon); }
 
     static get temperatureWeather() { return Weather.instance.temperatureWeather; }
-    static setTemperatureWeather(temp) { Weather.instance.setTemperatureWeather(temp); }
+    static setTemperatureWeather(temp) { 
+        Weather.instance.setTemperatureWeather(temp);
+    }
 
     static get tooltip() { return Weather.instance.tooltip; }
     static setTooltip(text) { Weather.instance.setTooltip(text); }
@@ -41,14 +46,16 @@ class Weather {
 
 Widget.widgets['weather/temperature'] = props => Widget({
     ...props,
-    type: 'label',
-    connections: [[5000, label => {
-        if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
-            label.label = Weather.temperatureWeather.toString()
-            Weather.setIconWeather(label.label.charAt(0))
-        }
-    }
-    ]],
+    type: 'dynamic',
+    items: [
+        { value: 'enabled', widget: { type: 'weather/panel-button' } },
+    ],
+    connections: [[Weather, dynamic => dynamic.update(value => {
+        if (!Weather.temperatureWeather)
+            return;
+
+        return value === 'enabled';
+    })]],
 });
 
 Widget.widgets['weather/panel-button'] = props => Widget({
@@ -62,19 +69,31 @@ Widget.widgets['weather/panel-button'] = props => Widget({
     child: {
         type: 'box',
         children: [
-            { type: 'weather/temperature',}
+            { type: 'weather/label',}
         ],
     },
+});
+
+Widget.widgets['weather/label'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[Weather, label => {
+        if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
+            label.label = Weather.temperatureWeather.toString()
+        }
+    }]],
 });
 
 Widget.widgets['tooltip'] = props => Widget({
     ...props,
     type: 'label',
-    connections: [[5000, label => {
+    connections: [[Weather, label => {
+
         tooltip = Weather.tooltip;
 
         if (!tooltip) {
             temp = Weather.temperatureWeather;
+
             if (temp) {
                 tooltip = Weather.temperatureWeather.toString();
             }
@@ -103,8 +122,8 @@ Widget.widgets['weather/forecast'] = props => Widget({
             className: 'tooltip',
             halign: 'center',
             children: [
-                { type: 'tooltip' },
                 { type: 'reset-timer' },
+                { type: 'tooltip' },
             ],
         }
     ],
