@@ -1,4 +1,4 @@
-const { exec, execAsync } = ags.Utils;
+const { execAsync } = ags.Utils;
 /* exported notifications, desktop, corners, indicator, dock, separator,
             launcher bar applauncher, overview, powermenu, verification*/
 

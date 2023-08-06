@@ -156,6 +156,8 @@ Widget.widgets['hyprland/taskbar'] = ({
                 for (const app of box._apps) {
                     if (client.title && app.match(client.title) || client.class && app.match(client.class)) {
                         box.add(Widget(item(app, client)));
+                        box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
+                        box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
                         return;
                     }
                 }
