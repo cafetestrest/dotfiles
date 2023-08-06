@@ -127,7 +127,7 @@ Widget.widgets['hyprland/client-icon'] = ({
 
 const _item = ({ iconName }, { address, title }) => ({
     type: 'button',
-    child: { type: 'icon', icon: iconName },
+    child: { type: 'icon', icon: iconName === 'org.gnome.Characters' ? 'code' : iconName },
     tooltip: title,
     className: Hyprland.active.client.address === address.substring(2) ? 'focused' : 'nonfocused',
     onClick: () => execAsync(`hyprctl dispatch focuswindow address:${address}`),
@@ -154,7 +154,7 @@ Widget.widgets['hyprland/taskbar'] = ({
                         return;
                 }
                 for (const app of box._apps) {
-                    if (client.title && app.match(client.title) || client.class && app.match(client.class)) {
+                    if (client.title && app.match(client.title) || client.class && app.match(client.class) || client.title && client.class === 'codium-url-handler') {
                         box.add(Widget(item(app, client)));
                         box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
                         box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
