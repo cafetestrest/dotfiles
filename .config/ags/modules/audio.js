@@ -3,6 +3,7 @@ const { Audio } = ags.Service;
 
 const iconSubstitute = item => {
     const substitues = [
+        { from: 'audio-headset-analog-usb', to: 'audio-headphones-symbolic' },
         { from: 'audio-headset-bluetooth', to: 'audio-headphones-symbolic' },
         { from: 'audio-card-analog-usb', to: 'audio-speakers-symbolic' },
         { from: 'audio-card-analog-pci', to: 'audio-volume-high-symbolic' },
@@ -43,8 +44,10 @@ Widget.widgets['audio/speaker-type-indicator'] = props => Widget({
     ...props,
     type: 'icon',
     connections: [[Audio, icon => {
-        if (Audio.speaker)
+        if (Audio.speaker) {
+            // console.log('iconName ' + Audio.speaker.iconName)
             icon.icon_name = iconSubstitute(Audio.speaker.iconName);
+        }
     }]],
 });
 
