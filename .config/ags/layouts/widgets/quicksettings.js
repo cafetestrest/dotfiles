@@ -463,7 +463,7 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             //     { type: 'asusctl/profile-indicator', balanced: null },
             //     { type: 'asusctl/mode-indicator', hybrid: null },
             // ] : []),
-            { type: 'audio/microphone-mute-indicator', unmuted: null },
+            // { type: 'audio/microphone-mute-indicator', unmuted: null },
             { type: 'notifications/dnd-indicator', noisy: null },
             // {
             //     type: 'box',
