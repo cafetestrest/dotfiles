@@ -1,5 +1,8 @@
 const { Widget } = ags;
 const { Bluetooth } = ags.Service;
+const { instance } = ags.Service.Bluetooth;
+
+let numOfTries = 0;
 
 Widget.widgets['bluetooth/indicator'] = ({
     enabled = { type: 'icon', icon: 'bluetooth-active-symbolic', className: 'enabled' },
@@ -36,8 +39,20 @@ Widget.widgets['bluetooth/label'] = props => Widget({
             return label.label = Bluetooth.connectedDevices.entries().next().value[1].alias;
 
         label.label = `${Bluetooth.connectedDevices.size} Connected`;
-    }]],
-});
+    }],
+    [60000, label => {
+        if (label.label === 'Not Connected' && numOfTries < 10) {
+            instance._getDevices().forEach(d => {
+                instance._deviceRemoved(null, d);
+            });
+            
+            instance._getDevices().forEach(d => {
+                instance._deviceAdded(null, d);
+            });
+            console.log('Not Connected' + ' num: ' + numOfTries++)
+        }
+    }]
+]});
 
 Widget.widgets['bluetooth/devices'] = props => Widget({
     ...props,
