@@ -32,6 +32,17 @@ Widget.widgets['bluetooth/label'] = props => Widget({
         if (!Bluetooth.enabled)
             return label.label = 'Disabled';
 
+        if (Bluetooth.connectedDevices.size === 0 && Bluetooth.devices.size > 0) {
+        // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
+            instance._getDevices().forEach(d => {
+                instance._deviceRemoved(null, d);
+            });
+            
+            instance._getDevices().forEach(d => {
+                instance._deviceAdded(null, d);
+            });
+        }
+
         if (Bluetooth.connectedDevices.size === 0)
             return label.label = 'Not Connected';
 
@@ -40,18 +51,6 @@ Widget.widgets['bluetooth/label'] = props => Widget({
 
         label.label = `${Bluetooth.connectedDevices.size} Connected`;
     }],
-    [60000, label => {
-        if (label.label === 'Not Connected' && numOfTries < 10) {
-            instance._getDevices().forEach(d => {
-                instance._deviceRemoved(null, d);
-            });
-            
-            instance._getDevices().forEach(d => {
-                instance._deviceAdded(null, d);
-            });
-            console.log('Not Connected' + ' num: ' + numOfTries++)
-        }
-    }]
 ]});
 
 Widget.widgets['bluetooth/devices'] = props => Widget({

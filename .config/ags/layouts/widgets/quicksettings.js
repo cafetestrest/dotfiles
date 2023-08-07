@@ -470,18 +470,10 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             //     connections: [[Bluetooth, box => {
             //         box.get_children().forEach(ch => ch.destroy());
             //         for (const [, device] of Bluetooth.connectedDevices) {
-            //             batteryPercentage = device.batteryPercentage;
-
             //             box.add(Widget({
-            //                 // type: 'hover-revealer',
-            //                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-            //                 // child: { type: 'label', label: device.name },
-            //                 type: 'box',
-            //                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-            //                 children: [
-            //                     { type: 'icon', icon: device.iconName + '-symbolic', },
-            //                     { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
-            //                 ],
+            //                 type: 'hover-revealer',
+            //                 indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+            //                 child: { type: 'label', label: device.name },
             //             }));
             //         }
             //         box.show_all();
@@ -533,7 +525,7 @@ Widget.widgets['usageStorage'] = () => Widget({
     ],
 });
 
-Widget.widgets['bluetooth/devices'] = () => Widget({
+Widget.widgets['bluetooth/devices-battery'] = () => Widget({
     type: 'box',
     className: 'bluetooth devices',
     connections: [[Bluetooth, box => {
@@ -548,7 +540,7 @@ Widget.widgets['bluetooth/devices'] = () => Widget({
                 type: 'box',
                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
                 children: [
-                    { type: 'icon', icon: device.iconName + '-symbolic', },
+                    { type: 'icon', icon: device.iconName + '-symbolic', className: 'btdevice' },
                     { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
                 ],
             }));
