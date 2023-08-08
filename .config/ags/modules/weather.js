@@ -164,7 +164,7 @@ Widget.widgets['weather/refresh-button'] = props => Widget({
     child: {
         type: 'icon',
         icon: 'view-refresh-symbolic',
-        halign: 'end',
+        halign: 'center',
     },
     onClick: () => {
         Weather.weatherData
