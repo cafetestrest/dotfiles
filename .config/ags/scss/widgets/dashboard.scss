@@ -19,7 +19,10 @@ window#weather .weather {
             .wallpaper {
                 border-radius: max($radii - $border_width,0 );
                 background-position: bottom right;
-                box-shadow: inset 0 0 $spacing 0 $shadow;
+
+                @if $drop_shadow {
+                    box-shadow: inset 0 0 $spacing 0 $shadow;
+                }
             }
         }
 
@@ -29,7 +32,7 @@ window#weather .weather {
             }
 
             .notification > box {
-                @include floating_widget($shadow_width: $spacing/2);
+                @include floating_widget;
                 border-radius: $radii;
                 padding: $spacing;
                 margin: $spacing/2;
@@ -37,9 +40,17 @@ window#weather .weather {
         }
 
         .placeholder {
-            color: $fg_color;
-            text-shadow: $text_shadow;
+            color: $wallpaper_fg;
             .icon { font-size: 7em }
+
+            label {
+                @if $drop_shadow {
+                    text-shadow: $text_shadow;
+                } @else {
+                    @include text_border;
+                }
+
+            }
         }
     }
 

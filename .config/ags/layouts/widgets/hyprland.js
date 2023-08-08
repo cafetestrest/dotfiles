@@ -1,14 +1,5 @@
 const { Widget } = ags;
-
-const indicator = {
-    type: 'box',
-    className: 'indicator',
-    valign: 'center',
-    children: [{
-        type: 'box',
-        className: 'fill',
-    }],
-};
+const { execAsync } = ags.Utils;
 
 Widget.widgets['workspaces'] = props => Widget({
     ...props,
@@ -21,12 +12,15 @@ Widget.widgets['workspaces'] = props => Widget({
             child: {
                 type: 'hyprland/workspaces',
                 fixed: 7,
-                active: {
-                    type: 'eventbox',
-                    child: indicator,
+                child: {
+                    type: 'box',
+                    className: 'indicator',
+                    valign: 'center',
+                    children: [{
+                        type: 'box',
+                        className: 'fill',
+                    }],
                 },
-                occupied: indicator,
-                empty: indicator,
             },
         }],
     }],
@@ -35,6 +29,7 @@ Widget.widgets['workspaces'] = props => Widget({
 Widget.widgets['client'] = props => Widget({
     ...props,
     type: 'button',
+    onSecondaryClick: () => execAsync('hyprctl dispatch killactive'),
     child: {
         type: 'box',
         children: [

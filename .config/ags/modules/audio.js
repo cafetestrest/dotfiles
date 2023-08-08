@@ -65,7 +65,7 @@ Widget.widgets['audio/speaker-percent-label'] = props => Widget({
 Widget.widgets['audio/speaker-slider'] = props => Widget({
     ...props,
     type: 'slider',
-    onChange: (_w, value) => Audio.speaker.volume = value,
+    onChange: ({ adjustment: { value } }) => Audio.speaker.volume = value,
     connections: [[Audio, slider => {
         if (!Audio.speaker)
             return;
@@ -111,7 +111,7 @@ Widget.widgets['audio/app-mixer'] = ({ item, ...props }) => {
         const slider = Widget({
             type: 'slider',
             hexpand: true,
-            onChange: (_w, value) => stream.volume = value,
+            onChange: ({ adjustment: { value } }) => stream.volume = value,
         });
         const box = Widget({
             type: 'box',

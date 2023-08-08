@@ -1,6 +1,6 @@
 const { Widget, Service, App } = ags;
-const { Bluetooth, Battery, Audio, Settings, Network } = ags.Service;
-const { execAsync, timeout } = ags.Utils;
+const { Bluetooth, Battery, Audio, Network, Theme } = Service;
+const { execAsync, timeout, USER } = ags.Utils;
 
 class QSMenu extends Service {
     static { Service.register(this); }
@@ -75,7 +75,7 @@ const avatar = {
             className: 'user',
             halign: 'start',
             valign: 'end',
-            connections: [[Settings, l => l.label = '@' + Settings.userName]],
+            label: '@' + USER,
         },
     }],
 };
@@ -83,7 +83,7 @@ const avatar = {
 const sysBtn = (icon, action, className = '') => ({
     type: 'button',
     className,
-    onClick: () => ags.Service.System.action(action),
+    onClick: () => Service.System.action(action),
     tooltip: action,
     child: {
         type: 'icon',
@@ -105,7 +105,7 @@ const systemBox = {
                 {
                     type: 'button',
                     className: 'settings',
-                    onClick: () => { ags.App.toggleWindow('quicksettings'); Settings.openSettings(); },
+                    onClick: () => { App.toggleWindow('quicksettings'); Theme.openSettings(); },
                     tooltip: 'Settings',
                     child: {
                         type: 'icon',
@@ -154,7 +154,7 @@ const volume = {
                 {
                     type: 'button',
                     onClick: () => {
-                        execAsync('pavucontrol');
+                        execAsync('pavucontrol').catch(print);
                         App.closeWindow('quicksettings');
                     },
                     child: {
@@ -239,7 +239,7 @@ const brightness = {
         {
             type: 'button',
             onClick: () => {
-                execAsync('wl-gammactl');
+                execAsync('wl-gammactl').catch(print);
                 App.closeWindow('quicksettings');
             },
             child: { type: 'brightness/icon' },
@@ -342,6 +342,14 @@ const nightlightToggle = smallToggle(
     'nightlight/mode-indicator',
 );
 
+const themeToggle = {
+    className: 'toggle',
+    type: 'button',
+    onClick: () => QSMenu.toggle('theme'),
+    child: { type: 'theme/indicator' },
+    connections: [[QSMenu, w => w.toggleClassName('on', QSMenu.opened === 'theme')]],
+};
+
 const appmixerToggle = {
     className: 'toggle',
     type: 'button',
@@ -381,6 +389,13 @@ const bluetoothSelection = submenu({
     contentType: 'bluetooth/devices',
 });
 
+const themeSelection = submenu({
+    menuName: 'theme',
+    icon: { type: 'icon', icon: 'preferences-desktop-theme-symbolic' },
+    title: 'Theme',
+    contentType: 'theme/selector',
+});
+
 Widget.widgets['quicksettings/popup-content'] = () => Widget({
     type: 'box',
     className: 'quicksettings',
@@ -414,18 +429,18 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     className: 'small-toggles',
                     vexpand: true,
                     hexpand: false,
-                    // children: ags.Service.Asusctl?.available
+                    // children: Service.Asusctl?.available
                     //     ? [
-                    //         { type: 'box', children: [asusmodeToggle, asusctlToggle, darkmodeToggle] },
-                    //         { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
+                    //         { type: 'box', children: [asusmodeToggle, asusctlToggle, dndToggle] },
+                    //         { type: 'box', children: [appmixerToggle, themeToggle, muteToggle] },
                     //     ] : [
-                    //         { type: 'box', children: [dndToggle, darkmodeToggle] },
-                    //         { type: 'box', children: [appmixerToggle, muteToggle] },
+                    //         { type: 'box', children: [dndToggle, muteToggle] },
+                    //         { type: 'box', children: [appmixerToggle, themeToggle] },
                     //     ],
                     children: [
                         // remove asus toggles if you are not on an asus laptop
                         { type: 'box', children: [idleToggle, nightlightToggle, darkmodeToggle] },
-                        { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
+                        { type: 'box', children: [appmixerToggle, dndToggle, muteToggle, themeToggle] },
                     ],
                 },
             ],
@@ -433,6 +448,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
         appmixer,
         // networkSelection,
         bluetoothSelection,
+        themeSelection,
         {
             type: 'media/popup-content',
             orientation: 'vertical',
@@ -444,22 +460,22 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
 Widget.widgets['quicksettings/panel-button'] = () => Widget({
     type: 'button',
     className: 'quicksettings panel-button',
-    onClick: () => ags.App.toggleWindow('quicksettings'),
+    onClick: () => App.toggleWindow('quicksettings'),
     onScrollUp: () => {
         Audio.speaker.volume += 0.02;
-        ags.Service.Indicator.speaker();
+        Service.Indicator.speaker();
     },
     onScrollDown: () => {
         Audio.speaker.volume -= 0.02;
-        ags.Service.Indicator.speaker();
+        Service.Indicator.speaker();
     },
-    connections: [[ags.App, (btn, win, visible) => {
+    connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'quicksettings' && visible);
     }]],
     child: {
         type: 'box',
         children: [
-            // ...(ags.Service.Asusctl?.available ? [
+            // ...(Service.Asusctl?.available ? [
             //     { type: 'asusctl/profile-indicator', balanced: null },
             //     { type: 'asusctl/mode-indicator', hybrid: null },
             // ] : []),
