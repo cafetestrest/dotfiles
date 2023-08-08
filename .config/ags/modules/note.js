@@ -10,9 +10,9 @@ Widget.widgets['note'] = props => Widget({
     type: 'button',
     tooltip: exec('cat /home/bajic/Documents/note'), //todo handle this one in nixos
     onClick: () => {
-        execAsync(['bash', '-c', "codium ~/Documents/note"])
+        execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
     // onSecondaryClick: () => {
-    //     execAsync(['bash', '-c', ""])
+    //     execAsync(['bash', '-c', ""]).catch(print);
     // },
 });

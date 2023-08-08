@@ -12,7 +12,7 @@ class WeatherService extends Service {
     }
 
     get weatherData() {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"])
+        execAsync(['bash', '-c', "~/.config/waybar/scripts/weather.sh -a"]).catch(print);
     }
 
     get temperatureWeather() { return this._temperatureWeather; }
@@ -179,7 +179,7 @@ Widget.widgets['weather/refresh-button'] = props => Widget({
 //     //     return this._iconWeather;
 //     // })(),
 //     connections: [[5000, icon => {
-//         // execAsync(['bash', '-c', "~/.config/waybar/scripts/usagememory.sh ags"])
+//         // execAsync(['bash', '-c', "~/.config/waybar/scripts/usagememory.sh ags"]).catch(print);
 
 //         // "☀️") icon="☾" ;; weather-clear-night-symbolic
 //         // "🌥") icon="" ;; weather-few-clouds-night-symbolic

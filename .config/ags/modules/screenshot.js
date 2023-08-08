@@ -9,9 +9,9 @@ Widget.widgets['screenshot'] = props => Widget({
     ...props,
     type: 'button',
     onClick: () => {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh 1"])
+        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh 1"]).catch(print);
     },
     onSecondaryClick: () => {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh"])
+        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh"]).catch(print);
     },
 });

@@ -9,9 +9,9 @@ Widget.widgets['clipboard'] = props => Widget({
     ...props,
     type: 'button',
     onClick: () => {
-        execAsync(['bash', '-c', "hyprctl dispatch movecursor 3550 260 && hyprctl dispatch exec copyq menu"])
+        execAsync(['bash', '-c', "hyprctl dispatch movecursor 3550 260 && hyprctl dispatch exec copyq menu"]).catch(print);
     },
     // onSecondaryClick: () => {
-    //     execAsync(['bash', '-c', ""])
+    //     execAsync(['bash', '-c', ""]).catch(print);
     // },
 });

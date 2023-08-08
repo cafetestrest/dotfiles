@@ -75,7 +75,7 @@ const panel = bar({
         separatorinvisible,
         separatorinvisible,
         { type: 'hyprland/taskbar', className: 'taskbar' },
-        { type: 'workspaces-custom', className: 'workspaces' },
+        { type: 'workspaces-custom', className: 'hyprworkspaces panel-button' },
         { type: 'media/panel-indicator', className: 'media panel-button', hexpand: true, halign: 'end' },
         separatorinvisible,
         separatorinvisible,

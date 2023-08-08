@@ -26,6 +26,7 @@ class System extends Service {
         System.instance._action = { cmd, action };
         // System.instance.emit('changed');
         exec(System.instance._action.cmd)
+        System.instance.emit('changed');
     }
 }
 
@@ -87,10 +88,7 @@ Widget.widgets['powermenu/verification'] = () => Widget({
                 {
                     type: 'button',
                     child: 'Yes',
-                    onClick: () => {
-                        App.toggleWindow('verification')
-                        exec(System.instance._action.cmd)
-                    },
+                    onClick: () => exec(System.instance._action.cmd),
                 },
             ],
         },

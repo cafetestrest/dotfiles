@@ -13,7 +13,7 @@ class ThemeService extends Service {
 
     constructor() {
         super();
-        exec('swww init');
+        // exec('swww init');
         this.setup();
     }
 
@@ -33,7 +33,7 @@ class ThemeService extends Service {
         setupScss(theme);
         setupHyprland(theme);
         this.setupOther();
-        this.setupWallpaper();
+        // this.setupWallpaper();
     }
 
     reset() {
@@ -49,8 +49,8 @@ class ThemeService extends Service {
         const gsettings = 'gsettings set org.gnome.desktop.interface color-scheme';
         execAsync(`${gsettings} "prefer-${darkmode ? 'dark' : 'light'}"`).catch(print);
 
-        const wezterm = `/home/${USER}/.config/wezterm`;
-        execAsync(`cp ${wezterm}/charm${darkmode ? '' : '-light'}.lua ${wezterm}/theme.lua`).catch(print);
+        // const wezterm = `/home/${USER}/.config/wezterm`;
+        // execAsync(`cp ${wezterm}/charm${darkmode ? '' : '-light'}.lua ${wezterm}/theme.lua`).catch(print);
     }
 
     setupWallpaper() {

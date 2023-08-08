@@ -317,11 +317,6 @@ const muteToggle = smallToggle(
     'audio/microphone-mute-indicator',
 );
 
-const darkmodeToggle = smallToggle(
-    'darkmode/toggle',
-    'darkmode/indicator',
-);
-
 const idleToggle = smallToggle(
     'idle/toggle',
     'idle/indicator',
@@ -439,8 +434,8 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                     //     ],
                     children: [
                         // remove asus toggles if you are not on an asus laptop
-                        { type: 'box', children: [idleToggle, nightlightToggle, darkmodeToggle] },
-                        { type: 'box', children: [appmixerToggle, dndToggle, muteToggle, themeToggle] },
+                        { type: 'box', children: [idleToggle, nightlightToggle, themeToggle] },
+                        { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
                     ],
                 },
             ],

@@ -3,7 +3,7 @@ const { Hyprland, Applications } = ags.Service;
 const { execAsync, lookUpIcon, warning } = ags.Utils;
 
 Widget.widgets['hyprland/workspaces'] = ({
-    fixed = 7,
+    fixed = 10,
     child,
     ...props
 }) => Widget({
@@ -115,8 +115,6 @@ Widget.widgets['hyprland/taskbar'] = ({
                 for (const app of box._apps) {
                     if (client.title && app.match(client.title) || client.class && app.match(client.class) || client.title && client.class === 'codium-url-handler') {
                         box.add(Widget(item(app, client)));
-                        box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
-                        box.add(Widget({ type: 'separator-invisible', valign: 'center' }));
                         return;
                     }
                 }

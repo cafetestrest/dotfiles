@@ -51,7 +51,7 @@ var launcher = (size = ags.Utils.getConfig()?.baseIconSize || 16) => ({
     }]],
     onClick: () => {
         // ags.App.toggleWindow('overview')
-        execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"])
+        execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print);
     },
     child: { type: 'distro-icon', size },
 });

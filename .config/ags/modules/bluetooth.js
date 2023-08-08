@@ -46,7 +46,7 @@ Widget.widgets['bluetooth/label'] = props => Widget({
     [60000, label => {
         if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.size === 0 && Bluetooth.devices.size > 0) {
             // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/ags-bt-reset.sh"])
+            execAsync(['bash', '-c', "~/.config/waybar/scripts/ags-bt-reset.sh"]).catch(print);
         }
     }]
 ]});

@@ -11,7 +11,7 @@ Widget.widgets['workspaces'] = props => Widget({
             className: 'eventbox',
             child: {
                 type: 'hyprland/workspaces',
-                fixed: 7,
+                fixed: 10,
                 child: {
                     type: 'box',
                     className: 'indicator',
