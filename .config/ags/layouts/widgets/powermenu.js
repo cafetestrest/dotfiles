@@ -26,7 +26,6 @@ class System extends Service {
         System.instance._action = { cmd, action };
         // System.instance.emit('changed');
         exec(System.instance._action.cmd)
-        System.instance.emit('changed');
     }
 }
 
