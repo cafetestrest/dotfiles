@@ -1,6 +1,6 @@
 const { Service, Widget } = ags;
 const { CONFIG_DIR, USER, exec, execAsync, readFile, writeFile } = ags.Utils;
-const { setupHyprland } = imports.theme.hyprland;
+// const { setupHyprland } = imports.theme.hyprland;
 const { setupScss } = imports.theme.scss;
 const { themes } = imports.theme;
 
@@ -31,7 +31,7 @@ class ThemeService extends Service {
             ...this.settings,
         };
         setupScss(theme);
-        setupHyprland(theme);
+        // setupHyprland(theme);
         this.setupOther();
         // this.setupWallpaper();
     }
