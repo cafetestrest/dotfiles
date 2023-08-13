@@ -55,13 +55,23 @@ window#quicksettings .quicksettings {
         }
     }
 
+    .qsmediavolume .volume-box {
+        .volume {
+            .slider {
+                @include slider;
+                margin-right: $spacing;
+            }
+        }
+    }
+
     .volume-box {
+        border: none;
         @include widget;
         margin-top: $spacing;
 
         .volume {
             .slider {
-                @include slider;
+                * { all:unset; }
                 margin-right: $spacing;
             }
 
@@ -247,6 +257,166 @@ window#quicksettings .quicksettings {
             }
         }
     }
+
+    .qstoggles {
+        margin-top: $spacing;
+
+        .toggle {
+            @include button;
+            margin: $spacing/2;
+
+            .arrow {
+                border-top: 0.6em solid transparent;
+                border-bottom: 0.6em solid transparent;
+            }
+
+            label {
+                margin-left: $spacing/2;
+                font-weight: bold;
+            }
+
+            button {
+                @include button($flat: true);
+                padding: $spacing;
+            }
+
+            &.active {
+                background-color: $accent;
+
+                label, image {
+                    color: $accent_fg;
+                }
+            }
+        }
+    }
+
+    .qsvolume {
+
+        // .volume-box {
+        //     .volume {
+        //         .slider {
+        //             * { all:unset; }
+        //         }
+        //     }
+        // }
+
+
+        .volume-box {
+            background-color: transparent;
+
+            .slider:hover {
+                slider {
+                    background-color: transparent;
+                    color: transparent;
+                    box-shadow: none;
+                    border: none;
+                }
+            }
+
+            .slider:active {
+                slider {
+                    background-color: transparent;
+                    color: transparent;
+                    box-shadow: none;
+                    border: none;
+                }
+            }
+
+            .slider:disabled {
+                highlight,
+                progress {
+                    background: rgba(145, 204, 255, 0.5);
+                }
+        
+                // slider {
+                //     background-color: #1e2022;
+                // }
+            }
+
+            .slider {
+
+                image {
+                    color: #e2e2e5;
+                    background-color: #0c0e10;
+                    padding: 0;
+                    border-radius: 100px;
+                    min-height: 42px;
+                    min-width: 42px;
+                }
+
+                margin: 0 8px;
+            	// @include sliders;
+                // border: 1px solid red;
+                trough {
+                    transition: 250ms;
+                    border-radius: 100px;
+                    background-color: #0c0e10;
+                    min-height: 42px;
+                    min-width: 42px;
+            
+                    highlight,
+                    progress {
+                        border-radius: 100px;
+                        background-color: #91ccff;
+                        min-height: 0.3em;
+                        min-width: 42px;
+                        border-radius: 100px;
+                    }
+            
+                    // slider {
+                    //     background-color: transparent;
+                    //     border-radius: 100px;
+                    //     min-height: 42px;
+                    //     min-width: 42px;
+                    // }
+
+                    slider {
+                        background-color: transparent;
+                        color: transparent;
+                        box-shadow: none;
+                        border: none;
+                    }
+
+                    slider:active {
+                        background-color: transparent;
+                        color: transparent;
+                        box-shadow: none;
+                        border: none;
+                    }
+
+                    slider:checked {
+                        background-color: transparent;
+                        color: transparent;
+                        box-shadow: none;
+                        border: none;
+                    }
+
+                    slider:disabled {
+                        background-color: transparent;
+                        color: transparent;
+                        box-shadow: none;
+                        border: none;
+                    }
+                }
+
+
+                // image {
+                //     color: #e2e2e5;
+                //     background-color: #0c0e10;
+                //     padding: 0;
+                //     border-radius: 100px;
+                //     min-height: 42px;
+                //     min-width: 42px;
+                // }
+            
+                // scale {
+                //     margin: 0 8px;
+                //     // @include slider($width: 0.3em, $slider_width: 0.5em);
+                // }
+
+            }
+        }
+    }
 }
 
 .bluetooth {
@@ -256,3 +426,5 @@ window#quicksettings .quicksettings {
 .btdevice {
     padding-left: 0.5rem;
 }
+
+

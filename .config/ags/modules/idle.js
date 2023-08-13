@@ -30,7 +30,7 @@ Widget.widgets['idle/toggle'] = props => Widget({
     type: 'button',
     onClick: Idle.checkMode,
     connections: [[Idle, button => {
-        button.toggleClassName('on', Idle.mode === true || Idle.profile === false);
+        button.toggleClassName('on', Idle.mode === true);
     }]],
 });
 
@@ -42,4 +42,16 @@ Widget.widgets['idle/indicator'] = props => Widget({
         { value: true, widget: { type: 'icon', icon: 'view-reveal-symbolic' } },
     ],
     connections: [[Idle, w => w.update(v => v === Idle.mode)]],
+});
+
+Widget.widgets['idle/label'] = props => Widget({
+    ...props,
+    type: 'label',
+    label: 'Idle Inhibitor',
+});
+
+Widget.widgets['idle/status-label'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[Idle, label => label.label = (Idle.mode ? 'On' : 'Off')]],
 });

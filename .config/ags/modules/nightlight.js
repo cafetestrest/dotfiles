@@ -56,3 +56,25 @@ Widget.widgets['nightlight/mode-indicator'] = props => Widget({
     ],
     connections: [[Nightlight, w => w.update(v => v === Nightlight.mode)]],
 });
+
+Widget.widgets['nightlight/label'] = props => Widget({
+    ...props,
+    type: 'label',
+    label: 'Night Light',
+});
+
+Widget.widgets['nightlight/status-label'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[Nightlight, label => {
+        let mode = Nightlight.mode;
+
+        if (mode === 'auto') {
+            label.label = 'Auto';
+        } else if (mode) {
+            label.label = 'On';
+        } else {
+            label.label = 'Off';
+        }
+    }]],
+});

@@ -55,6 +55,52 @@ const arrow = (menu, toggleOn) => ({
     },
 });
 
+const wideToggle = ({ icon, label, toggle, status, name }) => ({
+    type: toggle,
+    className: `toggle ${name}`,
+    child: {
+        type: 'box',
+        orientation: 'horizontal',
+        valign: 'center',
+        children: [
+            {
+                type: 'button',
+                valign: 'center',
+                hexpand: true,
+                child: {
+                    type: 'box',
+                    children: [
+                        {
+                            type: 'box',
+                            className: 'quicksettings__button_icon',
+                            orientation: 'horizontal',
+                            children: [
+                                { type: icon },
+                            ],
+                        },
+                        {
+                            type: 'box',
+                            orientation: 'vertical',
+                            hexpand: false,
+                            children: [
+                                {
+                                    type: label,
+                                    className: 'text__bold',
+                                    halign: 'start',
+                                },
+                                {
+                                    type: status,
+                                    halign: 'start',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+        ],
+    },
+});
+
 const menu = (name, child) => ({
     type: 'box',
     children: [{
@@ -307,6 +353,38 @@ const smallToggle = (toggle, indicator) => ({
     child: { type: indicator, halign: 'center' },
 });
 
+const notificationsToggle = wideToggle({
+    icon: 'notifications/dnd-indicator',
+    label: 'notifications/label',
+    toggle: 'notifications/dnd-toggle',
+    status: 'notifications/status-label',
+    name: 'notificationsToggle',
+});
+
+const wideIdleToggle = wideToggle({
+    icon: 'idle/indicator',
+    label: 'idle/label',
+    toggle: 'idle/toggle',
+    status: 'idle/status-label',
+    name: 'idleToggle',
+});
+
+const wideMuteToggle = wideToggle({
+    icon: 'audio/microphone-mute-indicator',
+    label: 'audio/microphone-mute-label',
+    toggle: 'audio/microphone-mute-toggle',
+    status: 'audio/microphone-mute-status-label',
+    name: 'microphoneToggle',
+});
+
+const wideNightlightToggle = wideToggle({
+    icon: 'nightlight/mode-indicator',
+    label: 'nightlight/label',
+    toggle: 'nightlight/mode-toggle',
+    status: 'nightlight/status-label',
+    name: 'idleToggle',
+});
+
 const dndToggle = smallToggle(
     'notifications/dnd-toggle',
     'notifications/dnd-indicator',
@@ -405,7 +483,13 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
                 systemBox,
             ],
         },
-        volume,
+        {
+            type: 'box',
+            className: 'qsmediavolume',
+            children: [
+                volume
+            ],
+        },
         // brightness,
         {
             type: 'box',
@@ -444,11 +528,32 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
         // networkSelection,
         bluetoothSelection,
         themeSelection,
+        // {
+        //     type: 'media/popup-content',
+        //     orientation: 'vertical',
+        //     className: 'media',
+        // },
         {
-            type: 'media/popup-content',
-            orientation: 'vertical',
-            className: 'media',
-        },
+            type: 'box',
+            className: 'qstoggles',
+            children: [{
+                type: 'box',
+                orientation: 'vertical',
+                children: [bluetoothToggle, notificationsToggle],
+            },
+            {
+                type: 'box',
+                orientation: 'vertical',
+                children: [wideIdleToggle, wideNightlightToggle],
+            },
+        ]},
+        {
+            type: 'box',
+            className: 'qsvolume',
+            children: [
+                volume
+            ],
+        }
     ],
 });
 
@@ -493,7 +598,6 @@ Widget.widgets['quicksettings/panel-button'] = () => Widget({
             // },
             { type: 'nightlight/mode-indicator'},
             { type: 'idle/indicator'},
-            { type: 'notifications/dnd-indicator', noisy: null },
             { type: 'bluetooth/indicator', disabled: null },
             { type: 'network/indicator' },
             // { type: 'audio/speaker-indicator' },

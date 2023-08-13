@@ -208,3 +208,20 @@ Widget.widgets['audio/stream-selector'] = ({ streams = 'speakers', ...props }) =
         box.show_all();
     }]],
 });
+
+Widget.widgets['audio/microphone-mute-label'] = props => Widget({
+    ...props,
+    type: 'label',
+    label: 'Microphone',
+});
+
+Widget.widgets['audio/microphone-mute-status-label'] = props => Widget({
+    ...props,
+    type: 'label',
+    connections: [[Audio, label => {
+        if (Audio.microphone?.isMuted)
+            label.label = 'Off';
+        else
+            label.label = 'On';
+    }]],
+});
