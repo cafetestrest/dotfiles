@@ -490,13 +490,13 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
             {
                 type: 'box',
                 orientation: 'vertical',
-                children: [wideIdleToggle, bluetoothToggle, ],
+                children: [bluetoothToggle, ],
             },
             {
                 type: 'box',
                 className: 'noarrow',
                 orientation: 'vertical',
-                children: [wideNightlightToggle, notificationsToggle, ],
+                children: [wideIdleToggle, ],
             },
         ]},
         {
@@ -505,6 +505,22 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
             orientation: 'vertical',
             children: [bluetoothSelection, ],
         },
+        {
+            type: 'box',
+            className: 'qstoggles',
+            children: [
+            {
+                type: 'box',
+                orientation: 'vertical',
+                children: [notificationsToggle, ],
+            },
+            {
+                type: 'box',
+                className: 'noarrow',
+                orientation: 'vertical',
+                children: [wideNightlightToggle, ],
+            },
+        ]},
         {
             type: 'box',
             className: 'qsvolume',
