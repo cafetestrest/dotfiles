@@ -64,6 +64,10 @@ window#quicksettings .quicksettings {
         }
     }
 
+    .qsvolume .volume-box {
+        border: none;
+    }
+
     .volume-box {
         border: none;
         @include widget;
@@ -291,129 +295,39 @@ window#quicksettings .quicksettings {
     }
 
     .qsvolume {
-
-        // .volume-box {
-        //     .volume {
-        //         .slider {
-        //             * { all:unset; }
-        //         }
-        //     }
-        // }
-
-
         .volume-box {
-            background-color: transparent;
+            background: transparent;
 
-            .slider:hover {
-                slider {
-                    background-color: transparent;
-                    color: transparent;
-                    box-shadow: none;
-                    border: none;
-                }
+            .volume button {
+                background: $widget_bg;
+                border-radius: 50%;
+                min-width: 2.3em;
+                margin: 14px 0;
             }
-
-            .slider:active {
-                slider {
-                    background-color: transparent;
-                    color: transparent;
-                    box-shadow: none;
-                    border: none;
-                }
-            }
-
-            .slider:disabled {
-                highlight,
-                progress {
-                    background: rgba(145, 204, 255, 0.5);
-                }
-        
-                // slider {
-                //     background-color: #1e2022;
-                // }
+            
+            .volume label {
+                border: none;
+                font-size: 0;
+                margin: 0;
+                padding: 0;
             }
 
             .slider {
-
-                image {
-                    color: #e2e2e5;
-                    background-color: #0c0e10;
-                    padding: 0;
-                    border-radius: 100px;
-                    min-height: 42px;
-                    min-width: 42px;
+                slider {
+                    min-height: 2.5em;
                 }
 
-                margin: 0 8px;
-            	// @include sliders;
-                // border: 1px solid red;
                 trough {
                     transition: 250ms;
                     border-radius: 100px;
-                    background-color: #0c0e10;
-                    min-height: 42px;
-                    min-width: 42px;
+                    background-color: $widget_bg;
             
                     highlight,
                     progress {
+                        @include button_active;
                         border-radius: 100px;
-                        background-color: #91ccff;
-                        min-height: 0.3em;
-                        min-width: 42px;
-                        border-radius: 100px;
-                    }
-            
-                    // slider {
-                    //     background-color: transparent;
-                    //     border-radius: 100px;
-                    //     min-height: 42px;
-                    //     min-width: 42px;
-                    // }
-
-                    slider {
-                        background-color: transparent;
-                        color: transparent;
-                        box-shadow: none;
-                        border: none;
-                    }
-
-                    slider:active {
-                        background-color: transparent;
-                        color: transparent;
-                        box-shadow: none;
-                        border: none;
-                    }
-
-                    slider:checked {
-                        background-color: transparent;
-                        color: transparent;
-                        box-shadow: none;
-                        border: none;
-                    }
-
-                    slider:disabled {
-                        background-color: transparent;
-                        color: transparent;
-                        box-shadow: none;
-                        border: none;
                     }
                 }
-
-
-                // image {
-                //     color: #e2e2e5;
-                //     background-color: #0c0e10;
-                //     padding: 0;
-                //     border-radius: 100px;
-                //     min-height: 42px;
-                //     min-width: 42px;
-                // }
-            
-                // scale {
-                //     margin: 0 8px;
-                //     // @include slider($width: 0.3em, $slider_width: 0.5em);
-                // }
-
             }
         }
     }
