@@ -35,6 +35,7 @@ const arrow = (menu, toggleOn) => ({
     }]],
     child: {
         type: 'icon',
+        className: 'arrow-icon',
         icon: 'pan-end-symbolic',
         properties: [
             ['deg', 0],
@@ -182,6 +183,7 @@ const volume = {
             children: [
                 {
                     type: 'button',
+                    className: 'volume-button',
                     child: { type: 'audio/speaker-type-indicator' },
                     onClick: 'pamixer --default-source -t',
                 },
@@ -489,6 +491,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
             children: [
             {
                 type: 'box',
+                className: 'witharrow',
                 orientation: 'vertical',
                 children: [bluetoothToggle, ],
             },
@@ -511,6 +514,7 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
             children: [
             {
                 type: 'box',
+                className: 'noarrow',
                 orientation: 'vertical',
                 children: [notificationsToggle, ],
             },

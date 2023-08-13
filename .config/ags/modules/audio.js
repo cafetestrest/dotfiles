@@ -43,6 +43,7 @@ Widget.widgets['audio/speaker-indicator'] = ({
 Widget.widgets['audio/speaker-type-indicator'] = props => Widget({
     ...props,
     type: 'icon',
+    className: 'volume-icon',
     connections: [[Audio, icon => {
         if (Audio.speaker) {
             // console.log('iconName ' + Audio.speaker.iconName)

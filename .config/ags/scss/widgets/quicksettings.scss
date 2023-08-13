@@ -266,7 +266,13 @@ window#quicksettings .quicksettings {
         min-width: 25em;
 
         .noarrow button {
-            padding: 0 0.6em;
+            min-height: 3.7em;
+            min-width: 12.5em;
+        }
+
+        .toggle.arrow.bluetooth{
+            min-height: 3.7em;
+            min-width: 12.5em;
         }
 
         .toggle {
@@ -274,19 +280,15 @@ window#quicksettings .quicksettings {
             margin: $spacing/2;
             border-radius: 24px;
 
-            .arrow {
-                border-top: 0.6em solid transparent;
-                border-bottom: 0.6em solid transparent;
-            }
-
             label {
-                margin-left: $spacing/2;
+                margin-left: $spacing;
                 font-weight: bold;
             }
 
             button {
                 @include button($flat: true);
                 padding: $spacing;
+
             }
 
             &.active {
@@ -306,8 +308,8 @@ window#quicksettings .quicksettings {
             .volume button {
                 background: $widget_bg;
                 border-radius: 50%;
-                min-width: 2.3em;
-                margin: 14px 0;
+                min-width: 1.5em;
+                min-height: 1.5em;
             }
             
             .volume label {
@@ -317,9 +319,16 @@ window#quicksettings .quicksettings {
                 padding: 0;
             }
 
+            .volume-icon {
+                -gtk-icon-transform: scale(0.8);
+            }
+
             .slider {
+                margin: 0 0.3em;
+                padding: 0;
+
                 slider {
-                    min-height: 2.5em;
+                    min-height: 2em;
                 }
 
                 trough {
@@ -331,7 +340,6 @@ window#quicksettings .quicksettings {
                     progress {
                         @include button_active;
                         border-radius: 100px;
-                        // min-height: 0.3em;
                         min-width: 38px;
                     }
                 }
