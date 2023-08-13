@@ -263,11 +263,16 @@ window#quicksettings .quicksettings {
     }
 
     .qstoggles {
-        margin-top: $spacing;
+        min-width: 25em;
+
+        .noarrow button {
+            padding: 0 0.6em;
+        }
 
         .toggle {
             @include button;
             margin: $spacing/2;
+            border-radius: 24px;
 
             .arrow {
                 border-top: 0.6em solid transparent;
@@ -326,9 +331,18 @@ window#quicksettings .quicksettings {
                     progress {
                         @include button_active;
                         border-radius: 100px;
+                        // min-height: 0.3em;
+                        min-width: 38px;
                     }
                 }
             }
+        }
+    }
+
+    .bluetoothSelection {
+        .submenu {
+            background: transparent;
+            border: none;
         }
     }
 }

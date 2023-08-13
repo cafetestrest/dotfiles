@@ -475,85 +475,92 @@ Widget.widgets['quicksettings/popup-content'] = () => Widget({
     orientation: 'vertical',
     hexpand: false,
     children: [
-        {
-            type: 'box',
-            className: 'header',
-            children: [
-                avatar,
-                systemBox,
-            ],
-        },
-        {
-            type: 'box',
-            className: 'qsmediavolume',
-            children: [
-                volume
-            ],
-        },
-        // brightness,
-        {
-            type: 'box',
-            className: 'toggles-box',
-            children: [
-                {
-                    type: 'box',
-                    orientation: 'vertical',
-                    className: 'arrow-toggles',
-                    // children: [networkToggle, bluetoothToggle],
-                    children: [bluetoothToggle],
-                },
-                {
-                    type: 'box',
-                    orientation: 'vertical',
-                    className: 'small-toggles',
-                    vexpand: true,
-                    hexpand: false,
-                    // children: Service.Asusctl?.available
-                    //     ? [
-                    //         { type: 'box', children: [asusmodeToggle, asusctlToggle, dndToggle] },
-                    //         { type: 'box', children: [appmixerToggle, themeToggle, muteToggle] },
-                    //     ] : [
-                    //         { type: 'box', children: [dndToggle, muteToggle] },
-                    //         { type: 'box', children: [appmixerToggle, themeToggle] },
-                    //     ],
-                    children: [
-                        // remove asus toggles if you are not on an asus laptop
-                        { type: 'box', children: [idleToggle, nightlightToggle, themeToggle] },
-                        { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
-                    ],
-                },
-            ],
-        },
-        appmixer,
-        // networkSelection,
-        bluetoothSelection,
-        themeSelection,
         // {
-        //     type: 'media/popup-content',
-        //     orientation: 'vertical',
-        //     className: 'media',
+        //     type: 'box',
+        //     className: 'header',
+        //     children: [
+        //         avatar,
+        //         systemBox,
+        //     ],
         // },
         {
             type: 'box',
             className: 'qstoggles',
-            children: [{
-                type: 'box',
-                orientation: 'vertical',
-                children: [bluetoothToggle, notificationsToggle],
-            },
+            children: [
             {
                 type: 'box',
                 orientation: 'vertical',
-                children: [wideIdleToggle, wideNightlightToggle],
+                children: [wideIdleToggle, bluetoothToggle, ],
+            },
+            {
+                type: 'box',
+                className: 'noarrow',
+                orientation: 'vertical',
+                children: [wideNightlightToggle, notificationsToggle, ],
             },
         ]},
+        {
+            type: 'box',
+            className: 'bluetoothSelection',
+            orientation: 'vertical',
+            children: [bluetoothSelection, ],
+        },
         {
             type: 'box',
             className: 'qsvolume',
             children: [
                 volume
             ],
-        }
+        },
+        // {
+        //     type: 'box',
+        //     className: 'qsmediavolume',
+        //     children: [
+        //         volume
+        //     ],
+        // },
+        // brightness,
+        // {
+        //     type: 'box',
+        //     className: 'toggles-box',
+        //     children: [
+        //         {
+        //             type: 'box',
+        //             orientation: 'vertical',
+        //             className: 'arrow-toggles',
+        //             // children: [networkToggle, bluetoothToggle],
+        //             children: [bluetoothToggle],
+        //         },
+        //         {
+        //             type: 'box',
+        //             orientation: 'vertical',
+        //             className: 'small-toggles',
+        //             vexpand: true,
+        //             hexpand: false,
+        //             // children: Service.Asusctl?.available
+        //             //     ? [
+        //             //         { type: 'box', children: [asusmodeToggle, asusctlToggle, dndToggle] },
+        //             //         { type: 'box', children: [appmixerToggle, themeToggle, muteToggle] },
+        //             //     ] : [
+        //             //         { type: 'box', children: [dndToggle, muteToggle] },
+        //             //         { type: 'box', children: [appmixerToggle, themeToggle] },
+        //             //     ],
+        //             children: [
+        //                 // remove asus toggles if you are not on an asus laptop
+        //                 { type: 'box', children: [idleToggle, nightlightToggle, themeToggle] },
+        //                 { type: 'box', children: [appmixerToggle, dndToggle, muteToggle] },
+        //             ],
+        //         },
+        //     ],
+        // },
+        appmixer,
+        // networkSelection,
+        themeSelection,
+        // {
+        //     type: 'media/popup-content',
+        //     orientation: 'vertical',
+        //     className: 'media',
+        // },
     ],
 });
 
