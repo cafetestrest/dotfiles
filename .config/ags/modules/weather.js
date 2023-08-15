@@ -6,7 +6,7 @@ class WeatherService extends Service {
 
     constructor() {
         super();
-        this._temperatureWeather = '-22';
+        this._temperatureWeather = null;
         this._tooltip = null;
         // this._iconWeather = null;
     }
@@ -128,7 +128,7 @@ Widget.widgets['weather/forecast'] = props => Widget({
             className: 'tooltip',
             halign: 'center',
             children: [
-                // { type: 'reset-timer' },
+                { type: 'reset-timer' },
                 { type: 'tooltip' },
             ],
         }

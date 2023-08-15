@@ -133,7 +133,9 @@ Widget.widgets['progress'] = ({ height = 18, width = 180, vertical = false, chil
         for (let i = 0; i < frames; ++i) {
             timeout(5 * i, () => {
                 fill._size += step;
-                fill.setStyle(`min-${axis}: ${fill._size}px`);
+                if (fill._size > 0) {
+                    fill.setStyle(`min-${axis}: ${fill._size}px`);
+                }
             });
         }
     };
