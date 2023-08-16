@@ -21,15 +21,15 @@ Widget.widgets['colorpicker'] = props => Widget({
                 btn._colors.shift();
         }
 
-        btn._id = Notifications.instance.Notify(
-            'Color Picker',
-            btn._id || null,
-            'color-select-symbolic',
-            color,
-            '',
-            [],
-            {},
-        );
+        // btn._id = Notifications.instance.Notify(
+        //     'Color Picker',
+        //     btn._id || null,
+        //     'color-select-symbolic',
+        //     color,
+        //     '',
+        //     [],
+        //     {},
+        // );
     }).catch(print)]],
     onSecondaryClick: (btn, event) => btn._colors.length > 0 ? Widget({
         type: 'menu',
