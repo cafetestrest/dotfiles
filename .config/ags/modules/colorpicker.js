@@ -3,7 +3,7 @@ const { execAsync } = ags.Utils;
 const { Widget } = ags;
 const { Gravity } = imports.gi.Gdk;
 
-const wlCopy = color => execAsync(['wl-copy', color]).catch(print);
+// const wlCopy = color => execAsync(['wl-copy', color]).catch(print);
 
 Widget.widgets['colorpicker'] = props => Widget({
     child: {
@@ -14,7 +14,9 @@ Widget.widgets['colorpicker'] = props => Widget({
     type: 'button',
     properties: [['colors', []]],
     connections: [['clicked', btn => execAsync('hyprpicker').then(color => {
-        wlCopy(color);
+        // wlCopy(color);
+        execAsync(`copyq write ${color}`)
+
         if (!btn._colors.includes(color)) {
             btn._colors.push(color);
             if (btn._colors > 10)
@@ -38,7 +40,8 @@ Widget.widgets['colorpicker'] = props => Widget({
             type: 'menuitem',
             child: color,
             style: `background-color: ${color}`,
-            onActivate: () => wlCopy(color),
+            // onActivate: () => wlCopy(color),
+            onActivate: () => execAsync(`copyq write ${color}`),
         })),
     }).popup_at_widget(btn, Gravity.WEST, Gravity.EAST, event) : false,
 });
