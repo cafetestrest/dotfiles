@@ -40,7 +40,7 @@ Widget.widgets['note'] = props => Widget({
     onClick: () => {
         execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
-    connections: [[10000, button => {
+    connections: [[60000, button => {
         if (!first) {
             first = true;
         } else {
