@@ -1,28 +1,38 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
+let
+  homeDirectory = "/home/${hostname}";
+in
 {
   imports = [
-    ./starship.nix
+    ./browser.nix
+    ./desktopEntries.nix
+    ./hyprland.nix
+    ./neofetch.nix
+    ./nerdfonts.nix
     ./packages.nix
     ./sh.nix
-    ./neofetch.nix
-    ./desktopEntries.nix
-    ./theming.nix
-    ./files.nix
-    ./hyprland.nix
+    ./starship.nix
+    ./theme.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.package = pkgs.nix;
-
   targets.genericLinux.enable = true;
-  
+
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      warn-dirty = false;
+    };
+  };
+
   home = {
+    username = hostname;
+    homeDirectory = homeDirectory;
+
     sessionVariables = {
       QT_XCB_GL_INTEGRATION = "none"; # kde-connect
       EDITOR = "nvim";
       VISUAL = "code";
-      # BROWSER = "flatpak run org.mozilla.firefox";
       TERMINAL = "nixGL wezterm";
       XCURSOR_THEME = "Qogir";
       NIXPKGS_ALLOW_UNFREE = "1";
@@ -33,10 +43,18 @@
       "$HOME/.local/bin"
     ];
 
-    username = "demeter";
-    homeDirectory = "/home/demeter";
     stateVersion = "21.11";
   };
+
+  gtk.gtk3.bookmarks = [
+    "file://${homeDirectory}/Documents"
+    "file://${homeDirectory}/Music"
+    "file://${homeDirectory}/Pictures"
+    "file://${homeDirectory}/Videos"
+    "file://${homeDirectory}/Downloads"
+    "file://${homeDirectory}/Projects Projects"
+    "file://${homeDirectory}/School School"
+  ];
 
   services = {
     kdeconnect = {
