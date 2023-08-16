@@ -160,11 +160,11 @@ Widget.widgets['weather/popup-content'] = () => Widget({
 Widget.widgets['weather/refresh-button'] = props => Widget({
     ...props,
     type: 'button',
-    className: 'refresh panel-button',
+    className: 'weather-refresh',
     child: {
         type: 'icon',
         icon: 'view-refresh-symbolic',
-        halign: 'center',
+        halign: 'end',
     },
     onClick: () => {
         Weather.weatherData
