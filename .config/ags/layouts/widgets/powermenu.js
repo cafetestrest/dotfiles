@@ -25,6 +25,11 @@ class System extends Service {
         // App.getWindow('verification').show();
         System.instance._action = { cmd, action };
         // System.instance.emit('changed');
+
+        if (action == 'Lock' || action == 'Sleep') {
+            exec('hyprctl dispatch movecursor 1920 1220')
+        }
+
         exec(System.instance._action.cmd)
     }
 }
