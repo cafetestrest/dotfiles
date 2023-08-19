@@ -11,15 +11,15 @@ Widget.widgets['datemenu/popup-content'] = props => Widget({
             format: '%H:%M',
             className: 'clock',
         },
-        {
-            type: 'box',
-            className: 'uptime',
-            halign: 'center',
-            children: [
-                'uptime: ',
-                { type: 'uptime' },
-            ],
-        },
+        // {
+        //     type: 'box',
+        //     className: 'uptime',
+        //     halign: 'center',
+        //     children: [
+        //         'uptime: ',
+        //         { type: 'uptime' },
+        //     ],
+        // },
         {
             type: 'box',
             className: 'calendar',
