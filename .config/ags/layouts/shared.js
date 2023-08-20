@@ -119,3 +119,15 @@ export const Quicksettings = ({ position }) => Window({
         child: quicksettings.PopupContent(),
     }),
 });
+
+export const NotificationsPopup = ({ position }) => Window({
+    name: 'notificationsPopup',
+    popup: true,
+    focusable: true,
+    anchor: position,
+    child: PopupLayout({
+        layout: position,
+        window: 'notificationsPopup',
+        child: dashboard.NotificationsPopupContent(),
+    }),
+});

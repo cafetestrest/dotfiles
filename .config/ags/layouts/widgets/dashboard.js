@@ -4,7 +4,7 @@ import { Wallpaper } from '../../modules/wallpaper.js';
 import * as datemenu from './datemenu.js';
 import * as notifications from './notifications.js';
 const { App } = ags;
-const { Button, Box } = ags.Widget;
+const { Button, Box, Label } = ags.Widget;
 
 
 export const PanelButton = ({ format } = {}) => Button({
@@ -28,6 +28,68 @@ export const PopupContent = () => Box({
             children: [datemenu.PopupContent()],
         }),
         Separator({ vexpand: true }),
+        Box({
+            className: 'notifications',
+            vertical: true,
+            children: [
+                notifications.Header(),
+                Box({
+                    className: 'notification-list-box',
+                    children: [
+                        Wallpaper({
+                            children: [notifications.List()],
+                        }),
+                    ],
+                }),
+            ],
+        }),
+    ],
+});
+
+export const NotificationsPanelButton = ({ format } = {}) => Button({
+    className: 'notifications-button panel-button',
+    onClicked: () => App.toggleWindow('notificationsPopup'),
+    connections: [[App, (btn, win, visible) => {
+        btn.toggleClassName('active', win === 'notificationsPopup' && visible);
+    }]],
+    child: notifications.PanelIndicator({ direction: 'right', hexpand: true }),
+});
+
+// export const NotificationsPanelButton = ({ format } = {}) => Button({
+//     className: 'notifications-button panel-button',
+//     onClicked: () => App.toggleWindow('notificationsPopup'),
+//     connections: [[App, (btn, win, visible) => {
+//         btn.toggleClassName('active', win === 'notificationsPopup' && visible);
+//     }]],
+//     child: NotificationsPopupContent(),
+// });
+
+// export const NotificationsPopupContent = () => Box({
+//     className: 'notifications-popup',
+//     vexpand: false,
+//     children: [
+//         Box({
+//             className: 'notifications',
+//             vertical: true,
+//             children: [
+//                 notifications.Header(),
+//                 Box({
+//                     className: 'notification-list-box',
+//                     children: [
+//                         Wallpaper({
+//                             children: [notifications.List()],
+//                         }),
+//                     ],
+//                 }),
+//             ],
+//         }),
+//     ],
+// });
+
+export const NotificationsPopupContent = () => Box({
+    className: 'notifications-popup',
+    vexpand: false,
+    children: [
         Box({
             className: 'notifications',
             vertical: true,

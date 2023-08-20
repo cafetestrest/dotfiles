@@ -245,15 +245,3 @@ export const DNDToggle = props => Button({
         button.toggleClassName('on', Notifications.dnd);
     }]],
 });
-
-// Widget.widgets['notifications/label'] = props => Widget({
-//     ...props,
-//     type: 'label',
-//     label: 'Notifications',
-// });
-
-// Widget.widgets['notifications/status-label'] = props => Widget({
-//     ...props,
-//     type: 'label',
-//     connections: [[Notifications, label => label.label = (!Notifications.dnd ? 'On' : 'Off')]],
-// }); todo

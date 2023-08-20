@@ -8,7 +8,8 @@ import { PanelIndicator as NotificationIndicator } from './widgets/notifications
 import { DistroIcon } from '../modules/misc.js';
 import { PanelButton as ColorPicker } from '../modules/colorpicker.js';
 import { PanelButton as PowerMenu } from './widgets/powermenu.js';
-import { PanelButton as DashBoard } from './widgets/dashboard.js';
+import { PanelButton as DashBoard, NotificationsPanelButton } from './widgets/dashboard.js';
+import { Taskbar } from '../modules/hyprland.js';
 import { PanelButton as ScreenRecord } from '../modules/screenrecord.js';
 import { PanelButton as QuickSettings } from './widgets/quicksettings.js';
 
@@ -19,6 +20,9 @@ const Bar = monitor => shared.Bar({
         Launcher({ child: DistroIcon() }),
         Separator({ valign: 'center' }),
         // Workspaces(),
+        // Taskbar({
+        //     vertical: false,
+        // }), todo check
         WorkspacesCustom(),
         Separator({ valign: 'center' }),
         Client(),
@@ -26,9 +30,10 @@ const Bar = monitor => shared.Bar({
     ],
     center: [
         DashBoard(),
+        NotificationsPanelButton(),
     ],
     end: [
-        NotificationIndicator({ direction: 'right', hexpand: true, halign: 'start' }),
+        // NotificationIndicator({ direction: 'right', hexpand: true, halign: 'start' }),
         ags.Widget.Box({ hexpand: true }),
         ScreenRecord(),
         ColorPicker(),
@@ -50,4 +55,5 @@ export default monitors => ([
     ]),
     shared.Quicksettings({ position: 'top right' }),
     shared.Dashboard({ position: 'top' }),
+    shared.NotificationsPopup({ position: 'top' }),
 ]).flat(2);
