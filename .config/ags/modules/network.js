@@ -81,15 +81,13 @@ export const WifiIndicator = ({
 });
 
 export const Indicator = ({
-    wifi = WifiIndicator(),
-    wired = WifiIndicator(),
+    wired = WiredIndicator(),
 } = {}) => Stack({
     items: [
         ['wired', wired],
-        ['wifi', wifi],
     ],
     connections: [[Network, stack => {
-        stack.shown = Network.primary || 'wifi';
+        stack.shown = Network.primary || '';
     }]],
 });
 

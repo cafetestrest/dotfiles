@@ -466,7 +466,7 @@ const ThemeSelection = () => Submenu({
     contentType: theme.Selector,
 });
 
-export const PopupContent = () => Box({
+export const PopupContent2 = () => Box({
     className: 'quicksettings',
     vertical: true,
     hexpand: false,
@@ -512,12 +512,102 @@ export const PopupContent = () => Box({
     ],
 });
 
+export const PopupContent = () => Box({
+    className: 'quicksettings',
+    vertical: true,
+    hexpand: false,
+    children: [
+        // Box({
+        //     className: 'header',
+        //     children: [
+        //         Avatar(),
+        //         SystemBox(),
+        //     ],
+        // }),
+        // BrightnessBox(),
+        Box({
+            className: 'qstoggles',
+            children: [
+                Box({
+                    vertical: true,
+                    className: 'arrow-toggles',
+                    children: [
+                        // NetworkToggle(),
+                        BluetoothToggle()
+                    ],
+                }),
+                Box({
+                    vertical: true,
+                    className: 'noarrow',
+                    children: [
+                        // wideIdleToggle()
+                    ],
+                }),
+            ],
+        }),
+        Box({
+            vertical: true,
+            className: 'bluetoothSelection',
+            children: [
+                BluetoothSelection(),
+            ],
+        }),
+        Box({
+            className: 'qstoggles',
+            children:
+                [
+                    Box({
+                        vertical: true,
+                        className: 'noarrow',
+                        children: [
+                            // notificationsToggle()
+                        ],
+                    }),
+                    Box({
+                        vertical: true,
+                        className: 'noarrow',
+                        children: [
+                            // wideNightlightToggle()
+                        ],
+                    }),
+                    // Box({ children: [DNDToggle(), MuteToggle()] }),
+                    // Box({ children: [AppmixerToggle(), ThemeToggle()] }),
+                ],
+        }),
+        Box({
+            className: 'qsvolume',
+            children: [
+                VolumeBox(),
+            ],
+        }),
+        // VolumeBox(),
+        Appmixer(),
+        // NetworkSelection(),
+        ThemeSelection(),
+        media.PopupContent(),
+    ],
+});
+
 const BluetoothIndicator = () => Box({
     connections: [[Bluetooth, box => {
         box.children = Array.from(Bluetooth.connectedDevices.values())
             .map(({ iconName, name }) => HoverRevealer({
                 indicator: Icon(iconName + '-symbolic'),
                 child: Label(name),
+            }));
+
+        box.visible = Bluetooth.connectedDevices.size > 0;
+    }]],
+});
+
+const BluetoothIndicatorWithBattery = () => Box({
+    connections: [[Bluetooth, box => {
+        box.children = Array.from(Bluetooth.connectedDevices.values())
+            .map(({ iconName, batteryPercentage }) => Box({
+                children: [
+                    Icon(iconName + '-symbolic'),
+                    Label(batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  "),
+                ],
             }));
 
         box.visible = Bluetooth.connectedDevices.size > 0;
@@ -533,7 +623,7 @@ const BatteryIndicator = () => HoverRevealer({
     }]],
 });
 
-export const PanelButton = () => Button({
+export const PanelButton2 = () => Button({
     className: 'quicksettings panel-button',
     onClicked: () => App.toggleWindow('quicksettings'),
     onScrollUp: () => {
@@ -558,6 +648,47 @@ export const PanelButton = () => Button({
             network.Indicator(),
             audio.SpeakerIndicator(),
             BatteryIndicator(),
+        ],
+    }),
+});
+
+export const PanelButton = () => Button({
+    className: 'quicksettings panel-button',
+    onClicked: () => App.toggleWindow('quicksettings'),
+    onScrollUp: () => {
+        Audio.speaker.volume += 0.02;
+        Service.Indicator.speaker();
+    },
+    onScrollDown: () => {
+        Audio.speaker.volume -= 0.02;
+        Service.Indicator.speaker();
+    },
+    connections: [[App, (btn, win, visible) => {
+        btn.toggleClassName('active', win === 'quicksettings' && visible);
+    }]],
+    child: Box({
+        children: [
+            // Service.Asusctl?.available && asusctl.ProfileIndicator({ balanced: null }),
+            // Service.Asusctl?.available && asusctl.ModeIndicator({ hybrid: null }),
+            notifications.DNDIndicator({ noisy: null }),
+            // { type: 'nightlight/mode-indicator'},
+            // { type: 'idle/indicator'},
+            BluetoothIndicatorWithBattery(),
+            bluetooth.Indicator({ disabled: null }),
+            network.Indicator(),
+            audio.MicrophoneMuteIndicator({ unmuted: null }),
+            Box({
+                className: 'speaker-box',
+                halign: 'end',
+                children: [
+                    audio.SpeakerIndicator(),
+                    Label({
+                        label: ' ',
+                    }),
+                    audio.SpeakerPercentLabel(),
+                ],
+            }),
+            // BatteryIndicator(),
         ],
     }),
 });
