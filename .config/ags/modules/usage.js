@@ -17,12 +17,11 @@ export const UsageCPUIndicator = props => FontIcon({
 });
 
 export const UsageCpuWidget = () => Box({
-    className: 'usage cpu',
+    className: 'usage cpu panel-button',
     halign: 'end',
     children: [
-        UsageRAM(),
-        Label({ label: ' ' }),
         UsageRAMIndicator(),
+        UsageRAM(),
     ]
 });
 
@@ -30,7 +29,7 @@ export const UsageRAM = props => Label({
     ...props,
     connections: [[15000, label => {
         execAsync(['bash', '-c', "free --giga -h | grep 'Mem' | awk '{print $3}'"])
-            .then(value => label.label = value.trim() + '%')
+            .then(value => label.label = value.trim())
             .catch(print);
     }]],
 });
@@ -41,12 +40,11 @@ export const UsageRAMIndicator = props => FontIcon({
 });
 
 export const UsageRAMWidget = () => Box({
-    className: 'usage ram',
+    className: 'usage ram panel-button',
     halign: 'end',
     children: [
-        UsageCPU(),
-        Label({ label: ' ' }),
         UsageCPUIndicator(),
+        UsageCPU(),
     ]
 });
 
@@ -54,7 +52,7 @@ export const UsageDisk = props => Label({
     ...props,
     connections: [[600000, label => {
         execAsync(['bash', '-c', "df -h / | awk 'NR==2 {print $5}'"])
-            .then(value => label.label = value.trim() + '%')
+            .then(value => label.label = value.trim())
             .catch(print);
     }]],
 });
@@ -65,12 +63,11 @@ export const UsageDiskIndicator = props => Icon({
 });
 
 export const UsageDiskWidget = () => Box({
-    className: 'usage disk',
+    className: 'usage disk panel-button',
     halign: 'end',
     children: [
-        UsageDisk(),
-        Label({ label: ' ' }),
         UsageDiskIndicator(),
+        UsageDisk(),
     ]
 });
 //todo check formatting

@@ -244,6 +244,8 @@ $workspaceBorder: 0px;
     }
 }
 
-.usage {
-    font-weight: bold;
+.usage.panel-button label {
+    margin: 0;
+    padding: 0;
+    margin-right: 2px;
 }

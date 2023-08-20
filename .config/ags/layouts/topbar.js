@@ -30,14 +30,14 @@ const Bar = monitor => shared.Bar({
         MediaIndicator({ hexpand: true, halign: 'end' }),
     ],
     center: [
-        DashBoard(),
+        DashBoard({ format: '%a %b %e   %H:%M:%S' }),
         NotificationsPanelButton(),
     ],
     end: [
         // NotificationIndicator({ direction: 'right', hexpand: true, halign: 'start' }),
         ags.Widget.Box({ hexpand: true }),
-        UsageCpuWidget(),
         UsageRAMWidget(),
+        UsageCpuWidget(),
         UsageDiskWidget(),
         ScreenRecord(),
         ColorPicker(),
@@ -58,6 +58,6 @@ export default monitors => ([
         // shared.Dock(mon),
     ]),
     shared.Quicksettings({ position: 'top right' }),
-    shared.Dashboard({ format: '%H:%M:%S  %a %b %e', position: 'top' }),
+    shared.Dashboard({ position: 'top' }),
     shared.NotificationsPopup({ position: 'top' }),
 ]).flat(2);
