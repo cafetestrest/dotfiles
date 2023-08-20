@@ -129,6 +129,8 @@ Widget.widgets['tooltip'] = ({
         tooltip = Weather.tooltip;
 
         if (tooltip) {
+            box.get_children().forEach(ch => ch.destroy());
+
             let todayOnce = true;
             let tomorrowOnce = true;
 
