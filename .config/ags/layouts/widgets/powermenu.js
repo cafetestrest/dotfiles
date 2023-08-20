@@ -41,7 +41,7 @@ const SysButton = (icon, action) => Button({
         vertical: true,
         children: [
             Icon(icon),
-            Label(action),
+            // Label(action),
         ],
     }),
 });

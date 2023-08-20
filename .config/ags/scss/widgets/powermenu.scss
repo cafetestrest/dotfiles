@@ -48,15 +48,17 @@ window#powermenu .powermenu {
 
     button {
         @include common;
-
+        
         image {
             @include button;
             margin: $popover_padding;
             margin-bottom: $popover_padding/2;
-            border-radius: $radii*2;
+            // border-radius: $radii*2; //override
+            border-radius: 50%;
             min-width: 120px;
             min-height: 120px;
-            font-size: 68px;
+            // font-size: 68px;
+            font-size: 35px;
         }
 
         label, image {
