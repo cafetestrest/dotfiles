@@ -8,7 +8,6 @@ class WeatherService extends Service {
         super();
         this._temperatureWeather = null;
         this._tooltip = null;
-        // this._iconWeather = null;
     }
 
     get weatherData() {
@@ -23,13 +22,6 @@ class WeatherService extends Service {
 
     get tooltip() { return this._tooltip; }
     setTooltip(text) { this._tooltip = text }
-
-    // get iconWeather() { return this._iconWeather; }
-    // setIconWeather(icon) {
-    //     if (icon) {
-    //         this._iconWeather = icon
-    //     }
-    // }
 }
 
 class Weather {
@@ -45,9 +37,6 @@ class Weather {
 
     static get tooltip() { return Weather.instance.tooltip; }
     static setTooltip(text) { Weather.instance.setTooltip(text); }
-
-    // static get iconWeather() { return Weather.instance.iconWeather; }
-    // static setIconWeather(icon) { Weather.instance.setIconWeather(icon); }
 }
 
 Widget.widgets['weather/temperature'] = props => Widget({
@@ -90,22 +79,93 @@ Widget.widgets['weather/label'] = props => Widget({
     }]],
 });
 
-Widget.widgets['tooltip'] = props => Widget({
-    ...props,
-    type: 'label',
-    connections: [[Weather, label => {
+const _weatherinfo = (weatherData) => ({
+    type: 'box',
+    className: 'weather-info',
+    orientation: 'vertical',
+    children: [
+        // { type: 'label', label: weatherData.justDayOfTheWeek },
+        { type: 'label', label: weatherData.dayOfWeek.substring(0, 3).toUpperCase() },
+        { type: 'label', label: weatherData.hourFromDate },
+        { type: 'label', label: weatherData.icon, className: 'weather-icon' },
+        { type: 'label', label: weatherData.temperature, className: 'weather-temperature' },
+        // { type: 'label', label: weatherData.LongWeather },
+        { type: 'label', label: " " + weatherData.Wind },
+        // { type: 'label', label: weatherData.Humidity },
+        { type: 'label', label: " " + weatherData.Cloud },
+        { type: 'label', label: weatherData.minTemp },
+        { type: 'label', label: weatherData.maxTemp },
+    ],
+    connections: [[Weather, box => {
+        switch (weatherData.icon) {
+            case "🌑":
+                box.setStyle(`
+                    background-color: gray;
+                `);
+            case "🌕":
+                box.setStyle(`
+                    background-color: gray;
+                `);
+            case "":
+                box.setStyle(`
+                    background-color: gray;
+                `);
+            case "":
+                box.setStyle(`
+                    background-color: #5B687B;
+                `);
+          }
+    }]]
+});
 
+Widget.widgets['tooltip'] = ({
+    weatherinfo = _weatherinfo,
+    ...props
+}) => Widget({
+    ...props,
+    type: 'box',
+    orientation: 'horizontal',
+    connections: [[Weather, box => {
         tooltip = Weather.tooltip;
 
-        if (!tooltip) {
-            temp = Weather.temperatureWeather;
+        if (tooltip) {
+            let todayOnce = true;
+            let tomorrowOnce = true;
 
-            if (temp) {
-                tooltip = Weather.temperatureWeather.toString();
-            }
+            tooltip.forEach(w => {
+                if (tomorrowOnce && 'Tomorrow' === w.justDayOfTheWeek) {
+                    box.add(Widget({
+                        type: 'label',
+                        className: 'weather-day',
+                    }));
+
+                    tomorrowOnce = false;
+                }
+
+                if (todayOnce && 'Today' === w.justDayOfTheWeek) {
+                    box.add(Widget({
+                        type: 'label',
+                        className: 'weather-day',
+                    }));
+
+                    todayOnce = false;
+                }
+
+                if ('Today' !== w.justDayOfTheWeek && 'Tomorrow' !== w.justDayOfTheWeek) {
+                    box.add(Widget({
+                        type: 'label',
+                        className: 'weather-day',
+                    }));
+                }
+
+                box.add(Widget({
+                    type: 'box',
+                    children: [
+                        weatherinfo(w)
+                    ]
+                }));
+            });
         }
-
-        label.label = tooltip;
     }]],
 });
 
@@ -170,84 +230,3 @@ Widget.widgets['weather/refresh-button'] = props => Widget({
         Weather.weatherData
     },
 });
-
-// Widget.widgets['weather/icon-indicator'] = props => Widget({
-//     ...props,
-//     type: 'icon',
-//     icon: 'weather-clear-symbolic',
-//     // icon: (() => {
-//     //     return this._iconWeather;
-//     // })(),
-//     connections: [[5000, icon => {
-//         // execAsync(['bash', '-c', "~/.config/waybar/scripts/usagememory.sh ags"]).catch(print);
-
-//         // "☀️") icon="☾" ;; weather-clear-night-symbolic
-//         // "🌥") icon="" ;; weather-few-clouds-night-symbolic
-//         // 01*) get_weather_icon "☀️";;weather-clear-symbolic 
-//         // 02*) get_weather_icon "🌤";;weather-few-clouds-symbolic
-//         // 03*) get_weather_icon "🌥";;weather-few-clouds-symbolic 
-//         // 04*) get_weather_icon "☁";;weather-overcast-symbolic
-//         // 09*) get_weather_icon "🌧";;weather-showers-symbolic
-//         // 10*) get_weather_icon "🌦";;weather-showers-scattered-symbolic
-//         // 11*) get_weather_icon "🌩";;weather-storm-symbolic
-//         // 13*) get_weather_icon "🌨";;weather-snow-symbolic
-//         // 50*) get_weather_icon "🌫";;weather-fog-symbolic
-
-//         console.log("iconWeather " + Weather.iconWeather)
-//         switch (Weather.iconWeather) {
-//             case '☾': {
-//                 iconName = 'weather-clear-night-symbolic';
-//                 break;
-//             }
-//             case '': {
-//                 iconName = 'weather-few-clouds-night-symbolic';
-//                 break;
-//             }
-//             case '☀️': {
-//                 // this
-//                 iconName = 'weather-clear-symbolic';
-//                 break;
-//             }
-//             case '🌤': {
-//                 // this
-//                 iconName = 'weather-few-clouds-symbolic';
-//                 break;
-//             }
-//             case '🌥': {
-//                 iconName = 'weather-few-clouds-symbolic';
-//                 break;
-//             }
-//             case '☁': {
-//                 iconName = 'weather-overcast-symbolic';
-//                 break;
-//             }
-//             case '🌧': {
-//                 iconName = 'weather-showers-symbolic';
-//                 break;
-//             }
-//             case '🌦': {
-//                 iconName = 'weather-showers-scattered-symbolic';
-//                 break;
-//             }
-//             case '🌩': {
-//                 iconName = 'weather-storm-symbolic';
-//                 break;
-//             }
-//             case '🌨': {
-//                 iconName = 'weather-snow-symbolic';
-//                 break;
-//             }
-//             case '🌫': {
-//                 iconName = 'weather-fog-symbolic';
-//                 break;
-//             }
-//             default: {
-//                 iconName = 'weather-severe-alert-symbolic';
-//                 break;
-//             }
-//         }
-
-//         icon.icon_name = iconName;
-//     }
-//     ]],
-// });
