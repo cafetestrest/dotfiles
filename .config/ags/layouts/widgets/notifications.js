@@ -1,52 +1,42 @@
+import { HoverRevealer } from '../../modules/misc.js';
+import * as notifications from '../../modules/notifications.js';
 const { App, Widget } = ags;
 const { Notifications } = ags.Service;
 const { timeout } = ags.Utils;
+const { Box, Scrollable, Label } = ags.Widget;
 
-Widget.widgets['notifications/header'] = props => Widget({
+export const Header = props => Box({
     ...props,
-    type: 'box',
+    className: 'header',
     children: [
-        { type: 'label', label: 'Notifications', hexpand: true, xalign: 0 },
-        { type: 'notifications/clear-button' },
+        Label({ label: 'Notifications', hexpand: true, xalign: 0 }),
+        notifications.ClearButton(),
     ],
 });
 
-Widget.widgets['notifications/list'] = props => Widget({
+export const List = props => Scrollable({
     ...props,
     hscroll: 'never',
     vscroll: 'automatic',
-    type: 'scrollable',
-    child: {
-        type: 'box',
-        orientation: 'vertical',
+    child: Box({
+        vertical: true,
         children: [
-            { type: 'notifications/notification-list' },
-            {
-                type: 'notifications/placeholder',
-                className: 'placeholder',
-                orientation: 'vertical',
-                valign: 'center',
-                vexpand: true,
-                children: [
-                    { type: 'label', label: '󰂛', className: 'icon' },
-                    'Your inbox is empty',
-                ],
-            },
+            notifications.NotificationList(),
+            notifications.Placeholder(),
         ],
-    },
+    }),
 });
 
-Widget.widgets['notifications/panel-indicator'] = ({ direction = 'left', ...props }) => Widget({
+export const PanelIndicator = ({ direction = 'left', ...props } = {}) => Box({
     ...props,
-    type: 'box',
+    className: 'notifications panel-button',
     connections: [[Notifications, box => {
         box.visible =
             Notifications.notifications.size > 0 &&
             !Notifications.dnd;
     }]],
-    children: [{
-        type: 'hover-revealer',
-        connection: [Notifications, revealer => {
+    children: [HoverRevealer({
+        connections: [[Notifications, revealer => {
             const title = Array.from(Notifications.notifications)?.pop()?.[1].summary;
             if (revealer._title === title)
                 return;
@@ -56,16 +46,15 @@ Widget.widgets['notifications/panel-indicator'] = ({ direction = 'left', ...prop
             timeout(3000, () => {
                 revealer.reveal_child = false;
             });
-        }],
+        }]],
         direction,
-        indicator: { type: 'notifications/dnd-indicator' },
-        child: {
-            type: 'label',
+        indicator: notifications.DNDIndicator(),
+        child: Label({
             connections: [[Notifications, label => {
                 label.label = Array.from(Notifications.notifications)?.pop()?.[1].summary || '';
             }]],
-        },
-    }],
+        }),
+    })],
 });
 
 Widget.widgets['notifications/panel-button'] = props => Widget({
