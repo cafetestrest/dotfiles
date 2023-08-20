@@ -1,10 +1,10 @@
 import * as shared from './shared.js';
 import { Launcher } from './shared.js';
-import { Workspaces, Client } from './widgets/hyprland.js';
+// import { Workspaces, Client } from './widgets/hyprland.js';
 import { WorkspacesCustom } from '../modules/workspaces.js';
 import { Separator, SeparatorInvisible } from '../modules/misc.js';
 import { PanelIndicator as MediaIndicator } from './widgets/media.js';
-import { PanelIndicator as NotificationIndicator } from './widgets/notifications.js';
+// import { PanelIndicator as NotificationIndicator } from './widgets/notifications.js';
 import { DistroIcon } from '../modules/misc.js';
 import { PanelButton as ColorPicker } from '../modules/colorpicker.js';
 import { PanelButton as PowerMenu } from './widgets/powermenu.js';
@@ -25,8 +25,8 @@ const Bar = monitor => shared.Bar({
         //     vertical: false,
         // }), todo check
         WorkspacesCustom(),
-        SeparatorInvisible({ valign: 'center' }),
-        Client(),
+        // SeparatorInvisible({ valign: 'center' }),
+        // Client(),
         MediaIndicator({ hexpand: true, halign: 'end' }),
     ],
     center: [

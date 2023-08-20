@@ -10,14 +10,24 @@ import * as dashboard from './widgets/dashboard.js';
 import * as quicksettings from './widgets/quicksettings.js';
 import * as powermenu from './widgets/powermenu.js';
 import * as notifications from '../modules/notifications.js';
+const { execAsync } = ags.Utils;
 
 // bar
-export const Launcher = ({ child }) => Button({
+export const Launcher2 = ({ child }) => Button({
     className: 'launcher panel-button',
     connections: [[ags.App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'overview' && visible);
     }]],
     onClicked: () => ags.App.toggleWindow('overview'),
+    child: Box({ children: [child] }),
+});
+
+export const Launcher = ({ child }) => Button({
+    className: 'launcher panel-button',
+    connections: [[ags.App, (btn, win, visible) => {
+        btn.toggleClassName('active', win === 'overview' && visible);
+    }]],
+    onClicked: () => execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print),
     child: Box({ children: [child] }),
 });
 
