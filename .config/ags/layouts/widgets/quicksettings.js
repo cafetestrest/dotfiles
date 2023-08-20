@@ -2,11 +2,11 @@ import { Uptime } from '../../modules/clock.js';
 import { FontIcon, HoverRevealer, Separator } from '../../modules/misc.js';
 import * as battery from '../../modules/battery.js';
 import * as audio from '../../modules/audio.js';
-import * as brightness from '../../modules/brightness.js';
+// import * as brightness from '../../modules/brightness.js';
 import * as network from '../../modules/network.js';
 import * as bluetooth from '../../modules/bluetooth.js';
 import * as notifications from '../../modules/notifications.js';
-import * as asusctl from '../../modules/asusctl.js';
+// import * as asusctl from '../../modules/asusctl.js';
 import * as theme from '../../theme/theme.js';
 import * as media from './media.js';
 const { Button, Box, Icon, Label, Revealer } = ags.Widget;
@@ -277,20 +277,20 @@ const usageStorage = {
     ],
 };
 
-const BrightnessBox = () => Box({
-    className: 'brightness',
-    children: [
-        Button({
-            onClicked: () => {
-                execAsync('wl-gammactl').catch(print);
-                App.closeWindow('quicksettings');
-            },
-            child: brightness.Indicator(),
-        }),
-        brightness.BrightnessSlider(),
-        brightness.PercentLabel(),
-    ],
-});
+// const BrightnessBox = () => Box({
+//     className: 'brightness',
+//     children: [
+//         Button({
+//             onClicked: () => {
+//                 execAsync('wl-gammactl').catch(print);
+//                 App.closeWindow('quicksettings');
+//             },
+//             child: brightness.Indicator(),
+//         }),
+//         brightness.BrightnessSlider(),
+//         brightness.PercentLabel(),
+//     ],
+// });
 
 const ArrowToggle = ({ icon, label, connection, toggle, name, toggleOn }) => Box({
     connections: [[
@@ -394,10 +394,10 @@ const MuteToggle = () => SmallToggle(
     audio.MicrophoneMuteIndicator,
 );
 
-const idleToggle = smallToggle(
-    'idle/toggle',
-    'idle/indicator',
-);
+// const idleToggle = SmallToggle(
+//     'idle/toggle',
+//     'idle/indicator',
+// ); todo
 
 const AsusctlToggle = () => SmallToggle(
     asusctl.ProfileToggle,
@@ -409,10 +409,10 @@ const AsusmodeToggle = () => SmallToggle(
     asusctl.ModeIndicator,
 );
 
-const nightlightToggle = smallToggle(
-    'nightlight/mode-toggle',
-    'nightlight/mode-indicator',
-);
+// const nightlightToggle = SmallToggle(
+//     'nightlight/mode-toggle',
+//     'nightlight/mode-indicator',
+// ); todo
 
 const ThemeToggle = () => Button({
     className: 'toggle',
@@ -479,25 +479,25 @@ export const PopupContent = () => Box({
             ],
         }),
         VolumeBox(),
-        BrightnessBox(),
+        // BrightnessBox(),
         Box({
             className: 'toggles-box',
             children: [
                 Box({
                     vertical: true,
                     className: 'arrow-toggles',
-                    children: [NetworkToggle(), BluetoothToggle()],
+                    children: [
+                        // NetworkToggle(),
+                        BluetoothToggle()
+                    ],
                 }),
                 Box({
                     vertical: true,
                     className: 'small-toggles',
                     vexpand: true,
                     hexpand: false,
-                    children: Service.Asusctl?.available
-                        ? [
-                            Box({ children: [AsusmodeToggle(), AsusctlToggle(), DNDToggle()] }),
-                            Box({ children: [AppmixerToggle(), ThemeToggle(), MuteToggle()] }),
-                        ] : [
+                    children:
+                        [
                             Box({ children: [DNDToggle(), MuteToggle()] }),
                             Box({ children: [AppmixerToggle(), ThemeToggle()] }),
                         ],
@@ -505,7 +505,7 @@ export const PopupContent = () => Box({
             ],
         }),
         Appmixer(),
-        NetworkSelection(),
+        // NetworkSelection(),
         BluetoothSelection(),
         ThemeSelection(),
         media.PopupContent(),
@@ -549,8 +549,8 @@ export const PanelButton = () => Button({
     }]],
     child: Box({
         children: [
-            Service.Asusctl?.available && asusctl.ProfileIndicator({ balanced: null }),
-            Service.Asusctl?.available && asusctl.ModeIndicator({ hybrid: null }),
+            // Service.Asusctl?.available && asusctl.ProfileIndicator({ balanced: null }),
+            // Service.Asusctl?.available && asusctl.ModeIndicator({ hybrid: null }),
             audio.MicrophoneMuteIndicator({ unmuted: null }),
             notifications.DNDIndicator({ noisy: null }),
             BluetoothIndicator(),
@@ -562,52 +562,51 @@ export const PanelButton = () => Button({
     }),
 });
 
+// Widget.widgets['usageCpu'] = () => Widget({
+//     type: 'box',
+//     className: 'panel-button',
+//     children: [
+//         usageCpu,
+//     ],
+// });
 
-Widget.widgets['usageCpu'] = () => Widget({
-    type: 'box',
-    className: 'panel-button',
-    children: [
-        usageCpu,
-    ],
-});
+// Widget.widgets['usageMemory'] = () => Widget({
+//     type: 'box',
+//     className: 'panel-button',
+//     children: [
+//         usageMemory,
+//     ],
+// });
 
-Widget.widgets['usageMemory'] = () => Widget({
-    type: 'box',
-    className: 'panel-button',
-    children: [
-        usageMemory,
-    ],
-});
+// Widget.widgets['usageStorage'] = () => Widget({
+//     type: 'box',
+//     className: 'panel-button',
+//     children: [
+//         usageStorage,
+//     ],
+// });
 
-Widget.widgets['usageStorage'] = () => Widget({
-    type: 'box',
-    className: 'panel-button',
-    children: [
-        usageStorage,
-    ],
-});
+// Widget.widgets['bluetooth/devices-battery'] = () => Widget({
+//     type: 'box',
+//     className: 'bluetooth devices',
+//     connections: [[Bluetooth, box => {
+//         box.get_children().forEach(ch => ch.destroy());
+//         for (const [, device] of Bluetooth.connectedDevices) {
+//             batteryPercentage = device.batteryPercentage;
 
-Widget.widgets['bluetooth/devices-battery'] = () => Widget({
-    type: 'box',
-    className: 'bluetooth devices',
-    connections: [[Bluetooth, box => {
-        box.get_children().forEach(ch => ch.destroy());
-        for (const [, device] of Bluetooth.connectedDevices) {
-            batteryPercentage = device.batteryPercentage;
-
-            box.add(Widget({
-                // type: 'hover-revealer',
-                // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-                // child: { type: 'label', label: device.name },
-                type: 'box',
-                // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-                children: [
-                    { type: 'icon', icon: device.iconName + '-symbolic', className: 'btdevice' },
-                    { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
-                ],
-            }));
-        }
-        box.show_all();
-        box.visible = Bluetooth.connectedDevices.size > 0;
-    }]],
-});
+//             box.add(Widget({
+//                 // type: 'hover-revealer',
+//                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+//                 // child: { type: 'label', label: device.name },
+//                 type: 'box',
+//                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
+//                 children: [
+//                     { type: 'icon', icon: device.iconName + '-symbolic', className: 'btdevice' },
+//                     { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
+//                 ],
+//             }));
+//         }
+//         box.show_all();
+//         box.visible = Bluetooth.connectedDevices.size > 0;
+//     }]],
+// }); todo

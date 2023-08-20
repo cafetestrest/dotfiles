@@ -71,7 +71,7 @@ class Indicator {
     static instance = new IndicatorService();
     static popup(value, icon) { Indicator.instance.popup(value, icon); }
     static speaker() { Indicator.instance.speaker(); }
-    static display() { Indicator.instance.display(); }
+    // static display() { Indicator.instance.display(); }
     static kbd() { Indicator.instance.kbd(); }
 }
 

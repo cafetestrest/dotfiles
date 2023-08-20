@@ -8,11 +8,11 @@ export const Separator = ({ className = '', ...props } = {}) => Box({
     className: [...className.split(' '), 'separator'].join(' '),
 });
 
-Widget.widgets['separator-invisible'] = props => Widget({
-    ...props,
-    type: 'box',
-    className: 'separator-invisible',
-});
+// Widget.widgets['separator-invisible'] = props => Widget({
+//     ...props,
+//     type: 'box',
+//     className: 'separator-invisible',
+// }); todo
 
 export const FontIcon = ({ icon = '', ...props }) => {
     const box = Box({

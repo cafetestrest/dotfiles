@@ -6,7 +6,7 @@ class WeatherService extends Service {
 
     constructor() {
         super();
-        this._temperatureWeather = null;
+        this._temperatureWeather = 'null';
         this._tooltip = null;
     }
 
@@ -175,7 +175,7 @@ Widget.widgets['reset-timer'] = props => Widget({
     ...props,
     type: 'label',
     connections: [[600000, label => {
-        Weather.weatherData
+        // Weather.weatherData
     }]],
 });
 
