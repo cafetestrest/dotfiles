@@ -68,11 +68,12 @@ window#quicksettings .quicksettings {
         @include widget;
         margin-top: $spacing;
 
-        //.volume {
-        //    .slider {
-        //        * { all:unset; }
-        //        margin-right: $spacing;
-        //    } todo check
+        .volume {
+           .slider {
+               * { all:unset; }
+               margin-right: $spacing;
+           }
+        }
 
         scale {
             @include slider;

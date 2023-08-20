@@ -63,6 +63,7 @@ export const SpeakerPercentLabel = props => Label({
 
 export const SpeakerSlider = props => Slider({
     ...props,
+    className: 'slider',
     drawValue: false,
     onChange: ({ value }) => Audio.speaker.volume = value,
     connections: [[Audio, slider => {

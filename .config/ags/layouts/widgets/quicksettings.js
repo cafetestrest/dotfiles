@@ -186,6 +186,7 @@ const VolumeBox = () => Box({
             className: 'volume',
             children: [
                 Button({
+                    className: 'volume-button',
                     child: audio.SpeakerTypeIndicator(),
                     onClicked: 'pamixer --default-source -t',
                 }),
