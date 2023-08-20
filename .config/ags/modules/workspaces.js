@@ -1,12 +1,10 @@
-const { Widget } = ags;
 const { Hyprland } = ags.Service;
 const { execAsync } = ags.Utils;
+const { Box, Button, Label } = ags.Widget;
 
-Widget.widgets['workspaces-custom'] = props => Widget({
+export const WorkspacesCustom = props => Box({
     ...props,
-    type: 'box',
-    className: 'workspaces-custom',
-    // box is an instance of Gtk.Box
+    className: 'hyprworkspaces panel-button',
     connections: [[Hyprland, box => {
         // remove every children
         box.get_children().forEach(ch => ch.destroy());
@@ -20,15 +18,16 @@ Widget.widgets['workspaces-custom'] = props => Widget({
                 continue;
             }
 
-            wsnum = i;
+            let wsnum = i;
             if (i === 10) {
                 wsnum = 0;
             }
 
-            box.add(ags.Widget({
-                type: 'button',
-                onClick: () => execAsync(`hyprctl dispatch workspace ${i}`),
-                child: wsnum.toString(),
+            wsnum = wsnum.toString();
+
+            box.add(Button({
+                onClicked: () => execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+                child: Label(`${wsnum}`),
                 className: Hyprland.active.workspace.id == i ? 'focused' : '',
             }));
 

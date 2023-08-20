@@ -1,6 +1,7 @@
 import * as shared from './shared.js';
 import { Launcher } from './shared.js';
 import { Workspaces, Client } from './widgets/hyprland.js';
+import { WorkspacesCustom } from '../modules/workspaces.js';
 import { Separator } from '../modules/misc.js';
 import { PanelIndicator as MediaIndicator } from './widgets/media.js';
 import { PanelIndicator as NotificationIndicator } from './widgets/notifications.js';
@@ -17,7 +18,8 @@ const Bar = monitor => shared.Bar({
     start: [
         Launcher({ child: DistroIcon() }),
         Separator({ valign: 'center' }),
-        Workspaces(),
+        // Workspaces(),
+        WorkspacesCustom(),
         Separator({ valign: 'center' }),
         Client(),
         MediaIndicator({ hexpand: true, halign: 'end' }),
