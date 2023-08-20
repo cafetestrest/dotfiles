@@ -1,86 +1,75 @@
-const { Service, Widget } = ags;
-const { exec, execAsync } = ags.Utils;
+const { execAsync } = ags.Utils;
+const { Label, Box, Icon } = ags.Widget;
+import { FontIcon } from './misc.js';
 
-// class UsageService extends Service {
-//     static { Service.register(this); }
-
-//     constructor() {
-//         super();
-//         this._cpuUsage = null;
-//         this._memoryUsage = null;
-//     }
-
-//     get cpuUsage() { return this._cpuUsage; }
-//     setCpuUsage(percent) {
-//         if (percent) {
-//             this._cpuUsage = percent
-//         }
-//     }
-
-//     get memoryUsage() { return this._memoryUsage; }
-//     setMemoryUsage(gb) {
-//         if (gb) {
-//             this._memoryUsage = gb
-//         }
-//     }
-
-// }
-
-// class Usage {
-//     static { Service.export(this, 'Usage'); }
-//     static instance = new UsageService;
-
-//     static get cpuUsage() { return Usage.instance.cpuUsage; }
-//     static setCpuUsage(percent) { Usage.instance.setCpuUsage(percent); }
-
-//     static get memoryUsage() { return Usage.instance.memoryUsage; }
-//     static setMemoryUsage(gb) { Usage.instance.setMemoryUsage(gb); }
-// }
-
-Widget.widgets['usagecpu'] = props => Widget({
+export const UsageCPU = props => Label({
     ...props,
-    type: 'label',
     connections: [[15000, label => {
         execAsync(['bash', '-c', "top -bn 1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"])
-            .then(value => label.label = value.trim())
+            .then(value => label.label = value.trim() + '%')
             .catch(print);
     }]],
 });
 
-Widget.widgets['usagecpu-indicator'] = props => Widget({
+export const UsageCPUIndicator = props => FontIcon({
     ...props,
-    type: 'font-icon',
     icon: '︁',
 });
 
-Widget.widgets['usagememory'] = props => Widget({
+export const UsageCpuWidget = () => Box({
+    className: 'usage cpu',
+    halign: 'end',
+    children: [
+        UsageRAM(),
+        Label({ label: ' ' }),
+        UsageRAMIndicator(),
+    ]
+});
+
+export const UsageRAM = props => Label({
     ...props,
-    type: 'label',
     connections: [[15000, label => {
         execAsync(['bash', '-c', "free --giga -h | grep 'Mem' | awk '{print $3}'"])
-            .then(value => label.label = value.trim())
+            .then(value => label.label = value.trim() + '%')
             .catch(print);
     }]],
 });
 
-Widget.widgets['usagememory-indicator'] = props => Widget({
+export const UsageRAMIndicator = props => FontIcon({
     ...props,
-    type: 'font-icon',
     icon: '︁',
 });
 
-Widget.widgets['usagestorage'] = props => Widget({
+export const UsageRAMWidget = () => Box({
+    className: 'usage ram',
+    halign: 'end',
+    children: [
+        UsageCPU(),
+        Label({ label: ' ' }),
+        UsageCPUIndicator(),
+    ]
+});
+
+export const UsageDisk = props => Label({
     ...props,
-    type: 'label',
     connections: [[600000, label => {
         execAsync(['bash', '-c', "df -h / | awk 'NR==2 {print $5}'"])
-            .then(value => label.label = value.trim())
+            .then(value => label.label = value.trim() + '%')
             .catch(print);
     }]],
 });
 
-Widget.widgets['usagestorage-indicator'] = props => Widget({
+export const UsageDiskIndicator = props => Icon({
     ...props,
-    type: 'icon',
     icon: 'drive-harddisk-solidstate-symbolic',
+});
+
+export const UsageDiskWidget = () => Box({
+    className: 'usage disk',
+    halign: 'end',
+    children: [
+        UsageDisk(),
+        Label({ label: ' ' }),
+        UsageDiskIndicator(),
+    ]
 });

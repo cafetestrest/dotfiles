@@ -2,7 +2,7 @@ import * as shared from './shared.js';
 import { Launcher } from './shared.js';
 import { Workspaces, Client } from './widgets/hyprland.js';
 import { WorkspacesCustom } from '../modules/workspaces.js';
-import { Separator } from '../modules/misc.js';
+import { Separator, SeparatorInvisible } from '../modules/misc.js';
 import { PanelIndicator as MediaIndicator } from './widgets/media.js';
 import { PanelIndicator as NotificationIndicator } from './widgets/notifications.js';
 import { DistroIcon } from '../modules/misc.js';
@@ -10,6 +10,7 @@ import { PanelButton as ColorPicker } from '../modules/colorpicker.js';
 import { PanelButton as PowerMenu } from './widgets/powermenu.js';
 import { PanelButton as DashBoard, NotificationsPanelButton } from './widgets/dashboard.js';
 import { Taskbar } from '../modules/hyprland.js';
+import { UsageCpuWidget, UsageRAMWidget, UsageDiskWidget } from '../modules/usage.js';
 import { PanelButton as ScreenRecord } from '../modules/screenrecord.js';
 import { PanelButton as QuickSettings } from './widgets/quicksettings.js';
 
@@ -18,13 +19,13 @@ const Bar = monitor => shared.Bar({
     monitor,
     start: [
         Launcher({ child: DistroIcon() }),
-        Separator({ valign: 'center' }),
+        SeparatorInvisible({ valign: 'center' }),
         // Workspaces(),
         // Taskbar({
         //     vertical: false,
         // }), todo check
         WorkspacesCustom(),
-        Separator({ valign: 'center' }),
+        SeparatorInvisible({ valign: 'center' }),
         Client(),
         MediaIndicator({ hexpand: true, halign: 'end' }),
     ],
@@ -35,11 +36,14 @@ const Bar = monitor => shared.Bar({
     end: [
         // NotificationIndicator({ direction: 'right', hexpand: true, halign: 'start' }),
         ags.Widget.Box({ hexpand: true }),
+        UsageCpuWidget(),
+        UsageRAMWidget(),
+        UsageDiskWidget(),
         ScreenRecord(),
         ColorPicker(),
-        Separator({ valign: 'center' }),
+        SeparatorInvisible({ valign: 'center' }),
         QuickSettings(),
-        Separator({ valign: 'center' }),
+        SeparatorInvisible({ valign: 'center' }),
         PowerMenu(),
     ],
 });
@@ -54,6 +58,6 @@ export default monitors => ([
         // shared.Dock(mon),
     ]),
     shared.Quicksettings({ position: 'top right' }),
-    shared.Dashboard({ position: 'top' }),
+    shared.Dashboard({ format: '%H:%M:%S  %a %b %e', position: 'top' }),
     shared.NotificationsPopup({ position: 'top' }),
 ]).flat(2);

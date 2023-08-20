@@ -599,7 +599,7 @@ export const PopupContent = () => Box({
                         ],
                     }),
                     // Box({ children: [DNDToggle(), MuteToggle()] }),
-                    // Box({ children: [AppmixerToggle(), ThemeToggle()] }), todo add classNames back
+                    // Box({ children: [AppmixerToggle(), ThemeToggle()] }),
                 ],
         }),
         Box({
@@ -721,52 +721,3 @@ export const PanelButton = () => Button({
         ],
     }),
 });
-
-// Widget.widgets['usageCpu'] = () => Widget({
-//     type: 'box',
-//     className: 'panel-button',
-//     children: [
-//         usageCpu,
-//     ],
-// });
-
-// Widget.widgets['usageMemory'] = () => Widget({
-//     type: 'box',
-//     className: 'panel-button',
-//     children: [
-//         usageMemory,
-//     ],
-// });
-
-// Widget.widgets['usageStorage'] = () => Widget({
-//     type: 'box',
-//     className: 'panel-button',
-//     children: [
-//         usageStorage,
-//     ],
-// });
-
-// Widget.widgets['bluetooth/devices-battery'] = () => Widget({
-//     type: 'box',
-//     className: 'bluetooth devices',
-//     connections: [[Bluetooth, box => {
-//         box.get_children().forEach(ch => ch.destroy());
-//         for (const [, device] of Bluetooth.connectedDevices) {
-//             batteryPercentage = device.batteryPercentage;
-
-//             box.add(Widget({
-//                 // type: 'hover-revealer',
-//                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-//                 // child: { type: 'label', label: device.name },
-//                 type: 'box',
-//                 // indicator: { type: 'icon', icon: device.iconName + '-symbolic' },
-//                 children: [
-//                     { type: 'icon', icon: device.iconName + '-symbolic', className: 'btdevice' },
-//                     { type: 'label', label: batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  " },
-//                 ],
-//             }));
-//         }
-//         box.show_all();
-//         box.visible = Bluetooth.connectedDevices.size > 0;
-//     }]],
-// }); todo
