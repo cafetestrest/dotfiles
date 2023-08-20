@@ -1,18 +1,25 @@
 const { Service, Widget } = ags;
 const { exec, execAsync } = ags.Utils;
+const { Button, Icon, Label, Stack } = ags.Widget;
 
 class IdleService extends Service {
     static { Service.register(this); }
 
     checkMode() {
         execAsync(['bash', '-c', "~/.config/hypr/scripts/swayidle.sh toggle"]).catch(print);
-        this._mode = !this._mode;
+
+        if (this._mode == 'on') {
+            this._mode = 'off';
+        } else {
+            this._mode = 'on';
+        }
+
         this.emit('changed');
     }
 
     constructor() {
         super();
-        this._mode = exec('pidof swayidle') ? true : false;
+        this._mode = exec('pidof swayidle') ? 'on' : 'off';
     }
 
     get mode() { return this._mode; }
@@ -25,33 +32,33 @@ class Idle {
     static get mode() { return Idle.instance.mode; }
 }
 
-Widget.widgets['idle/toggle'] = props => Widget({
+export const IdleToggle = props => Button({
     ...props,
-    type: 'button',
-    onClick: Idle.checkMode,
+    onClicked: Idle.checkMode,
     connections: [[Idle, button => {
-        button.toggleClassName('on', Idle.mode === true);
+        button.toggleClassName('on', Idle.mode == 'on');
     }]],
 });
 
-Widget.widgets['idle/indicator'] = props => Widget({
-    ...props,
-    type: 'dynamic',
+export const IdleIndicator = ({
+    off = Icon('view-conceal-symbolic'),
+    on = Icon('view-reveal-symbolic'),
+    ...rest
+} = {}) => Stack({
+    ...rest,
     items: [
-        { value: false, widget: { type: 'icon', icon: 'view-conceal-symbolic' } },
-        { value: true, widget: { type: 'icon', icon: 'view-reveal-symbolic' } },
+        ['on', on],
+        ['off', off],
     ],
-    connections: [[Idle, w => w.update(v => v === Idle.mode)]],
+    connections: [[Idle, stack => stack.shown = Idle.mode]],
 });
 
-Widget.widgets['idle/label'] = props => Widget({
+export const IdleCheck = props => Label({
     ...props,
-    type: 'label',
     label: 'Idle Inhibitor',
 });
 
-Widget.widgets['idle/status-label'] = props => Widget({
+export const IdleStatusLabel = ({ player = prefer, ...props } = {}) => Label({
     ...props,
-    type: 'label',
-    connections: [[Idle, label => label.label = (Idle.mode ? 'On' : 'Off')]],
+    connections: [[Idle, label => label.label = (Idle.mode == 'on' ? 'On' : 'Off')]],
 });

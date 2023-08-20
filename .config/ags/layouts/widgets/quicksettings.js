@@ -6,6 +6,7 @@ import * as audio from '../../modules/audio.js';
 import * as network from '../../modules/network.js';
 import * as bluetooth from '../../modules/bluetooth.js';
 import * as notifications from '../../modules/notifications.js';
+import * as idle from '../../modules/idle.js';
 // import * as asusctl from '../../modules/asusctl.js';
 import * as theme from '../../theme/theme.js';
 import * as media from './media.js';
@@ -394,10 +395,10 @@ const MuteToggle = () => SmallToggle(
     audio.MicrophoneMuteIndicator,
 );
 
-// const idleToggle = SmallToggle(
-//     'idle/toggle',
-//     'idle/indicator',
-// ); todo
+const IdleToggle = () => SmallToggle(
+    idle.IdleToggle,
+    idle.IdleIndicator,
+);
 
 const AsusctlToggle = () => SmallToggle(
     asusctl.ProfileToggle,
@@ -541,6 +542,7 @@ export const PopupContent = () => Box({
                     className: 'noarrow',
                     children: [
                         // wideIdleToggle()
+                        IdleToggle()
                     ],
                 }),
             ],
@@ -571,7 +573,7 @@ export const PopupContent = () => Box({
                         ],
                     }),
                     // Box({ children: [DNDToggle(), MuteToggle()] }),
-                    // Box({ children: [AppmixerToggle(), ThemeToggle()] }),
+                    // Box({ children: [AppmixerToggle(), ThemeToggle()] }), todo add classNames back
                 ],
         }),
         Box({
@@ -584,7 +586,7 @@ export const PopupContent = () => Box({
         Appmixer(),
         // NetworkSelection(),
         ThemeSelection(),
-        media.PopupContent(),
+        // media.PopupContent(),
     ],
 });
 
@@ -606,7 +608,7 @@ const BluetoothIndicatorWithBattery = () => Box({
             .map(({ iconName, batteryPercentage }) => Box({
                 children: [
                     Icon(iconName + '-symbolic'),
-                    Label(batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%" : "  "),
+                    Label(batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%  " : "  "),
                 ],
             }));
 
@@ -673,6 +675,7 @@ export const PanelButton = () => Button({
             notifications.DNDIndicator({ noisy: null }),
             // { type: 'nightlight/mode-indicator'},
             // { type: 'idle/indicator'},
+            idle.IdleIndicator(),
             BluetoothIndicatorWithBattery(),
             bluetooth.Indicator({ disabled: null }),
             network.Indicator(),
