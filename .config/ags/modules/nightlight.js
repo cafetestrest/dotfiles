@@ -1,19 +1,21 @@
-const { Service, Widget } = ags;
+const { Service } = ags;
 const { exec, execAsync } = ags.Utils;
+const { Button, Icon, Stack } = ags.Widget;
+import { FontIcon } from './misc.js';
 
 class NightlightService extends Service {
     static { Service.register(this); }
 
     checkMode() {
-        if (false === this._mode) {
+        if ('off' === this._mode) {
             execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh enable"]).catch(print);
             this._mode = 'auto';
-        } else if (true === this._mode) {
+        } else if ('on' === this._mode) {
             execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh disable"]).catch(print);
-            this._mode = false;
+            this._mode = 'off';
         } else {
             execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh automatic"]).catch(print);
-            this._mode = true;
+            this._mode = 'on';
         }
 
         this.emit('changed');
@@ -22,7 +24,7 @@ class NightlightService extends Service {
     constructor() {
         super();
 
-        this._mode = exec('pidof wlsunset') ? 'auto' : false;
+        this._mode = exec('pidof wlsunset') ? 'auto' : 'off';
     }
 
     get mode() { return this._mode; }
@@ -35,46 +37,25 @@ class Nightlight {
     static get mode() { return Nightlight.instance.mode; }
 }
 
-Widget.widgets['nightlight/mode-toggle'] = props => Widget({
+export const NightlightToggle = props => Button({
     ...props,
-    type: 'button',
-    onClick: Nightlight.checkMode,
+    onClicked: Nightlight.checkMode,
     connections: [[Nightlight, button => {
-        button.toggleClassName('on', Nightlight.mode === true || Nightlight.profile === false);
+        button.toggleClassName('on', Nightlight.mode == 'on' || Nightlight.mode == 'auto');
     }]],
 });
 
-Widget.widgets['nightlight/mode-indicator'] = props => Widget({
-    ...props,
-    type: 'dynamic',
+export const NightlightIndicator = ({
+    on = FontIcon({ icon: '' }),
+    off = Icon('night-light-disabled-symbolic'),
+    auto = Icon('night-light-symbolic'),
+    ...rest
+} = {}) => Stack({
+    ...rest,
     items: [
-        // { value: true, widget: { type: 'icon', icon: 'daytime-sunset-symbolic' } },
-        { value: true, widget: { type: 'font-icon', icon: '' } },
-        { value: false, widget: { type: 'icon', icon: 'night-light-disabled-symbolic' } },
-        { value: 'auto', widget: { type: 'icon', icon: 'night-light-symbolic' } },
-        
+        ['on', on],
+        ['off', off],
+        ['auto', auto],
     ],
-    connections: [[Nightlight, w => w.update(v => v === Nightlight.mode)]],
-});
-
-Widget.widgets['nightlight/label'] = props => Widget({
-    ...props,
-    type: 'label',
-    label: 'Night Light',
-});
-
-Widget.widgets['nightlight/status-label'] = props => Widget({
-    ...props,
-    type: 'label',
-    connections: [[Nightlight, label => {
-        let mode = Nightlight.mode;
-
-        if (mode === 'auto') {
-            label.label = 'Auto';
-        } else if (mode) {
-            label.label = 'On';
-        } else {
-            label.label = 'Off';
-        }
-    }]],
+    connections: [[Nightlight, stack => stack.shown = Nightlight.mode]],
 });

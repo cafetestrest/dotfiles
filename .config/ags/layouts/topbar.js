@@ -41,10 +41,10 @@ export default monitors => ([
     ...monitors.map(mon => [
         Bar(mon),
         shared.Notifications(mon, 'slide_down', 'top'),
-        shared.Desktop(mon),
+        // shared.Desktop(mon),
         ...shared.Corners(mon),
         shared.OSDIndicator(mon),
-        shared.Dock(mon),
+        // shared.Dock(mon),
     ]),
     shared.Quicksettings({ position: 'top right' }),
     shared.Dashboard({ position: 'top' }),

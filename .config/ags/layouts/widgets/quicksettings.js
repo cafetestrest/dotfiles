@@ -7,6 +7,7 @@ import * as network from '../../modules/network.js';
 import * as bluetooth from '../../modules/bluetooth.js';
 import * as notifications from '../../modules/notifications.js';
 import * as idle from '../../modules/idle.js';
+import * as nightlight from '../../modules/nightlight.js';
 // import * as asusctl from '../../modules/asusctl.js';
 import * as theme from '../../theme/theme.js';
 import * as media from './media.js';
@@ -353,38 +354,6 @@ const SmallToggle = (toggle, indicator) => toggle({
     child: indicator({ halign: 'center' }),
 });
 
-const notificationsToggle = wideToggle({
-    icon: 'notifications/dnd-indicator',
-    label: 'notifications/label',
-    toggle: 'notifications/dnd-toggle',
-    status: 'notifications/status-label',
-    name: 'notificationsToggle',
-});
-
-const wideIdleToggle = wideToggle({
-    icon: 'idle/indicator',
-    label: 'idle/label',
-    toggle: 'idle/toggle',
-    status: 'idle/status-label',
-    name: 'idleToggle',
-});
-
-const wideMuteToggle = wideToggle({
-    icon: 'audio/microphone-mute-indicator',
-    label: 'audio/microphone-mute-label',
-    toggle: 'audio/microphone-mute-toggle',
-    status: 'audio/microphone-mute-status-label',
-    name: 'microphoneToggle',
-});
-
-const wideNightlightToggle = wideToggle({
-    icon: 'nightlight/mode-indicator',
-    label: 'nightlight/label',
-    toggle: 'nightlight/mode-toggle',
-    status: 'nightlight/status-label',
-    name: 'idleToggle',
-});
-
 const DNDToggle = () => SmallToggle(
     notifications.DNDToggle,
     notifications.DNDIndicator,
@@ -393,11 +362,6 @@ const DNDToggle = () => SmallToggle(
 const MuteToggle = () => SmallToggle(
     audio.MicrophoneMuteToggle,
     audio.MicrophoneMuteIndicator,
-);
-
-const IdleToggle = () => SmallToggle(
-    idle.IdleToggle,
-    idle.IdleIndicator,
 );
 
 const AsusctlToggle = () => SmallToggle(
@@ -410,17 +374,78 @@ const AsusmodeToggle = () => SmallToggle(
     asusctl.ModeIndicator,
 );
 
-// const nightlightToggle = SmallToggle(
-//     'nightlight/mode-toggle',
-//     'nightlight/mode-indicator',
-// ); todo
-
 const ThemeToggle = () => Button({
     className: 'toggle',
     onClicked: () => QSMenu.toggle('theme'),
     child: theme.Indicator(),
     connections: [[QSMenu, w => w.toggleClassName('on', QSMenu.opened === 'theme')]],
 });
+
+const IdleButtonToggle = () => Button({
+    className: 'toggle',
+    child: Box({
+        className: 'title',
+        children: [
+            idle.IdleIndicator(),
+            Box({
+                children: [
+                    Label({
+                        label: 'Idle Inhibitor',
+                    }),
+                ]
+            })
+        ]
+    }),
+});
+
+const NightlightButtonToggle = () => Button({
+    className: 'toggle',
+    child: Box({
+        className: 'title',
+        children: [
+            nightlight.NightlightIndicator(),
+            Box({
+                children: [
+                    Label({
+                        label: 'Night Light',
+                    }),
+                ]
+            })
+        ]
+    }),
+});
+
+const NotificationButtonToggle = () => Button({
+    className: 'toggle',
+    child: Box({
+        className: 'title',
+        children: [
+            notifications.DNDIndicator(),
+            Box({
+                children: [
+                    Label({
+                        label: 'Do Not Disturb',
+                    }),
+                ]
+            })
+        ]
+    }),
+});
+
+const NotificationToggle = () => SmallToggle(
+    notifications.DNDToggle,
+    NotificationButtonToggle
+);
+
+const NightlightToggle = () => SmallToggle(
+    nightlight.NightlightToggle,
+    NightlightButtonToggle
+);
+
+const IdleToggle = () => SmallToggle(
+    idle.IdleToggle,
+    IdleButtonToggle
+);
 
 const AppmixerToggle = () => Button({
     className: 'toggle',
@@ -541,7 +566,7 @@ export const PopupContent = () => Box({
                     vertical: true,
                     className: 'noarrow',
                     children: [
-                        // wideIdleToggle()
+                        // WideIdleToggle(),
                         IdleToggle()
                     ],
                 }),
@@ -562,14 +587,14 @@ export const PopupContent = () => Box({
                         vertical: true,
                         className: 'noarrow',
                         children: [
-                            // notificationsToggle()
+                            NotificationToggle()
                         ],
                     }),
                     Box({
                         vertical: true,
                         className: 'noarrow',
                         children: [
-                            // wideNightlightToggle()
+                            NightlightToggle()
                         ],
                     }),
                     // Box({ children: [DNDToggle(), MuteToggle()] }),
