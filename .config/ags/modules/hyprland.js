@@ -74,8 +74,8 @@ export const ClientIcon = ({
 });
 
 const AppItem = ({ iconName }, { address, title }) => Button({
-    child: Icon(iconName),
-    // tooltip: title,
+    child: Icon({ icon: iconName === 'org.gnome.Characters' ? 'code' : iconName }),
+    tooltipText: title,
     className: Hyprland.active.client.address === address.substring(2) ? 'focused' : 'nonfocused',
     onClicked: () => execAsync(`hyprctl dispatch focuswindow address:${address}`).catch(print),
 });
@@ -100,7 +100,8 @@ export const Taskbar = ({
                 }
                 for (const app of box._apps) {
                     if (client.title && app.match(client.title) ||
-                        client.class && app.match(client.class))
+                        client.class && app.match(client.class) ||
+                        client.title && client.class === 'codium-url-handler')
                         return item(app, client);
                 }
             });
