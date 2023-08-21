@@ -10,6 +10,8 @@ import * as dashboard from './widgets/dashboard.js';
 import * as quicksettings from './widgets/quicksettings.js';
 import * as powermenu from './widgets/powermenu.js';
 import * as notifications from '../modules/notifications.js';
+import * as weather from '../modules/weather.js';
+
 const { execAsync } = ags.Utils;
 
 // bar
@@ -139,5 +141,17 @@ export const NotificationsPopup = ({ position }) => Window({
         layout: position,
         window: 'notificationsPopup',
         child: dashboard.NotificationsPopupContent(),
+    }),
+});
+
+export const Weather = ({ position }) => Window({
+    name: 'weather',
+    popup: true,
+    focusable: true,
+    anchor: position,
+    child: PopupLayout({
+        layout: position,
+        window: 'weather',
+        child: weather.PopupContent(),
     }),
 });

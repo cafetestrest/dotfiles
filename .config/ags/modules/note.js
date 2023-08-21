@@ -1,5 +1,7 @@
-const { Service, Widget } = ags;
-const { exec, execAsync } = ags.Utils;
+const { Service } = ags;
+const { execAsync } = ags.Utils;
+const { Button } = ags.Widget;
+import { FontIcon } from './misc.js';
 
 let first = false;
 
@@ -29,15 +31,11 @@ class Note {
     static setNote(text) { Note.instance.setNote(text); }
 }
 
-Widget.widgets['note'] = props => Widget({
-    child: {
-        type: 'font-icon',
-        icon: '',
-    },
+export const NoteWidget = props => Button({
     ...props,
-    type: 'button',
-    tooltip: '',
-    onClick: () => {
+    child: FontIcon({ icon: '' }),
+    tooltipText: '',
+    onClicked: () => {
         execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
     connections: [[60000, button => {
@@ -53,5 +51,4 @@ Widget.widgets['note'] = props => Widget({
             button.set_tooltip_text(tooltip);
         }
     }]],
-    onSecondaryClick: Note.callNote
 });

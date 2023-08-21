@@ -70,4 +70,3 @@ export const UsageDiskWidget = () => Box({
         UsageDisk(),
     ]
 });
-//todo check formatting

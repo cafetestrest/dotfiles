@@ -71,3 +71,19 @@ export const Devices = props => Box({
         }));
     }]],
 });
+
+
+export const BluetoothIndicatorWithBattery = props => Box({
+    ...props,
+    connections: [[Bluetooth, box => {
+        box.children = Array.from(Bluetooth.connectedDevices.values())
+            .map(({ iconName, batteryPercentage }) => Box({
+                children: [
+                    Icon(iconName + '-symbolic'),
+                    Label(batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%  " : ""),
+                ],
+            }));
+
+        box.visible = Bluetooth.connectedDevices.size > 0;
+    }]],
+});

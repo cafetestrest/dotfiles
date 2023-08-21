@@ -1,14 +1,12 @@
 const { execAsync } = ags.Utils;
-const { Widget } = ags;
+const { Button, Icon } = ags.Widget;
 
-Widget.widgets['screenshot'] = props => Widget({
-    child: {
-        type: 'icon',
-        icon: 'applets-screenshooter-symbolic',
-    },
+export const Screeenshot = props => Button({
     ...props,
-    type: 'button',
-    onClick: () => {
+    child: Icon({
+        icon: 'applets-screenshooter-symbolic',
+    }),
+    onClicked: () => {
         execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh 1"]).catch(print);
     },
     onSecondaryClick: () => {

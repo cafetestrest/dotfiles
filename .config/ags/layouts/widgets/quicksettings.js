@@ -628,20 +628,6 @@ const BluetoothIndicator = () => Box({
     }]],
 });
 
-const BluetoothIndicatorWithBattery = () => Box({
-    connections: [[Bluetooth, box => {
-        box.children = Array.from(Bluetooth.connectedDevices.values())
-            .map(({ iconName, batteryPercentage }) => Box({
-                children: [
-                    Icon(iconName + '-symbolic'),
-                    Label(batteryPercentage !== 0 ? " " + batteryPercentage.toString() + "%  " : "  "),
-                ],
-            }));
-
-        box.visible = Bluetooth.connectedDevices.size > 0;
-    }]],
-});
-
 const BatteryIndicator = () => HoverRevealer({
     direction: 'right',
     indicator: battery.Indicator(),
@@ -702,7 +688,7 @@ export const PanelButton = () => Button({
             // { type: 'nightlight/mode-indicator'},
             // { type: 'idle/indicator'},
             idle.IdleIndicator(),
-            BluetoothIndicatorWithBattery(),
+            // bluetooth.BluetoothIndicatorWithBattery({}),
             bluetooth.Indicator({ disabled: null }),
             network.Indicator(),
             audio.MicrophoneMuteIndicator({ unmuted: null }),

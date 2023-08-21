@@ -1,14 +1,12 @@
 const { execAsync } = ags.Utils;
-const { Widget } = ags;
+const { Button, Icon } = ags.Widget;
 
-Widget.widgets['clipboard'] = props => Widget({
-    child: {
-        type: 'icon',
-        icon: 'edit-paste-symbolic',
-    },
+export const Clipboard = props => Button({
     ...props,
-    type: 'button',
-    onClick: () => {
+    child: Icon({
+        icon: 'edit-paste-symbolic',
+    }),
+    onClicked: () => {
         execAsync(['bash', '-c', "hyprctl dispatch movecursor 3550 260 && hyprctl dispatch exec copyq menu"]).catch(print);
     },
     // onSecondaryClick: () => {

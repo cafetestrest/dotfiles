@@ -1,5 +1,4 @@
 import * as shared from './shared.js';
-import { Launcher } from './shared.js';
 // import { Workspaces, Client } from './widgets/hyprland.js';
 import { WorkspacesCustom } from '../modules/workspaces.js';
 import { Separator, SeparatorInvisible } from '../modules/misc.js';
@@ -13,12 +12,17 @@ import { Taskbar } from '../modules/hyprland.js';
 import { UsageCpuWidget, UsageRAMWidget, UsageDiskWidget } from '../modules/usage.js';
 import { PanelButton as ScreenRecord } from '../modules/screenrecord.js';
 import { PanelButton as QuickSettings } from './widgets/quicksettings.js';
+import { BluetoothIndicatorWithBattery } from '../modules/bluetooth.js';
+import { NoteWidget } from '../modules/note.js';
+import { Screeenshot } from '../modules/screenshot.js';
+import { Clipboard } from '../modules/clipboard.js';
+import { TemperatureWidget } from '../modules/weather.js';
 
 const Bar = monitor => shared.Bar({
     anchor: 'top left right',
     monitor,
     start: [
-        Launcher({ child: DistroIcon() }),
+        shared.Launcher({ child: DistroIcon() }),
         SeparatorInvisible({ valign: 'center' }),
         // Workspaces(),
         // Taskbar({
@@ -31,6 +35,7 @@ const Bar = monitor => shared.Bar({
     ],
     center: [
         DashBoard({ format: '%a %b %e   %H:%M:%S' }),
+        TemperatureWidget(),
         NotificationsPanelButton(),
     ],
     end: [
@@ -39,8 +44,13 @@ const Bar = monitor => shared.Bar({
         UsageRAMWidget(),
         UsageCpuWidget(),
         UsageDiskWidget(),
+        BluetoothIndicatorWithBattery({ className: 'btdevices panel-button' }),
+        SeparatorInvisible({ valign: 'center' }),
         ScreenRecord(),
         ColorPicker(),
+        NoteWidget({ className: 'note panel-button' }),
+        Screeenshot({ className: 'note panel-button' }),
+        Clipboard({ className: 'note panel-button' }),
         SeparatorInvisible({ valign: 'center' }),
         QuickSettings(),
         SeparatorInvisible({ valign: 'center' }),
@@ -60,4 +70,5 @@ export default monitors => ([
     shared.Quicksettings({ position: 'top right' }),
     shared.Dashboard({ position: 'top' }),
     shared.NotificationsPopup({ position: 'top' }),
+    shared.Weather({ position: 'top' }),
 ]).flat(2);

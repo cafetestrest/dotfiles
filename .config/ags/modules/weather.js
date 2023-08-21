@@ -1,12 +1,13 @@
-const { App, Service, Widget } = ags;
-const { exec, execAsync } = ags.Utils;
+const { App, Service } = ags;
+const { execAsync } = ags.Utils;
+const { Box, Button, Label, Stack, Icon } = ags.Widget;
 
 class WeatherService extends Service {
     static { Service.register(this); }
 
     constructor() {
         super();
-        this._temperatureWeather = 'null';
+        this._temperatureWeather = null;
         this._tooltip = null;
     }
 
@@ -39,39 +40,29 @@ class Weather {
     static setTooltip(text) { Weather.instance.setTooltip(text); }
 }
 
-Widget.widgets['weather/temperature'] = props => Widget({
-    ...props,
-    type: 'dynamic',
+export const TemperatureWidget = ({
+    enabled = PannelButton(),
+    ...rest
+} = {}) => Stack({
+    ...rest,
     items: [
-        { value: 'enabled', widget: { type: 'weather/panel-button' } },
+        ['enabled', enabled],
     ],
-    connections: [[Weather, dynamic => dynamic.update(value => {
-        if (!Weather.temperatureWeather)
-            return;
-
-        return value === 'enabled';
-    })]],
+    connections: [[Weather, stack => stack.shown = 'enabled']],
 });
 
-Widget.widgets['weather/panel-button'] = props => Widget({
+export const PannelButton = props => Button({
     ...props,
-    type: 'button',
     className: 'weather panel-button',
-    onClick: () => App.toggleWindow('weather'),
+    child: Temperature(),
+    onClicked: () => App.toggleWindow('weather'),
     connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'weather' && visible);
     }]],
-    child: {
-        type: 'box',
-        children: [
-            { type: 'weather/label',}
-        ],
-    },
 });
 
-Widget.widgets['weather/label'] = props => Widget({
+export const Temperature = props => Label({
     ...props,
-    type: 'label',
     connections: [[Weather, label => {
         if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
             label.label = Weather.temperatureWeather.toString()
@@ -79,22 +70,20 @@ Widget.widgets['weather/label'] = props => Widget({
     }]],
 });
 
-const _weatherinfo = (weatherData) => ({
-    type: 'box',
+export const WeatherInfo = (weatherData) => Box({
     className: 'weather-info',
-    orientation: 'vertical',
+    vertical: true,
     children: [
-        // { type: 'label', label: weatherData.justDayOfTheWeek },
-        { type: 'label', label: weatherData.dayOfWeek.substring(0, 3).toUpperCase() },
-        { type: 'label', label: weatherData.hourFromDate },
-        { type: 'label', label: weatherData.icon, className: 'weather-icon' },
-        { type: 'label', label: weatherData.temperature, className: 'weather-temperature' },
-        // { type: 'label', label: weatherData.LongWeather },
-        { type: 'label', label: " " + weatherData.Wind },
-        // { type: 'label', label: weatherData.Humidity },
-        { type: 'label', label: " " + weatherData.Cloud },
-        { type: 'label', label: weatherData.minTemp },
-        { type: 'label', label: weatherData.maxTemp },
+        Label({ label: weatherData.dayOfWeek.substring(0, 3).toUpperCase(), }),
+        Label({ label: weatherData.hourFromDate, }),
+        Label({ label: weatherData.icon, className: 'weather-icon', }),
+        Label({ label: weatherData.temperature, className: 'weather-temperature' }),
+        // Label({ label: weatherData.LongWeather, }),
+        Label({ label: " " + weatherData.Wind, }),
+        // Label({ label: weatherData.Humidity, }),
+        Label({ label: " " + weatherData.Cloud, }),
+        Label({ label: weatherData.minTemp, }),
+        Label({ label: weatherData.maxTemp, }),
     ],
     connections: [[Weather, box => {
         switch (weatherData.icon) {
@@ -115,18 +104,12 @@ const _weatherinfo = (weatherData) => ({
                     background-color: #5B687B;
                 `);
           }
-    }]]
+    }]],
 });
 
-Widget.widgets['tooltip'] = ({
-    weatherinfo = _weatherinfo,
-    ...props
-}) => Widget({
-    ...props,
-    type: 'box',
-    orientation: 'horizontal',
+export const Tooltip = () => Box({
     connections: [[Weather, box => {
-        tooltip = Weather.tooltip;
+        let tooltip = Weather.tooltip;
 
         if (tooltip) {
             box.get_children().forEach(ch => ch.destroy());
@@ -136,99 +119,79 @@ Widget.widgets['tooltip'] = ({
 
             tooltip.forEach(w => {
                 if (tomorrowOnce && 'Tomorrow' === w.justDayOfTheWeek) {
-                    box.add(Widget({
-                        type: 'label',
-                        className: 'weather-day',
-                    }));
+                    box.add(
+                        Label({ className: 'weather-day', })
+                    );
 
                     tomorrowOnce = false;
                 }
 
                 if (todayOnce && 'Today' === w.justDayOfTheWeek) {
-                    box.add(Widget({
-                        type: 'label',
-                        className: 'weather-day',
-                    }));
+                    box.add(
+                        Label({ className: 'weather-day', })
+                    );
 
                     todayOnce = false;
                 }
 
                 if ('Today' !== w.justDayOfTheWeek && 'Tomorrow' !== w.justDayOfTheWeek) {
-                    box.add(Widget({
-                        type: 'label',
-                        className: 'weather-day',
-                    }));
+                    box.add(
+                        Label({ className: 'weather-day', })
+                    );
                 }
 
-                box.add(Widget({
-                    type: 'box',
-                    children: [
-                        weatherinfo(w)
-                    ]
-                }));
+                box.add(
+                    WeatherInfo(w)
+                );
             });
         }
     }]],
 });
 
-Widget.widgets['reset-timer'] = props => Widget({
+export const ResetTimer = props => Label({
     ...props,
-    type: 'label',
     connections: [[600000, label => {
-        // Weather.weatherData
+        Weather.weatherData
     }]],
 });
 
-Widget.widgets['weather/forecast'] = props => Widget({
-    ...props,
-    type: 'box',
-    orientation: 'vertical',
+export const Forecast = () => Box({
     className: 'datemenu',
+    vertical: true,
     children: [
-        {
-            type: 'box',
+        Box({
             className: 'tooltip',
             halign: 'center',
             children: [
-                { type: 'reset-timer' },
-                { type: 'tooltip' },
-            ],
-        }
-    ],
+                ResetTimer(),
+                Tooltip(),
+            ]
+        })
+    ]
 });
 
-Widget.widgets['weather/popup-content'] = () => Widget({
-    type: 'box',
+export const PopupContent = () => Box({
     className: 'weather',
     vexpand: false,
     children: [
-        {
-            type: 'box',
-            orientation: 'vertical',
+        Box({
+            vertical: true,
             children: [
-                {
-                    type: 'weather/forecast',
-                    className: 'datemenu',
-                },
-                {
-                    type: 'weather/refresh-button',
-                    className: 'header panel-button',
-                },
-            ],
-        },
-    ],
+                Forecast({ className: 'datemenu', }),
+                RefreshButton({ className: 'header panel-button', }),
+            ]
+        })
+    ]
 });
 
-Widget.widgets['weather/refresh-button'] = props => Widget({
+export const RefreshButton = props => Button({
     ...props,
-    type: 'button',
     className: 'weather-refresh',
-    child: {
-        type: 'icon',
+    child: Icon({
         icon: 'view-refresh-symbolic',
         halign: 'end',
-    },
-    onClick: () => {
+    }),
+    onClicked: () => {
         Weather.weatherData
     },
 });
