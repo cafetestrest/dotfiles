@@ -1,6 +1,6 @@
 const { Service } = ags;
 const { exec, execAsync } = ags.Utils;
-const { Button, Icon, Stack } = ags.Widget;
+const { Button, Icon, Stack, Label } = ags.Widget;
 
 class IdleService extends Service {
     static { Service.register(this); }
@@ -51,4 +51,9 @@ export const IdleIndicator = ({
         ['off', off],
     ],
     connections: [[Idle, stack => stack.shown = Idle.mode]],
+});
+
+export const IdleStatus = props => Label({
+    ...props,
+    connections: [[Idle, label => label.label = (Idle.mode ? 'On' : 'Off')]],
 });
