@@ -250,8 +250,9 @@ $workspaceBorder: 0px;
     margin-right: 2px;
 }
 
-.btdevices box,
-.btdevices label {
+.btdevices.panel-button box,
+.btdevices.panel-button label {
     margin: 0;
     padding: 0;
+    margin-left:0.4em;
 }

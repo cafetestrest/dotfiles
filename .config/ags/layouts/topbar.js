@@ -45,7 +45,7 @@ const Bar = monitor => shared.Bar({
         UsageCpuWidget(),
         UsageDiskWidget(),
         BluetoothIndicatorWithBattery({ className: 'btdevices panel-button' }),
-        SeparatorInvisible({ valign: 'center' }),
+        SeparatorInvisible({ valign: 'center' }), //todo check borders for bt devices
         ScreenRecord(),
         ColorPicker(),
         NoteWidget({ className: 'note panel-button' }),
