@@ -75,7 +75,7 @@ export const ClientIcon = ({
 
 const AppItem = ({ iconName }, { address, title }) => Button({
     child: Icon(iconName),
-    tooltip: title,
+    // tooltip: title,
     className: Hyprland.active.client.address === address.substring(2) ? 'focused' : 'nonfocused',
     onClicked: () => execAsync(`hyprctl dispatch focuswindow address:${address}`).catch(print),
 });

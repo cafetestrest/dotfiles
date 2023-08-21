@@ -25,9 +25,7 @@ const Bar = monitor => shared.Bar({
         shared.Launcher({ child: DistroIcon() }),
         SeparatorInvisible({ valign: 'center' }),
         // Workspaces(),
-        // Taskbar({
-        //     vertical: false,
-        // }), todo check
+        Taskbar({ className: 'taskbar', }),
         WorkspacesCustom(),
         // SeparatorInvisible({ valign: 'center' }),
         // Client(),
@@ -45,7 +43,7 @@ const Bar = monitor => shared.Bar({
         UsageCpuWidget(),
         UsageDiskWidget(),
         BluetoothIndicatorWithBattery({ className: 'btdevices panel-button' }),
-        SeparatorInvisible({ valign: 'center' }), //todo check borders for bt devices
+        SeparatorInvisible({ valign: 'center' }),
         ScreenRecord(),
         ColorPicker(),
         NoteWidget({ className: 'note panel-button' }),
