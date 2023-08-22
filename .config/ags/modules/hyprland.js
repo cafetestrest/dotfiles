@@ -74,7 +74,7 @@ export const ClientIcon = ({
 });
 
 const AppItem = ({ iconName }, { address, title }) => Button({
-    child: Icon({ icon: iconName === 'org.gnome.Characters' ? 'code' : iconName }),
+    child: Icon({ icon: iconName }),
     tooltipText: title,
     className: Hyprland.active.client.address === address.substring(2) ? 'focused' : 'nonfocused',
     onClicked: () => execAsync(`hyprctl dispatch focuswindow address:${address}`).catch(print),
@@ -93,6 +93,12 @@ export const Taskbar = ({
             if (windowName && !App.getWindow(windowName).visible)
                 return;
 
+            const iconNames = {
+                'codium-url-handler': 'code',
+                'jetbrains-phpstorm': 'phpstorm',
+                'Rofi': 'rofi',
+            };
+
             box.children = Array.from(Hyprland.clients.values()).map(client => {
                 for (const appName of skip) {
                     if (client.class.toLowerCase().includes(appName.toLowerCase()))
@@ -101,8 +107,13 @@ export const Taskbar = ({
                 for (const app of box._apps) {
                     if (client.title && app.match(client.title) ||
                         client.class && app.match(client.class) ||
-                        client.title && client.class === 'codium-url-handler')
-                        return item(app, client);
+                        iconNames.hasOwnProperty(client.class)) {
+                            if (iconNames.hasOwnProperty(client.class)) {
+                                app.iconName = iconNames[client.class]
+                            }
+                            // console.log('icon ' + app.iconName + ' class ' + client.class + ' title ' + client.title)
+                            return item(app, client);
+                        }
                 }
             });
         }],
