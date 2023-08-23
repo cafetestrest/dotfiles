@@ -702,6 +702,39 @@ export const PanelButton = () => Button({
                     }),
                     audio.SpeakerPercentLabel(),
                 ],
+                connections: [[Audio, box => {
+                    let alreadyCreated = false;
+                    let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
+                    let classnameToDisplay = 'headset-icon';
+
+                    box.get_children().forEach(ch => {
+                        if (ch.className == classnameToDisplay) {
+                            if (isHeadsetSelected) {
+                                ch.visible = true;
+                            } else {
+                                ch.visible = false;
+                            }
+
+                            alreadyCreated = true;
+                        }
+                    });
+
+                    if (alreadyCreated) {
+                        return;
+                    }
+
+                    if (isHeadsetSelected) {
+                        box.add(Box({
+                            className: classnameToDisplay,
+                            children: [
+                                Label({ label: ' ', }),
+                                audio.SpeakerTypeIndicator()
+                            ]
+                        }))
+                        box.show_all()
+                    }
+                }
+                ]],
             }),
             // BatteryIndicator(),
         ],
