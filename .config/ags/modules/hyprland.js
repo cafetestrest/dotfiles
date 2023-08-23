@@ -94,7 +94,6 @@ export const Taskbar = ({
                 return;
 
             const iconNames = {
-                'codium-url-handler': 'code',
                 'jetbrains-phpstorm': 'phpstorm',
                 'Rofi': 'rofi',
             };
@@ -111,7 +110,6 @@ export const Taskbar = ({
                             if (iconNames.hasOwnProperty(client.class)) {
                                 app.iconName = iconNames[client.class]
                             }
-                            // console.log('icon ' + app.iconName + ' class ' + client.class + ' title ' + client.title)
                             return item(app, client);
                         }
                 }
