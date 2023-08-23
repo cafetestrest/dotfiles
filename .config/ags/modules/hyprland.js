@@ -94,6 +94,7 @@ export const Taskbar = ({
                 return;
 
             const iconNames = {
+                'codium-url-handler': 'code',
                 'jetbrains-phpstorm': 'phpstorm',
                 'Rofi': 'rofi',
             };

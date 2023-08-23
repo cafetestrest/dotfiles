@@ -82,8 +82,8 @@ export const WeatherInfo = (weatherData) => Box({
         Label({ label: " " + weatherData.Wind, }),
         // Label({ label: weatherData.Humidity, }),
         Label({ label: " " + weatherData.Cloud, }),
-        Label({ label: weatherData.minTemp, }),
         Label({ label: weatherData.maxTemp, }),
+        Label({ label: weatherData.minTemp, }),
     ],
     connections: [[Weather, box => {
         switch (weatherData.icon) {
