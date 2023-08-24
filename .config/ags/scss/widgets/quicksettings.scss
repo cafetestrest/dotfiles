@@ -299,6 +299,18 @@ window#quicksettings .quicksettings {
                 }
             }
         }
+
+        .arrow-toggles .toggle:hover {
+            border-radius: 0;
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+        }
+
+        .arrow-toggles .toggle .arrow:hover {
+            border-radius: 0;
+            border-top-right-radius: 24px;
+            border-bottom-right-radius: 24px;
+        }
     }
 
     .qsvolume {
