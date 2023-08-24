@@ -1,4 +1,4 @@
-const { Notifications } = ags.Service;
+// const { Notifications } = ags.Service;
 const { execAsync } = ags.Utils;
 const { Gravity } = imports.gi.Gdk;
 const { Button, Icon, Menu, MenuItem, Label } = ags.Widget;

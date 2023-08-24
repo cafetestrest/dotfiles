@@ -67,52 +67,6 @@ const Arrow = (menu, toggleOn) => Button({
     }),
 });
 
-const wideToggle = ({ icon, label, toggle, status, name }) => ({
-    type: toggle,
-    className: `toggle ${name}`,
-    child: {
-        type: 'box',
-        orientation: 'horizontal',
-        valign: 'center',
-        children: [
-            {
-                type: 'button',
-                valign: 'center',
-                hexpand: true,
-                child: {
-                    type: 'box',
-                    children: [
-                        {
-                            type: 'box',
-                            className: 'quicksettings__button_icon',
-                            orientation: 'horizontal',
-                            children: [
-                                { type: icon },
-                            ],
-                        },
-                        {
-                            type: 'box',
-                            orientation: 'vertical',
-                            hexpand: false,
-                            children: [
-                                {
-                                    type: label,
-                                    className: 'text__bold',
-                                    halign: 'start',
-                                },
-                                {
-                                    type: status,
-                                    halign: 'start',
-                                },
-                            ],
-                        },
-                    ],
-                },
-            },
-        ],
-    },
-});
-
 const RevealerMenu = (name, child) => Box({
     children: [Revealer({
         transition: 'slide_down',
@@ -215,70 +169,6 @@ const VolumeBox = () => Box({
         })),
     ],
 });
-
-const speaker = {
-    type: 'box',
-    className: 'speaker-box',
-    halign: 'end',
-    children: [
-        {
-            type: 'audio/speaker-indicator',
-        },
-        ' ',
-        {
-            type: 'audio/speaker-percent-label',
-        },
-        '%',
-    ],
-};
-
-const usageCpu = {
-    type: 'box',
-    className: 'usagecpu-box',
-    halign: 'end',
-    children: [
-        {
-            type: 'usagecpu-indicator',
-        },
-        ' ',
-        {
-            type: 'usagecpu',
-        },
-        '%',
-    ],
-};
-
-const usageMemory = {
-    type: 'box',
-    className: 'usagememory-box',
-    halign: 'end',
-    children: [
-        {
-            type: 'usagememory-indicator',
-        },
-        ' ',
-        {
-            type: 'usagememory',
-        },
-        // '%',
-    ],
-};
-
-const usageStorage = {
-    type: 'box',
-    className: 'usagestorage-box',
-    halign: 'end',
-    children: [
-        {
-            type: 'usagestorage-indicator',
-        },
-        ' ',
-        {
-            type: 'usagestorage',
-        },
-        // '%',
-    ],
-};
 
 // const BrightnessBox = () => Box({
 //     className: 'brightness',

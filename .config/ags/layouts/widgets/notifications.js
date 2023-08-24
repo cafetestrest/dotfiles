@@ -1,6 +1,5 @@
 import { HoverRevealer } from '../../modules/misc.js';
 import * as notifications from '../../modules/notifications.js';
-const { App, Widget } = ags;
 const { Notifications } = ags.Service;
 const { timeout } = ags.Utils;
 const { Box, Scrollable, Label } = ags.Widget;

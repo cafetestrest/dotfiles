@@ -73,12 +73,12 @@ const Workspace = index => {
 
         // this is for my monitor layout
         // shifts clients back by 1920px if necessary
-        clients = clients.map(client => {
-            const [x, y] = client.at;
-            if (x > 1920)
-                client.at = [x - 1920, y];
-            return client;
-        });
+        // clients = clients.map(client => {
+        //     const [x, y] = client.at;
+        //     if (x > 1920)
+        //         client.at = [x - 1920, y];
+        //     return client;
+        // });
 
         fixed.get_children().forEach(ch => ch.destroy());
         clients.forEach(c => c.mapped && fixed.put(Client(c), c.at[0] * SCALE, c.at[1] * SCALE));
