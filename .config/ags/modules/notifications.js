@@ -226,8 +226,8 @@ export const ClearButton = props => Button({
 });
 
 export const DNDIndicator = ({
-    silent = Icon('notifications-disabled-symbolic'),
-    noisy = Icon('preferences-system-notifications-symbolic'),
+    silent = Icon({ icon: 'notifications-disabled-symbolic', className: 'indicator' }),
+    noisy = Icon({ icon: 'preferences-system-notifications-symbolic', className: 'indicator' }),
 } = {}) => Stack({
     items: [
         ['true', silent],

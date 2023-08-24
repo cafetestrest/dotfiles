@@ -198,7 +198,10 @@ const ArrowToggle = ({ icon, label, connection, toggle, name, toggleOn }) => Box
             onClicked: toggle,
             child: Box({
                 children: [
-                    icon,
+                    Box({
+                        className: 'arrow-icon',
+                        children: [ icon, ]
+                    }),
                     label,
                 ],
             }),

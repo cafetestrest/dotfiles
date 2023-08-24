@@ -42,9 +42,9 @@ export const NightlightToggle = props => Button({
 });
 
 export const NightlightIndicator = ({
-    on = Icon( 'weather-clear-symbolic' ),
-    off = Icon('night-light-disabled-symbolic'),
-    auto = Icon('night-light-symbolic'),
+    on = Icon({ icon: 'weather-clear-symbolic', className: 'indicator' }),
+    off = Icon({ icon: 'night-light-disabled-symbolic', className: 'indicator' }),
+    auto = Icon({ icon: 'night-light-symbolic', className: 'indicator' }),
     ...rest
 } = {}) => Stack({
     ...rest,

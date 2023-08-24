@@ -41,8 +41,8 @@ export const IdleToggle = props => Button({
 });
 
 export const IdleIndicator = ({
-    off = Icon('view-conceal-symbolic'),
-    on = Icon('view-reveal-symbolic'),
+    on = Icon({ icon: 'view-reveal-symbolic', className: 'indicator' }),
+    off = Icon({ icon: 'view-conceal-symbolic', className: 'indicator' }),
     ...rest
 } = {}) => Stack({
     ...rest,

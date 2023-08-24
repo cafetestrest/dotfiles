@@ -352,7 +352,7 @@ window#quicksettings .quicksettings {
                     progress {
                         @include button_active;
                         border-radius: 100px;
-                        min-width: 38px;
+                        min-width: 2em;
                     }
                 }
             }

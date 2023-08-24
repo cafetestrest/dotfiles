@@ -76,8 +76,8 @@ export const SpeakerSlider = props => Slider({
 });
 
 export const MicrophoneMuteIndicator = ({
-    muted = Icon('microphone-disabled-symbolic'),
-    unmuted = Icon('microphone-sensitivity-high-symbolic'),
+    muted = Icon({ icon: 'microphone-disabled-symbolic', className: 'indicator' }),
+    unmuted = Icon({ icon: 'microphone-sensitivity-high-symbolic', className: 'indicator' }),
     ...props
 } = {}) => Stack({
     ...props,
