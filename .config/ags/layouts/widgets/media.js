@@ -113,49 +113,53 @@ export const PanelIndicator = ({
     ...props,
     className: 'media panel-button',
     player,
-    children: [HoverRevealer({
-        direction,
-        onPrimaryClick,
-        onScrollUp: () => Mpris.getPlayer(player)?.next(),
-        onScrollDown: () => Mpris.getPlayer(player)?.previous(),
-        onSecondaryClick: () => Mpris.getPlayer(player)?.playPause(),
-        indicator: mpris.PlayerIcon({
-            player,
-            className: 'icon',
-            symbolic: true,
-        }),
-        child: Box({
-            children: [
-                mpris.ArtistLabel({ player }),
-                Label(' '),
-                mpris.TitleLabel({ player }),
-            ],
-        }),
-        connections: [[Mpris, revealer => {
-            const mpris = Mpris.getPlayer(player);
-            if (!mpris)
-                return;
+    children: [
+        mpris.PreviousButton({ player }),
+        HoverRevealer({
+            direction,
+            onPrimaryClick,
+            onScrollUp: () => Mpris.getPlayer(player)?.next(),
+            onScrollDown: () => Mpris.getPlayer(player)?.previous(),
+            onSecondaryClick: () => Mpris.getPlayer(player)?.playPause(),
+            indicator: mpris.PlayerIcon({
+                player,
+                className: 'icon',
+                symbolic: true,
+            }),
+            child: Box({
+                children: [
+                    mpris.ArtistLabel({ player }),
+                    Label(' '),
+                    mpris.TitleLabel({ player }),
+                ],
+            }),
+            connections: [[Mpris, revealer => {
+                const mpris = Mpris.getPlayer(player);
+                if (!mpris)
+                    return;
 
-            function truncateString(inputString, maxLength) {
-                if (!inputString) {
-                    return '';
+                function truncateString(inputString, maxLength) {
+                    if (!inputString) {
+                        return '';
+                    }
+
+                    if (inputString.length > maxLength) {
+                        return inputString.slice(0, maxLength);
+                    } else {
+                        return inputString;
+                    }
                 }
 
-                if (inputString.length > maxLength) {
-                    return inputString.slice(0, maxLength);
-                } else {
-                    return inputString;
-                }
-            }
+                if (revealer._current === truncateString(mpris.trackTitle, 50))
+                    return;
 
-            if (revealer._current === truncateString(mpris.trackTitle, 50))
-                return;
-
-            revealer._current = truncateString(mpris.trackTitle, 50);
-            revealer.reveal_child = true;
-            timeout(3000, () => {
-                revealer.reveal_child = false;
-            });
-        }]],
-    })],
+                revealer._current = truncateString(mpris.trackTitle, 50);
+                revealer.reveal_child = true;
+                timeout(3000, () => {
+                    revealer.reveal_child = false;
+                });
+            }]],
+        }),
+        mpris.NextButton({ player }),
+    ],
 });

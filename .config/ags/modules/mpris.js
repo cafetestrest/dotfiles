@@ -357,7 +357,8 @@ export const PlayPauseButton = ({
 
 export const PreviousButton = ({
     player,
-    child = Label({ className: 'previous', label: '󰒮' }),
+    // child = Label({ className: 'previous', label: '󰒮' }),
+    child = Icon({ className: 'next', icon: 'go-previous-symbolic' }),
     ...props
 } = {}) => PlayerButton({
     ...props,
@@ -373,7 +374,8 @@ export const PreviousButton = ({
 
 export const NextButton = ({
     player,
-    child = Label({ className: 'next', label: '󰒭' }),
+    // child = Label({ className: 'next', label: '󰒭' }),
+    child = Icon({ className: 'next', icon: 'go-next-symbolic' }),
     ...props
 } = {}) => PlayerButton({
     ...props,
