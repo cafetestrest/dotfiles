@@ -6,7 +6,7 @@ class IdleService extends Service {
     static { Service.register(this); }
 
     checkMode() {
-        execAsync(['bash', '-c', "~/.config/hypr/scripts/swayidle.sh toggle"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh toggle"]).catch(print);
 
         if (this._mode == 'on') {
             this._mode = 'off';

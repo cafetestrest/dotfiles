@@ -7,13 +7,13 @@ class NightlightService extends Service {
 
     checkMode() {
         if (this._mode === "auto") {
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh enable"]).catch(print);
+            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh enable"]).catch(print);
             this._mode = "on";
         } else if (this._mode === "on") {
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh disable"]).catch(print);
+            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh disable"]).catch(print);
             this._mode = "off";
         } else {
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/nightlight.sh automatic"]).catch(print);
+            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh automatic"]).catch(print);
             this._mode = "auto";
         }
 

@@ -1,7 +1,8 @@
 import { Spinner } from './misc.js';
 const { Bluetooth } = ags.Service;
 const { Icon, Label, Box, Button, Stack } = ags.Widget;
-const { exec, execAsync } = ags.Utils;
+const { execAsync } = ags.Utils;
+const { instance } = ags.Service.Bluetooth;
 
 let numOfTries = 0;
 
@@ -45,7 +46,13 @@ export const ConnectedLabel = props => Label({
     [60000, label => {
         if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.size === 0 && Bluetooth.devices.size > 0) {
             // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
-            execAsync(['bash', '-c', "~/.config/waybar/scripts/ags-bt-reset.sh"]).catch(print);
+            instance._getDevices().forEach(d => {
+                instance._deviceRemoved(null, d);
+            });
+
+            instance._getDevices().forEach(d => {
+                instance._deviceAdded(null, d);
+            });
         }
     }]
 ]});

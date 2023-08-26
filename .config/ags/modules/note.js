@@ -9,7 +9,7 @@ class NoteService extends Service {
     static { Service.register(this); }
 
     get callNote() {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/note.sh ags"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/note.sh ags"]).catch(print);
         // this.emit('changed');
     }
 

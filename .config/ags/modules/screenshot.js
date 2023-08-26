@@ -7,9 +7,9 @@ export const Screeenshot = props => Button({
         icon: 'applets-screenshooter-symbolic',
     }),
     onClicked: () => {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh 1"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/screenshot.sh 1"]).catch(print);
     },
     onSecondaryClick: () => {
-        execAsync(['bash', '-c', "~/.config/waybar/scripts/screenshot.sh"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/screenshot.sh"]).catch(print);
     },
 });
