@@ -1,7 +1,6 @@
 import { Spinner } from './misc.js';
 const { Bluetooth } = ags.Service;
 const { Icon, Label, Box, Button, Stack } = ags.Widget;
-const { execAsync } = ags.Utils;
 const { instance } = ags.Service.Bluetooth;
 
 let numOfTries = 0;

@@ -114,20 +114,24 @@ export const PlayerIcon = ({ symbolic = false, player = prefer, ...props } = {})
     ...props,
     connections: [[Mpris, icon => {
         const mpris = Mpris.getPlayer(player);
-        const name = `${mpris?.entry}${symbolic ? '-symbolic' : ''}`;
-        lookUpIcon(name)
-            ? icon.icon_name = name
-            : icon.icon_name = 'media-playback-pause-symbolic';
+        // const name = `${mpris?.entry}${symbolic ? '-symbolic' : ''}`;
+        // lookUpIcon(name)
+        //     ? icon.icon_name = name
+        //     : icon.icon_name = 'media-playback-pause-symbolic';
+
+        let selectedIcon = 'media-playback-pause-symbolic';
 
         //check if media is playing, if not them remove media icon
         if (mpris && mpris.position && mpris.position === -1) {
-            icon.icon_name = null;
+            selectedIcon = null;
         }
 
         //check if media is paused, update the icon is it is
         if (mpris && mpris.playBackStatus === 'Paused') {
-            icon.icon_name = 'media-playback-start-symbolic';
+            selectedIcon = 'media-playback-start-symbolic';
         }
+
+        icon.icon_name = selectedIcon;
     }]],
 });
 
