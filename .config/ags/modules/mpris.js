@@ -117,11 +117,16 @@ export const PlayerIcon = ({ symbolic = false, player = prefer, ...props } = {})
         const name = `${mpris?.entry}${symbolic ? '-symbolic' : ''}`;
         lookUpIcon(name)
             ? icon.icon_name = name
-            : icon.icon_name = 'audio-x-generic-symbolic';
+            : icon.icon_name = 'media-playback-start-symbolic';
 
         //check if media is playing, if not them remove media icon
         if (mpris && mpris.position && mpris.position === -1) {
             icon.icon_name = null;
+        }
+
+        //check if media is paused, update the icon is it is
+        if (mpris && mpris.playBackStatus === 'Paused') {
+            icon.icon_name = 'media-playback-pause-symbolic';
         }
     }]],
 });
