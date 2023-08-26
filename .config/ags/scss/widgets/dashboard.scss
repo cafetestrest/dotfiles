@@ -83,6 +83,10 @@ window#notificationsPopup .notifications-popup {
     color: black;
 }
 
+.weather-refresh:focus {
+    color: $accent;
+}
+
 .weather-info {
     background-color: rgba(81, 164, 231, 0.76);
     border-radius: 16px;
@@ -111,3 +115,4 @@ window#notificationsPopup .notifications-popup {
 .weather-day:first-child {
     padding: 0;
 }
+
