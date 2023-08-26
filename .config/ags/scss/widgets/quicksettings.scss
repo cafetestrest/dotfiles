@@ -324,6 +324,10 @@ window#quicksettings .quicksettings {
                 min-height: 1.5em;
             }
 
+            .volume button:focus {
+                background-color: transparentize($hover_fg, 0.5);
+            }
+
             .volume label {
                 border: none;
                 font-size: 0;
@@ -354,6 +358,11 @@ window#quicksettings .quicksettings {
                         border-radius: 100px;
                         min-width: 2em;
                     }
+
+                    highlight:focus {
+                        background-color: transparentize($hover_fg, 0.5);
+                        background-image: none;
+                    }
                 }
             }
         }
@@ -365,6 +374,12 @@ window#quicksettings .quicksettings {
             border: none;
         }
     }
+
+    .qstoggles .noarrow button:focus{
+        background-image: none;
+        background-color: transparentize($hover_fg, 0.5);
+    }
+
 }
 
 .bluetooth {
