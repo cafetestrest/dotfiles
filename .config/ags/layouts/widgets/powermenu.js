@@ -14,8 +14,8 @@ class System extends Service {
         const cmd = {
             'Lock': 'gtklock -d',
             'Sleep': 'systemctl suspend',
-            'Reboot': 'systemctl reboot',
             'Log Out': 'pkill Hyprland',
+            'Reboot': 'systemctl reboot',
             'Shutdown': 'shutdown now',
         }[action];
 
@@ -48,8 +48,8 @@ export const PopupContent = () => Box({
     children: [
         SysButton('system-lock-screen-symbolic', 'Lock'),
         SysButton('weather-clear-night-symbolic', 'Sleep'),
-        SysButton('system-reboot-symbolic', 'Reboot'),
         SysButton('system-log-out-symbolic', 'Log Out'),
+        SysButton('system-reboot-symbolic', 'Reboot'),
         SysButton('system-shutdown-symbolic', 'Shutdown'),
     ],
 });
