@@ -76,21 +76,16 @@ export const WeatherInfo = (weatherData) => Box({
     children: [
         Label({ label: weatherData.dayOfWeek.substring(0, 3).toUpperCase(), }),
         Label({ label: weatherData.hourFromDate, }),
-        Label({
-            label: weatherData.icon !== '' ? weatherData.icon : weatherData.icon6 !== '' ? weatherData.icon6 : weatherData.icon12, className: 'weather-icon',
-        }),
+        Label({ label: weatherData.icon, className: 'weather-icon', }),
         Label({ label: weatherData.temperature, className: 'weather-temperature' }),
-        Label({
-            label: !weatherData.rain.startsWith("null") ? '☔ ' + weatherData.rain : !weatherData.rain6.startsWith("null") ? '☔ ' + weatherData.rain6 : '☔ ' + weatherData.rain12,
-        }),
+        Label({ label: "☔ " + weatherData.rain, }),
         Label({ label: " " + weatherData.wind, }),
         // Label({ label: weatherData.humidity, }),
         Label({ label: '↑ ' + weatherData.maxTemp, }),
         Label({ label: '↓ ' + weatherData.minTemp, }),
     ],
     connections: [[Weather, box => {
-        const icon = weatherData.icon !== '' ? weatherData.icon : weatherData.icon6 !== '' ? weatherData.icon6 : weatherData.icon12;
-        switch (icon) {
+        switch (weatherData.icon) {
             case "🌑": {
                 box.setStyle(`
                     background: linear-gradient(to bottom, #2c3e50, #1a2533);
