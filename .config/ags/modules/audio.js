@@ -36,10 +36,29 @@ export const SpeakerIndicator = ({
             return stack.shown = '0';
 
         const vol = Audio.speaker.volume * 100;
-        for (const threshold of [100, 66, 33, 0, -1]) {
-            if (vol > threshold + 1)
-                return stack.shown = `${threshold + 1}`;
-        }
+
+        if (vol == 0)
+                return stack.shown = '0';
+
+        if (vol > 100)
+                return stack.shown = '101';
+
+        if (vol > 66)
+            return stack.shown = '67';
+
+
+        if (vol > 33)
+            return stack.shown = '34';
+
+        if (vol > 0)
+            return stack.shown = '1';
+
+        return stack.shown = '0';
+
+        // for (const threshold of [100, 66, 33, 1]) {
+        //     if (vol > threshold + 1)
+        //         return stack.shown = `${threshold + 1}`;
+        // }
     }, 'speaker-changed']],
 });
 
