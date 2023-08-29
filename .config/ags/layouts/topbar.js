@@ -39,8 +39,8 @@ const Bar = monitor => shared.Bar({
     end: [
         // NotificationIndicator({ direction: 'right', hexpand: true, halign: 'start' }),
         ags.Widget.Box({ hexpand: true }),
-        UsageRAMWidget(),
         UsageCpuWidget(),
+        UsageRAMWidget(),
         UsageDiskWidget(),
         BluetoothIndicatorWithBattery({ className: 'btdevices panel-button' }),
         SeparatorInvisible({ valign: 'center' }),
