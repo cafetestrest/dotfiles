@@ -40,7 +40,7 @@ class ThemeService extends Service {
         };
         setupScss(theme);
         // setupHyprland(theme);
-        this.setupOther();
+        // this.setupOther();
         // this.setupWallpaper();
     }
 
