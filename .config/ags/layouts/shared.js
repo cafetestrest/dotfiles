@@ -30,6 +30,7 @@ export const Launcher = ({ child }) => Button({
         btn.toggleClassName('active', win === 'overview' && visible);
     }]],
     onClicked: () => execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print),
+    onSecondaryClick: () => ags.App.toggleWindow('overview'),
     child: Box({ children: [child] }),
 });
 

@@ -49,8 +49,8 @@ const Workspace = index => {
         className: 'workspace',
         valign: 'center',
         style: `
-            min-width: ${1920 * SCALE}px;
-            min-height: ${1080 * SCALE}px;
+            min-width: ${3840 * SCALE}px;
+            min-height: ${2160 * SCALE}px;
         `,
         connections: [[Hyprland, box => {
             box.toggleClassName('active', Hyprland.active.workspace.id === index);
@@ -72,13 +72,13 @@ const Workspace = index => {
         clients = clients.filter(({ workspace: { id } }) => id === index);
 
         // this is for my monitor layout
-        // shifts clients back by 1920px if necessary
-        // clients = clients.map(client => {
-        //     const [x, y] = client.at;
-        //     if (x > 1920)
-        //         client.at = [x - 1920, y];
-        //     return client;
-        // });
+        // shifts clients back by 3840px if necessary
+        clients = clients.map(client => {
+            const [x, y] = client.at;
+            if (x > 3840)
+                client.at = [x - 3840, y];
+            return client;
+        });
 
         fixed.get_children().forEach(ch => ch.destroy());
         clients.forEach(c => c.mapped && fixed.put(Client(c), c.at[0] * SCALE, c.at[1] * SCALE));

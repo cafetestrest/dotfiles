@@ -5,7 +5,7 @@ import * as shared from './layouts/shared.js';
 
 const layouts = {
     topbar,
-    bottombar,
+    // bottombar,
 };
 
 const monitors = ags.Service.Hyprland.HyprctlGet('monitors')
@@ -18,9 +18,9 @@ export default {
     },
     windows: [
         ...layouts[Theme.getSetting('layout')](monitors),
-        shared.ApplauncherPopup(),
+        // shared.ApplauncherPopup(),
         shared.OverviewPopup(),
         shared.PowermenuPopup(),
-        shared.VerificationPopup(),
+        // shared.VerificationPopup(),
     ],
 };
