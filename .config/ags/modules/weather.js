@@ -41,14 +41,21 @@ class Weather {
 }
 
 export const TemperatureWidget = ({
+    disabled = null,
     enabled = PannelButton(),
     ...rest
 } = {}) => Stack({
     ...rest,
     items: [
+        ['disabled', disabled],
         ['enabled', enabled],
     ],
-    connections: [[Weather, stack => stack.shown = 'enabled']],
+    connections: [[Weather, stack => {
+        if (Weather.temperatureWeather) {
+            return stack.shown = 'enabled';
+        }
+        return stack.shown = 'disabled';
+    }]],
 });
 
 export const PannelButton = props => Button({
