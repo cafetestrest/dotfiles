@@ -142,7 +142,8 @@ const VolumeBox = () => Box({
                 Button({
                     className: 'volume-button',
                     child: audio.SpeakerTypeIndicator(),
-                    onClicked: 'pamixer --default-source -t',
+                    onClicked: 'pamixer -t',
+                    onSecondaryClick: 'pamixer --default-source -t',
                 }),
                 audio.SpeakerSlider({ hexpand: true }),
                 audio.SpeakerPercentLabel(),
