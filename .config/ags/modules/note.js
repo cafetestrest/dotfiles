@@ -1,7 +1,6 @@
 const { Service } = ags;
 const { execAsync } = ags.Utils;
-const { Button } = ags.Widget;
-import { FontIcon } from './misc.js';
+const { Button, Icon } = ags.Widget;
 
 let first = false;
 
@@ -33,7 +32,7 @@ class Note {
 
 export const NoteWidget = props => Button({
     ...props,
-    child: FontIcon({ icon: '' }),
+    child: Icon({ icon: 'user-bookmarks-symbolic' }),
     tooltipText: '',
     onClicked: () => {
         execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
