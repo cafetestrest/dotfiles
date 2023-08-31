@@ -19,14 +19,22 @@ export const WorkspacesCustom = props => Box({
             }
 
             let wsnum = i;
+            let next = i + 1;
+            let prev = i - 1;
+            if (i === 1) {
+                prev = 10;
+            }
             if (i === 10) {
                 wsnum = 0;
+                next = 0;
             }
 
             wsnum = wsnum.toString();
 
             box.add(Button({
                 onClicked: () => execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+                onScrollUp: () => execAsync(`hyprctl dispatch workspace ${next}`).catch(print),
+                onScrollDown: () => execAsync(`hyprctl dispatch workspace ${prev}`).catch(print),
                 child: Label(`${wsnum}`),
                 className: Hyprland.active.workspace.id == i ? 'focused' : '',
             }));
