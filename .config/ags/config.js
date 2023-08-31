@@ -19,7 +19,7 @@ export default {
     windows: [
         ...layouts[Theme.getSetting('layout')](monitors),
         // shared.ApplauncherPopup(),
-        shared.OverviewPopup(),
+        // shared.OverviewPopup(),
         shared.PowermenuPopup(),
         // shared.VerificationPopup(),
     ],
