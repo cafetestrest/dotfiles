@@ -220,6 +220,10 @@ $workspaceBorder: 0px;
     }
 
     .media {
+        button {
+            padding: 0;
+        }
+
         &.spotify .icon { color: $green; }
         &.firefox .icon { color: $orange; }
         &.mpv .icon { color: $magenta; }
