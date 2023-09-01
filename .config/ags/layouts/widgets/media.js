@@ -129,7 +129,7 @@ export const PanelIndicator = ({
             child: Box({
                 children: [
                     mpris.ArtistLabel({ player }),
-                    Label(' - '),
+                    Label('   '),
                     mpris.TitleLabel({ player }),
                     Label('   '),
                 ],
