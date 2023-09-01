@@ -12,7 +12,7 @@ class WeatherService extends Service {
     }
 
     get weatherData() {
-        execAsync(['bash', '-c', "~/.config/scripts/weather.sh ags"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/openweathermap.sh ags"]).catch(print);
     }
 
     get temperatureWeather() { return this._temperatureWeather; }
@@ -81,8 +81,8 @@ export const WeatherInfo = (weatherData) => Box({
     className: 'weather-info',
     vertical: true,
     children: [
-        Label({ label: weatherData.dayOfWeek.substring(0, 3).toUpperCase(), }),
-        Label({ label: weatherData.hourFromDate, }),
+        Label({ label: weatherData.Date.substring(0, 3).toUpperCase(), }),
+        Label({ label: weatherData.Hour + 'h', }),
         Label({ label: weatherData.icon, className: 'weather-icon', }),
         Label({ label: weatherData.temperature, className: 'weather-temperature' }),
         Label({ label: "☔ " + weatherData.rain, }),
@@ -93,6 +93,30 @@ export const WeatherInfo = (weatherData) => Box({
     ],
     connections: [[Weather, box => {
         switch (weatherData.icon) {
+            case "🌇": {//sunset
+                box.setStyle(`
+                    background: linear-gradient(to bottom, #ff6f61, #ffca58, #f0e68c);
+                `);
+                break;
+            }
+            case "🌄": {//sunrise   
+                box.setStyle(`
+                    background: linear-gradient(to bottom, #ffcc00, #ff6f61, #ff5e62, #d55f74);
+                `);
+                break;
+            }
+            case "🌤": {//few clouds
+                box.setStyle(`
+                    background: linear-gradient(to bottom, #80b3ff, #ffffff, #ffdb4d);
+                `);
+                break;
+            }
+            case "🌩": {//thunderstorm
+                box.setStyle(`
+                    background: linear-gradient(to bottom, #0c0e23, #1a1c38, #121320, #0c0e23);
+                `);
+                break;
+            }
             case "🌑": {
                 box.setStyle(`
                     background: linear-gradient(to bottom, #2c3e50, #1a2533);
