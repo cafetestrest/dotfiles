@@ -96,12 +96,14 @@ export const WeatherInfo = (weatherData) => Box({
             case "🌇": {//sunset
                 box.setStyle(`
                     background: linear-gradient(to bottom, #ff6f61, #ffca58, #f0e68c);
+                    color: #000000;
                 `);
                 break;
             }
             case "🌄": {//sunrise   
                 box.setStyle(`
                     background: linear-gradient(to bottom, #ffcc00, #ff6f61, #ff5e62, #d55f74);
+                    color: #000000;
                 `);
                 break;
             }
