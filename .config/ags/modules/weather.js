@@ -81,8 +81,8 @@ export const WeatherInfo = (weatherData) => Box({
     className: 'weather-info',
     vertical: true,
     children: [
-        Label({ label: weatherData.Date.substring(0, 3).toUpperCase(), }),
-        Label({ label: weatherData.Hour + 'h', }),
+        Label({ label: weatherData.date.substring(0, 3).toUpperCase(), }),
+        Label({ label: weatherData.hour + 'h', }),
         Label({ label: weatherData.icon, className: 'weather-icon', }),
         Label({ label: weatherData.temperature, className: 'weather-temperature' }),
         Label({ label: "☔ " + weatherData.rain, }),
