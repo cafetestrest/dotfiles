@@ -10,7 +10,7 @@ import { PanelButton as PowerMenu } from './widgets/powermenu.js';
 import { PanelButton as DashBoard, NotificationsPanelButton } from './widgets/dashboard.js';
 import { Taskbar } from '../modules/hyprland.js';
 import { UsageCpuWidget, UsageRAMWidget, UsageDiskWidget } from '../modules/usage.js';
-import { PanelButton as ScreenRecord } from '../modules/screenrecord.js';
+// import { PanelButton as ScreenRecord } from '../modules/screenrecord.js';
 import { PanelButton as QuickSettings } from './widgets/quicksettings.js';
 import { BluetoothIndicatorWithBattery } from '../modules/bluetooth.js';
 import { NoteWidget } from '../modules/note.js';
