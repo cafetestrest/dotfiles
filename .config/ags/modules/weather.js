@@ -110,6 +110,7 @@ export const WeatherInfo = (weatherData) => Box({
             case "🌤": {//few clouds
                 box.setStyle(`
                     background: linear-gradient(to bottom, #80b3ff, #ffffff, #ffdb4d);
+                    color: #000000;
                 `);
                 break;
             }
@@ -167,6 +168,7 @@ export const WeatherInfo = (weatherData) => Box({
             case "⛈️": {//heavy rain
                 box.setStyle(`
                     background: linear-gradient(to bottom, #2c3e50, #34495e, #2c3e50, #34495e, #2c3e50);
+                    color: #000000;
                 `);
                 break;
             }
@@ -205,6 +207,7 @@ export const WeatherInfo = (weatherData) => Box({
             case "🌧️": {//rain showers
                 box.setStyle(`
                     background: linear-gradient(to bottom, #5e7d99, #6a8ba6, #7698b3, #87a5bf, #97b3cb, #a6c0d8, #b4cedf);
+                    color: #000000;
                 `);
                 break;
             }
