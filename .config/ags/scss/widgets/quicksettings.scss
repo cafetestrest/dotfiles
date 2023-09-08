@@ -149,5 +149,33 @@ window#quicksettings .quicksettings {
         margin-bottom: $spacing;
         &:last-child { margin-bottom: 0; }
     }
+
+    .qsvolume {
+        button, .icon {
+            @include button($flat: false);
+            padding: $spacing;
+        }
+
+        .volumeslider {
+            margin: 0 0.5em;
+            padding: 0;
+
+            slider {
+                all: unset;
+            }
+
+            trough{
+                min-height: 2em;
+                border-radius: $radii;
+                // background-color: $widget_bg;
+
+                highlight,
+                progress {
+                    border-radius: $radii;
+                    min-width: 2em;
+                }
+            }
+        }
+    }
 }
 //todo add missing from old one

@@ -42,6 +42,7 @@ export const PercentLabel = () => Label({
 
 const VolumeSlider = () => Slider({
     hexpand: true,
+    className: 'volumeslider',
     drawValue: false,
     onChange: ({ value }) => Audio.speaker.volume = value,
     connections: [[Audio, slider => {
@@ -66,6 +67,15 @@ export const Volume = () => Box({
                 box.visible = Array.from(Audio.apps).length > 0;
             }]],
         }),
+    ],
+});
+
+export const VolumeWithoutPercent = () => Box({
+    className: 'slider',
+    children: [
+        TypeIndicator(),
+        VolumeSlider(),
+        Arrow('sink-selector'),
     ],
 });
 
