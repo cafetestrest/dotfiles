@@ -5,9 +5,7 @@ const { Mpris } = ags.Service;
 
 const Indicator = ({ player, direction = 'right' } = {}) => Box({
     className: `media panel-button ${player.name}`,
-    children: [
-        mpris.PreviousButton(player),
-        HoverRevealer({
+    children: [HoverRevealer({
         direction,
         onPrimaryClick: () => player.playPause(),
         onScrollUp: () => player.next(),
@@ -48,9 +46,7 @@ const Indicator = ({ player, direction = 'right' } = {}) => Box({
                 revealer.revealChild = false;
             });
         }]],
-    }),
-    mpris.NextButton(player),
-    ],
+    })],
 });
 
 export default ({ direction } = {}) => Box({
@@ -65,6 +61,10 @@ export default ({ direction } = {}) => Box({
 
         box.visible = true;
         box._player = player;
-        box.children = [Indicator({ player, direction })];
+        box.children = [
+            mpris.PreviousButton(player),
+            Indicator({ player, direction }),
+            mpris.NextButton(player),
+        ];
     }]],
 });
