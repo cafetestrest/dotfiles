@@ -1,12 +1,11 @@
 window#quicksettings .quicksettings {
     @include floating_widget;
 
-    .header {
-        > box:last-child {
-            @include widget;
-            padding: $spacing;
-        }
+    .row {
+        margin: 0 0 $spacing 0;
+    }
 
+    .header {
         .avatar {
             @include widget;
             margin-right: $spacing;
@@ -17,16 +16,11 @@ window#quicksettings .quicksettings {
             }
         }
 
-        .user {
-            font-size: 1.2em;
-            color: transparentize($fg_color, 0.2);
-            margin: $spacing/2;
-        }
-
         .battery-progress {
             progressbar {
                 @include slider($width: $spacing*3.4);
                 margin-top: $spacing;
+                min-height: 20px;
             }
 
             label {
@@ -39,370 +33,120 @@ window#quicksettings .quicksettings {
             &.half label { color: $fg_color; }
         }
 
-        .system {
+        .system-box {
+            @include widget;
+            padding: $spacing;
+
             button, .uptime {
                 @include button;
                 padding: $spacing;
-                margin-left: $spacing;
                 font-weight: bold;
+                margin-left: $spacing;
                 &:first-child { margin-left: 0; }
+                min-height: 20px;
+                min-width: 20px;
+
+                image {
+                    font-size: 1.2em;
+                }
             }
         }
     }
 
-    .qsmediavolume .volume-box {
-        .volume {
-            .slider {
-                @include slider;
-                margin-right: $spacing;
-            }
-        }
-    }
-
-    .qsvolume .volume-box {
-        border: none;
-    }
-
-    .volume-box {
-        border: none;
+    .slider-box {
         @include widget;
-        margin-top: $spacing;
+        padding: $spacing;
 
-        .volume {
-           .slider {
-               * { all:unset; }
-               margin-right: $spacing;
-           }
+        > box:last-child { margin-bottom: 0; }
+
+        .slider > * {
+            margin-left: $spacing;
+            &:first-child { margin-left: 0; }
+        }
+
+        button, .icon {
+            @include button($flat: true);
+            padding: $spacing/2;
         }
 
         scale {
             @include slider;
-            margin-right: $spacing;
-        }
-
-        button {
-            @include button($flat: true);
-            padding: $spacing/2;
-            margin: $spacing/2;
         }
 
         .menu {
-            all: unset;
-            border-top: 1px solid $widget_bg;
-            padding: $spacing;
-
-            .separator {
-                min-height: 1px;
-                margin: $spacing/2 0;
-                background-color: $widget_bg;
-            }
-
-            button {
-                @include button($flat: true);
-                border-radius: $radii*.7;
-                padding: $spacing/2;
-                margin-top: $spacing / 2;
-                &:first-child { margin-top: 0; }
-
-                image {
-                    margin-right: $spacing/2;
-                }
-            }
+            background-color: $bg_color;
+            border: $border_width solid $popover_border_color;
+            border-radius: $radii;
         }
     }
 
-    .brightness {
+    .mixer-item {
+        margin: 0 $spacing;
+        scale { @include slider($width: 7px); }
+        > box { padding: $spacing; }
+        label:last-child { min-width: 3em; }
+        image { font-size: 20px; }
+    }
+
+    .menu {
         @include widget;
         margin-top: $spacing;
-        padding-right: $spacing;
+        padding: $spacing;
 
-        scale {
-            @include slider;
-            margin: 0 $spacing;
-            margin-left: 0;
+        separator {
+            background-color: $border_color;
+            margin: $spacing $spacing/2;
         }
+
+        label { margin-left: $spacing; }
 
         button {
             @include button($flat: true);
             padding: $spacing/2;
-            margin: $spacing/2;
         }
     }
 
-    .toggles-box {
-        margin-top: $spacing;
+    .toggle-button {
+        @include button;
+        margin-right: $spacing;
+        font-weight: bold;
 
-        .small-toggles {
-            @include widget;
-            padding: $spacing/2;
-
-            .toggle {
-                @include button;
-                margin: $spacing/2;
-                padding: $spacing;
-            }
+        label {
+            margin-left: $spacing/2;
         }
 
-        .arrow-toggles {
-            @include widget;
-            padding: $spacing/2;
-            margin-right: $spacing;
-
-            .toggle.arrow {
-                @include button;
-                margin: $spacing/2;
-
-                label {
-                    margin-left: $spacing/2;
-                    font-weight: bold;
-                }
-
-                button {
-                    @include button($flat: true);
-                    padding: $spacing;
-
-                    &:first-child {
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                    }
-
-                    &:last-child {
-                        border-top-left-radius: 0;
-                        border-bottom-left-radius: 0;
-                    }
-                }
-
-                &.active {
-                    background-color: $accent;
-
-                    label, image {
-                        color: $accent_fg;
-                    }
-                }
-            }
-        }
-    }
-
-    .submenu {
-        @include widget;
-        margin-top: $spacing;
-
-        .title {
-            > *:first-child {
-                margin: $spacing;
-            }
-
-            label {
-                font-weight: bold;
-                font-size: 1.2em;
-            }
-        }
-
-        .content {
-            border-top: 1px solid $widget_bg;
+        button {
+            @include button($flat: true);
             padding: $spacing;
-        }
 
-        &.app-mixer .content {
-            scale {
-                @include slider;
+            &:first-child {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
             }
 
-            > box {
-                padding: $spacing;
-            }
-
-            label:last-child {
-                min-width: 3em;
-            }
-
-            image {
-                margin-right: $spacing;
+            &:last-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
             }
         }
 
-        &.network .content, &.theme, .content {
-            button {
-                @include button($flat: true);
-                border-radius: $radii*0.8;
-                padding: $spacing/2;
-                margin-top: $spacing / 2;
-                &:first-child { margin-top: 0; }
-            }
+        &.active {
+            background-color: $accent;
 
-            image {
-                margin-right: $spacing/2;
-            }
-        }
-
-        &.bluetooth .content {
-            > box {
-                padding: $spacing/2;
-            }
-
-            switch {
-                @include switch;
+            label, image {
+                color: $accent_fg;
             }
         }
     }
 
-    .media {
-        .mediabox{
-            @include widget;
-            @include media;
-            margin-top: $spacing;
-
-            .cover-art-bg {
-                border-radius: max($radii - $border_width, 0);
-            }
-
-            .shader {
-                border-radius: max($radii - $border_width, 0);
-            }
-        }
+    .simple-toggle {
+        @include button;
+        padding: $spacing;
     }
 
-    .qstoggles {
-        min-width: 25em;
-
-        .noarrow button {
-            min-height: 3.7em;
-            min-width: 12.5em;
-        }
-
-        .toggle.arrow.bluetooth{
-            min-height: 3.7em;
-            min-width: 12.5em;
-        }
-
-        .toggle {
-            @include button;
-            margin: $spacing/2;
-            border-radius: 24px;
-
-            label {
-                margin-left: $spacing;
-                font-weight: bold;
-            }
-
-            button {
-                @include button($flat: true);
-                padding: $spacing;
-
-            }
-
-            &.active {
-                background-color: $accent;
-
-                label, image {
-                    color: $accent_fg;
-                }
-            }
-        }
-
-        .arrow-toggles .toggle:hover {
-            border-radius: 0;
-            border-top-left-radius: $radii*1.5;
-            border-bottom-left-radius: $radii*1.5;
-        }
-
-        .arrow-toggles .toggle .arrow:hover {
-            border-radius: 0;
-            border-top-right-radius: $radii*1.5;
-            border-bottom-right-radius: $radii*1.5;
-        }
-
-        .arrow-toggles .toggle:focus {
-            background-image: none;
-            background-color: transparentize($hover_fg, 0.5);
-            border-top-left-radius: $radii*1.5;
-            border-bottom-left-radius: $radii*1.5;
-        }
-
-        .arrow-toggles .toggle .arrow:focus {
-            background-image: none;
-            background-color: transparentize($hover_fg, 0.5);
-            border-top-right-radius: $radii*1.5;
-            border-bottom-right-radius: $radii*1.5;
-        }
-
+    .media .player {
+        @include media;
+        margin-bottom: $spacing;
+        &:last-child { margin-bottom: 0; }
     }
-
-    .qsvolume {
-        .volume-box {
-            background: transparent;
-
-            .volume button {
-                background: $widget_bg;
-                border-radius: 50%;
-                min-width: 1.5em;
-                min-height: 1.5em;
-            }
-
-            .volume button:focus {
-                background-color: transparentize($hover_fg, 0.5);
-            }
-
-            .volume label {
-                border: none;
-                font-size: 0;
-                margin: 0;
-                padding: 0;
-            }
-
-            .volume-icon {
-                -gtk-icon-transform: scale(0.8);
-            }
-
-            .slider {
-                margin: 0 0.3em;
-                padding: 0;
-
-                slider {
-                    min-height: 2em;
-                }
-
-                trough {
-                    transition: 250ms;
-                    border-radius: 100px;
-                    background-color: $widget_bg;
-
-                    highlight,
-                    progress {
-                        @include button_active;
-                        border-radius: 100px;
-                        min-width: 2em;
-                    }
-
-                    highlight:focus {
-                        background-color: transparentize($hover_fg, 0.5);
-                        background-image: none;
-                    }
-                }
-            }
-        }
-    }
-
-    .bluetoothSelection {
-        .submenu {
-            background: transparent;
-            border: none;
-        }
-    }
-
-    .qstoggles .noarrow button:focus{
-        background-image: none;
-        background-color: transparentize($hover_fg, 0.5);
-    }
-
 }
-
-.bluetooth {
-    font-weight: bold;
-}
-
-.btdevice {
-    padding-left: 0.5rem;
-}
-
-
