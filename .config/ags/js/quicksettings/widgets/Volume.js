@@ -9,6 +9,7 @@ const { Label, Icon, Box, Slider, Button } = ags.Widget;
 const iconSubstitute = item => {
     const substitues = [
         ['audio-headset-bluetooth', icons.audio.type.headset],
+        ['audio-headset-analog-usb', icons.audio.type.headset],
         ['audio-card-analog-usb', icons.audio.type.speaker],
         ['audio-card-analog-pci', icons.audio.type.card],
     ];
@@ -20,8 +21,10 @@ const iconSubstitute = item => {
     return item;
 };
 
-const TypeIndicator = () => Button({
-    onClicked: 'pactl set-sink-mute @DEFAULT_SINK@ toggle',
+export const TypeIndicator = () => Button({
+    // onClicked: 'pactl set-sink-mute @DEFAULT_SINK@ toggle',
+    onClicked: 'pamixer -t',
+    onSecondaryClick: 'pamixer --default-source -t',
     child: Icon({
         connections: [[Audio, icon => {
             if (Audio.speaker)
@@ -30,7 +33,7 @@ const TypeIndicator = () => Button({
     }),
 });
 
-const PercentLabel = () => Label({
+export const PercentLabel = () => Label({
     connections: [[Audio, label => {
         if (Audio.speaker)
             label.label = `${Math.floor(Audio.speaker.volume * 100)}%`;

@@ -17,6 +17,7 @@ export default () => SimpleToggleButton({
     //             ? 'Muted' : 'Unmuted';
     //     }, 'microphone-changed']],
     // }),
-    toggle: 'pactl set-source-mute @DEFAULT_SOURCE@ toggle',
+    // toggle: 'pactl set-source-mute @DEFAULT_SOURCE@ toggle',
+    toggle: 'pamixer --default-source -t',
     connection: [Audio, () => Audio.microphone?.isMuted],
 });

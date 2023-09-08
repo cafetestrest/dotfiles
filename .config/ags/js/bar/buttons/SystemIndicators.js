@@ -4,6 +4,7 @@ import Asusctl from '../../services/asusctl.js';
 import Indicator from '../../services/onScreenIndicator.js';
 import BatteryIcon from '../../misc/BatteryIcon.js';
 import icons from '../../icons.js';
+import { PercentLabel, TypeIndicator } from '../../quicksettings/widgets/Volume.js';
 const { App } = ags;
 const { Bluetooth, Audio, Battery, Notifications, Network } = ags.Service;
 const { Box, Label, Icon, Stack } = ags.Widget;
@@ -114,15 +115,55 @@ export default () => PanelButton({
     }]],
     child: Box({
         children: [
-            Asusctl?.available && ProfileIndicator(),
-            Asusctl?.available && ModeIndicator(),
+            // Asusctl?.available && ProfileIndicator(),
+            // Asusctl?.available && ModeIndicator(),
             MicrophoneMuteIndicator(),
             DNDIndicator(),
             BluetoothDevicesIndicator(),
             BluetoothIndicator(),
             NetworkIndicator(),
-            AudioIndicator(),
-            BatteryIndicator(),
+            Box({
+                className: 'system-volume',
+                children: [
+                    AudioIndicator(),
+                    Label({ label: ' ' }),
+                    PercentLabel(),
+                ],
+                connections: [[Audio, box => {
+                    let alreadyCreated = false;
+                    let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
+                    let classnameToDisplay = 'headset-icon';
+
+                    box.get_children().forEach(ch => {
+                        if (ch.className == classnameToDisplay) {
+                            if (isHeadsetSelected) {
+                                ch.visible = true;
+                            } else {
+                                ch.visible = false;
+                            }
+
+                            alreadyCreated = true;
+                        }
+                    });
+
+                    if (alreadyCreated) {
+                        return;
+                    }
+
+                    if (isHeadsetSelected) {
+                        box.add(Box({
+                            className: classnameToDisplay,
+                            children: [
+                                Label({ label: ' ', }),
+                                TypeIndicator()
+                            ]
+                        }))
+                        box.show_all()
+                    }
+                }
+                ]],
+            })
+            // BatteryIndicator(),
         ],
     }),
 });
