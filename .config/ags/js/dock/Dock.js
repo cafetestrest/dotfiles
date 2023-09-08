@@ -31,13 +31,20 @@ const AppButton = ({ icon, ...rest }) => Button({
     }),
 });
 
-const Taskbar = ({ windowName, skip = [] } = {}) => Box({
+export const Taskbar = ({ windowName, skip = [] } = {}) => Box({
+    className: 'taskbar',
     properties: [['apps', Applications.query('')]],
     connections: [
         [Applications, box => box._apps = Applications.query('')],
         [Hyprland, box => {
             if (windowName && !App.getWindow(windowName).visible)
                 return;
+
+            const iconNames = {
+                'codium-url-handler': 'code',
+                'jetbrains-phpstorm': 'phpstorm',
+                'Rofi': 'rofi',
+            };
 
             box.children = Array.from(Hyprland.clients.values()).map(client => {
                 for (const appName of skip) {
@@ -46,7 +53,13 @@ const Taskbar = ({ windowName, skip = [] } = {}) => Box({
                 }
                 for (const app of box._apps) {
                     if (client.title && app.match(client.title) ||
-                        client.class && app.match(client.class)) {
+                        client.class && app.match(client.class) ||
+                        iconNames.hasOwnProperty(client.class)) {
+
+                        if (iconNames.hasOwnProperty(client.class)) {
+                            app.iconName = iconNames[client.class]
+                        }
+
                         return AppButton({
                             icon: app.iconName,
                             tooltipText: app.name,

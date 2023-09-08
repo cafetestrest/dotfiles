@@ -10,6 +10,8 @@ import SystemIndicators from './buttons/SystemIndicators.js';
 import PowerMenu from './buttons/PowerMenu.js';
 import Separator from '../misc/Separator.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
+import { Taskbar } from '../dock/Dock.js';
+
 const { Window, CenterBox, Box } = ags.Widget;
 
 const SeparatorDot = rest => Separator({
@@ -25,7 +27,8 @@ const Start = () => Box({
         SeparatorDot(),
         Workspaces(),
         SeparatorDot(),
-        FocusedClient(),
+        // FocusedClient(),
+        Taskbar(),
         Box({ hexpand: true }),
         MediaIndicator({ direction: 'left' }),
         SeparatorDot({

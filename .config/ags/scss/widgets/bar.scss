@@ -216,13 +216,12 @@ $workspaceBorder: 0px;
         }
     }
 
-    //todo topbar padding with new things?
-    //.taskbar {
-    //    button {
-    //        background-color: transparent;
-    //        padding: 0 0.5em;
-    //    }
-    //}
+    .taskbar {
+       button {
+           background-color: transparent;
+           padding: 0 0.5em;
+       }
+    }
 }
 
 //.usage.panel-button label {
