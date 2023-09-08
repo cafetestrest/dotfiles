@@ -149,8 +149,15 @@ const PlayerButton = ({ player, items, onClick, prop, canProp, cantValue }) => B
     child: Stack({ items }),
     onClicked: () => player[onClick](),
     connections: [[player, button => {
-        button.visible = player[canProp] !== cantValue;
-        button.child.shown = `${player[prop]}`;
+        // button.visible = player[canProp] !== cantValue;
+        // button.child.shown = `${player[prop]}`;
+
+        const mpris = player
+        if (!mpris || mpris[canProp] === cantValue)
+            return button.hide();
+
+        button.show();
+        button.child.shown = `${mpris[prop]}`;
     }]],
 });
 
@@ -219,7 +226,8 @@ export const PlayPauseButton = player => PlayerButton({
 export const PreviousButton = player => PlayerButton({
     player,
     items: [
-        ['true', Icon({ className: 'next', icon: 'go-previous-symbolic' }),
+        ['true',
+        Icon({ className: 'prev', icon: 'go-previous-symbolic' }),
             // Label({
             //     className: 'previous',
             //     label: icons.mpris.prev,
@@ -235,7 +243,8 @@ export const PreviousButton = player => PlayerButton({
 export const NextButton = player => PlayerButton({
     player,
     items: [
-        ['true', Icon({ className: 'next', icon: 'go-next-symbolic' }),
+        ['true',
+        Icon({ className: 'next', icon: 'go-next-symbolic' }),
             // Label({
             //     className: 'next',
             //     label: icons.mpris.next,
