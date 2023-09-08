@@ -40,6 +40,7 @@
 //window#notifications .notifications,
 //window#notificationsPopup .notifications-popup,
 //window#weather .weather {
+window#notification .dashboard,
 window#dashboard .dashboard {
     @include floating_widget;
 
@@ -150,9 +151,9 @@ window#dashboard .dashboard {
     //}
 }
 
-//window#notificationsPopup .notifications-popup {
-//    min-height: 450px;
-//}
+window#notification .dashboard {
+    min-height: 32em;
+}
 //
 //.weather-refresh {
 //    all: unset;

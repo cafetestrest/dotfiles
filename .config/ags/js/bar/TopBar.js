@@ -27,10 +27,10 @@ const Start = () => Box({
         SeparatorDot(),
         FocusedClient(),
         Box({ hexpand: true }),
-        NotificationIndicator(),
+        MediaIndicator({ direction: 'left' }),
         SeparatorDot({
-            connections: [[ags.Service.Notifications, dot => {
-                dot.visible = ags.Service.Notifications.notifications.size > 0;
+            connections: [[ags.Service.Mpris, dot => {
+                dot.visible = !!ags.Service.Mpris.getPlayer();
             }]],
         }),
     ],
@@ -39,7 +39,7 @@ const Start = () => Box({
 const Center = () => Box({
     className: 'center',
     children: [
-        DateButton(),
+        DateButton({ format: '%a %b%e   %H:%M:%S' }),
     ],
 });
 
@@ -47,11 +47,11 @@ const End = () => Box({
     className: 'end',
     children: [
         SeparatorDot({
-            connections: [[ags.Service.Mpris, dot => {
-                dot.visible = !!ags.Service.Mpris.getPlayer();
+            connections: [[ags.Service.Notifications, dot => {
+                dot.visible = ags.Service.Notifications.notifications.size > 0;
             }]],
         }),
-        MediaIndicator(),
+        NotificationIndicator({ direction: 'right' }),
         Box({ hexpand: true }),
         ScreenRecord(),
         SeparatorDot({

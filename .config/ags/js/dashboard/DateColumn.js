@@ -1,5 +1,5 @@
 import Clock from '../misc/Clock.js';
-import { uptime } from '../variables.js';
+// import { uptime } from '../variables.js';
 const { Box, Label, Widget } = ags.Widget;
 
 export default () => Box({
@@ -7,11 +7,11 @@ export default () => Box({
     className: 'datemenu',
     children: [
         Clock({ format: '%H:%M' }),
-        Label({
-            connections: [[uptime, label => {
-                label.label = `uptime: ${uptime.value}`;
-            }]],
-        }),
+        // Label({
+        //     connections: [[uptime, label => {
+        //         label.label = `uptime: ${uptime.value}`;
+        //     }]],
+        // }),
         Box({
             className: 'calendar',
             children: [
