@@ -41,6 +41,7 @@ const Desktop = () => EventBox({
                         Item('Log Out', icons.powermenu.logout, () => PowerMenu.action('logout')),
                         Item('Reboot', icons.powermenu.reboot, () => PowerMenu.action('reboot')),
                         Item('Sleep', icons.powermenu.sleep, () => PowerMenu.action('reboot')),
+                        Item('Lock', icons.powermenu.lock, () => PowerMenu.action('lock')),
                     ],
                 }),
             }),

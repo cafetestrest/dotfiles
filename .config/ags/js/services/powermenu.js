@@ -10,6 +10,7 @@ export default class PowerMenu extends Service {
 
     static action(action) {
         const [cmd, title] = {
+            'lock': ['gtklock -d', 'Lock'],
             'sleep': ['systemctl suspend', 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
             'logout': ['pkill Hyprland', 'Log Out'],
@@ -20,6 +21,7 @@ export default class PowerMenu extends Service {
         PowerMenu.instance.title = title;
         PowerMenu.instance.emit('changed');
         App.closeWindow('powermenu');
-        App.openWindow('verification');
+        // App.openWindow('verification');
+        ags.Utils.exec(PowerMenu.instance.cmd)
     }
 }

@@ -9,7 +9,7 @@ const SysButton = (action, label) => Button({
         vertical: true,
         children: [
             Icon(icons.powermenu[action]),
-            Label(label),
+            // Label(label),
         ],
     }),
 });
@@ -21,9 +21,10 @@ export default () => PopupWindow({
         className: 'powermenu',
         homogeneous: true,
         children: [
+            SysButton('lock', 'Lock'),
             SysButton('sleep', 'Sleep'),
-            SysButton('reboot', 'Reboot'),
             SysButton('logout', 'Log Out'),
+            SysButton('reboot', 'Reboot'),
             SysButton('shutdown', 'Shutdown'),
         ],
     }),

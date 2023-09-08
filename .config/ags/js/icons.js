@@ -45,6 +45,7 @@ export default {
         screen: ['󰛩', '󱩎', '󱩏', '󱩐', '󱩑', '󱩒', '󱩓', '󱩔', '󱩕', '󱩖', '󰛨'],
     },
     powermenu: {
+        lock: 'system-lock-screen-symbolic',
         sleep: 'weather-clear-night-symbolic',
         reboot: 'system-reboot-symbolic',
         logout: 'system-log-out-symbolic',

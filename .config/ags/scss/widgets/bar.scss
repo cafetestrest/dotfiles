@@ -126,6 +126,11 @@ $workspaceBorder: 0px;
         &.mpv image { color: $magenta; }
     }
 
+    // prev/next buttons
+    .media button {
+        padding: 0;
+    }
+
     .notifications {
         image { color: $yellow; }
     }
