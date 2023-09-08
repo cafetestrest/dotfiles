@@ -5,7 +5,9 @@ const { Mpris } = ags.Service;
 
 const Indicator = ({ player, direction = 'right' } = {}) => Box({
     className: `media panel-button ${player.name}`,
-    children: [HoverRevealer({
+    children: [
+        mpris.PreviousButton(player),
+        HoverRevealer({
         direction,
         onPrimaryClick: () => player.playPause(),
         onScrollUp: () => player.next(),
@@ -15,21 +17,40 @@ const Indicator = ({ player, direction = 'right' } = {}) => Box({
         child: Box({
             children: [
                 mpris.ArtistLabel(player),
-                Label(' - '),
+                Label('   '),
                 mpris.TitleLabel(player),
+                Label('   '),
             ],
         }),
         connections: [[player, revealer => {
             if (revealer._current === player.trackTitle)
                 return;
 
-            revealer._current = player.trackTitle;
+            function truncateString(inputString, maxLength) {
+                if (!inputString) {
+                    return '';
+                }
+
+                if (inputString.length > maxLength) {
+                    return inputString.slice(0, maxLength);
+                } else {
+                    return inputString;
+                }
+            }
+
+            if (revealer._current === truncateString(mpris.trackTitle, 50))
+                return;
+
+            // revealer._current = player.trackTitle;
+            revealer._current = truncateString(mpris.trackTitle, 50);
             revealer.revealChild = true;
             ags.Utils.timeout(3000, () => {
                 revealer.revealChild = false;
             });
         }]],
-    })],
+    }),
+    mpris.NextButton(player),
+    ],
 });
 
 export default ({ direction } = {}) => Box({

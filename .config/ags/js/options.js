@@ -6,5 +6,5 @@ export default {
     workspaces: 7,
 
     // dockItemSize: 56,
-    dockItemSize: 18,
+    dockItemSize: 16,
 };

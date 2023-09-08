@@ -69,10 +69,24 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Icon({
     className: 'player-icon',
     tooltipText: player.indentity || '',
     connections: [[player, icon => {
-        const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
-        lookUpIcon(name)
-            ? icon.icon = name
-            : icon.icon = icons.mpris.fallback;
+        // const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
+        // lookUpIcon(name)
+        //     ? icon.icon = name
+        //     : icon.icon = icons.mpris.fallback;
+
+        let selectedIcon = 'media-playback-pause-symbolic';
+
+        //check if media is playing, if not them remove media icon
+        if (player && player.position && player.position === -1) {
+            selectedIcon = null;
+        }
+
+        //check if media is paused, update the icon is it is
+        if (player && player.playBackStatus === 'Paused') {
+            selectedIcon = 'media-playback-start-symbolic';
+        }
+
+        icon.icon_name = selectedIcon;
     }]],
 });
 
@@ -205,10 +219,12 @@ export const PlayPauseButton = player => PlayerButton({
 export const PreviousButton = player => PlayerButton({
     player,
     items: [
-        ['true', Label({
-            className: 'previous',
-            label: icons.mpris.prev,
-        })],
+        ['true', Icon({ className: 'next', icon: 'go-previous-symbolic' }),
+            // Label({
+            //     className: 'previous',
+            //     label: icons.mpris.prev,
+            // })
+        ],
     ],
     onClick: 'previous',
     prop: 'canGoPrev',
@@ -219,10 +235,12 @@ export const PreviousButton = player => PlayerButton({
 export const NextButton = player => PlayerButton({
     player,
     items: [
-        ['true', Label({
-            className: 'next',
-            label: icons.mpris.next,
-        })],
+        ['true', Icon({ className: 'next', icon: 'go-next-symbolic' }),
+            // Label({
+            //     className: 'next',
+            //     label: icons.mpris.next,
+            // })
+        ],
     ],
     onClick: 'next',
     prop: 'canGoNext',
