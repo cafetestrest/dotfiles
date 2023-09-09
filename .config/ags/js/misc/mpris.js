@@ -152,12 +152,12 @@ const PlayerButton = ({ player, items, onClick, prop, canProp, cantValue }) => B
         // button.visible = player[canProp] !== cantValue;
         // button.child.shown = `${player[prop]}`;
 
-        const mpris = player
-        if (!mpris || mpris[canProp] === cantValue)
+        // hotfix to make buttons clickable (worked like so previously)
+        if (!player || player[canProp] === cantValue)
             return button.hide();
 
         button.show();
-        button.child.shown = `${mpris[prop]}`;
+        button.child.shown = `${player[prop]}`;
     }]],
 });
 
