@@ -3,14 +3,16 @@ import { SimpleToggleButton } from '../ToggleButton.js';
 import icons from '../../icons.js';
 const { Icon, Label } = ags.Widget;
 
-export default () => SimpleToggleButton({
-    icon: Icon({
-        connections: [[Idle, icon => {
-            icon.icon = Idle.mode == 'on'
-                ? icons.idle.on
-                : icons.idle.off;
-        }]],
-    }),
+export const IdleIndicator = () => Icon({
+    connections: [[Idle, icon => {
+        icon.icon = Idle.mode == 'on'
+            ? icons.idle.on
+            : icons.idle.off;
+    }]],
+});
+
+export const IdleToggle = () => SimpleToggleButton({
+    icon: IdleIndicator(),
     label: Label({
         connections: [[Idle, label => {
             label.label = Idle.mode == 'on' ? 'Idle' : 'Off';

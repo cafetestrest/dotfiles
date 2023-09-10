@@ -10,7 +10,7 @@ import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
 // import Brightness from './widgets/Brightness.js';
 import DND from './widgets/DND.js';
 import MicMute from './widgets/MicMute.js';
-import Idle from './widgets/Idle.js';
+import { IdleToggle } from './widgets/Idle.js';
 const { Box } = ags.Widget;
 
 const Row = (toggles, menus = []) => Box({
@@ -55,7 +55,7 @@ export default () => PopupWindow({
                 [
                     DND(),
                     Box({ className: 'button-spacing' }),
-                    Idle(),
+                    IdleToggle(),
                 ],
             ),
             Row(

@@ -8,6 +8,7 @@ import { PercentLabel, TypeIndicator } from '../../quicksettings/widgets/Volume.
 const { App } = ags;
 const { Bluetooth, Audio, Battery, Notifications, Network } = ags.Service;
 const { Box, Label, Icon, Stack } = ags.Widget;
+import { IdleIndicator } from '../../quicksettings/widgets/Idle.js';
 
 const ProfileIndicator = () => Icon({
     connections: [[Asusctl, icon => {
@@ -119,6 +120,7 @@ export default () => PanelButton({
             // Asusctl?.available && ModeIndicator(),
             MicrophoneMuteIndicator(),
             DNDIndicator(),
+            IdleIndicator(),
             BluetoothDevicesIndicator(),
             BluetoothIndicator(),
             NetworkIndicator(),
