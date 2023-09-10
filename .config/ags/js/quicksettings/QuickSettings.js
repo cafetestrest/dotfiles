@@ -9,7 +9,7 @@ import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
 // import Media from './widgets/Media.js';
 // import Brightness from './widgets/Brightness.js';
 import DND from './widgets/DND.js';
-// import MicMute from './widgets/MicMute.js';
+import MicMute from './widgets/MicMute.js';
 import Idle from './widgets/Idle.js';
 const { Box } = ags.Widget;
 
@@ -55,10 +55,14 @@ export default () => PopupWindow({
                 [
                     DND(),
                     Box({ className: 'button-spacing' }),
-                    // ThemeToggle(),
                     Idle(),
-                    // ThemeToggle(),
-                        // MicMute()
+                ],
+            ),
+            Row(
+                [
+                    ThemeToggle(),
+                    Box({ className: 'button-spacing' }),
+                    MicMute()
                 ],
                 [
                     // ProfileSelector(),

@@ -11,12 +11,12 @@ export default () => SimpleToggleButton({
                 : icons.audio.mic.unmuted;
         }, 'microphone-changed']],
     }),
-    // label: Label({
-    //     connections: [[Audio, label => {
-    //         label.label = Audio.microphone?.isMuted
-    //             ? 'Muted' : 'Unmuted';
-    //     }, 'microphone-changed']],
-    // }),
+    label: Label({
+        connections: [[Audio, label => {
+            label.label = Audio.microphone?.isMuted
+                ? 'Muted' : 'Unmuted';
+        }, 'microphone-changed']],
+    }),
     // toggle: 'pactl set-source-mute @DEFAULT_SOURCE@ toggle',
     toggle: 'pamixer --default-source -t',
     connection: [Audio, () => Audio.microphone?.isMuted],
