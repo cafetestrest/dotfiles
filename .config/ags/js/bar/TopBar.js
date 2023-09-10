@@ -1,6 +1,7 @@
 import OverviewButton from './buttons/OverviewButton.js';
-import Workspaces from './buttons/Workspaces.js';
-import FocusedClient from './buttons/FocusedClient.js';
+// import Workspaces from './buttons/Workspaces.js';
+import WorkspacesHypr from './buttons/WorkspacesHypr.js';
+// import FocusedClient from './buttons/FocusedClient.js';
 import MediaIndicator from './buttons/MediaIndicator.js';
 import DateButton from './buttons/DateButton.js';
 import NotificationIndicator from './buttons/NotificationIndicator.js';
@@ -25,10 +26,11 @@ const Start = () => Box({
     children: [
         OverviewButton(),
         SeparatorDot(),
-        Workspaces(),
+        Taskbar(),
+        SeparatorDot(),
+        WorkspacesHypr(),
         SeparatorDot(),
         // FocusedClient(),
-        Taskbar(),
         Box({ hexpand: true }),
         MediaIndicator({ direction: 'left' }),
         SeparatorDot({
