@@ -26,6 +26,18 @@ export const BluetoothToggle = () => ArrowToggleButton({
                 return label.label = Bluetooth.connectedDevices.entries().next().value[1].alias;
 
             label.label = `${Bluetooth.connectedDevices.size} Connected`;
+        }],
+        [60000, label => {
+            if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.size === 0 && Bluetooth.devices.size > 0) {
+                // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
+                instance._getDevices().forEach(d => {
+                    instance._deviceRemoved(null, d);
+                });
+    
+                instance._getDevices().forEach(d => {
+                    instance._deviceAdded(null, d);
+                });
+            }
         }]],
     }),
     connection: [Bluetooth, () => Bluetooth.enabled],

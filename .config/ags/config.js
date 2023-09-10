@@ -11,6 +11,7 @@ import PowerMenu from './js/powermenu/PowerMenu.js';
 import Notifications from './js/notifications/Notifications.js';
 import QuickSettings from './js/quicksettings/QuickSettings.js';
 import QSNotifications from './js/dashboard/Notifications.js';
+import Weather from './js/dashboard/Weather.js';
 const ws = ags.Service.Hyprland.HyprctlGet('monitors');
 const forMonitors = widget => ws.map(mon => widget(mon.id));
 
@@ -29,6 +30,7 @@ export default {
         // Applauncher(),
         // Overview(),
         Dashboard(),
+        Weather(),
         QSNotifications(),
         // QuickSettings(),
         QuickSettings(),

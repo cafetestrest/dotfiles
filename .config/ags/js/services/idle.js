@@ -25,6 +25,7 @@ class IdleService extends Service {
 }
 
 export default class Idle {
+    static { Service.Idle = this; }
     static instance = new IdleService();
 
     static checkMode() { Idle.instance.checkMode(); }

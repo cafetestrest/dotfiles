@@ -5,7 +5,6 @@ class NoteService extends Service {
     static { Service.register(this); }
 
     get callNote() {
-        console.log('callNote')
         execAsync(['bash', '-c', "~/.config/scripts/note.sh ags"]).catch(print);
         // this.emit('changed');
     }

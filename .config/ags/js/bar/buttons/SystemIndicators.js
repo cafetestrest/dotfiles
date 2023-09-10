@@ -39,12 +39,13 @@ const DNDIndicator = () => Icon({
     }]],
 });
 
+// todo revert back to name isntead of batteryLevel
 const BluetoothDevicesIndicator = () => Box({
     connections: [[Bluetooth, box => {
         box.children = Array.from(Bluetooth.connectedDevices.values())
-            .map(({ iconName, name }) => HoverRevealer({
+            .map(({ iconName, batteryLevel }) => HoverRevealer({
                 indicator: Icon(iconName + '-symbolic'),
-                child: Label(name),
+                child: Label(batteryLevel.toString()),
             }));
 
         box.visible = Bluetooth.connectedDevices.size > 0;

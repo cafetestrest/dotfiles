@@ -29,6 +29,7 @@ class NightlightService extends Service {
 }
 
 export default class Nightlight {
+    static { Service.Nightlight = this; }
     static instance = new NightlightService();
 
     static checkMode() { Nightlight.instance.checkMode(); }

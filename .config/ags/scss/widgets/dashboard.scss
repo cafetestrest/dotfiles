@@ -41,6 +41,7 @@
 //window#notificationsPopup .notifications-popup,
 //window#weather .weather {
 window#notification .dashboard,
+window#weather .weather,
 window#dashboard .dashboard {
     @include floating_widget;
 
@@ -144,56 +145,58 @@ window#dashboard .dashboard {
         margin-top: $spacing*2;
     }
 
-    //todo weather
-    //.weather-info .weather-icon{
-    //    font-size: 2em;
-    //    margin: 0.1em 0;
-    //}
+    //weather popup
+    .weather-info .weather-icon{
+       font-size: 2em;
+       margin: 0.1em 0;
+    }
 }
 
+// height of the notification popup
 window#notification .dashboard {
     min-height: 32em;
 }
-//
-//.weather-refresh {
-//    all: unset;
-//    border: none;
-//    margin: 0;
-//    padding: 0;
-//}
-//
-//.weather-refresh:hover {
-//    color: gray;
-//}
-//
-//.weather-refresh:active {
-//    color: black;
-//}
-//
-//.weather-refresh:focus {
-//    color: $accent;
-//}
-//
-//.weather-info {
-//    background-color: rgba(81, 164, 231, 0.76);
-//    border-radius: 16px;
-//    padding: 10px;
-//    margin: 0 5px;
-//
-//    min-width: 4.8em;
-//    min-height: 10em;
-//
-//    margin-bottom: 5px;
-//}
-//
-//.weather-temperature {
-//    margin-bottom: 0.6em;
-//}
-//
-//.weather-day {
-//    padding: 2px;
-//}
-//
-//.weather-day:first-child {
-//    padding: 0;
-//}
+
+// weather popup
+.weather-refresh {
+   all: unset;
+   border: none;
+   margin: 0;
+   padding: 0;
+}
+
+.weather-refresh:hover {
+   color: gray;
+}
+
+.weather-refresh:active {
+   color: black;
+}
+
+.weather-refresh:focus {
+   color: $accent;
+}
+
+.weather-info {
+   background-color: rgba(81, 164, 231, 0.76);
+   border-radius: 16px;
+   padding: 10px;
+   margin: 0 5px;
+
+   min-width: 4.8em;
+   min-height: 10em;
+
+   margin-bottom: 5px;
+}
+
+.weather-temperature {
+   margin-bottom: 0.6em;
+}
+
+.weather-day {
+   padding: 2px;
+}
+
+.weather-day:first-child {
+   padding: 0;
+}

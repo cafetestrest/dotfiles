@@ -98,4 +98,7 @@ export default {
     },
     screenshot: 'applets-screenshooter-symbolic',
     note: 'user-bookmarks-symbolic',
+    usage: {
+        disk: 'drive-harddisk-solidstate-symbolic',
+    },
 };

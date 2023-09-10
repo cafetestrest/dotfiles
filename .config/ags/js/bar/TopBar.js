@@ -14,6 +14,9 @@ import ScreenRecord from './buttons/ScreenRecord.js';
 import { Taskbar } from '../dock/Dock.js';
 import Screenshot from './buttons/Screenshot.js';
 import Note from './buttons/Note.js';
+import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
+import BluetoothDevices from './buttons/BluetoothDevices.js';
+import { TemperatureIndicator } from './buttons/Weather.js';
 
 const { Window, CenterBox, Box } = ags.Widget;
 
@@ -47,6 +50,7 @@ const Center = () => Box({
     className: 'center',
     children: [
         DateButton({ format: '%a %b%e   %H:%M:%S' }),
+        TemperatureIndicator(),
     ],
 });
 
@@ -60,6 +64,10 @@ const End = () => Box({
         }),
         NotificationIndicator({ direction: 'right' }),
         Box({ hexpand: true }),
+        UsageCPU(),
+        UsageRAM(),
+        UsageDisk(),
+        BluetoothDevices(),
         ScreenRecord(),
         SeparatorDot({
             connections: [[ags.Service.Recorder, dot => {

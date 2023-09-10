@@ -232,11 +232,12 @@ $float: 0px;
     all: unset;
 }
 
-//.usage.panel-button label {
-//    margin: 0;
-//    padding: 0;
-//    margin-right: 2px;
-//}
+// usage in topbar, cpu, ram and disk
+.usage.panel-button label {
+   margin: 0;
+   padding: 0;
+   margin-right: 2px;
+}
 //
 //.btdevices.panel-button box,
 //.btdevices.panel-button label {
