@@ -170,9 +170,7 @@ $float: 0px;
 
     .workspaces {
         > * { padding: 0; }
-        //border: $workspaceBorder solid transparent;
-        //// padding: 4px;
-        //// > * { padding: 0; }todo
+
         .eventbox {
             transition: $transition;
 
