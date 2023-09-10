@@ -43,9 +43,10 @@ export default () => PopupWindow({
             // ),
             Row(
                 [
-                    NetworkToggle(),
-                    Box({ className: 'button-spacing' }),
+                    // NetworkToggle(),
                     BluetoothToggle(),
+                    Box({ className: 'button-spacing' }),
+                    IdleToggle(),
                 ],
                 [
                     // WifiSelection(),
@@ -56,15 +57,14 @@ export default () => PopupWindow({
                 [
                     DND(),
                     Box({ className: 'button-spacing' }),
-                    IdleToggle(),
+                    NightlightToggle()
                 ],
             ),
             Row(
                 [
                     ThemeToggle(),
                     Box({ className: 'button-spacing' }),
-                    // MicMute(),
-                    NightlightToggle()
+                    MicMute(),
                 ],
                 [
                     // ProfileSelector(),

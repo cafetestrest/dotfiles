@@ -14,8 +14,6 @@ export const NightlightToggle = () => SimpleToggleButton({
     label: Label({
         connections: [[Nightlight, label => {
             let mode = Nightlight.mode;
-            console.log('mode ' + mode)
-
             let text;
             if (mode === 'auto') {
                 text = 'Auto';
