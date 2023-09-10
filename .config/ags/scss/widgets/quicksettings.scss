@@ -1,9 +1,16 @@
+$buttonMinHeight: 3.5em;
+$buttonMinWidth: 12em;
+// min height of the volume slider
+$sliderVolumeMinHeight: 2em;
+// min width of the volume (to not become invisible)
+$sliderTroughMinWidth: 2em;
+
 window#quicksettings .quicksettings {
     @include floating_widget;
 
-    .row {
-        margin: 0 0 $spacing 0;
-    }
+    // .row {
+    //     margin: 0 0 $spacing 0;
+    // }
 
     .header {
         .avatar {
@@ -105,11 +112,34 @@ window#quicksettings .quicksettings {
             padding: $spacing/2;
         }
     }
+        
+    .button-spacing{
+        margin-right: $spacing;
+    }
+
+    .simple-toggle {
+        @include button;
+
+        // text spacing
+        label {
+            margin-left: $spacing/2;
+            font-weight: bold;
+        }
+
+        // icon spacing
+        box {
+            margin-left: $spacing;
+        }
+    }
 
     .toggle-button {
         @include button;
-        margin-right: $spacing;
         font-weight: bold;
+
+        min-height: $buttonMinHeight;
+        min-width: $buttonMinWidth;
+        border-radius: $radii * 1.5;
+        margin-bottom: $spacing;
 
         label {
             margin-left: $spacing/2;
@@ -120,11 +150,13 @@ window#quicksettings .quicksettings {
             padding: $spacing;
 
             &:first-child {
+                border-radius: $radii * 1.5;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
             }
 
             &:last-child {
+                border-radius: $radii * 1.5;
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
             }
@@ -137,11 +169,20 @@ window#quicksettings .quicksettings {
                 color: $accent_fg;
             }
         }
-    }
 
-    .simple-toggle {
-        @include button;
-        padding: $spacing;
+        //button border radius
+        &:focus,
+        &:hover{
+            border-radius: $radii * 1.5;
+        }
+
+        &:active, &.on, &.active, &:checked {
+            border-radius: $radii * 1.5;
+
+            &:hover {
+                border-radius: $radii * 1.5;
+            }
+        }
     }
 
     .media .player {
@@ -151,6 +192,9 @@ window#quicksettings .quicksettings {
     }
 
     .qsvolume {
+        // separate from buttons
+        margin-top: $spacing / 2;
+
         button, .icon {
             @include button($flat: false);
             padding: $spacing;
@@ -165,13 +209,22 @@ window#quicksettings .quicksettings {
             }
 
             trough{
-                min-height: 2em;
+                min-height: $sliderVolumeMinHeight;
                 border-radius: $radii;
+                background-color: $widget_bg;
 
                 highlight,
                 progress {
                     border-radius: $radii;
-                    min-width: 2em;
+                    min-width: $sliderTroughMinWidth;
+                    background: $active_gradient;
+                }
+
+                // different shade when hover/focus - same as in common file - &:hover
+                highlight:hover,
+                highlight:focus {
+                    box-shadow: inset 0 0 0 $border_width $border_color,
+                            inset 0 0 0 99px $hover;
                 }
             }
         }

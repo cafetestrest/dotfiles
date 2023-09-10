@@ -88,7 +88,7 @@ export const SimpleToggleButton = ({
     icon, label, toggle,
     connection: [service, condition],
 }) => Button({
-    className: 'simple-toggle',
+    className: 'simple-toggle toggle-button',
     connections: [[service, box => {
         box.toggleClassName('active', condition());
     }]],

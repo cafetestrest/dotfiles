@@ -11,11 +11,11 @@ export default () => SimpleToggleButton({
                 : icons.notifications.noisy;
         }]],
     }),
-    // label: Label({
-    //     connections: [[Notifications, label => {
-    //         label.label = Notifications.dnd ? 'Silent' : 'Noisy';
-    //     }]],
-    // }),
+    label: Label({
+        connections: [[Notifications, label => {
+            label.label = Notifications.dnd ? 'Silent' : 'Noisy';
+        }]],
+    }),
     toggle: () => Notifications.dnd = !Notifications.dnd,
     connection: [Notifications, () => Notifications.dnd],
 });

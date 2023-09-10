@@ -38,12 +38,38 @@ export default () => PopupWindow({
             // Row(
             //     [Header()],
             // ),
+            Row(
+                [
+                    NetworkToggle(),
+                    Box({ className: 'button-spacing' }),
+                    BluetoothToggle(),
+                ],
+                [
+                    // WifiSelection(),
+                    BluetoothDevices(),
+                ],
+            ),
+            Row(
+                [
+                    DND(),
+                    Box({ className: 'button-spacing' }),
+                    ThemeToggle(),
+                    // ThemeToggle(),
+                        // MicMute()
+                ],
+                [
+                    // ProfileSelector(),
+                    ThemeSelector()
+                ],
+            ),
             Row([Box({
                 className: 'qsvolume',
                 vertical: true,
                 children: [
                     Row(
-                        [VolumeWithoutPercent()],
+                        [
+                            VolumeWithoutPercent()
+                        ],
                         [
                             SinkSelector(),
                             AppMixer()
@@ -54,24 +80,6 @@ export default () => PopupWindow({
                     // ),
                 ],
             })]),
-            Row(
-                [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
-                [
-                    // WifiSelection(),
-                    BluetoothDevices()
-                ],
-            ),
-            Row(
-                [Homogeneous([
-                    // ProfileToggle(),
-                    ThemeToggle()]),
-                    MicMute()
-                ],
-                [
-                    // ProfileSelector(),
-                    ThemeSelector()
-                ],
-            ),
             // Row(
             //     [DND(), MicMute()],
             // ),
