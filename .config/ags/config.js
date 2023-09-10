@@ -9,8 +9,7 @@ import PowerMenu from './js/powermenu/PowerMenu.js';
 // import Verification from './js/powermenu/Verification.js';
 // import Desktop from './js/desktop/Desktop.js';
 import Notifications from './js/notifications/Notifications.js';
-// import QuickSettings from './js/quicksettings/QuickSettings.js';
-import WideQuickSettings from './js/quicksettings/WideQuickSettings.js';
+import QuickSettings from './js/quicksettings/QuickSettings.js';
 import QSNotifications from './js/dashboard/Notifications.js';
 const ws = ags.Service.Hyprland.HyprctlGet('monitors');
 const forMonitors = widget => ws.map(mon => widget(mon.id));
@@ -32,7 +31,7 @@ export default {
         Dashboard(),
         QSNotifications(),
         // QuickSettings(),
-        WideQuickSettings(),
+        QuickSettings(),
         PowerMenu(),
         // Verification(),
     ].flat(2),
