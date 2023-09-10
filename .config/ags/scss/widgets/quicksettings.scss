@@ -8,6 +8,7 @@ $sliderTroughMinWidth: 2em;
 window#quicksettings .quicksettings {
     @include floating_widget;
 
+    // disabled this spacing, as I've created one in buttons, also one is on volume
     // .row {
     //     margin: 0 0 $spacing 0;
     // }
