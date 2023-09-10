@@ -91,4 +91,9 @@ export default {
         on: 'view-reveal-symbolic',
         off: 'view-conceal-symbolic',
     },
+    nightlight: {
+        on: 'weather-clear-symbolic',
+        off: 'night-light-disabled-symbolic',
+        auto: 'night-light-symbolic',
+    },
 };

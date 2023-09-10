@@ -9,6 +9,7 @@ const { App } = ags;
 const { Bluetooth, Audio, Battery, Notifications, Network } = ags.Service;
 const { Box, Label, Icon, Stack } = ags.Widget;
 import { IdleIndicator } from '../../quicksettings/widgets/Idle.js';
+import { NightlightIndicator } from '../../quicksettings/widgets/NightLight.js';
 
 const ProfileIndicator = () => Icon({
     connections: [[Asusctl, icon => {
@@ -121,6 +122,7 @@ export default () => PanelButton({
             MicrophoneMuteIndicator(),
             DNDIndicator(),
             IdleIndicator(),
+            NightlightIndicator(),
             BluetoothDevicesIndicator(),
             BluetoothIndicator(),
             NetworkIndicator(),
