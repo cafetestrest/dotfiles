@@ -96,4 +96,6 @@ export default {
         off: 'night-light-disabled-symbolic',
         auto: 'night-light-symbolic',
     },
+    screenshot: 'applets-screenshooter-symbolic',
+    note: 'user-bookmarks-symbolic',
 };

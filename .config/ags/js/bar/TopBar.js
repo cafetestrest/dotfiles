@@ -12,6 +12,8 @@ import PowerMenu from './buttons/PowerMenu.js';
 import Separator from '../misc/Separator.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
 import { Taskbar } from '../dock/Dock.js';
+import Screenshot from './buttons/Screenshot.js';
+import Note from './buttons/Note.js';
 
 const { Window, CenterBox, Box } = ags.Widget;
 
@@ -71,6 +73,8 @@ const End = () => Box({
             }]],
         }),
         ColorPicker(),
+        Note(),
+        Screenshot(),
         SeparatorDot(),
         SystemIndicators(),
         SeparatorDot(),

@@ -19,7 +19,9 @@ export default () => PanelButton({
         if (!color)
             return;
 
-        wlCopy(color);
+        // wlCopy(color);
+        execAsync(`copyq write ${color}`)
+
         if (!colors.includes(color)) {
             colors.push(color);
             if (colors > 10)
@@ -28,22 +30,23 @@ export default () => PanelButton({
             writeFile(JSON.stringify(colors, null, 2), COLORS_CACHE);
         }
 
-        btn._id = Notifications.instance.Notify(
-            'Color Picker',
-            btn._id || null,
-            'color-select-symbolic',
-            color,
-            '',
-            [],
-            {},
-        );
+        // btn._id = Notifications.instance.Notify(
+        //     'Color Picker',
+        //     btn._id || null,
+        //     'color-select-symbolic',
+        //     color,
+        //     '',
+        //     [],
+        //     {},
+        // );
     }).catch(print)]],
     onSecondaryClick: btn => colors.length > 0 ? Menu({
         className: 'colorpicker',
         children: colors.map(color => MenuItem({
             child: Label(color),
             style: `background-color: ${color}`,
-            onActivate: () => wlCopy(color),
+            // onActivate: () => wlCopy(color),
+            onActivate: () => execAsync(`copyq write ${color}`)
         })),
     }).popup_at_widget(btn, Gravity.SOUTH, Gravity.NORTH, null) : false,
 });
