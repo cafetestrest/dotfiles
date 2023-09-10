@@ -87,4 +87,8 @@ export default {
             up: 'pan-up-symbolic',
         },
     },
+    idle: {
+        on: 'view-reveal-symbolic',
+        off: 'view-conceal-symbolic',
+    },
 };
