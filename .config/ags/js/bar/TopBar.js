@@ -11,8 +11,8 @@ import SystemIndicators from './buttons/SystemIndicators.js';
 import PowerMenu from './buttons/PowerMenu.js';
 import Separator from '../misc/Separator.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
-import BatteryBar from './buttons/BatteryBar.js';
-import SubMenu from './buttons/SubMenu.js';
+// import BatteryBar from './buttons/BatteryBar.js';
+// import SubMenu from './buttons/SubMenu.js';
 const { Window, CenterBox, Box } = ags.Widget;
 const { SystemTray } = ags.Service;
 import { Taskbar } from '../dock/Dock.js';
@@ -40,7 +40,7 @@ const Start = () => Box({
         SeparatorDot(),
         // Workspaces(),
         Taskbar(),
-        // SeparatorDot(),
+        SeparatorDot(),
         WorkspacesHypr(),
         SeparatorDot(),
         // FocusedClient(),
@@ -74,13 +74,15 @@ const End = () => Box({
         UsageRAM(),
         UsageDisk(),
         BluetoothDevices(),
-        SubMenu({
-            items: submenuItems,
-            children: [
-                SysTray(),
-                ColorPicker(),
-            ],
-        }),
+        SysTray(),
+        ColorPicker(),
+        // SubMenu({
+        //     items: submenuItems,
+        //     children: [
+        //         SysTray(),
+        //         ColorPicker(),
+        //     ],
+        // }),
         SeparatorDot(),
         ScreenRecord(),
         SeparatorDot(

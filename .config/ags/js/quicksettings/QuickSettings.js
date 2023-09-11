@@ -1,8 +1,8 @@
-// import Header from './widgets/Header.js';
+import Header from './widgets/Header.js';
 import PopupWindow from '../misc/PopupWindow.js';
 import { VolumeWithoutPercent, SinkSelector, AppMixer } from './widgets/Volume.js';
 // import { NetworkToggle, WifiSelection } from './widgets/Network.js';
-import { NetworkToggle } from './widgets/Network.js';
+// import { NetworkToggle } from './widgets/Network.js';
 import { BluetoothToggle, BluetoothDevices } from './widgets/Bluetooth.js';
 import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
 // import { ProfileToggle, ProfileSelector } from './widgets/AsusProfile.js';

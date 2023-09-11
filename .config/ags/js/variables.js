@@ -14,10 +14,13 @@ export const uptime = ags.Variable(0, {
     poll: [60_000, 'uptime', line => prettyUptime(line.split(/\s+/)[2].replace(',', ''))],
 });
 
-export const distro = ags.Utils.exec('cat /etc/os-release')
-    .split('\n')
-    .find(line => line.includes('ID'))
-    .split('=')[1];
+export const distro = ags.Utils.exec('bash -c "cat /etc/os-release | grep \'^ID\' | head -n 1 | cut -d \'=\' -f2"')
+    .toLowerCase();
+
+// export const distro = ags.Utils.exec('cat /etc/os-release')
+//     .split('\n')
+//     .find(line => line.includes('ID'))
+//     .split('=')[1];
 
 export const distroIcon = (() => {
     switch (distro) {
@@ -47,6 +50,6 @@ export const ram = ags.Variable(0, {
         .splice(1, 2))],
 });
 
-export const temp = ags.Variable(0, {
-    poll: [options.systemFetchInterval, 'cat ' + options.temperature, n => n / 100_000],
-});
+// export const temp = ags.Variable(0, {
+//     poll: [options.systemFetchInterval, 'cat ' + options.temperature, n => n / 100_000],
+// });

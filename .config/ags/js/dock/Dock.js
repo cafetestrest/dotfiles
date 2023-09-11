@@ -31,7 +31,7 @@ const AppButton = ({ icon, ...rest }) => Button({
     }),
 });
 
-const Taskbar = ({ windowName, skip = [] } = {}) => Box({
+export const Taskbar = ({ windowName, skip = [] } = {}) => Box({
     className: 'taskbar',
     properties: [['apps', Applications.query('')]],
     connections: [

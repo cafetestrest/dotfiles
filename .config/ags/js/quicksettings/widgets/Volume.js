@@ -138,7 +138,7 @@ const SinkItem = stream => Button({
                 hexpand: true,
                 halign: 'end',
                 connections: [['draw', icon => {
-                    print(Audio.speaker, stream);
+                    // print(Audio.speaker, stream);
                     icon.visible = Audio.speaker === stream;
                 }]],
             }),

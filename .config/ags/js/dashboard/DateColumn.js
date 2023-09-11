@@ -39,7 +39,7 @@ export default () => Box({
             children: [
                 SysProgress('cpu', 'Cpu', '%'),
                 SysProgress('ram', 'Ram', '%'),
-                SysProgress('temp', 'Temperature', '°'),
+                // SysProgress('temp', 'Temperature', '°'),
             ],
         }),
     ],
