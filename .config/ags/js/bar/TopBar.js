@@ -32,7 +32,7 @@ const Start = () => Box({
         OverviewButton(),
         SeparatorDot(),
         Taskbar(),
-        SeparatorDot(),
+        // SeparatorDot(),
         WorkspacesHypr(),
         SeparatorDot(),
         // FocusedClient(),
@@ -49,7 +49,7 @@ const Start = () => Box({
 const Center = () => Box({
     className: 'center',
     children: [
-        DateButton({ format: '%a %b%e   %H:%M:%S' }),
+        DateButton({ format: '%a %b %e   %H:%M:%S' }),
         TemperatureIndicator(),
     ],
 });
