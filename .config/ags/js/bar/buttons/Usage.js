@@ -1,27 +1,31 @@
 const { execAsync } = ags.Utils;
 const { Label, Box, Icon } = ags.Widget;
 import FontIcon from '../../misc/FontIcon.js';
+import * as vars from '../../variables.js';
+
+const UsageLabel = (type, title, unit) => Label({
+    className: `label ${type}`,
+    connections: [[vars[type], label => {
+        label.label = `${title}${Math.floor(vars[type].value * 100)}${unit}`;
+    }]],
+});
 
 export const UsageCPU = () => Box({
-    className: 'usage cpu panel-button',
+    className: 'cpu usage panel-button',
     children: [
         FontIcon({
+            className: 'icon',
             icon: '︁',
         }),
-        Label({
-            connections: [[5000, label => {
-                execAsync(['bash', '-c', "top -bn 1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"])
-                    .then(value => label.label = value.trim() + '%')
-                    .catch(print);
-            }]],
-        })
+        UsageLabel('cpu', '', '%'),
     ]
 });
 
 export const UsageRAM = () => Box({
-    className: 'usage ram panel-button',
+    className: 'ram usage panel-button',
     children: [
         FontIcon({
+            className: 'icon',
             icon: '︁',
         }),
         Label({
@@ -30,14 +34,15 @@ export const UsageRAM = () => Box({
                     .then(value => label.label = value.trim())
                     .catch(print);
             }]],
-        })
+        }),
     ]
 });
 
 export const UsageDisk = () => Box({
-    className: 'usage disk panel-button',
+    className: 'disk usage panel-button',
     children: [
         FontIcon({
+            className: 'icon',
             icon: '',
         }),
         Label({

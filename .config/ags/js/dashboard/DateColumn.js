@@ -2,6 +2,7 @@ import icons from '../icons.js';
 import Clock from '../misc/Clock.js';
 import * as vars from '../variables.js';
 const { Box, Label, Widget, CircularProgress, Icon } = ags.Widget;
+import FontIcon from '../misc/FontIcon.js';
 
 const SysProgress = (type, title, unit) => Box({
     className: `circular-progress-box ${type}`,
@@ -13,7 +14,7 @@ const SysProgress = (type, title, unit) => Box({
         hexpand: true,
         className: `circular-progress ${type}`,
         binds: [['value', vars[type]]],
-        child: Icon(icons.system[type]),
+        child: type === 'cpu' ? FontIcon({ icon: '︁' }) : Icon(icons.system[type]),
         startAt: 0.75,
     }),
 });
