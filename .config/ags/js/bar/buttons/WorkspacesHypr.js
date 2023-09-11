@@ -10,10 +10,9 @@ export default () => Box({
 
         // add a button for each workspace
         const numberOfWorkspaces = 10;
-        const { workspaces } = Hyprland;
 
         for (let i = 1; i <= numberOfWorkspaces; ++i) {
-            if (!workspaces.has(i)) {
+            if (Hyprland.getWorkspace(i)?.id !== i) {
                 continue;
             }
 
