@@ -143,10 +143,30 @@ window#dashboard .dashboard {
         margin-top: $spacing*2;
     }
 
+    .circular-progress-box {
+        @include widget;
+        margin-top: $spacing;
+        margin-right: $spacing;
+        &:last-child { margin-right: 0; }
+        padding: 10px;
+
+        .circular-progress {
+            min-height: 70px;
+            margin: $spacing/2;
+            font-size: $spacing*1.2;
+            background-color: $bg_color;
+            color: $accent;
+
+            image {
+                font-size: 2em;
+            }
+        }
+    }
+
     //weather popup
     .weather-info .weather-icon{
-       font-size: 2em;
-       margin: 0.1em 0;
+        font-size: 2em;
+        margin: 0.1em 0;
     }
 }
 
@@ -157,44 +177,44 @@ window#notification .dashboard {
 
 // weather popup
 .weather-refresh {
-   all: unset;
-   border: none;
-   margin: 0;
-   padding: 0;
+    all: unset;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 .weather-refresh:hover {
-   color: gray;
+    color: gray;
 }
 
 .weather-refresh:active {
-   color: black;
+    color: black;
 }
 
 .weather-refresh:focus {
-   color: $accent;
+    color: $accent;
 }
 
 .weather-info {
-   background-color: rgba(81, 164, 231, 0.76);
-   border-radius: 16px;
-   padding: 10px;
-   margin: 0 5px;
+    background-color: rgba(81, 164, 231, 0.76);
+    border-radius: 16px;
+    padding: 10px;
+    margin: 0 5px;
 
-   min-width: 4.8em;
-   min-height: 10em;
+    min-width: 4.8em;
+    min-height: 10em;
 
-   margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .weather-temperature {
-   margin-bottom: 0.6em;
+    margin-bottom: 0.6em;
 }
 
 .weather-day {
-   padding: 2px;
+    padding: 2px;
 }
 
 .weather-day:first-child {
-   padding: 0;
+    padding: 0;
 }

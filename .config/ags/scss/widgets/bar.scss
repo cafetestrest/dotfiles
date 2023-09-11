@@ -1,4 +1,4 @@
-// $float: 5px;
+// $float: $spacing * 0.7;
 $float: 0px;
 
 @mixin panel_button($flat: false, $reactive: true){
@@ -32,10 +32,7 @@ $float: 0px;
         }
     } @else {
         @include accs_button($flat, $reactive);
-
-        > * {
-            margin: $float;
-        }
+        > * { margin: $float; }
     }
 
     label {
@@ -85,7 +82,7 @@ $float: 0px;
     }
 
     separator {
-        // background-color: transparentize($fg_color, 0.7);
+        // background-color: transparentize($fg_color, 0.9);
         background-color: transparent;
         border-radius: $radii;
         min-height: 5px;
@@ -110,6 +107,7 @@ $float: 0px;
         &:active image { color: $red; }
     }
 
+    /* stylelint-disable-next-line selector-not-notation */
     .quicksettings:not(.active):not(:active) {
         .bluetooth { color: $blue; }
 
@@ -134,11 +132,40 @@ $float: 0px;
         image { color: $yellow; }
     }
 
+    .battery-bar {
+        image { margin-right: $spacing/2; }
+        .font-icon { font-size: 1.3em; }
+
+        levelbar trough {
+            @include widget;
+            min-width: 70px;
+            min-height: 14px;
+
+            block.filled {
+                border-radius: max($radii - $border_width, 0);
+                background-image: $active_gradient;
+            }
+        }
+
+        @mixin color($color) {
+            image, label { color: $color }
+
+            block.filled {
+                background-image: linear-gradient(to right, $color, lighten($color, 6%));
+            }
+        }
+
+        .medium { @include color($yellow) }
+        .low { @include color($red) }
+        .charging { @include color($green) }
+        &:active { @include color($accent_fg) }
+    }
+
     //new workspaces look
     .hyprworkspaces {
-       border: 0.3em solid transparent;
+        border: 0.3em solid transparent;
 
-       button {
+        button {
             all: unset;
             background-color: transparent;
             color: $fg-color;
@@ -148,21 +175,21 @@ $float: 0px;
             margin-left: 5px;
             margin-right: 5px;
         }
-    
-       // on hover
-       button:hover {
+
+        // on hover
+        button:hover {
             background-color: transparentize($color: $fg_color, $amount: 0.9);
             color: $fg_color;
         }
-    
-       // on click
-       button:active {
+
+        // on click
+        button:active {
             background-color: transparentize($color: $fg_color, $amount: 0.8);
             color: $fg_color;
         }
-    
-       // current one
-       button.focused {
+
+        // current one
+        button.focused {
             background-color: $fg_color;
             color: $bg_color;
         }
@@ -190,6 +217,7 @@ $float: 0px;
                 min-width: 10px;
                 min-height: 10px;
                 border-radius: $radii*0.6;
+                border: $border;
                 margin: 0 $spacing/2;
                 transition: $transition/2;
                 background-color: transparentize($fg_color, 0.8);

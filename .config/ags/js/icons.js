@@ -16,7 +16,7 @@ export default {
         type: {
             headset: 'audio-headphones-symbolic',
             speaker: 'audio-speakers-symbolic',
-            card: 'audio-volume-high-symbolic',
+            card: 'audio-card-symbolic',
         },
         mixer: '',
     },
@@ -34,6 +34,10 @@ export default {
     apps: {
         apps: 'view-app-grid-symbolic',
         search: 'folder-saved-search-symbolic',
+    },
+    battery: {
+        charging: '󱐋',
+        warning: 'battery-empty-symbolic',
     },
     bluetooth: {
         enabled: 'bluetooth-active-symbolic',
@@ -86,6 +90,11 @@ export default {
             down: 'pan-down-symbolic',
             up: 'pan-up-symbolic',
         },
+    },
+    system: {
+        cpu: 'org.gnome.SystemMonitor-symbolic',
+        ram: 'drive-harddisk-solidstate-symbolic',
+        temp: 'temperature-symbolic',
     },
     idle: {
         on: 'view-reveal-symbolic',

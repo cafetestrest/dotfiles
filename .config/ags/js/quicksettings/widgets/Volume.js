@@ -27,8 +27,11 @@ export const TypeIndicator = () => Button({
     onSecondaryClick: 'pamixer --default-source -t',
     child: Icon({
         connections: [[Audio, icon => {
-            if (Audio.speaker)
-                icon.icon = iconSubstitute(Audio.speaker.iconName);
+            if (!Audio.speaker)
+                return;
+
+            icon.icon = iconSubstitute(Audio.speaker.iconName);
+            icon.tooltipText = `Volume ${Math.floor(Audio.speaker.volume * 100)}%`;
         }, 'speaker-changed']],
     }),
 });
@@ -121,6 +124,7 @@ const MixerItem = stream => Box({
 });
 
 const SinkItem = stream => Button({
+    hexpand: true,
     onClicked: () => Audio.speaker = stream,
     child: Box({
         children: [
@@ -134,6 +138,7 @@ const SinkItem = stream => Button({
                 hexpand: true,
                 halign: 'end',
                 connections: [['draw', icon => {
+                    print(Audio.speaker, stream);
                     icon.visible = Audio.speaker === stream;
                 }]],
             }),
@@ -153,7 +158,7 @@ const SettingsButton = () => Button({
 
 export const AppMixer = () => Menu({
     name: 'app-mixer',
-    icon: FontIcon({ icon: icons.audio.mixer }),
+    icon: FontIcon(icons.audio.mixer),
     title: Label('App Mixer'),
     content: Box({
         className: 'app-mixer',
@@ -162,7 +167,7 @@ export const AppMixer = () => Menu({
             Box({
                 vertical: true,
                 connections: [[Audio, box => {
-                    box.children = Array.from(Audio.apps.values()).map(MixerItem);
+                    box.children = Audio.apps.map(MixerItem);
                 }]],
             }),
             Separator({ orientation: 'horizontal' }),
@@ -182,7 +187,7 @@ export const SinkSelector = () => Menu({
             Box({
                 vertical: true,
                 connections: [[Audio, box => {
-                    box.children = Array.from(Audio.speakers.values()).map(SinkItem);
+                    box.children = Audio.speakers.map(SinkItem);
                 }]],
             }),
             Separator({ orientation: 'horizontal' }),

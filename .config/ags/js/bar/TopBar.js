@@ -11,6 +11,10 @@ import SystemIndicators from './buttons/SystemIndicators.js';
 import PowerMenu from './buttons/PowerMenu.js';
 import Separator from '../misc/Separator.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
+import BatteryBar from './buttons/BatteryBar.js';
+import SubMenu from './buttons/SubMenu.js';
+const { Window, CenterBox, Box } = ags.Widget;
+const { SystemTray } = ags.Service;
 import { Taskbar } from '../dock/Dock.js';
 import Screenshot from './buttons/Screenshot.js';
 import Note from './buttons/Note.js';
@@ -18,12 +22,15 @@ import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
 import BluetoothDevices from './buttons/BluetoothDevices.js';
 import { TemperatureIndicator } from './buttons/Weather.js';
 
-const { Window, CenterBox, Box } = ags.Widget;
+const submenuItems = ags.Variable(1);
+SystemTray.instance.connect('changed', () => {
+    submenuItems.setValue(SystemTray.items.length + 1);
+});
 
-const SeparatorDot = rest => Separator({
-    ...rest,
+const SeparatorDot = (service, condition) => Separator({
     orientation: 'vertical',
     valign: 'center',
+    connections: service && [[service, dot => dot.visible = condition()]],
 });
 
 const Start = () => Box({
@@ -31,6 +38,7 @@ const Start = () => Box({
     children: [
         OverviewButton(),
         SeparatorDot(),
+        // Workspaces(),
         Taskbar(),
         // SeparatorDot(),
         WorkspacesHypr(),
@@ -38,11 +46,10 @@ const Start = () => Box({
         // FocusedClient(),
         Box({ hexpand: true }),
         MediaIndicator({ direction: 'left' }),
-        SeparatorDot({
-            connections: [[ags.Service.Mpris, dot => {
-                dot.visible = !!ags.Service.Mpris.getPlayer();
-            }]],
-        }),
+        SeparatorDot(
+            ags.Service.Mpris,
+            () => !!ags.Service.Mpris.getPlayer(),
+        ),
     ],
 });
 
@@ -57,30 +64,34 @@ const Center = () => Box({
 const End = () => Box({
     className: 'end',
     children: [
-        SeparatorDot({
-            connections: [[ags.Service.Notifications, dot => {
-                dot.visible = ags.Service.Notifications.notifications.size > 0;
-            }]],
-        }),
+        SeparatorDot(
+            ags.Service.Notifications,
+            () => ags.Service.Notifications.notifications.length > 0,
+        ),
         NotificationIndicator({ direction: 'right' }),
         Box({ hexpand: true }),
         UsageCPU(),
         UsageRAM(),
         UsageDisk(),
         BluetoothDevices(),
+        SubMenu({
+            items: submenuItems,
+            children: [
+                SysTray(),
+                ColorPicker(),
+            ],
+        }),
+        SeparatorDot(),
         ScreenRecord(),
-        SeparatorDot({
-            connections: [[ags.Service.Recorder, dot => {
-                dot.visible = ags.Service.Recorder.recording;
-            }]],
-        }),
-        SysTray(),
-        SeparatorDot({
-            connections: [[ags.Service.SystemTray, dot => {
-                dot.visible = ags.Service.SystemTray.items.length > 0;
-            }]],
-        }),
-        ColorPicker(),
+        SeparatorDot(
+            ags.Service.Recorder,
+            () => ags.Service.Recorder.recording,
+        ),
+        // BatteryBar(),
+        // SeparatorDot(
+        //     ags.Service.Battery,
+        //     () => ags.Service.Battery.available,
+        // ),
         Note(),
         Screenshot(),
         SeparatorDot(),

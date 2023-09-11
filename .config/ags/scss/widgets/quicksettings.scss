@@ -9,15 +9,16 @@ window#quicksettings .quicksettings {
     @include floating_widget;
 
     // disabled this spacing, as I've created one in buttons, also one is on volume
-    // .row {
-    //     margin: 0 0 $spacing 0;
-    // }
+    //.row {
+    //    margin-top: $spacing;
+    //    &:first-child { margin-top: 0; }
+    //}
 
     .header {
         .avatar {
             @include widget;
             margin-right: $spacing;
-            min-width: $spacing*7 + 38px;
+            min-width: $spacing*6 + 38px;
 
             .shader {
                 @include shader;
@@ -25,12 +26,6 @@ window#quicksettings .quicksettings {
         }
 
         .battery-progress {
-            progressbar {
-                @include slider($width: $spacing*3.4);
-                margin-top: $spacing;
-                min-height: 20px;
-            }
-
             label {
                 margin-top: $spacing;
                 color: $accent_fg;
@@ -39,6 +34,18 @@ window#quicksettings .quicksettings {
             }
 
             &.half label { color: $fg_color; }
+
+            progressbar {
+                @include slider($width: $spacing*3.4);
+                margin-top: $spacing;
+                min-height: 20px;
+            }
+
+            &.low progressbar {
+                @include slider($width: $spacing*3.4, $gradient: linear-gradient(to right, $red, $red));
+                margin-top: $spacing;
+                min-height: 20px;
+            }
         }
 
         .system-box {
@@ -53,7 +60,7 @@ window#quicksettings .quicksettings {
                 &:first-child { margin-left: 0; }
                 min-height: 20px;
                 min-width: 20px;
-
+                
                 image {
                     font-size: 1.2em;
                 }
@@ -101,7 +108,7 @@ window#quicksettings .quicksettings {
         margin-top: $spacing;
         padding: $spacing;
 
-        separator {
+        separator { 
             background-color: $border_color;
             margin: $spacing $spacing/2;
         }
@@ -112,8 +119,12 @@ window#quicksettings .quicksettings {
             @include button($flat: true);
             padding: $spacing/2;
         }
+
+        switch {
+            @include switch;
+        }
     }
-        
+
     .button-spacing{
         margin-right: $spacing;
     }
@@ -188,8 +199,7 @@ window#quicksettings .quicksettings {
 
     .media .player {
         @include media;
-        margin-bottom: $spacing;
-        &:last-child { margin-bottom: 0; }
+        margin-top: $spacing;
     }
 
     .qsvolume {

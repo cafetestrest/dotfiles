@@ -10,5 +10,5 @@ export default () => PanelButton({
     }]],
     // onClicked: () => ags.App.toggleWindow('overview'),
     onClicked: () => execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print),
-    content: FontIcon({ icon: distroIcon }),
+    content: FontIcon(distroIcon),
 });

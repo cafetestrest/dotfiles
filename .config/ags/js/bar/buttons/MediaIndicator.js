@@ -1,61 +1,60 @@
 import HoverRevealer from '../../misc/HoverRevealer.js';
 import * as mpris from '../../misc/mpris.js';
+import options from '../../options.js';
 const { Box, Label } = ags.Widget;
 const { Mpris } = ags.Service;
 
-const Indicator = ({ player, direction = 'right' } = {}) => Box({
+export const getPlayer = (name = options.preferredMpris) =>
+    Mpris.getPlayer(name) || Mpris.players[0] || null;
+
+// todo add prev/next
+const Indicator = ({ player, direction = 'right' } = {}) => HoverRevealer({
     className: `media panel-button ${player.name}`,
-    children: [
-        mpris.PreviousButton(player),
-        HoverRevealer({
-        direction,
-        onPrimaryClick: () => player.playPause(),
-        onScrollUp: () => player.next(),
-        onScrollDown: () => player.previous(),
-        onSecondaryClick: () => player.playPause(),
-        indicator: mpris.PlayerIcon(player),
-        child: Box({
-            children: [
-                mpris.ArtistLabel(player),
-                Label('   '),
-                mpris.TitleLabel(player),
-                Label('   '),
-            ],
-        }),
-        connections: [[player, revealer => {
-            if (revealer._current === player.trackTitle)
-                return;
-
-            function truncateString(inputString, maxLength) {
-                if (!inputString) {
-                    return '';
-                }
-
-                if (inputString.length > maxLength) {
-                    return inputString.slice(0, maxLength);
-                } else {
-                    return inputString;
-                }
-            }
-
-            if (revealer._current === truncateString(mpris.trackTitle, 50))
-                return;
-
-            // revealer._current = player.trackTitle;
-            revealer._current = truncateString(mpris.trackTitle, 50);
-            revealer.revealChild = true;
-            ags.Utils.timeout(3000, () => {
-                revealer.revealChild = false;
-            });
+    direction,
+    onPrimaryClick: () => player.playPause(),
+    onScrollUp: () => player.next(),
+    onScrollDown: () => player.previous(),
+    onSecondaryClick: () => player.playPause(),
+    indicator: mpris.PlayerIcon(player),
+    child: Label({
+        vexpand: true,
+        truncate: 'end',
+        maxWidthChars: 40,
+        connections: [[player, label => {
+            label.label = `${player.trackArtists[0]}   ${player.trackTitle}   `;
         }]],
     }),
-    mpris.NextButton(player),
-    ],
+    connections: [[player, revealer => {
+        if (revealer._current === player.trackTitle)
+            return;
+
+        function truncateString(inputString, maxLength) {
+            if (!inputString) {
+                return '';
+            }
+
+            if (inputString.length > maxLength) {
+                return inputString.slice(0, maxLength);
+            } else {
+                return inputString;
+            }
+        }
+
+        if (revealer._current === truncateString(player.trackTitle, 50))
+            return;
+
+        // revealer._current = player.trackTitle;
+        revealer._current = truncateString(player.trackTitle, 50);
+        revealer.revealChild = true;
+        ags.Utils.timeout(3000, () => {
+            revealer.revealChild = false;
+        });
+    }]],
 });
 
 export default ({ direction } = {}) => Box({
     connections: [[Mpris, box => {
-        const player = Mpris.getPlayer(mpris.prefer);
+        const player = getPlayer();
         if (!player) {
             box._player = null;
             return;
@@ -65,8 +64,6 @@ export default ({ direction } = {}) => Box({
 
         box.visible = true;
         box._player = player;
-        box.children = [
-            Indicator({ player, direction }),
-        ];
+        box.children = [Indicator({ player, direction })];
     }]],
 });
