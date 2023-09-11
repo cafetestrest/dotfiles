@@ -3,6 +3,7 @@ import Spinner from '../../misc/Spinner.js';
 import { Menu, ArrowToggleButton } from '../ToggleButton.js';
 const { Bluetooth } = ags.Service;
 const { Icon, Label, Box } = ags.Widget;
+const { instance } = ags.Service.Bluetooth;
 
 let numOfTries = 0;
 
@@ -32,7 +33,7 @@ export const BluetoothToggle = () => ArrowToggleButton({
             label.label = `${Bluetooth.connectedDevices.length} Connected`;
         }],
         [60000, label => {
-            if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.size === 0 && Bluetooth.devices.size > 0) {
+            if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.length === 0 && Bluetooth.devices.length > 0) {
                 // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
                 instance._getDevices().forEach(d => {
                     instance._deviceRemoved(null, d);

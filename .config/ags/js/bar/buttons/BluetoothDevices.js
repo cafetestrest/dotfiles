@@ -19,6 +19,6 @@ export default () => Box({
                 ],
             }));
 
-        box.visible = Bluetooth.connectedDevices.size > 0;
+        box.visible = Bluetooth.connectedDevices.length > 0;
     }]],
 });
