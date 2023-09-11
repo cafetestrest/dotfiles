@@ -46,7 +46,9 @@ export default ({
         for (let i = 0; i < frames; ++i) {
             ags.Utils.timeout(5 * i, () => {
                 fill._size += step;
-                fill.setStyle(`min-${axis}: ${fill._size}px`);
+                if (fill._size > 0) {
+                    fill.setStyle(`min-${axis}: ${fill._size}px`);
+                }
             });
         }
     };

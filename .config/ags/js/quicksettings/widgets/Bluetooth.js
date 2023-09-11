@@ -4,6 +4,8 @@ import { Menu, ArrowToggleButton } from '../ToggleButton.js';
 const { Bluetooth } = ags.Service;
 const { Icon, Label, Box } = ags.Widget;
 
+let numOfTries = 0;
+
 export const BluetoothToggle = () => ArrowToggleButton({
     name: 'bluetooth',
     icon: Icon({
@@ -21,6 +23,8 @@ export const BluetoothToggle = () => ArrowToggleButton({
 
             if (Bluetooth.connectedDevices.size === 0)
                 return label.label = 'Not Connected';
+
+            numOfTries = 0;
 
             if (Bluetooth.connectedDevices.size === 1)
                 return label.label = Bluetooth.connectedDevices.entries().next().value[1].alias;
