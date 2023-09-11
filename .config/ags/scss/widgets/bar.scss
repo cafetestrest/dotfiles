@@ -236,10 +236,11 @@ $float: 0px;
    padding: 0;
    margin-right: 2px;
 }
-//
-//.btdevices.panel-button box,
-//.btdevices.panel-button label {
-//    margin: 0;
-//    padding: 0;
-//    margin-left:0.4em;
-//}
+
+// bt devices connected instead in QS inidcators, added next to systray
+.bluetooth-indicator.panel-button box,
+.bluetooth-indicator.panel-button label {
+   margin: 0;
+   padding: 0;
+   margin-left:0.4em;
+}

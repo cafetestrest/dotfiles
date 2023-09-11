@@ -124,7 +124,7 @@ export default () => PanelButton({
             DNDIndicator(),
             IdleIndicator(),
             NightlightIndicator(),
-            BluetoothDevicesIndicator(),
+            // BluetoothDevicesIndicator(),
             BluetoothIndicator(),
             NetworkIndicator(),
             Box({
