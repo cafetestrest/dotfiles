@@ -42,9 +42,9 @@ const DNDIndicator = () => Icon({
 const BluetoothDevicesIndicator = () => Box({
     connections: [[Bluetooth, box => {
         box.children = Bluetooth.connectedDevices
-            .map(({ iconName, batteryLevel }) => HoverRevealer({
+            .map(({ iconName, batteryPercentage }) => HoverRevealer({
                 indicator: Icon(iconName + '-symbolic'),
-                child: Label(batteryLevel.toString()),
+                child: batteryPercentage !== 0 ? Label(batteryPercentage.toString()) : null,
             }));
 
         box.visible = Bluetooth.connectedDevices.length > 0;

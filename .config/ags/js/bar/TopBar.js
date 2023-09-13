@@ -21,6 +21,7 @@ import Note from './buttons/Note.js';
 import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
 import BluetoothDevices from './buttons/BluetoothDevices.js';
 import { TemperatureIndicator } from './buttons/Weather.js';
+import BluetoothDevice from './buttons/BluetoothDevice.js';
 
 const submenuItems = ags.Variable(1);
 SystemTray.instance.connect('changed', () => {
@@ -58,6 +59,7 @@ const Center = () => Box({
     children: [
         DateButton({ format: '%a %b %e   %H:%M:%S' }),
         TemperatureIndicator(),
+        BluetoothDevice(),
     ],
 });
 
