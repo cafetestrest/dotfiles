@@ -53,6 +53,7 @@ const Indicator = ({ player, direction = 'right' } = {}) => HoverRevealer({
 });
 
 export default ({ direction } = {}) => Box({
+    className: 'media-player',
     connections: [[Mpris, box => {
         const player = getPlayer();
         if (!player) {
@@ -64,6 +65,10 @@ export default ({ direction } = {}) => Box({
 
         box.visible = true;
         box._player = player;
-        box.children = [Indicator({ player, direction })];
+        box.children = [
+            mpris.PreviousButton(player),
+            Indicator({ player, direction }),
+            mpris.NextButton(player),
+        ];
     }]],
 });
