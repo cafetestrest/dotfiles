@@ -12,11 +12,10 @@ class BtDeviceInfoService extends Service {
     }
 
     call() {
-        execAsync(['bash', '-c', "~/.config/scripts/111.sh ags"]).catch(print);
+        execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(print);
     }
 
     get callBtDeviceInfoScript() {
-        // execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(print);
         this.call()
     }
 

@@ -1,6 +1,7 @@
 const { Bluetooth } = ags.Service;
 const { Label, Box, Icon } = ags.Widget;
 
+// This one is relying on ags Bluetooth service to provice information and is quicker but does not show battery percentage without gnome
 export default () => Box({
     className: 'bluetooth-indicator panel-button',
     connections: [[Bluetooth, box => {
