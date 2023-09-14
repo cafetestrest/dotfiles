@@ -50,7 +50,6 @@ const Start = () => Box({
         Box({ hexpand: true }),
         SeparatorDot('Mpris', m => m.players.length > 0),
         MediaIndicator({ direction: 'left' }),
-        NotificationIndicator(),
     ],
 });
 
