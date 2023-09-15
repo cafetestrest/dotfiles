@@ -329,6 +329,7 @@ window.popup {
         background-color: $bg_color;
         padding: $spacing;
         border: $border;
+        min-height: 20em;
 
         separator {
             background-color: $border_color;
@@ -336,6 +337,8 @@ window.popup {
 
         menuitem {
             @include button;
+            background-color: transparent;
+            box-shadow: none;
             padding: $spacing/2;
             margin: $spacing/2 0;
             &:first-child { margin-top: 0; }
