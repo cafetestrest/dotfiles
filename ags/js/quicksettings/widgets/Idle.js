@@ -15,7 +15,7 @@ export const IdleToggle = () => SimpleToggleButton({
     icon: IdleIndicator(),
     label: Label({
         connections: [[Idle, label => {
-            label.label = Idle.mode == 'on' ? 'Idle' : 'Off';
+            label.label = Idle.mode == 'on' ? 'Timeout' : 'Always On';
         }]],
     }),
     toggle: Idle.checkMode,
