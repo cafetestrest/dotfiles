@@ -14,7 +14,10 @@ const SysProgress = (type, title, unit) => Box({
         hexpand: true,
         className: `circular-progress ${type}`,
         binds: [['value', vars[type]]],
-        child: type === 'cpu' ? FontIcon({ icon: '︁' }) : Icon(icons.system[type]),
+        child: type === 'ram' ? FontIcon({ icon: '︁' })
+            : type === 'disk' ? FontIcon({ icon: '' })
+            : type === 'cpu' ? FontIcon({ icon: '︁' })
+            : Icon(icons.system[type]),
         startAt: 0.75,
     }),
 });
@@ -44,6 +47,7 @@ export default () => Box({
             children: [
                 SysProgress('cpu', 'Cpu', '%'),
                 SysProgress('ram', 'Ram', '%'),
+                SysProgress('disk', 'Disk', '%'),
                 // SysProgress('temp', 'Temperature', '°'),
             ],
         }),

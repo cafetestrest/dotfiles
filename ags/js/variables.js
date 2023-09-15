@@ -47,6 +47,24 @@ export const ram = ags.Variable(0, {
         .splice(1, 2))],
 });
 
+export const ramGB = ags.Variable(0, {
+    poll: [options.systemFetchInterval, "free --giga -h", out => out.split('\n')
+    .find(line => line.includes('Mem:'))
+    .split(/\s+/)
+    .splice(2, 1)]
+});
+
+export const disk = ags.Variable(0, {
+    poll: [600_000, "df -h /", out => {
+        const lines = out.split('\n');
+        if (lines.length >= 2) {
+            console.log('checked disk %, check if I checked in 10 mins?')
+            return lines[1].split(/\s+/)[4].replace('%', '') / 100;
+        }
+        return -1;
+    }]
+});
+
 // export const temp = ags.Variable(0, {
 //     poll: [options.systemFetchInterval, 'cat ' + options.temperature, n => n / 100_000],
 // });
