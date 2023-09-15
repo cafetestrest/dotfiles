@@ -109,7 +109,7 @@ window#quicksettings .quicksettings {
 
     .menu {
         @include widget;
-        margin-top: $spacing;
+        margin-bottom: $spacing;
         padding: $spacing;
 
         separator { 
@@ -209,6 +209,11 @@ window#quicksettings .quicksettings {
     .qsvolume {
         // separate from buttons
         margin-top: $spacing / 2;
+
+        .menu {
+            margin-top: $spacing;
+            margin-bottom: 0;
+        }
 
         button, .icon {
             @include button($flat: false);
