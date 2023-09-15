@@ -6,7 +6,25 @@ import * as vars from '../../variables.js';
 const UsagePercentageLabel = (type, title, unit) => Label({
     className: `label ${type}`,
     connections: [[vars[type], label => {
-        label.label = `${title}${Math.floor(vars[type].value * 100)}${unit}`;
+        const percentage = Math.floor(vars[type].value * 100);
+
+        label.label = `${title}${percentage}${unit}`;
+
+        if (percentage <= 69) {
+            return;
+        }
+
+        if (percentage > 90) {
+            // color red
+            label.setStyle(`
+                color: #FF0E0D;
+            `);
+        } else if (percentage > 69) {
+            // color yellow
+            label.setStyle(`
+                color: #F9BB4A;
+            `);
+        }
     }]],
 });
 
