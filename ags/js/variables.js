@@ -58,7 +58,6 @@ export const disk = ags.Variable(0, {
     poll: [600_000, "df -h /", out => {
         const lines = out.split('\n');
         if (lines.length >= 2) {
-            console.log('checked disk %, check if I checked in 10 mins?')
             return lines[1].split(/\s+/)[4].replace('%', '') / 100;
         }
         return -1;
