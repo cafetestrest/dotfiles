@@ -127,6 +127,10 @@ window#quicksettings .quicksettings {
         switch {
             @include switch;
         }
+
+        slider {
+            margin: 0;
+        }
     }
 
     .button-spacing{
