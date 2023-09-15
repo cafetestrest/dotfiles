@@ -60,17 +60,17 @@ export default () => PopupWindow({
                     NightlightToggle()
                 ],
             ),
-            Row(
-                [
-                    ThemeToggle(),
-                    Box({ className: 'button-spacing' }),
-                    MicMute(),
-                ],
-                [
-                    // ProfileSelector(),
-                    ThemeSelector()
-                ],
-            ),
+            // Row(
+            //     [
+            //         ThemeToggle(),
+            //         Box({ className: 'button-spacing' }),
+            //         MicMute(),
+            //     ],
+            //     [
+            //         // ProfileSelector(),
+            //         ThemeSelector()
+            //     ],
+            // ),
             Row([Box({
                 className: 'qsvolume',
                 vertical: true,
