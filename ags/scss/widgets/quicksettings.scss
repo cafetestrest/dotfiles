@@ -213,6 +213,10 @@ window#quicksettings .quicksettings {
         .menu {
             margin-top: $spacing;
             margin-bottom: 0;
+
+            button {
+                box-shadow: inset 0px 2px 10px 1px rgba(0,0,0,0.5);
+            }
         }
 
         button, .icon {
@@ -248,5 +252,13 @@ window#quicksettings .quicksettings {
                 }
             }
         }
+    }
+
+    .bluetooth-devices {
+        margin-bottom: 0.8em;
+    }
+        
+    .bluetooth-devices:last-child {
+        margin-bottom: 0;
     }
 }

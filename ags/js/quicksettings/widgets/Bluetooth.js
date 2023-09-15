@@ -59,6 +59,7 @@ export const BluetoothDevices = () => Menu({
         vertical: true,
         connections: [[Bluetooth, box => {
             box.children = Bluetooth.devices.map(device => Box({
+                className: 'bluetooth-devices',
                 children: [
                     Icon(device.iconName + '-symbolic'),
                     Label(device.name),
