@@ -24,27 +24,6 @@ export default () => Box({
                         Label({
                             className: 'btdevice-label',
                             label: batteryPercentage !== "" ? batteryPercentage.toString() + "%" : "",
-                            connections: [[Btdevice, label => {
-                                if (label.label && label.label.endsWith("%")) {
-                                    const batLevelPercentage = label.label.slice(0, -1);
-
-                                    if (batLevelPercentage >= 15) {
-                                        return;
-                                    }
-
-                                    if (batLevelPercentage < 8) {
-                                        // color red
-                                        label.setStyle(`
-                                            color: #FF0E0D;
-                                        `);
-                                    } else if (batLevelPercentage < 15) {
-                                        // color yellow
-                                        label.setStyle(`
-                                            color: #F9BB4A;
-                                        `);
-                                    }
-                                }
-                            }]],
                         }),
                     ],
                 }))
