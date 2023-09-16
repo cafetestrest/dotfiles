@@ -72,6 +72,7 @@ const End = () => Box({
         UsageDisk(),
         BluetoothDevice(),
         // BluetoothDevices(),
+        SeparatorDot(),
         SysTray(),
         ColorPicker(),
         // SubMenu({
