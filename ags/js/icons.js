@@ -1,5 +1,5 @@
 export default {
-    settings: 'org.gnome.Settings-symbolic',
+    settings: 'applications-system-symbolic',
     tick: 'object-select-symbolic',
     audio: {
         mic: {
