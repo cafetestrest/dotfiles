@@ -1,6 +1,7 @@
 const { App } = ags;
 const { Box, Button, Label, Stack, Icon } = ags.Widget;
 import Weather from '../../services/weather.js';
+import Theme from '../../services/theme/theme.js';
 
 export const TemperatureIndicator = ({
     disabled = null,
@@ -296,4 +297,5 @@ export const RefreshButton = props => Button({
     onClicked: () => {
         Weather.weatherData
     },
+    onSecondaryClick: () => Theme.openSettings(),
 });

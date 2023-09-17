@@ -63,7 +63,7 @@ $float: 0px;
 
     @if $bar_style == 'floating' {
         @include floating_widget;
-        margin: $wm_gaps;
+        margin: $wm_gaps $wm_gaps 0 $wm_gaps;
         padding: 0;
     }
 
