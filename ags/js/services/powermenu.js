@@ -10,8 +10,8 @@ export default class PowerMenu extends Service {
 
     static action(action) {
         const [cmd, title] = {
-            'lock': ['gtklock -d', 'Lock'],
-            'sleep': ['systemctl suspend', 'Sleep'],
+            'lock': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
+            'sleep': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
             'logout': ['pkill Hyprland', 'Log Out'],
             'shutdown': ['shutdown now', 'Shutdown'],
