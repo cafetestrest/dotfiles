@@ -65,11 +65,6 @@ export default ({ direction } = {}) => Box({
         if (box._player === player)
             return;
 
-        // if (player.position == -1) {
-        //     box.visible = false;
-        //     return;
-        // }
-
         box.visible = true;
         box._player = player;
         box.children = [
