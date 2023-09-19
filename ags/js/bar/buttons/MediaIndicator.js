@@ -7,7 +7,6 @@ const { Mpris } = ags.Service;
 export const getPlayer = (name = options.preferredMpris) =>
     Mpris.getPlayer(name) || Mpris.players[0] || null;
 
-// todo add prev/next
 const Indicator = ({ player, direction = 'right' } = {}) => HoverRevealer({
     className: `media panel-button ${player.name}`,
     direction,
@@ -56,17 +55,20 @@ export default ({ direction } = {}) => Box({
     className: 'media-player',
     connections: [[Mpris, box => {
         const player = getPlayer();
+        box.visible = !!player;
+
         if (!player) {
             box._player = null;
             return;
         }
+
         if (box._player === player)
             return;
 
-        if (player.position == -1) {
-            box.visible = false;
-            return;
-        }
+        // if (player.position == -1) {
+        //     box.visible = false;
+        //     return;
+        // }
 
         box.visible = true;
         box._player = player;

@@ -1,5 +1,5 @@
 export default {
-    settings: 'applications-system-symbolic',
+    settings: 'emblem-system-symbolic',
     tick: 'object-select-symbolic',
     audio: {
         mic: {
@@ -46,7 +46,7 @@ export default {
     brightness: {
         indicator: 'display-brightness-symbolic',
         keyboard: 'keyboard-brightness-symbolic',
-        screen: ['󰛩', '󱩎', '󱩏', '󱩐', '󱩑', '󱩒', '󱩓', '󱩔', '󱩕', '󱩖', '󰛨'],
+        screen: 'display-brightness-symbolic',
     },
     powermenu: {
         lock: 'system-lock-screen-symbolic',
