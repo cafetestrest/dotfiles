@@ -1,24 +1,39 @@
 { pkgs, ... }:
-let
-  launcher = pkgs.writeShellScriptBin "gnome" ''
-    XDG_CURRENT_DESKTOP=gnome gnome-shell --wayland
-  '';
-in
 {
   services.xserver = {
-    # displayManager.gdm.enable = true;
+    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    desktopManager.gnome.debug = true;
   };
 
-  environment.systemPackages = [ launcher ];
+  programs.dconf.profiles = {
+    gdm.databases = [{
+      settings = {
+        "org/gnome/desktop/peripherals/touchpad" = {
+          tap-to-click = true;
+        };
+        "org/gnome/desktop/interface" = {
+          cursor-theme = "Qogir";
+        };
+      };
+    }];
+  };
+
+  environment.systemPackages = with pkgs; [
+    gnome-extension-manager
+    nautilus-open-any-terminal
+    qogir-icon-theme
+  ];
 
   environment.gnome.excludePackages = (with pkgs; [
+    gnome-text-editor
+    gnome-console
     gnome-photos
     gnome-tour
+    gnome-connections
   ]) ++ (with pkgs.gnome; [
     cheese # webcam tool
     gnome-music
-    gnome-terminal
     gedit # text editor
     epiphany # web browser
     geary # email reader
@@ -32,5 +47,8 @@ in
     yelp # Help view
     gnome-contacts
     gnome-initial-setup
+    gnome-shell-extensions
+    gnome-maps
+    gnome-font-viewer
   ]);
 }

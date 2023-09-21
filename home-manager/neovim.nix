@@ -5,6 +5,16 @@
     VISUAL = "nvim";
   };
 
+  xdg.desktopEntries."nvim" = {
+    name = "NeoVim";
+    comment = "Edit text files";
+    icon = "nvim";
+    exec = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.neovim}/bin/nvim %F";
+    categories = [ "TerminalEmulator" ];
+    terminal = false;
+    mimeType = [ "text/plain" ];
+  };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -15,7 +25,7 @@
     withPython3 = true;
 
     extraPackages = with pkgs; [
-      stylua
+      gnumake
       cargo
       gcc13
       unzip
@@ -26,11 +36,6 @@
       python311Packages.pynvim
       php82Packages.composer
       python311Packages.pip
-      chafa
-      ffmpegthumbnailer
-      poppler_utils
-      fontpreview
-      xclip
     ];
   };
 

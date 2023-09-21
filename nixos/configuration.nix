@@ -12,19 +12,28 @@
     ./sound.nix
   ];
 
-  virtualisation.podman.enable = true;
+  documentation.nixos.enable = false;
+
+  virtualisation = {
+    podman.enable = true;
+    libvirtd.enable = true;
+  };
+
+  programs = {
+    dconf.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-software # for flatpak
     home-manager
     neovim
     git
-    tree
     wget
   ];
 
   services = {
     xserver.enable = true;
+    xserver.excludePackages = [ pkgs.xterm ];
     printing.enable = true;
     flatpak.enable = true;
   };
@@ -37,7 +46,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
   };
 
   networking = {

@@ -5,6 +5,7 @@ let
     "arch" = "distrobox-enter Arch -- zsh";
     "fedora" = "distrobox-enter Fedora -- zsh";
     "eza" = "eza -l --sort type --no-permissions --no-user --no-time --header --icons --no-filesize --group-directories-first";
+    "tree" = "eza --tree";
     "ll" = "eza";
     "éé" = "eza";
     "és" = "eza";
@@ -46,15 +47,15 @@ in
       enable = true;
       shellAliases = aliases;
     };
-    nushell = {
-      enable = true;
-      shellAliases = aliases;
-      extraConfig = ''
-        $env.config = {
-          show_banner: false,
-        }
-      '';
-    };
+    # nushell = {
+    #   enable = true;
+    #   shellAliases = aliases;
+    #   extraConfig = ''
+    #     $env.config = {
+    #       show_banner: false,
+    #     }
+    #   '';
+    # };
   };
 
   programs.tmux = {
