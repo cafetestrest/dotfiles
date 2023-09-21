@@ -106,7 +106,7 @@ export default {
         auto: 'night-light-symbolic',
     },
     screenshot: 'applets-screenshooter-symbolic',
-    note: 'user-bookmarks-symbolic',
+    note: 'view-dual-symbolic',
     usage: {
         disk: 'drive-harddisk-solidstate-symbolic',
     },
