@@ -1,13 +1,19 @@
 window#applauncher .applauncher{
     @include floating_widget;
+    padding: 0; //padding around window
+    background-color: transparentize($color: $bg_color, $amount: 0.05); //trasparent background
+    border-radius: $radii;
 
     .header {
-        margin: $popover_padding;
-        margin-bottom: 0;
+        margin: $spacing $spacing $spacing / 2 $spacing;
 
         image, entry {
             @include widget;
             padding: $spacing/2;
+
+            // remove background and border
+            background-color: transparent;
+            border: none;
         }
 
         image {
@@ -25,13 +31,27 @@ window#applauncher .applauncher{
 
     scrolledwindow {
         @include scrollbar;
-        padding: $popover_padding;
-        min-width: 500px;
-        min-height: 350px;
+        padding: 0 0.1em $popover_padding / 2 $popover_padding;
+        min-width: 37.5em;
+        min-height: 23em;
     }
 
+    // list of apps
+    .scrollable {
+        padding-top: $spacing / 2;
+    }
+
+    .header-separator {
+        background-color: $hover;
+    }
+
+    .app-separator {
+        background-color: transparent;
+    }
+
+    .math-result,
     .placeholder {
-        margin-top: $spacing;
+        margin-top: $spacing * 2;
         color: $fg_color;
         font-size: 1.2em;
     }
@@ -39,7 +59,9 @@ window#applauncher .applauncher{
     .app {
         all: unset;
         transition: $transition;
-        padding: $spacing;
+        padding: $spacing / 2;
+        margin-right: $spacing * 2; //from scroll wheel
+        border-radius: $radii / 2;
 
         label {
             transition: $transition;
@@ -50,6 +72,7 @@ window#applauncher .applauncher{
 
             &.description {
                 color: transparentize($fg_color, 0.3);
+                font-size: small;
             }
         }
 
@@ -59,8 +82,10 @@ window#applauncher .applauncher{
         }
 
         &:hover, &:focus {
+            background-color: #0059D1;
+
             .title {
-                color: $accent;
+                // color: $accent;
             }
 
             image {

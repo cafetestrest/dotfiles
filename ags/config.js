@@ -34,7 +34,7 @@ export default {
         // forMonitors(FloatingDock),
         // forMonitors(Desktop),
         forMonitors(Notifications),
-        // Applauncher(),
+        Applauncher(),
         // Overview(),
         Dashboard(),
         Weather(),

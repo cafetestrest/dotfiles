@@ -15,7 +15,7 @@ const AppItem = (app, window) => Button({
         children: [
             Icon({
                 icon: app.app.get_string('Icon'),
-                size: 42,
+                size: 20,
             }),
             Box({
                 vertical: true,
@@ -58,12 +58,39 @@ const Applauncher = ({ windowName = 'applauncher' } = {}) => {
             }
         },
         onChange: ({ text }) => {
+            function containsMathOperation(text) {
+                // Define a regular expression to match mathematical operators
+                const mathOperationRegex = /[+\-*/]/;
+
+                // Use the test method to check if the text contains a math operation
+                return mathOperationRegex.test(text);
+            }
+
+            let mathResult = null;
+
+            if (containsMathOperation(text)) {
+                try {
+                    mathResult = eval(text);
+                } catch (error) {
+                    // do nothing
+                }
+            }
+
             list.children = Applications.query(text).map(app => [
-                Separator(),
+                // Separator(),
                 AppItem(app, windowName),
             ]).flat();
-            list.add(Separator());
+            list.add(Separator({ className: 'app-separator'}));
             list.show_all();
+
+            // if there is no apps being shown and there is math result, show it as a result
+            if (list.children.length === 1 && containsMathOperation(text) && mathResult) {
+                list.add(Label({
+                    className: 'math-result',
+                    label: 'Result: ' + text + ' = ' + mathResult,
+                }));
+                list.show_all();
+            }
 
             placeholder.visible = list.children.length === 1;
         },
@@ -81,7 +108,11 @@ const Applauncher = ({ windowName = 'applauncher' } = {}) => {
                     entry,
                 ],
             }),
+            Box({
+                className: 'header-separator',
+            }),
             Scrollable({
+                className: 'scrollable',
                 hscroll: 'never',
                 child: Box({
                     vertical: true,
