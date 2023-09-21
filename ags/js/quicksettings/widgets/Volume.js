@@ -7,7 +7,7 @@ import { Menu } from '../ToggleButton.js';
 const { Audio } = ags.Service;
 const { Label, Icon, Box, Slider, Button } = ags.Widget;
 
-const TypeIndicator = () => Button({
+export const TypeIndicator = () => Button({
     // onClicked: 'pactl set-sink-mute @DEFAULT_SINK@ toggle',
     onClicked: 'pamixer -t',
     onSecondaryClick: 'pamixer --default-source -t',
