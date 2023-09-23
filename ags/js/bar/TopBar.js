@@ -42,7 +42,7 @@ const Start = () => Box({
         OverviewButton(),
         SeparatorDot(),
         // Workspaces(),
-        Taskbar(),
+        Taskbar([]),
         SeparatorDot(),
         WorkspacesHypr(),
         SeparatorDot(),
