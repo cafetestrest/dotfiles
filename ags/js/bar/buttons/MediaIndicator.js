@@ -57,6 +57,11 @@ export default ({ direction } = {}) => Box({
         const player = getPlayer();
         box.visible = !!player;
 
+        if (player && player.position && player.position === -1) {
+            box.visible = false;
+            return;
+        }
+
         if (!player) {
             box._player = null;
             return;
@@ -65,7 +70,6 @@ export default ({ direction } = {}) => Box({
         if (box._player === player)
             return;
 
-        box.visible = true;
         box._player = player;
         box.children = [
             mpris.PreviousButton(player),
