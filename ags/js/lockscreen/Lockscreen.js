@@ -13,7 +13,7 @@ export default monitor => Window({
     setup: self => Layer.set_keyboard_mode(self, Layer.KeyboardMode.EXCLUSIVE),
     connections: [[Lockscreen, (w, lock) => w.visible = lock, 'lock']],
     child: Box({
-        style: 'min-width: 3000px; min-height: 2000px;',
+        style: 'min-width: 3840px; min-height: 2160px;',
         className: 'shader',
         children: [Box({
             className: 'content',

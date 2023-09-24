@@ -37,7 +37,7 @@ export const BatteryProgress = () => Box({
 export default () => Box({
     className: 'header',
     children: [
-        Avatar(),
+        // Avatar(),
         Box({
             className: 'system-box',
             vertical: true,
@@ -70,7 +70,7 @@ export default () => Box({
                         }),
                     ],
                 }),
-                BatteryProgress(),
+                // BatteryProgress(),
             ],
         }),
     ],
