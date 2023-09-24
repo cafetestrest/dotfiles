@@ -65,18 +65,21 @@ function weatherBackgroundStyle(icon, box) {
         case "🌩": {//thunderstorm
             box.setStyle(`
                 background: linear-gradient(to bottom, #0c0e23, #1a1c38, #121320, #0c0e23);
+                color: #ffffff;
             `);
             break;
         }
         case "🌑": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #2c3e50, #1a2533);
+                color: #ffffff;
             `);
             break;
         }
         case "🌕": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #001f3f, #002f4f, #003f5f, #004f6f, #005f7f);
+                color: #ffffff;
             `);
             break;
         }
@@ -98,6 +101,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #1c2331, #212a38, #263141, #2b3749, #303d51);
+                color: #ffffff;
             `);
             break;
         }
@@ -111,6 +115,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #1c2331, #1c2331, #1c2331, #293547, #38475f);
+                color: #ffffff;
             `);
             break;
         }
@@ -124,6 +129,7 @@ function weatherBackgroundStyle(icon, box) {
         case "󰙾": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #050818, #070b1d, #0a0e22, #0d1126, #10152b);
+                color: #ffffff;
             `);
             break;
         }
@@ -137,6 +143,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #0e1620, #121c2a, #162133, #18273c, #1c2c46);
+                color: #ffffff;
             `);
             break;
         }
@@ -150,6 +157,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #040d1c, #081427, #0c1a32, #101f3d, #142348);
+                color: #ffffff;
             `);
             break;
         }
@@ -163,6 +171,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #050818, #070b1d, #0a0e22, #0d1126, #10152b);
+                color: #ffffff;
             `);
             break;
         }
@@ -176,6 +185,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #0e1620, #162133, #1c263f, #232c4c, #293259);
+                color: #ffffff;
             `);
             break;
         }
@@ -189,6 +199,7 @@ function weatherBackgroundStyle(icon, box) {
         case "": {
             box.setStyle(`
                 background: linear-gradient(to bottom, #050818, #08142a, #0c1d3b, #101f47, #142556);
+                color: #ffffff;
             `);
             break;
         }

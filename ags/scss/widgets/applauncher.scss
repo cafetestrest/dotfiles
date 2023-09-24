@@ -14,6 +14,7 @@ window#applauncher .applauncher{
             // remove background and border
             background-color: transparent;
             border: none;
+            caret-color: $fg_color;
         }
 
         image {
