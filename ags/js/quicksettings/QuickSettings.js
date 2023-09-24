@@ -14,6 +14,7 @@ const { Box } = ags.Widget;
 import { IdleToggle } from './widgets/Idle.js';
 import { NightlightToggle } from './widgets/NightLight.js';
 import { SysProgress } from '../dashboard/DateColumn.js';
+import { QSWidget } from '../bar/buttons/Weather.js';
 
 const Row = (toggles, menus = []) => Box({
     className: 'row',
@@ -107,6 +108,7 @@ export default () => PopupWindow({
                     }),
                 ],
             ),
+            QSWidget()
         ],
     }),
 });
