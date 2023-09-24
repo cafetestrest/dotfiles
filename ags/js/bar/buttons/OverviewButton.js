@@ -5,9 +5,9 @@ const { execAsync } = ags.Utils;
 
 export default () => PanelButton({
     className: 'overview',
-    connections: [[ags.App, (btn, win, visible) => {
-        btn.toggleClassName('active', win === 'overview' && visible);
-    }]],
+    // connections: [[ags.App, (btn, win, visible) => {
+    //     btn.toggleClassName('active', win === 'overview' && visible);
+    // }]],
     onClicked: () => ags.App.toggleWindow('applauncher'),
     // onClicked: () => execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print),
     content: FontIcon(distroIcon),

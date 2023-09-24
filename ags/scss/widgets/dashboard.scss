@@ -124,27 +124,6 @@ window#dashboard .dashboard {
         margin-top: $spacing*2;
     }
 
-    .circular-progress-box {
-        @include widget;
-        margin-top: $spacing;
-        margin-right: $spacing;
-        &:last-child { margin-right: 0; }
-        padding: $spacing;
-
-        .circular-progress {
-            min-height: $spacing * 8;
-            min-width: $spacing * 8;
-            margin: $spacing/2;
-            font-size: $spacing;
-            background-color: $bg_color;
-            color: $accent;
-
-            image {
-                font-size: 1.8em;
-            }
-        }
-    }
-
     //weather popup
     .weather-info .weather-icon{
         font-size: 2em;
@@ -199,4 +178,25 @@ window#notification .dashboard {
 
 .weather-day:first-child {
     padding: 0;
+}
+
+.circular-progress-box {
+    @include widget;
+    margin-top: $spacing;
+    margin-right: $spacing;
+    &:last-child { margin-right: 0; }
+    padding: $spacing;
+
+    .circular-progress {
+        min-height: $spacing * 8;
+        min-width: $spacing * 8;
+        margin: $spacing/2;
+        font-size: $spacing;
+        background-color: $bg_color;
+        color: $accent;
+
+        image {
+            font-size: 1.8em;
+        }
+    }
 }

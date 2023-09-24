@@ -13,6 +13,7 @@ import MicMute from './widgets/MicMute.js';
 const { Box } = ags.Widget;
 import { IdleToggle } from './widgets/Idle.js';
 import { NightlightToggle } from './widgets/NightLight.js';
+import { SysProgress } from '../dashboard/DateColumn.js';
 
 const Row = (toggles, menus = []) => Box({
     className: 'row',
@@ -93,6 +94,19 @@ export default () => PopupWindow({
             //     [DND(), MicMute()],
             // ),
             // Media(),
+            Row(
+                [
+                    Box({
+                        className: 'system-info',
+                        children: [
+                            SysProgress('cpu', 'Cpu', '%'),
+                            SysProgress('ram', 'Ram', '%'),
+                            SysProgress('disk', 'Disk', '%'),
+                            // SysProgress('temp', 'Temperature', '°'),
+                        ],
+                    }),
+                ],
+            ),
         ],
     }),
 });

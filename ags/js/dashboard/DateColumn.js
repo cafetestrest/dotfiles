@@ -4,7 +4,7 @@ import * as vars from '../variables.js';
 const { Box, Label, Widget, CircularProgress, Icon } = ags.Widget;
 import FontIcon from '../misc/FontIcon.js';
 
-const SysProgress = (type, title, unit) => Box({
+export const SysProgress = (type, title, unit) => Box({
     className: `circular-progress-box ${type}`,
     hexpand: true,
     connections: [[vars[type], box => {
@@ -42,14 +42,14 @@ export default () => Box({
                 }),
             ],
         }),
-        Box({
-            className: 'system-info',
-            children: [
-                SysProgress('cpu', 'Cpu', '%'),
-                SysProgress('ram', 'Ram', '%'),
-                SysProgress('disk', 'Disk', '%'),
-                // SysProgress('temp', 'Temperature', '°'),
-            ],
-        }),
+        // Box({
+        //     className: 'system-info',
+        //     children: [
+        //         SysProgress('cpu', 'Cpu', '%'),
+        //         SysProgress('ram', 'Ram', '%'),
+        //         SysProgress('disk', 'Disk', '%'),
+        //         // SysProgress('temp', 'Temperature', '°'),
+        //     ],
+        // }),
     ],
 });
