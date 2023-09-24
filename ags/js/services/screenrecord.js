@@ -70,7 +70,7 @@ class RecorderService extends Service {
             area ? await execAsync(['wayshot', '-s', area, '-f', file])
                 : await execAsync(['wayshot', '-f', file]);
 
-            execAsync(['bash', '-c', `wl-copy < ${file}`]);
+            // execAsync(['bash', '-c', `wl-copy < ${file}`]).catch(console.error);
 
             const res = await execAsync([
                 'notify-send',
