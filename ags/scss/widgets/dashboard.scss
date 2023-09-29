@@ -201,3 +201,68 @@ window#notification .dashboard {
         }
     }
 }
+
+// weather window width of the weather widget
+window#weather .weather .tooltip {
+    .qsweather-widget:first-child {
+        margin: 0;
+    }
+
+    .qsweather-widget:last-child {
+        margin: 0;
+    }
+
+    .qsweather-widget {
+        margin: 0 1em;
+        min-width: 25em;
+    }
+}
+
+// shared logic for weather widget, first one only goes to qs
+window#quicksettings .quicksettings,
+window#weather .tooltip {
+    .qsweather-widget {
+        margin: 0;
+        padding: 0;
+        margin-top: $spacing * 1.5;
+        border-radius: $radii;
+    }
+    
+    .qs-weather-box-main {
+        margin: 0.5em;
+    
+        .weather-icon {
+            font-size: 42px;
+            margin-left: 0.5em;
+        }
+    
+        .weather-temperature {
+            all: unset;
+            font-size: 28px;
+            margin-left: 0.5em;
+        }
+    
+        .weather-rain {
+            margin-right: 1em;
+        }
+    
+        .weather-hour {
+            margin-right: 1em;
+        }
+    }
+    
+    .qs-weather-box-child {
+        margin-bottom: 1em;
+    
+        .weather-icon {
+            margin-top: 0.3em;
+            font-size: 24px;
+        }
+    
+        .weather-temperature {
+            all: unset;
+            margin-bottom: 0.2em;
+            font-size: 20px;
+        }
+    }
+}

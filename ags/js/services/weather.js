@@ -14,13 +14,17 @@ class WeatherService extends Service {
         execAsync(['bash', '-c', "~/.config/scripts/openweathermap.sh ags"]).catch(print);
     }
 
-    get temperatureWeather() { return this._temperatureWeather; }
+    get temperatureWeather() {
+        return this._temperatureWeather;
+    }
     setTemperatureWeather(temp) {
         this._temperatureWeather = temp;
         this.emit('changed');
     }
 
-    get tooltip() { return this._tooltip; }
+    get tooltip() {
+        return this._tooltip;
+    }
     setTooltip(text) { this._tooltip = text }
 }
 

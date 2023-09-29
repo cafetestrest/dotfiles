@@ -239,35 +239,70 @@ export const Tooltip = () => Box({
         if (tooltip) {
             box.get_children().forEach(ch => ch.destroy());
 
-            let todayOnce = true;
-            let tomorrowOnce = true;
+            let now = false;
+            let widget = null;
+            let prevDayName = null;
+            let numOfWidgets = 3;
 
             tooltip.forEach(w => {
-                if (tomorrowOnce && 'Tomorrow' === w.justDayOfTheWeek) {
-                    box.add(
-                        Label({ className: 'weather-day', })
-                    );
+                if (numOfWidgets > 0 && w.date !== prevDayName) {
+                    numOfWidgets = numOfWidgets - 1;
+                    now = true;
+                }
+                prevDayName = w.date;
 
-                    tomorrowOnce = false;
+                if (now === false) {
+                    widget.add(
+                        Box({
+                            className: 'qs-weather-box-child',
+                            vertical: true,
+                            hexpand: true,
+                            children: [
+                                // Label({ label: w.date.substring(0, 3).toUpperCase(), }),
+                                Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                Label({ label: w.icon, className: 'weather-icon', }),
+                                Label({ label: w.temperature, className: 'weather-temperature' }),
+                                Label({ label: w.rain, className: 'weather-rain', }),
+                                Label({ label: " " + w.wind, }),
+                                Label({ label: '↑ ' + w.maxTemp, }),
+                                // Label({ label: '↓ ' + w.minTemp, }),
+                            ],
+                        }),
+                    );
                 }
 
-                if (todayOnce && 'Today' === w.justDayOfTheWeek) {
+                if (now) {
+                    now = false;
+
+                    widget = Box({
+                        className: 'qs-weather-box-forecast',
+                        hexpand: true,
+                    });
+
                     box.add(
-                        Label({ className: 'weather-day', })
+                        Box({
+                            className: 'qsweather-widget',
+                            vertical: true,
+                            hexpand: true,
+                            children: [
+                                Box({
+                                    className: 'qs-weather-box-main',
+                                    children: [
+                                        Label({ label: w.temperature, className: 'weather-temperature' }),
+                                        Label({ label: w.icon, className: 'weather-icon', }),
+                                        Box({ hexpand: true }),
+                                        Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
+                                        Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                    ]
+                                }),
+                                widget,
+                            ],
+                            connections: [[Weather, box => {
+                                weatherBackgroundStyle(w.icon, box)
+                            }]]
+                        })
                     );
-
-                    todayOnce = false;
                 }
-
-                if ('Today' !== w.justDayOfTheWeek && 'Tomorrow' !== w.justDayOfTheWeek) {
-                    box.add(
-                        Label({ className: 'weather-day', })
-                    );
-                }
-
-                box.add(
-                    WeatherInfo(w)
-                );
             });
         }
     }]],
@@ -344,7 +379,7 @@ export const QSWidget = () => Box({
                                 Label({ label: w.hour + 'h', className: 'weather-hour', }),
                                 Label({ label: w.icon, className: 'weather-icon', }),
                                 Label({ label: w.temperature, className: 'weather-temperature' }),
-                                Label({ label: w.rain, className: 'weather-horainur', }),
+                                Label({ label: w.rain, className: 'weather-rain', }),
                             ],
                         }),
                     );
