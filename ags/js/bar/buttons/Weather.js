@@ -280,7 +280,7 @@ export const Tooltip = () => Box({
                             hexpand: true,
                             children: [
                                 // Label({ label: w.date.substring(0, 3).toUpperCase(), }),
-                                Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                Label({ label: numOfWidgets <= 0 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
                                 Label({ label: w.icon, className: 'weather-icon', }),
                                 Label({ label: w.temperature, className: 'weather-temperature' }),
                                 Label({ label: w.rain, className: 'weather-rain', }),
@@ -313,7 +313,7 @@ export const Tooltip = () => Box({
                                         Label({ label: w.icon, className: 'weather-icon', }),
                                         Box({ hexpand: true }),
                                         Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
-                                        Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                        Label({ label: numOfWidgets <= 1 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
                                     ]
                                 }),
                                 widget,
