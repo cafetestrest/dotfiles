@@ -214,7 +214,14 @@ window#weather .weather .tooltip {
 
     .qsweather-widget {
         margin: 0 1em;
-        min-width: 25em;
+    }
+
+    .qs-weather-box-child {
+        min-width: 5em;
+    }
+
+    .qs-weather-box-main {
+        min-width: 20em;
     }
 }
 
