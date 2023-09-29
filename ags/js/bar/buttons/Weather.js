@@ -244,6 +244,7 @@ export const Tooltip = () => Box({
             let widget = null;
             let prevDayName = null;
             let numOfWidgets = 3;
+            let emptyDayWeather = count;
 
             tooltip.forEach(w => {
                 if (numOfWidgets > 0 && w.date !== prevDayName) {
@@ -251,9 +252,11 @@ export const Tooltip = () => Box({
                     now = true;
 
                     // if only one weather day info - empty widget
-                    if (count === 1) {
+                    if (count > 0 && count - 1 === emptyDayWeather) {
                         now = false;
                     }
+
+                    emptyDayWeather = count;
 
                     // adds spacing
                     if (count > 0 && now) {
@@ -266,6 +269,7 @@ export const Tooltip = () => Box({
                         );
                     }
                 }
+
                 prevDayName = w.date;
 
                 if (now === false) {
