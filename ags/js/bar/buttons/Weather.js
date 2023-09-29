@@ -239,6 +239,7 @@ export const Tooltip = () => Box({
         if (tooltip) {
             box.get_children().forEach(ch => ch.destroy());
 
+            let count = 0;
             let now = false;
             let widget = null;
             let prevDayName = null;
@@ -248,6 +249,22 @@ export const Tooltip = () => Box({
                 if (numOfWidgets > 0 && w.date !== prevDayName) {
                     numOfWidgets = numOfWidgets - 1;
                     now = true;
+
+                    // if only one weather day info - empty widget
+                    if (count === 1) {
+                        now = false;
+                    }
+
+                    // adds spacing
+                    if (count > 0 && now) {
+                        box.add(
+                            Box({
+                                children: [
+                                    Label({ label: ' ', className: 'weather-spacing' }),
+                                ],
+                            }),
+                        );
+                    }
                 }
                 prevDayName = w.date;
 
@@ -300,9 +317,11 @@ export const Tooltip = () => Box({
                             connections: [[Weather, box => {
                                 weatherBackgroundStyle(w.icon, box)
                             }]]
-                        })
+                        }),
                     );
                 }
+
+                count = count + 1;
             });
         }
     }]],

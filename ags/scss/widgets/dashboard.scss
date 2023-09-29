@@ -204,16 +204,12 @@ window#notification .dashboard {
 
 // weather window width of the weather widget
 window#weather .weather .tooltip {
-    .qsweather-widget:first-child {
-        margin: 0;
-    }
-
-    .qsweather-widget:last-child {
-        margin: 0;
+    .weather-spacing {
+        padding-left: $spacing;
     }
 
     .qsweather-widget {
-        margin: 0 1em;
+        margin: 0;
     }
 
     .qs-weather-box-child {
