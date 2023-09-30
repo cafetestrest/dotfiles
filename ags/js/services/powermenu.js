@@ -13,7 +13,7 @@ export default class PowerMenu extends Service {
             'lock': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
             'sleep': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
-            'logout': ['pkill Hyprland', 'Log Out'],
+            'logout': [`loginctl terminate-user ${ags.Utils.USER}`, 'Log Out'],
             'shutdown': ['shutdown now', 'Shutdown'],
         }[action];
 

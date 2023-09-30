@@ -252,7 +252,7 @@ export const Tooltip = () => Box({
                     now = true;
 
                     // if only one weather day info - empty widget
-                    if (count > 0 && count - 1 === emptyDayWeather) {
+                    if (count > 0 && (count - 1 === emptyDayWeather || count - 2 === emptyDayWeather)) {
                         now = false;
                     }
 
