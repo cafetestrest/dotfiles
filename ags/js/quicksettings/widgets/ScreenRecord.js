@@ -3,6 +3,9 @@ import { ArrowToggleButton, Menu, opened } from '../ToggleButton.js';
 import icons from '../../icons.js';
 const { Label, Box, Button, Icon } = ags.Widget;
 
+// todo remove after
+import Lockscreen from '../../services/lockscreen.js';
+
 const recorders = [
     {
         name: 'Screenshot',
@@ -18,6 +21,11 @@ const recorders = [
         name: 'Screen Record',
         icon: icons.recorder.recording,
         click: () => ScreenRecord.start(),
+    },
+    {
+        name: 'Lockscreen',
+        icon: icons.powermenu.lock,
+        click: () => Lockscreen.lockscreen(),
     },
 ];
 
