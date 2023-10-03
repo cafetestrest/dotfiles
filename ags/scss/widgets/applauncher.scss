@@ -17,6 +17,10 @@ window#applauncher .applauncher{
             caret-color: $fg_color;
         }
 
+        entry {
+            padding-left: $spacing;
+        }
+
         image {
             margin-right: $spacing;
             -gtk-icon-transform: scale(0.8);

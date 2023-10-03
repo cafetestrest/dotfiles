@@ -1,117 +1,66 @@
 import Header from './widgets/Header.js';
 import PopupWindow from '../misc/PopupWindow.js';
-import { VolumeWithoutPercent, SinkSelector, AppMixer } from './widgets/Volume.js';
-// import { NetworkToggle, WifiSelection } from './widgets/Network.js';
-// import { NetworkToggle } from './widgets/Network.js';
+import { Volume, SinkSelector, AppMixer } from './widgets/Volume.js';
+import { NetworkToggle, WifiSelection } from './widgets/Network.js';
 import { BluetoothToggle, BluetoothDevices } from './widgets/Bluetooth.js';
 import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
-// import { ProfileToggle, ProfileSelector } from './widgets/AsusProfile.js';
-// import Media from './widgets/Media.js';
-// import Brightness from './widgets/Brightness.js';
+import { ProfileToggle, ProfileSelector } from './widgets/AsusProfile.js';
+import Media from './widgets/Media.js';
+import Brightness from './widgets/Brightness.js';
 import DND from './widgets/DND.js';
 import MicMute from './widgets/MicMute.js';
-const { Box } = ags.Widget;
-import { IdleToggle } from './widgets/Idle.js';
-import { NightlightToggle } from './widgets/NightLight.js';
-import { SysProgress } from '../dashboard/DateColumn.js';
-import { QSWidget } from '../bar/buttons/Weather.js';
-import { ScreenRecordToggle, ScreenRecordSelector } from './widgets/ScreenRecord.js';
+import { Widget } from '../imports.js';
 
-const Row = (toggles, menus = []) => Box({
+const Row = (toggles, menus = []) => Widget.Box({
     className: 'row',
     vertical: true,
     children: [
-        Box({
+        Widget.Box({
             children: toggles,
         }),
         ...menus,
     ],
 });
 
-// const Homogeneous = toggles => Box({
-//     homogeneous: true,
-//     children: toggles,
-// });
+const Homogeneous = toggles => Widget.Box({
+    homogeneous: true,
+    children: toggles,
+});
 
 export default () => PopupWindow({
     name: 'quicksettings',
     anchor: 'top right',
     layout: 'top right',
-    content: Box({
+    content: Widget.Box({
         className: 'quicksettings',
         vertical: true,
         children: [
-            // Row(
-            //     [Header()],
-            // ),
             Row(
-                [
-                    // NetworkToggle(),
-                    BluetoothToggle(),
-                    Box({ className: 'button-spacing' }),
-                    IdleToggle(),
-                ],
-                [
-                    // WifiSelection(),
-                    BluetoothDevices(),
-                ],
+                [Header()],
             ),
-            Row(
-                [
-                    DND(),
-                    Box({ className: 'button-spacing' }),
-                    NightlightToggle()
-                ],
-            ),
-            Row(
-                [
-                    ThemeToggle(),
-                    Box({ className: 'button-spacing' }),
-                    // MicMute(),
-                    ScreenRecordToggle()
-                ],
-                [
-                    // ProfileSelector(),
-                    ThemeSelector(),
-                    ScreenRecordSelector(),
-                ],
-            ),
-            Row([Box({
-                className: 'qsvolume',
+            Row([Widget.Box({
+                className: 'slider-box',
                 vertical: true,
                 children: [
                     Row(
-                        [
-                            VolumeWithoutPercent()
-                        ],
-                        [
-                            SinkSelector(),
-                            AppMixer()
-                        ],
+                        [Volume()],
+                        [SinkSelector(), AppMixer()],
                     ),
-                    // Row(
-                    //     [Brightness()],
-                    // ),
+                    Row(
+                        [Brightness()],
+                    ),
                 ],
             })]),
-            // Row(
-            //     [DND(), MicMute()],
-            // ),
-            // Media(),
             Row(
-                [
-                    Box({
-                        className: 'system-info',
-                        children: [
-                            SysProgress('cpu', 'Cpu', '%'),
-                            SysProgress('ram', 'Ram', '%'),
-                            SysProgress('disk', 'Disk', '%'),
-                            // SysProgress('temp', 'Temperature', '°'),
-                        ],
-                    }),
-                ],
+                [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
+                [WifiSelection(), BluetoothDevices()],
             ),
-            QSWidget()
+            Row(
+                [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
+                [ProfileSelector(), ThemeSelector()],
+            ),
+            Media(),
         ],
     }),
 });
+//todo

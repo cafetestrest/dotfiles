@@ -1,22 +1,23 @@
 import icons from '../../icons.js';
 import Spinner from '../../misc/Spinner.js';
 import { Menu, ArrowToggleButton } from '../ToggleButton.js';
-const { Bluetooth } = ags.Service;
-const { Icon, Label, Box } = ags.Widget;
+import { Bluetooth, Widget } from '../../imports.js';
+import Gtk from 'gi://Gtk';
+
 const { instance } = ags.Service.Bluetooth;
 
 let numOfTries = 0;
 
 export const BluetoothToggle = () => ArrowToggleButton({
     name: 'bluetooth',
-    icon: Icon({
+    icon: Widget.Icon({
         connections: [[Bluetooth, icon => {
             icon.icon = Bluetooth.enabled
                 ? icons.bluetooth.enabled
                 : icons.bluetooth.disabled;
         }]],
     }),
-    label: Label({
+    label: Widget.Label({
         truncate: 'end',
         connections: [[Bluetooth, label => {
             if (!Bluetooth.enabled)
@@ -52,28 +53,30 @@ export const BluetoothToggle = () => ArrowToggleButton({
 
 export const BluetoothDevices = () => Menu({
     name: 'bluetooth',
-    icon: Icon(icons.bluetooth.disabled),
-    title: Label('Bluetooth'),
-    content: Box({
+    icon: Widget.Icon(icons.bluetooth.disabled),
+    title: Widget.Label('Bluetooth'),
+    content: Widget.Box({
         hexpand: true,
         vertical: true,
         connections: [[Bluetooth, box => {
-            box.children = Bluetooth.devices.map(device => Box({
-                className: 'bluetooth-devices',
-                children: [
-                    Icon(device.iconName + '-symbolic'),
-                    Label(device.name),
-                    device.batteryPercentage > 0 && Label(`${device.batteryPercentage}%`),
-                    Box({ hexpand: true }),
-                    device.connecting ? Spinner() : ags.Widget({
-                        type: imports.gi.Gtk.Switch,
-                        active: device.connected,
-                        connections: [['notify::active', ({ active }) => {
-                            device.setConnection(active);
-                        }]],
-                    }),
-                ],
-            }));
+            box.children = Bluetooth.devices
+                .filter(d => d.name)
+                .map(device => Widget.Box({
+                    className: 'bluetooth-devices',//todo check if this needs to be changed
+                    children: [
+                        Widget.Icon(device.iconName + '-symbolic'),
+                        Widget.Label(device.name),
+                        device.batteryPercentage > 0 && Widget.Label(`${device.batteryPercentage}%`),
+                        Widget.Box({ hexpand: true }),
+                        device.connecting ? Spinner() : Widget({
+                            type: Gtk.Switch,
+                            active: device.connected,
+                            connections: [['notify::active', ({ active }) => {
+                                device.setConnection(active);
+                            }]],
+                        }),
+                    ],
+                }));
         }]],
     }),
 });

@@ -1,17 +1,16 @@
 import icons from '../../icons.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
-const { Notifications } = ags.Service;
-const { Icon, Label } = ags.Widget;
+import { Notifications, Widget } from '../../imports.js';
 
 export default () => SimpleToggleButton({
-    icon: Icon({
+    icon: Widget.Icon({
         connections: [[Notifications, icon => {
             icon.icon = Notifications.dnd
                 ? icons.notifications.silent
                 : icons.notifications.noisy;
-        }]],
+        }, 'notify::dnd']],
     }),
-    label: Label({
+    label: Widget.Label({
         connections: [[Notifications, label => {
             label.label = Notifications.dnd ? 'Silent' : 'Noisy';
         }]],

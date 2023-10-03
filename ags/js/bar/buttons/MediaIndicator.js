@@ -1,8 +1,7 @@
 import HoverRevealer from '../../misc/HoverRevealer.js';
 import * as mpris from '../../misc/mpris.js';
 import options from '../../options.js';
-const { Box, Label } = ags.Widget;
-const { Mpris } = ags.Service;
+import { Widget, Mpris, Utils } from '../../imports.js';
 
 export const getPlayer = (name = options.preferredMpris) =>
     Mpris.getPlayer(name) || Mpris.players[0] || null;
@@ -15,12 +14,12 @@ const Indicator = ({ player, direction = 'right' } = {}) => HoverRevealer({
     onScrollDown: () => player.previous(),
     onSecondaryClick: () => player.playPause(),
     indicator: mpris.PlayerIcon(player),
-    child: Label({
+    child: Widget.Label({
         vexpand: true,
         truncate: 'end',
         maxWidthChars: 40,
         connections: [[player, label => {
-            label.label = `${player.trackArtists[0]}   ${player.trackTitle}   `;
+            label.label = `${player.trackArtists.join(', ')}   ${player.trackTitle}   `;
         }]],
     }),
     connections: [[player, revealer => {
@@ -45,13 +44,13 @@ const Indicator = ({ player, direction = 'right' } = {}) => HoverRevealer({
         // revealer._current = player.trackTitle;
         revealer._current = truncateString(player.trackTitle, 50);
         revealer.revealChild = true;
-        ags.Utils.timeout(3000, () => {
+        Utils.timeout(3000, () => {
             revealer.revealChild = false;
         });
     }]],
 });
 
-export default ({ direction } = {}) => Box({
+export default ({ direction } = {}) => Widget.Box({
     className: 'media-player',
     connections: [[Mpris, box => {
         const player = getPlayer();
@@ -71,10 +70,6 @@ export default ({ direction } = {}) => Box({
             return;
 
         box._player = player;
-        box.children = [
-            mpris.PreviousButton(player),
-            Indicator({ player, direction }),
-            mpris.NextButton(player),
-        ];
-    }]],
+        box.children = [Indicator({ player, direction })];
+    }, 'notify::players']],//todo other buttons prev/next
 });

@@ -1,15 +1,18 @@
-const { App, Service } = ags;
+import { App, Service } from '../imports.js';
 
-export default class PowerMenu extends Service {
+class PowerMenu extends Service {
     static {
-        Service.PowerMenu = this;
-        Service.register(this);
+        Service.register(this, {}, {
+            'title': ['string'],
+            'cmd': ['string'],
+        });
     }
 
-    static instance = new PowerMenu();
+    get title() { return this._title || ''; }
+    get cmd() { return this._cmd || ''; }
 
-    static action(action) {
-        const [cmd, title] = {
+    action(action) {
+        [this._cmd, this._title] = {
             'lock': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
             'sleep': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
@@ -17,11 +20,12 @@ export default class PowerMenu extends Service {
             'shutdown': ['shutdown now', 'Shutdown'],
         }[action];
 
-        PowerMenu.instance.cmd = cmd;
-        PowerMenu.instance.title = title;
-        PowerMenu.instance.emit('changed');
+        this.notify('cmd');
+        this.notify('title');
+        this.emit('changed');
         App.closeWindow('powermenu');
-        // App.openWindow('verification');
-        ags.Utils.exec(PowerMenu.instance.cmd)
+        // App.openWindow('verification');//todo if not working, check logic in verification (missing this: ags.Utils.exec(PowerMenu.instance.cmd))
     }
 }
+
+export default new PowerMenu();

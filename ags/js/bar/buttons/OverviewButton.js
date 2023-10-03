@@ -1,14 +1,13 @@
 import PanelButton from '../PanelButton.js';
 import FontIcon from '../../misc/FontIcon.js';
 import { distroIcon } from '../../variables.js';
-const { execAsync } = ags.Utils;
+import { App } from '../../imports.js';
 
 export default () => PanelButton({
     className: 'overview',
-    // connections: [[ags.App, (btn, win, visible) => {
+    // connections: [[App, (btn, win, visible) => {
     //     btn.toggleClassName('active', win === 'overview' && visible);
     // }]],
-    onClicked: () => ags.App.toggleWindow('applauncher'),
-    // onClicked: () => execAsync(['bash', '-c', "pkill rofi || rofi -show drun -config ~/.config/rofi/spotlight.rasi"]).catch(print),
+    onClicked: () => App.toggleWindow('applauncher'),
     content: FontIcon(distroIcon),
 });
