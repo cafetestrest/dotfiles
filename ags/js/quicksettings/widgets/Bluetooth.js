@@ -62,7 +62,7 @@ export const BluetoothDevices = () => Menu({
             box.children = Bluetooth.devices
                 .filter(d => d.name)
                 .map(device => Widget.Box({
-                    className: 'bluetooth-devices',//todo check if this needs to be changed
+                    className: 'bluetooth-devices',
                     children: [
                         Widget.Icon(device.iconName + '-symbolic'),
                         Widget.Label(device.name),
