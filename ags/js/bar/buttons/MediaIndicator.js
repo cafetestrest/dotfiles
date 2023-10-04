@@ -70,6 +70,10 @@ export default ({ direction } = {}) => Widget.Box({
             return;
 
         box._player = player;
-        box.children = [Indicator({ player, direction })];
-    }, 'notify::players']],//todo other buttons prev/next
+        box.children = [
+            mpris.PreviousButton(player),
+            Indicator({ player, direction }),
+            mpris.NextButton(player),
+        ];
+    }, 'notify::players']],
 });

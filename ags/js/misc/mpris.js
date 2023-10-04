@@ -52,10 +52,23 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Widget
     className: 'player-icon',
     tooltipText: player.identity || '',
     connections: [[player, icon => {
+        let selectedIcon = null;
         const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
         Utils.lookUpIcon(name)
-            ? icon.icon = name
-            : icon.icon = icons.mpris.fallback;//todo icon
+            ? selectedIcon = name
+            : selectedIcon = icons.mpris.pause;
+
+        //check if media is playing, if not them remove media icon
+        if (player && player.position && player.position === -1) {
+            selectedIcon = null;
+        }
+
+        //check if media is paused, update the icon is it is
+        if (player && player.playBackStatus === 'Paused') {
+            selectedIcon = icons.mpris.play;
+        }
+
+        icon.icon_name = selectedIcon;
     }]],
 });
 
@@ -122,7 +135,7 @@ const PlayerButton = ({ player, items, onClick, prop, canProp, cantValue }) => W
     }),
     onClicked: player[onClick].bind(player),
     binds: [['visible', player, canProp, c => c !== cantValue]],
-});//todo logic?
+});
 
 export const ShuffleButton = player => PlayerButton({
     player,
@@ -189,10 +202,10 @@ export const PlayPauseButton = player => PlayerButton({
 export const PreviousButton = player => PlayerButton({
     player,
     items: [
-        ['true', Widget.Label({
+        ['true', Widget.Icon({
             className: 'previous',
-            label: icons.mpris.prev,
-        })],//todo icon
+            icon: icons.mpris.previcon,
+        })],
     ],
     onClick: 'previous',
     prop: 'can-go-prev',
@@ -203,10 +216,10 @@ export const PreviousButton = player => PlayerButton({
 export const NextButton = player => PlayerButton({
     player,
     items: [
-        ['true', Widget.Label({
+        ['true', Widget.Icon({
             className: 'next',
-            label: icons.mpris.next,
-        })],//todo icon
+            icon: icons.mpris.nexticon,
+        })],
     ],
     onClick: 'next',
     prop: 'can-go-next',

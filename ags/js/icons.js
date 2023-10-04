@@ -83,6 +83,10 @@ export default {
         stopped: '󰐍',
         prev: '󰒮',
         next: '󰒭',
+        pause: 'media-playback-pause-symbolic',
+        play: 'media-playback-start-symbolic',
+        nexticon: 'go-next-symbolic',
+        previcon: 'go-previous-symbolic',
     },
     ui: {
         arrow: {

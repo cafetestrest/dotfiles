@@ -33,18 +33,30 @@ const AppButton = ({ icon, ...rest }) => Widget.Button({
     }),
 });
 
-//todo get back icons
-const Taskbar = () => Widget.Box({
+export const Taskbar = () => Widget.Box({
+    className: 'taskbar',
     binds: [['children', Hyprland, 'clients', c => c.map(client => {
+        const iconNames = {
+            'jetbrains-phpstorm': 'phpstorm',
+            // 'Rofi': 'rofi',
+        };
+
         for (const appName of pinned) {
             if (client.class.toLowerCase().includes(appName.toLowerCase()))
                 return null;
         }
         for (const app of Applications.list) {
             if (client.title && app.match(client.title) ||
-                client.class && app.match(client.class)) {
+                client.class && app.match(client.class) ||
+                iconNames.hasOwnProperty(client.class)) {
+                let newIcon = false;
+
+                if (iconNames.hasOwnProperty(client.class)) {
+                    newIcon = iconNames[client.class]
+                }
+
                 return AppButton({
-                    icon: app.iconName,
+                    icon: newIcon === false ? app.iconName : newIcon,
                     tooltipText: app.name,
                     onMiddleClick: () => app.launch(),
                 });

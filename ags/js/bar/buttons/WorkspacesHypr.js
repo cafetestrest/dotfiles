@@ -1,8 +1,6 @@
-const { Hyprland } = ags.Service;
-const { Box, Button, Label } = ags.Widget;
-const { execAsync } = ags.Utils;
+import { Hyprland, Widget, Utils } from '../../imports.js';
 
-export default () => Box({
+export default () => Widget.Box({
     className: 'hyprworkspaces panel-button',
     connections: [[Hyprland, box => {
         // remove every children
@@ -21,11 +19,11 @@ export default () => Box({
                 wsnum = 0;
             }
 
-            box.add(Button({
-                onClicked: () => execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
-                onScrollUp: () => execAsync(`hyprctl dispatch workspace +1`).catch(print),
-                onScrollDown: () => execAsync(`hyprctl dispatch workspace -1`).catch(print),
-                child: Label(`${wsnum.toString()}`),
+            box.add(Widget.Button({
+                onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+                onScrollUp: () => Utils.execAsync(`hyprctl dispatch workspace +1`).catch(print),
+                onScrollDown: () => Utils.execAsync(`hyprctl dispatch workspace -1`).catch(print),
+                child: Widget.Label(`${wsnum.toString()}`),
                 className: Hyprland.active.workspace.id == i ? 'focused' : '',
             }));
         }

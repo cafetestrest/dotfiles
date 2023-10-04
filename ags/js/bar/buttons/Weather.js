@@ -1,12 +1,11 @@
-const { App } = ags;
-const { Box, Button, Label, Stack, Icon } = ags.Widget;
 import Weather from '../../services/weather.js';
+import { App, Widget } from '../../imports.js';
 
 export const TemperatureIndicator = ({
     disabled = null,
     enabled = PannelButton(),
     ...rest
-} = {}) => Stack({
+} = {}) => Widget.Stack({
     ...rest,
     items: [
         ['disabled', disabled],
@@ -20,7 +19,7 @@ export const TemperatureIndicator = ({
     }]],
 });
 
-export const PannelButton = props => Button({
+export const PannelButton = props => Widget.Button({
     ...props,
     className: 'weather panel-button',
     child: Temperature(),
@@ -30,7 +29,7 @@ export const PannelButton = props => Button({
     }]],
 });
 
-export const Temperature = props => Label({
+export const Temperature = props => Widget.Label({
     ...props,
     connections: [[Weather, label => {
         if (Weather.temperatureWeather && label.label !== Weather.temperatureWeather) {
@@ -213,26 +212,26 @@ function weatherBackgroundStyle(icon, box) {
     }
 }
 
-export const WeatherInfo = (weatherData) => Box({
+export const WeatherInfo = (weatherData) => Widget.Box({
     className: 'weather-info',
     vertical: true,
     children: [
-        Label({ label: weatherData.date.substring(0, 3).toUpperCase(), }),
-        Label({ label: weatherData.hour + 'h', }),
-        Label({ label: weatherData.icon, className: 'weather-icon', }),
-        Label({ label: weatherData.temperature, className: 'weather-temperature' }),
-        Label({ label: "☔ " + weatherData.rain, }),
-        Label({ label: " " + weatherData.wind, }),
-        // Label({ label: weatherData.humidity, }),
-        Label({ label: '↑ ' + weatherData.maxTemp, }),
-        Label({ label: '↓ ' + weatherData.minTemp, }),
+        Widget.Label({ label: weatherData.date.substring(0, 3).toUpperCase(), }),
+        Widget.Label({ label: weatherData.hour + 'h', }),
+        Widget.Label({ label: weatherData.icon, className: 'weather-icon', }),
+        Widget.Label({ label: weatherData.temperature, className: 'weather-temperature' }),
+        Widget.Label({ label: "☔ " + weatherData.rain, }),
+        Widget.Label({ label: " " + weatherData.wind, }),
+        // Widget.Label({ label: weatherData.humidity, }),
+        Widget.Label({ label: '↑ ' + weatherData.maxTemp, }),
+        Widget.Label({ label: '↓ ' + weatherData.minTemp, }),
     ],
     connections: [[Weather, box => {
         weatherBackgroundStyle(weatherData.icon, box)
     }]],
 });
 
-export const Tooltip = () => Box({
+export const Tooltip = () => Widget.Box({
     connections: [[Weather, box => {
         let tooltip = Weather.tooltip;
 
@@ -261,9 +260,9 @@ export const Tooltip = () => Box({
                     // adds spacing
                     if (count > 0 && now) {
                         box.add(
-                            Box({
+                            Widget.Box({
                                 children: [
-                                    Label({ label: ' ', className: 'weather-spacing' }),
+                                    Widget.Label({ label: ' ', className: 'weather-spacing' }),
                                 ],
                             }),
                         );
@@ -274,19 +273,19 @@ export const Tooltip = () => Box({
 
                 if (now === false) {
                     widget.add(
-                        Box({
+                        Widget.Box({
                             className: 'qs-weather-box-child',
                             vertical: true,
                             hexpand: true,
                             children: [
-                                // Label({ label: w.date.substring(0, 3).toUpperCase(), }),
-                                Label({ label: numOfWidgets <= 0 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
-                                Label({ label: w.icon, className: 'weather-icon', }),
-                                Label({ label: w.temperature, className: 'weather-temperature' }),
-                                Label({ label: w.rain, className: 'weather-rain', }),
-                                Label({ label: numOfWidgets <= 0 ? '↑ ' + w.maxTemp : " " + w.wind, }),
-                                Label({ label: numOfWidgets <= 0 ? '↓ ' + w.minTemp : '↑ ' + w.maxTemp, }),
-                                // Label({ label: '↓ ' + w.minTemp, }),
+                                // Widget.Label({ label: w.date.substring(0, 3).toUpperCase(), }),
+                                Widget.Label({ label: numOfWidgets <= 0 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
+                                Widget.Label({ label: w.icon, className: 'weather-icon', }),
+                                Widget.Label({ label: w.temperature, className: 'weather-temperature' }),
+                                Widget.Label({ label: w.rain, className: 'weather-rain', }),
+                                Widget.Label({ label: numOfWidgets <= 0 ? '↑ ' + w.maxTemp : " " + w.wind, }),
+                                Widget.Label({ label: numOfWidgets <= 0 ? '↓ ' + w.minTemp : '↑ ' + w.maxTemp, }),
+                                // Widget.Label({ label: '↓ ' + w.minTemp, }),
                             ],
                         }),
                     );
@@ -295,25 +294,25 @@ export const Tooltip = () => Box({
                 if (now) {
                     now = false;
 
-                    widget = Box({
+                    widget = Widget.Box({
                         className: 'qs-weather-box-forecast',
                         hexpand: true,
                     });
 
                     box.add(
-                        Box({
+                        Widget.Box({
                             className: 'qsweather-widget',
                             vertical: true,
                             hexpand: true,
                             children: [
-                                Box({
+                                Widget.Box({
                                     className: 'qs-weather-box-main',
                                     children: [
-                                        Label({ label: w.temperature, className: 'weather-temperature' }),
-                                        Label({ label: w.icon, className: 'weather-icon', }),
-                                        Box({ hexpand: true }),
-                                        Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
-                                        Label({ label: numOfWidgets <= 1 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
+                                        Widget.Label({ label: w.temperature, className: 'weather-temperature' }),
+                                        Widget.Label({ label: w.icon, className: 'weather-icon', }),
+                                        Widget.Box({ hexpand: true }),
+                                        Widget.Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
+                                        Widget.Label({ label: numOfWidgets <= 1 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', className: 'weather-hour', }),
                                     ]
                                 }),
                                 widget,
@@ -331,18 +330,18 @@ export const Tooltip = () => Box({
     }]],
 });
 
-export const ResetTimer = props => Label({
+export const ResetTimer = props => Widget.Label({
     ...props,
     connections: [[600000, label => {
         Weather.weatherData
     }]],
 });
 
-export const Forecast = () => Box({
+export const Forecast = () => Widget.Box({
     className: 'datemenu',
     vertical: true,
     children: [
-        Box({
+        Widget.Box({
             className: 'tooltip',
             halign: 'center',
             children: [
@@ -353,11 +352,11 @@ export const Forecast = () => Box({
     ]
 });
 
-export const PopupContent = () => Box({
+export const PopupContent = () => Widget.Box({
     className: 'weather',
     vexpand: false,
     children: [
-        Box({
+        Widget.Box({
             vertical: true,
             children: [
                 Forecast({ className: 'datemenu', }),
@@ -367,10 +366,10 @@ export const PopupContent = () => Box({
     ]
 });
 
-export const RefreshButton = props => Button({
+export const RefreshButton = props => Widget.Button({
     ...props,
     className: 'weather-refresh',
-    child: Icon({
+    child: Widget.Icon({
         icon: 'view-refresh-symbolic',
         halign: 'end',
     }),
@@ -379,7 +378,7 @@ export const RefreshButton = props => Button({
     },
 });
 
-export const QSWidget = () => Box({
+export const QSWidget = () => Widget.Box({
     connections: [[Weather, box => {
         let tooltip = Weather.tooltip;
 
@@ -394,15 +393,15 @@ export const QSWidget = () => Box({
             tooltip.forEach(w => {
                 if (count > 0 && now === false) {
                     widget.add(
-                        Box({
+                        Widget.Box({
                             className: 'qs-weather-box-child',
                             vertical: true,
                             hexpand: true,
                             children: [
-                                Label({ label: w.hour + 'h', className: 'weather-hour', }),
-                                Label({ label: w.icon, className: 'weather-icon', }),
-                                Label({ label: w.temperature, className: 'weather-temperature' }),
-                                Label({ label: w.rain, className: 'weather-rain', }),
+                                Widget.Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                Widget.Label({ label: w.icon, className: 'weather-icon', }),
+                                Widget.Label({ label: w.temperature, className: 'weather-temperature' }),
+                                Widget.Label({ label: w.rain, className: 'weather-rain', }),
                             ],
                         }),
                     );
@@ -411,25 +410,25 @@ export const QSWidget = () => Box({
                 if (count > 0 && now) {
                     now = false;
 
-                    widget = Box({
+                    widget = Widget.Box({
                         className: 'qs-weather-box-forecast',
                         hexpand: true,
                     });
 
                     box.add(
-                        Box({
+                        Widget.Box({
                             className: 'qsweather-widget',
                             vertical: true,
                             hexpand: true,
                             children: [
-                                Box({
+                                Widget.Box({
                                     className: 'qs-weather-box-main',
                                     children: [
-                                        Label({ label: w.temperature, className: 'weather-temperature' }),
-                                        Label({ label: w.icon, className: 'weather-icon', }),
-                                        Box({ hexpand: true }),
-                                        Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
-                                        Label({ label: w.hour + 'h', className: 'weather-hour', }),
+                                        Widget.Label({ label: w.temperature, className: 'weather-temperature' }),
+                                        Widget.Label({ label: w.icon, className: 'weather-icon', }),
+                                        Widget.Box({ hexpand: true }),
+                                        Widget.Label({ label: "☔ " + w.rain, className: 'weather-rain', }),
+                                        Widget.Label({ label: w.hour + 'h', className: 'weather-hour', }),
                                     ]
                                 }),
                                 widget

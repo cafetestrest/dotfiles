@@ -1,4 +1,4 @@
-import { App, Service } from '../imports.js';
+import { App, Service, Utils } from '../imports.js';
 
 class PowerMenu extends Service {
     static {
@@ -24,7 +24,8 @@ class PowerMenu extends Service {
         this.notify('title');
         this.emit('changed');
         App.closeWindow('powermenu');
-        // App.openWindow('verification');//todo if not working, check logic in verification (missing this: ags.Utils.exec(PowerMenu.instance.cmd))
+        // App.openWindow('verification');
+        Utils.exec(this._cmd);
     }
 }
 

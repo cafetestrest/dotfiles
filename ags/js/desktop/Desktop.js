@@ -63,4 +63,3 @@ export default monitor => Widget.Window({
     anchor: ['top', 'bottom', 'left', 'right'],
     child: Desktop(),
 });
-//todo unsure if anything needs to be changed?

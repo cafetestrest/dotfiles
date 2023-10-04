@@ -1,9 +1,9 @@
-const { execAsync } = ags.Utils;
-const { Label, Box, Icon } = ags.Widget;
 import FontIcon from '../../misc/FontIcon.js';
 import * as vars from '../../variables.js';
 
-const UsagePercentageLabel = (type, title, unit) => Label({
+import { Widget } from '../../imports.js';
+
+const UsagePercentageLabel = (type, title, unit) => Widget.Label({
     className: `label ${type}`,
     connections: [[vars[type], label => {
         const percentage = Math.floor(vars[type].value * 100);
@@ -12,14 +12,14 @@ const UsagePercentageLabel = (type, title, unit) => Label({
     }]],
 });
 
-const UsageLabel = (type, title, unit) => Label({
+const UsageLabel = (type, title, unit) => Widget.Label({
     className: `label ${type}`,
     connections: [[vars[type], label => {
         label.label = `${title}${vars[type].value}${unit}`;
     }]],
 });
 
-export const UsageCPU = () => Box({
+export const UsageCPU = () => Widget.Box({
     className: 'cpu usage panel-button',
     children: [
         FontIcon({
@@ -30,7 +30,7 @@ export const UsageCPU = () => Box({
     ]
 });
 
-export const UsageRAM = () => Box({
+export const UsageRAM = () => Widget.Box({
     className: 'ram usage panel-button',
     children: [
         FontIcon({
@@ -41,7 +41,7 @@ export const UsageRAM = () => Box({
     ]
 });
 
-export const UsageDisk = () => Box({
+export const UsageDisk = () => Widget.Box({
     className: 'disk usage panel-button',
     children: [
         FontIcon({

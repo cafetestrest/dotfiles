@@ -6,7 +6,7 @@ import { Arrow } from '../ToggleButton.js';
 import { Menu } from '../ToggleButton.js';
 import { Audio, Widget, Utils } from '../../imports.js';
 
-const TypeIndicator = () => Widget.Button({
+export const TypeIndicator = () => Widget.Button({
     onClicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
     child: Widget.Icon({
         connections: [[Audio, icon => {

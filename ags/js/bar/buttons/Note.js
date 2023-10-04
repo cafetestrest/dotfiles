@@ -1,21 +1,21 @@
-const { execAsync } = ags.Utils;
-const { Icon } = ags.Widget;
 import icons from '../../icons.js';
 import PanelButton from '../PanelButton.js';
 // import Note from '../../services/note.js';
+
+import { Widget, Utils } from '../../imports.js';
 
 // let first = false;
 
 export default () => PanelButton({
     className: 'panel-button note',
-    content: Icon({
+    content: Widget.Icon({
         icon: icons.note,
     }),
     onClicked: () => {
-        execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
+        Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
     onSecondaryClick: () => {
-        execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
+        Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
     // connections: [[60000, button => {
     //     if (!first) {

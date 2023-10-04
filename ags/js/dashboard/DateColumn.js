@@ -14,11 +14,10 @@ export const SysProgress = (type, title, unit) => Widget.Box({
         hexpand: true,
         className: `circular-progress ${type}`,
         binds: [['value', vars[type]]],
-        child: Widget.Icon(icons.system[type]),
-        // child: type === 'ram' ? FontIcon({ icon: '︁' })
-        //     : type === 'disk' ? FontIcon({ icon: '' })
-        //     : type === 'cpu' ? FontIcon({ icon: '︁' })
-        //     : Icon(icons.system[type]),//todo get back to this if icons are wonky
+        child: type === 'ram' ? FontIcon({ icon: '︁' })
+            : type === 'disk' ? FontIcon({ icon: '' })
+            : type === 'cpu' ? FontIcon({ icon: '︁' })
+            : Widget.Icon(icons.system[type]),
         startAt: 0.75,
     }),
 });

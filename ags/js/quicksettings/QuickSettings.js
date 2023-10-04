@@ -1,6 +1,6 @@
 import Header from './widgets/Header.js';
 import PopupWindow from '../misc/PopupWindow.js';
-import { Volume, SinkSelector, AppMixer } from './widgets/Volume.js';
+import { VolumeWithoutPercent, Volume, SinkSelector, AppMixer } from './widgets/Volume.js';
 import { NetworkToggle, WifiSelection } from './widgets/Network.js';
 import { BluetoothToggle, BluetoothDevices } from './widgets/Bluetooth.js';
 import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
@@ -10,6 +10,12 @@ import Brightness from './widgets/Brightness.js';
 import DND from './widgets/DND.js';
 import MicMute from './widgets/MicMute.js';
 import { Widget } from '../imports.js';
+
+import { IdleToggle } from './widgets/Idle.js';
+import { NightlightToggle } from './widgets/NightLight.js';
+import { SysProgress } from '../dashboard/DateColumn.js';
+import { QSWidget } from '../bar/buttons/Weather.js';
+import { ScreenRecordToggle, ScreenRecordSelector } from './widgets/ScreenRecord.js';
 
 const Row = (toggles, menus = []) => Widget.Box({
     className: 'row',
@@ -35,32 +41,95 @@ export default () => PopupWindow({
         className: 'quicksettings',
         vertical: true,
         children: [
+            // Row(
+            //     [Header()],
+            // ),
             Row(
-                [Header()],
+                [
+                    // NetworkToggle(),
+                    BluetoothToggle(),
+                    Widget.Box({ className: 'button-spacing' }),
+                    IdleToggle(),
+                ],
+                [
+                    // WifiSelection(),
+                    BluetoothDevices(),
+                ],
+            ),
+            Row(
+                [
+                    DND(),
+                    Widget.Box({ className: 'button-spacing' }),
+                    NightlightToggle()
+                ],
+            ),
+            Row(
+                [
+                    ThemeToggle(),
+                    Widget.Box({ className: 'button-spacing' }),
+                    // MicMute(),
+                    ScreenRecordToggle()
+                ],
+                [
+                    // ProfileSelector(),
+                    ThemeSelector(),
+                    ScreenRecordSelector(),
+                ],
             ),
             Row([Widget.Box({
-                className: 'slider-box',
+                className: 'qsvolume',
                 vertical: true,
                 children: [
                     Row(
-                        [Volume()],
-                        [SinkSelector(), AppMixer()],
+                        [
+                            VolumeWithoutPercent()
+                        ],
+                        [
+                            SinkSelector(),
+                            AppMixer()
+                        ],
                     ),
-                    Row(
-                        [Brightness()],
-                    ),
+                    // Row(
+                    //     [Brightness()],
+                    // ),
                 ],
             })]),
             Row(
-                [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
-                [WifiSelection(), BluetoothDevices()],
+                [
+                    Widget.Box({
+                        className: 'system-info',
+                        children: [
+                            SysProgress('cpu', 'Cpu', '%'),
+                            SysProgress('ram', 'Ram', '%'),
+                            SysProgress('disk', 'Disk', '%'),
+                            // SysProgress('temp', 'Temperature', '°'),
+                        ],
+                    }),
+                ],
             ),
-            Row(
-                [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
-                [ProfileSelector(), ThemeSelector()],
-            ),
-            Media(),
+            QSWidget(),
+            // Row([Widget.Box({
+            //     className: 'slider-box',
+            //     vertical: true,
+            //     children: [
+            //         Row(
+            //             [Volume()],
+            //             [SinkSelector(), AppMixer()],
+            //         ),
+            //         Row(
+            //             [Brightness()],
+            //         ),
+            //     ],
+            // })]),
+            // Row(
+            //     [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
+            //     [WifiSelection(), BluetoothDevices()],
+            // ),
+            // Row(
+            //     [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
+            //     [ProfileSelector(), ThemeSelector()],
+            // ),
+            // Media(),
         ],
     }),
 });
-//todo

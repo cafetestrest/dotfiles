@@ -45,8 +45,10 @@ export default ({
 
             for (let i = 0; i < frames; ++i) {
                 Utils.timeout(5 * i, () => {
-                    fill._size += step;//todo if here?
-                    fill.setStyle(`min-${axis}: ${fill._size}px`);
+                    fill._size += step;
+                    if (fill._size > 0) {
+                        fill.setStyle(`min-${axis}: ${fill._size}px`);
+                    }
                 });
             }
         },

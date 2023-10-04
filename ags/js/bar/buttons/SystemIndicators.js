@@ -109,48 +109,48 @@ export default () => PanelButton({
             // BluetoothDevicesIndicator(),
             BluetoothIndicator(),
             NetworkIndicator(),
-            AudioIndicator(),//todo remove
-            // Widget.Box({//todo
-            //     className: 'system-volume',
-            //     children: [
-            //         AudioIndicator(),
-            //         Widget.Label({ label: ' ' }),
-            //         PercentLabel(),
-            //     ],
-            //     connections: [[Audio, box => {
-            //         let alreadyCreated = false;
-            //         let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
-            //         let classnameToDisplay = 'headset-icon';
-            //
-            //         box.get_children().forEach(ch => {
-            //             if (ch.className == classnameToDisplay) {
-            //                 if (isHeadsetSelected) {
-            //                     ch.visible = true;
-            //                 } else {
-            //                     ch.visible = false;
-            //                 }
-            //
-            //                 alreadyCreated = true;
-            //             }
-            //         });
-            //
-            //         if (alreadyCreated) {
-            //             return;
-            //         }
-            //
-            //         if (isHeadsetSelected) {
-            //             box.add(Widget.Box({
-            //                 className: classnameToDisplay,
-            //                 children: [
-            //                     Widget.Label({ label: ' ', }),
-            //                     TypeIndicator()
-            //                 ]
-            //             }))
-            //             box.show_all()
-            //         }
-            //     }
-            //     ]],
-            // })
+            // AudioIndicator(),
+            Widget.Box({
+                className: 'system-volume',
+                children: [
+                    AudioIndicator(),
+                    Widget.Label({ label: ' ' }),
+                    PercentLabel(),
+                ],
+                connections: [[Audio, box => {
+                    let alreadyCreated = false;
+                    let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
+                    let classnameToDisplay = 'headset-icon';
+            
+                    box.get_children().forEach(ch => {
+                        if (ch.className == classnameToDisplay) {
+                            if (isHeadsetSelected) {
+                                ch.visible = true;
+                            } else {
+                                ch.visible = false;
+                            }
+            
+                            alreadyCreated = true;
+                        }
+                    });
+            
+                    if (alreadyCreated) {
+                        return;
+                    }
+            
+                    if (isHeadsetSelected) {
+                        box.add(Widget.Box({
+                            className: classnameToDisplay,
+                            children: [
+                                Widget.Label({ label: ' ', }),
+                                TypeIndicator()
+                            ]
+                        }))
+                        box.show_all()
+                    }
+                }
+                ]],
+            })
         ],
     }),
 });
