@@ -140,12 +140,12 @@ const FontButton = (title, prop) => Row(title, Widget({
 const page = Variable('󰒓 General');
 const showPage = p => page.value = p;
 
-const Tab = name => Widget.Button({
+const Tab = page => Widget.Button({
     hexpand: true,
     className: 'tab',
-    onClicked: () => showPage(name),
-    child: Widget.Label(name),
-    connections: [[page, b => b.toggleClassName('active', page.value === name)]],
+    onClicked: () => showPage(page),
+    child: Widget.Label(page),
+    connections: [[page, b => b.toggleClassName('active', page.value === page)]],
 });
 
 const Layout = pages => Widget.Box({
@@ -162,7 +162,7 @@ const Layout = pages => Widget.Box({
                     ...Object.keys(pages).map(page => Tab(page)),
                     Widget.Button({
                         className: 'tab',
-                        onClicked: () => Theme.reset(),
+                        onClicked: Theme.reset,
                         child: Widget.Label('󰦛 Reset'),
                         hexpand: true,
                     }),
@@ -193,7 +193,7 @@ const Page = children => Widget.Scrollable({
     }),
 });
 
-export default () => Widget({
+export const SettingsDialog = () => Widget({
     type: Gtk.Window,
     name: 'settings',
     child: Layout({
