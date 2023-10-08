@@ -1,7 +1,7 @@
 import NotificationColumn from './NotificationColumn.js';
 import PopupWindow from '../misc/PopupWindow.js';
 
-export default ({ anchor = 'top', layout = 'top' } = {}) => PopupWindow({
+export default ({ anchor = ['top'], layout = 'top' } = {}) => PopupWindow({
     name: 'notification',
     layout,
     anchor,

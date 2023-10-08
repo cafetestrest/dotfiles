@@ -1,7 +1,7 @@
 import themes from '../../themes.js';
 import setupScss from './scss.js';
 import setupHyprland from './hyprland.js';
-import SettingsDialog from '../../settingsdialog/SettingsDialog.js';
+import { SettingsDialog } from '../../settingsdialog/SettingsDialog.js';
 import IconBrowser from '../../misc/IconBrowser.js';
 import { Service, Utils } from '../../imports.js';
 
