@@ -103,7 +103,7 @@ export default monitor => Widget.Window({
     name: `bar${monitor}`,
     exclusive: true,
     monitor,
-    anchor: 'top left right',
+    anchor: ['top', 'left', 'right'],
     child: Widget.CenterBox({
         className: 'panel',
         startWidget: Start(),
