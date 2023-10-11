@@ -14,7 +14,7 @@ const AppItem = app => Widget.Button({
     child: Widget.Box({
         children: [
             Widget.Icon({
-                icon: app.iconName != 'nvim' ? app.iconName : '',
+                icon: app.iconName,
                 size: 20,
             }),
             Widget.Box({
