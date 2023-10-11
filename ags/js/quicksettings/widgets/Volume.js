@@ -169,7 +169,7 @@ export const SinkSelector = () => Menu({
                 vertical: true,
                 connections: [[Audio, box => {
                     box.children = Audio.speakers.map(SinkItem);
-                }, 'notify::speaker']],
+                }, 'notify::speakers']],
             }),
             Separator({ orientation: 'horizontal' }),
             Widget.Box({
