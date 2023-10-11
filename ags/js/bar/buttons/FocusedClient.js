@@ -8,8 +8,8 @@ export const ClientLabel = substitutes => Widget.Label({
 
 export const ClientIcon = substitutes => Widget.Icon({
     connections: [[Hyprland.active.client, icon => {
-        let classIcon = Hyprland.active.client.class;
-        let titleIcon = Hyprland.active.client.title;
+        let classIcon = `${Hyprland.active.client.class}-symbolic`;
+        let titleIcon = `${Hyprland.active.client.title}-symbolic`;
         substitutes.forEach(([from, to]) => {
             if (classIcon === from)
                 classIcon = to;
@@ -17,9 +17,6 @@ export const ClientIcon = substitutes => Widget.Icon({
             if (titleIcon === from)
                 titleIcon = to;
         });
-
-        classIcon += '-symbolic';
-        titleIcon += '-symbolic';
 
         const hasTitleIcon = Utils.lookUpIcon(titleIcon);
         const hasClassIcon = Utils.lookUpIcon(classIcon);
@@ -39,12 +36,12 @@ export default () => PanelButton({
     content: Widget.Box({
         children: [
             ClientIcon([
-                ['transmission-gtk', 'transmission'],
-                ['blueberry.py', 'bluetooth'],
-                ['org.wezfurlong.wezterm', 'folder-code'],
-                ['com.raggesilver.BlackBox', 'folder-code'],
-                ['Caprine', 'facebook-messenger'],
-                ['', 'preferences-desktop-display'],
+                ['transmission-gtk', 'transmission-symbolic'],
+                ['blueberry.py-symbolic', 'bluetooth-symbolic'],
+                ['org.wezfurlong.wezterm-symbolic', 'folder-code-symbolic'],
+                ['com.raggesilver.BlackBox-symbolic', 'folder-code-symbolic'],
+                ['Caprine-symbolic', 'facebook-messenger-symbolic'],
+                ['-symbolic', 'preferences-desktop-display-symbolic'],
             ]),
             ClientLabel([
                 ['transmission-gtk', 'Transmission'],
