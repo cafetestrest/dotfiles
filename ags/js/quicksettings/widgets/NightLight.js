@@ -1,9 +1,9 @@
 import Nightlight from '../../services/nightlight.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 import icons from '../../icons.js';
-const { Icon, Label } = ags.Widget;
+import { Widget } from '../../imports.js';
 
-export const NightlightIndicator = () => Icon({
+export const NightlightIndicator = () => Widget.Icon({
     connections: [[Nightlight, icon => {
         icon.icon = icons.nightlight[Nightlight.mode];
     }]],
@@ -11,7 +11,7 @@ export const NightlightIndicator = () => Icon({
 
 export const NightlightToggle = () => SimpleToggleButton({
     icon: NightlightIndicator(),
-    label: Label({
+    label: Widget.Label({
         connections: [[Nightlight, label => {
             let mode = Nightlight.mode;
             let text;

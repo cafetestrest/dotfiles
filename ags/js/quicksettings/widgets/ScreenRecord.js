@@ -1,7 +1,7 @@
 import ScreenRecord from '../../services/screenrecord.js';
 import { ArrowToggleButton, Menu, opened } from '../ToggleButton.js';
 import icons from '../../icons.js';
-const { Label, Box, Button, Icon } = ags.Widget;
+import { Widget } from '../../imports.js';
 
 // todo remove after
 import Lockscreen from '../../services/lockscreen.js';
@@ -31,8 +31,8 @@ const recorders = [
 
 export const ScreenRecordToggle = () => ArrowToggleButton({
     name: 'screenrecord',
-    icon: Icon(icons.screenshot),
-    label: Label({ label: 'Screenshot' }),
+    icon: Widget.Icon(icons.screenshot),
+    label: Widget.Label({ label: 'Screenshot' }),
     connection: [opened, () => opened.value === 'screenrecord'],
     activate: () => opened.setValue('screenrecord'),
     activateOnArrow: false,
@@ -41,17 +41,17 @@ export const ScreenRecordToggle = () => ArrowToggleButton({
 
 export const ScreenRecordSelector = () => Menu({
     name: 'screenrecord',
-    icon: Icon(icons.screenshot),
-    title: Label('Screenrecord Selector'),
-    content: Box({
+    icon: Widget.Icon(icons.screenshot),
+    title: Widget.Label('Screenrecord Selector'),
+    content: Widget.Box({
         vertical: true,
-        children: recorders.map(({ name, icon, click }) => Button({
+        children: recorders.map(({ name, icon, click }) => Widget.Button({
             hexpand: true,
             onClicked: click,
-            child: Box({
+            child: Widget.Box({
                 children: [
-                    Icon(icon),
-                    Label(name),
+                    Widget.Icon(icon),
+                    Widget.Label(name),
                 ],
             }),
         }))

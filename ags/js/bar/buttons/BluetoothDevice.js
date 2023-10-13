@@ -1,9 +1,9 @@
-const { Label, Box, Icon } = ags.Widget;
+import { Widget } from '../../imports.js';
 import Btdevice from '../../services/btdevice.js';
 
 // This one is a custom scrips that looks for data in bluetoothctl, it is slower and is refreshed once every 10 seconds
 // used just as the Bluetooth service does not display battery percentage without gnome
-export default () => Box({
+export default () => Widget.Box({
     className: 'bluetooth-indicator panel-button',
     connections: [[10000, box => {
         Btdevice.callBtDeviceInfoScript
@@ -14,14 +14,14 @@ export default () => Box({
             box.get_children().forEach(ch => ch.destroy());
 
             data.forEach(({ iconName, batteryPercentage }) => 
-                box.add(Box({
+                box.add(Widget.Box({
                     className: 'btdevice',
                     children: [
-                        Icon({
+                        Widget.Icon({
                             className: 'btdevice-icon',
                             icon: iconName + '-symbolic',
                         }),
-                        Label({
+                        Widget.Label({
                             className: 'btdevice-label',
                             label: batteryPercentage !== "" ? batteryPercentage.toString() + "%" : "",
                         }),

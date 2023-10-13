@@ -1,9 +1,9 @@
 import Idle from '../../services/idle.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 import icons from '../../icons.js';
-const { Icon, Label } = ags.Widget;
+import { Widget } from '../../imports.js';
 
-export const IdleIndicator = () => Icon({
+export const IdleIndicator = () => Widget.Icon({
     connections: [[Idle, icon => {
         icon.icon = Idle.mode == 'on'
             ? icons.idle.on
@@ -13,7 +13,7 @@ export const IdleIndicator = () => Icon({
 
 export const IdleToggle = () => SimpleToggleButton({
     icon: IdleIndicator(),
-    label: Label({
+    label: Widget.Label({
         connections: [[Idle, label => {
             label.label = Idle.mode == 'on' ? 'Timeout' : 'Always On';
         }]],
