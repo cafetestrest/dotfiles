@@ -23,6 +23,7 @@ export const SysProgress = (type, title, unit) => Widget.Box({
         binds: [['value', vars[type]]],
         connections: [[Theme, prog => {
             prog.rounded = Theme.getSetting('radii') > 0;
+            prog.inverted = true;
         }]],
     }),
 });
@@ -50,7 +51,7 @@ export default () => Widget.Box({
         //     children: [
         //         SysProgress('cpu', 'Cpu', '%'),
         //         SysProgress('ram', 'Ram', '%'),
-        //         SysProgress('temp', 'Temperature', '°'),
+        //         // SysProgress('temp', 'Temperature', '°'),
         //     ],
         // }),
     ],
