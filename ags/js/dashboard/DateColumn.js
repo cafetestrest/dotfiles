@@ -2,6 +2,7 @@ import icons from '../icons.js';
 import Clock from '../misc/Clock.js';
 import * as vars from '../variables.js';
 import { Widget } from '../imports.js';
+import Theme from '../services/theme/theme.js';
 
 import FontIcon from '../misc/FontIcon.js';
 
@@ -19,6 +20,10 @@ export const SysProgress = (type, title, unit) => Widget.Box({
             : type === 'cpu' ? FontIcon({ icon: '︁' })
             : Widget.Icon(icons.system[type]),
         startAt: 0.75,
+        binds: [['value', vars[type]]],
+        connections: [[Theme, prog => {
+            prog.rounded = Theme.getSetting('radii') > 0;
+        }]],
     }),
 });
 

@@ -44,7 +44,7 @@ export const Volume = () => Widget.Box({
         PercentLabel(),
         Arrow('sink-selector'),
         Widget.Box({
-            children: [Arrow('app-mixer')],
+            child: Arrow('app-mixer'),
             connections: [[Audio, box => {
                 box.visible = Array.from(Audio.apps).length > 0;
             }]],
