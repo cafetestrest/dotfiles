@@ -1,11 +1,10 @@
-const { Service } = ags;
-const { exec, execAsync } = ags.Utils;
+import { Service, Utils } from '../imports.js';
 
 class IdleService extends Service {
     static { Service.register(this); }
 
     checkMode() {
-        execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh toggle"]).catch(print);
+        Utils.execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh toggle"]).catch(print);
 
         if (this._mode == 'on') {
             this._mode = 'off';
@@ -18,7 +17,7 @@ class IdleService extends Service {
 
     constructor() {
         super();
-        this._mode = exec('pidof swayidle') ? 'on' : 'off';
+        this._mode = Utils.exec('pidof swayidle') ? 'on' : 'off';
     }
 
     get mode() { return this._mode; }

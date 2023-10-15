@@ -13,10 +13,10 @@ class PowerMenu extends Service {
 
     action(action) {
         [this._cmd, this._title] = {
-            'lock': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
-            'sleep': [`/home/${ags.Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
+            'lock': [`/home/${Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
+            'sleep': [`/home/${Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
-            'logout': [`loginctl terminate-user ${ags.Utils.USER}`, 'Log Out'],
+            'logout': [`loginctl terminate-user ${Utils.USER}`, 'Log Out'],
             'shutdown': ['shutdown now', 'Shutdown'],
         }[action];
 

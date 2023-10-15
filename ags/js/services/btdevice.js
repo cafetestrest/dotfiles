@@ -1,5 +1,4 @@
-const { Service } = ags;
-const { execAsync } = ags.Utils;
+import { Service, Utils } from '../imports.js';
 
 class BtDeviceInfoService extends Service {
     static { Service.register(this); }
@@ -12,7 +11,7 @@ class BtDeviceInfoService extends Service {
     }
 
     call() {
-        execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(print);
+        Utils.execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(print);
     }
 
     get callBtDeviceInfoScript() {

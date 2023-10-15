@@ -1,5 +1,4 @@
-const { Service } = ags;
-const { exec, execAsync } = ags.Utils;
+import { Service, Utils } from '../imports.js';
 
 class WeatherService extends Service {
     static { Service.register(this); }
@@ -11,7 +10,7 @@ class WeatherService extends Service {
     }
 
     get weatherData() {
-        execAsync(['bash', '-c', "~/.config/scripts/openweathermap.sh ags"]).catch(print);
+        Utils.execAsync(['bash', '-c', "~/.config/scripts/openweathermap.sh ags"]).catch(print);
     }
 
     get temperatureWeather() {

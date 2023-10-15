@@ -1,18 +1,17 @@
-const { Service } = ags;
-const { exec, execAsync } = ags.Utils;
+import { Service, Utils } from '../imports.js';
 
 class NightlightService extends Service {
     static { Service.register(this); }
 
     checkMode() {
         if (this._mode === "auto") {
-            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh enable"]).catch(print);
+            Utils.execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh enable"]).catch(print);
             this._mode = "on";
         } else if (this._mode === "on") {
-            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh disable"]).catch(print);
+            Utils.execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh disable"]).catch(print);
             this._mode = "off";
         } else {
-            execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh automatic"]).catch(print);
+            Utils.execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh automatic"]).catch(print);
             this._mode = "auto";
         }
 
@@ -22,7 +21,7 @@ class NightlightService extends Service {
     constructor() {
         super();
 
-        this._mode = exec('pidof wlsunset') ? 'auto' : 'off';
+        this._mode = Utils.exec('pidof wlsunset') ? 'auto' : 'off';
     }
 
     get mode() { return this._mode; }

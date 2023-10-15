@@ -1,11 +1,10 @@
-const { Service } = ags;
-const { execAsync } = ags.Utils;
+import { Service, Utils } from '../imports.js';
 
 class NoteService extends Service {
     static { Service.register(this); }
 
     get callNote() {
-        execAsync(['bash', '-c', "~/.config/scripts/note.sh ags"]).catch(print);
+        Utils.execAsync(['bash', '-c', "~/.config/scripts/note.sh ags"]).catch(print);
         // this.emit('changed');
     }
 
