@@ -53,14 +53,14 @@ export const ram = Variable(0, {
 //     poll: [options.systemFetchInterval, 'cat ' + options.temperature, n => n / 100_000],
 // });
 
-export const ramGB = ags.Variable(0, {
+export const ramGB = Variable(0, {
     poll: [options.systemFetchInterval, "free --giga -h", out => out.split('\n')
         .find(line => line.includes('Mem:'))
         .split(/\s+/)
         .splice(2, 1)]
 });
 
-export const disk = ags.Variable(0, {
+export const disk = Variable(0, {
     poll: [600_000, "df -h /", out => {
         const lines = out.split('\n');
         if (lines.length >= 2) {

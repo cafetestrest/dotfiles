@@ -1,6 +1,6 @@
 import { Service, Utils } from '../imports.js';
 
-class BtDeviceInfoService extends Service {
+class BtDeviceInfo extends Service {
     static { Service.register(this); }
 
     constructor() {
@@ -22,12 +22,4 @@ class BtDeviceInfoService extends Service {
     setData(text) { this._data = text }
 }
 
-export default class BtDeviceInfo {
-    static { Service.BtDeviceInfo = this; }
-    static instance = new BtDeviceInfoService();
-
-    static get callBtDeviceInfoScript() { return BtDeviceInfo.instance.callBtDeviceInfoScript; }
-
-    static get data() { return BtDeviceInfo.instance.data; }
-    static setData(text) { BtDeviceInfo.instance.setData(text); }
-}
+export default new BtDeviceInfo();

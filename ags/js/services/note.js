@@ -1,6 +1,6 @@
 import { Service, Utils } from '../imports.js';
 
-class NoteService extends Service {
+class Note extends Service {
     static { Service.register(this); }
 
     get callNote() {
@@ -17,12 +17,4 @@ class NoteService extends Service {
     setNote(text) { this._note = text; }
 }
 
-export default class Note {
-    static { Service.Note = this; }
-    static instance = new NoteService();
-
-    static get callNote() { return Note.instance.callNote; }
-
-    static get note() { return Note.instance.note; }
-    static setNote(text) { Note.instance.setNote(text); }
-}
+export default new Note();

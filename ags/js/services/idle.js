@@ -1,6 +1,6 @@
 import { Service, Utils } from '../imports.js';
 
-class IdleService extends Service {
+class Idle extends Service {
     static { Service.register(this); }
 
     checkMode() {
@@ -23,10 +23,4 @@ class IdleService extends Service {
     get mode() { return this._mode; }
 }
 
-export default class Idle {
-    static { Service.Idle = this; }
-    static instance = new IdleService();
-
-    static checkMode() { Idle.instance.checkMode(); }
-    static get mode() { return Idle.instance.mode; }
-}
+export default new Idle();

@@ -72,4 +72,8 @@ export async function globalServices() {
     globalThis.theme = (await import('./services/theme/theme.js')).default;
     globalThis.audio = globalThis.ags.Audio;
     globalThis.mpris = globalThis.ags.Mpris;
+
+    globalThis.btdevice = (await import('./services/btdevice.js')).default;
+    globalThis.note = (await import('./services/note.js')).default;
+    globalThis.weather = (await import('./services/weather.js')).default;
 }

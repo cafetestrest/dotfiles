@@ -1,6 +1,6 @@
 import { Service, Utils } from '../imports.js';
 
-class WeatherService extends Service {
+class Weather extends Service {
     static { Service.register(this); }
 
     constructor() {
@@ -27,17 +27,4 @@ class WeatherService extends Service {
     setTooltip(text) { this._tooltip = text }
 }
 
-export default class Weather {
-    static { Service.Weather = this; }
-    static instance = new WeatherService();
-
-    static get weatherData() { return Weather.instance.weatherData; }
-
-    static get temperatureWeather() { return Weather.instance.temperatureWeather; }
-    static setTemperatureWeather(temp) { 
-        Weather.instance.setTemperatureWeather(temp);
-    }
-
-    static get tooltip() { return Weather.instance.tooltip; }
-    static setTooltip(text) { Weather.instance.setTooltip(text); }
-}
+export default new Weather();

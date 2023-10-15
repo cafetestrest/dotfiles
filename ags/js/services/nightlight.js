@@ -1,6 +1,6 @@
 import { Service, Utils } from '../imports.js';
 
-class NightlightService extends Service {
+class Nightlight extends Service {
     static { Service.register(this); }
 
     checkMode() {
@@ -27,10 +27,4 @@ class NightlightService extends Service {
     get mode() { return this._mode; }
 }
 
-export default class Nightlight {
-    static { Service.Nightlight = this; }
-    static instance = new NightlightService();
-
-    static checkMode() { Nightlight.instance.checkMode(); }
-    static get mode() { return Nightlight.instance.mode; }
-}
+export default new Nightlight();
