@@ -3,7 +3,11 @@ import { Service, Utils } from '../imports.js';
 class Nightlight extends Service {
     static { Service.register(this); }
 
-    checkMode() {
+    _mode = null;
+
+    get mode() { return this._mode; }
+
+    set mode(value) {
         if (this._mode === "auto") {
             Utils.execAsync(['bash', '-c', "~/.config/scripts/nightlight.sh enable"]).catch(print);
             this._mode = "on";
@@ -23,8 +27,6 @@ class Nightlight extends Service {
 
         this._mode = Utils.exec('pidof wlsunset') ? 'auto' : 'off';
     }
-
-    get mode() { return this._mode; }
 }
 
 export default new Nightlight();

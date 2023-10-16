@@ -25,6 +25,15 @@ export const NightlightToggle = () => SimpleToggleButton({
             label.label = text;
         }]],
     }),
-    toggle: Nightlight.checkMode,
+    toggle: () => {
+        console.log('nmod ' + Nightlight.mode)
+        if (Nightlight.mode === "auto") {
+            return Nightlight.mode = "on";
+        } else if (Nightlight.mode === "on") {
+            return Nightlight.mode = "off";
+        } else {
+            return Nightlight.mode = "auto";
+        }
+    },
     connection: [Nightlight, () => Nightlight.mode]
 });
