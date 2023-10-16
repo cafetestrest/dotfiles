@@ -3,24 +3,27 @@ import { Service, Utils } from '../imports.js';
 class Idle extends Service {
     static { Service.register(this); }
 
-    checkMode() {
-        Utils.execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh toggle"]).catch(print);
+    _mode = null;
 
-        if (this._mode == 'on') {
-            this._mode = 'off';
+	get mode() {
+		return this._mode;
+	}
+
+	set mode(value) {
+        this._mode = value;
+
+        if (value) {
+            Utils.execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh startup"]).catch(print);
         } else {
-            this._mode = 'on';
+            Utils.execAsync("pkill swayidle").catch(print);
         }
-
         this.emit('changed');
-    }
+	}
 
-    constructor() {
-        super();
-        this._mode = Utils.exec('pidof swayidle') ? 'on' : 'off';
-    }
-
-    get mode() { return this._mode; }
+	constructor() {
+		super();
+		this._mode = Utils.exec('pidof swayidle') ? true : false;
+	}
 }
 
 export default new Idle();
