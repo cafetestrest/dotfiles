@@ -5,25 +5,19 @@ class Idle extends Service {
 
     _mode = null;
 
-	get mode() {
-		return this._mode;
-	}
+    get mode() { return this._mode; }
 
-	set mode(value) {
+    set mode(value) {
         this._mode = value;
 
-        if (value) {
-            Utils.execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh startup"]).catch(print);
-        } else {
-            Utils.execAsync("pkill swayidle").catch(print);
-        }
+        Utils.execAsync(['bash', '-c', "~/.config/scripts/swayidle.sh toggle"]).catch(print);
         this.emit('changed');
 	}
 
-	constructor() {
-		super();
-		this._mode = Utils.exec('pidof swayidle') ? true : false;
-	}
+    constructor() {
+        super();
+        this._mode = Utils.exec('pidof swayidle') ? 'on' : 'off';
+    }
 }
 
 export default new Idle();

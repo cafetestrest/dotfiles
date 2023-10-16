@@ -5,7 +5,7 @@ import { Widget } from '../../imports.js';
 
 export const IdleIndicator = () => Widget.Icon({
     connections: [[Idle, icon => {
-        icon.icon = Idle.mode == true
+        icon.icon = Idle.mode == 'on'
             ? icons.idle.on
             : icons.idle.off;
     }]],
@@ -15,9 +15,15 @@ export const IdleToggle = () => SimpleToggleButton({
     icon: IdleIndicator(),
     label: Widget.Label({
         connections: [[Idle, label => {
-            label.label = Idle.mode == true ? 'Timeout' : 'Always On';
+            label.label = Idle.mode == 'on' ? 'Timeout' : 'Always On';
         }]],
     }),
-    toggle: () => Idle.mode = !Idle.mode,
-    connection: [Idle, () => Idle.mode]
+    toggle: () => {
+        if (Idle.mode == 'on') {
+            Idle.mode = 'off';
+        } else {
+            Idle.mode = 'on';
+        }
+    },
+    connection: [Idle, () => Idle.mode == 'on']
 });
