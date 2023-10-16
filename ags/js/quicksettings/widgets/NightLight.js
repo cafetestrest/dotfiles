@@ -26,7 +26,6 @@ export const NightlightToggle = () => SimpleToggleButton({
         }]],
     }),
     toggle: () => {
-        console.log('nmod ' + Nightlight.mode)
         if (Nightlight.mode === "auto") {
             return Nightlight.mode = "on";
         } else if (Nightlight.mode === "on") {
