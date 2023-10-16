@@ -4,8 +4,7 @@ import { Menu, ArrowToggleButton } from '../ToggleButton.js';
 import { Bluetooth, Widget } from '../../imports.js';
 import Gtk from 'gi://Gtk';
 
-const { instance } = ags.Service.Bluetooth;
-
+const path = 'resource:///com/github/Aylur/ags/service/bluetooth.js';
 let numOfTries = 0;
 
 export const BluetoothToggle = () => ArrowToggleButton({
@@ -36,12 +35,11 @@ export const BluetoothToggle = () => ArrowToggleButton({
         [60000, label => {
             if (label.label === 'Not Connected' && numOfTries < 10 && Bluetooth.connectedDevices.length === 0 && Bluetooth.devices.length > 0) {
                 // hotfix that forces a reread from GnomeBluetooth (https://github.com/Aylur/dotfiles/issues/49)
-                instance._getDevices().forEach(d => {
-                    instance._deviceRemoved(null, d);
-                });
-
-                instance._getDevices().forEach(d => {
-                    instance._deviceAdded(null, d);
+                import(path).then(({ default: bluetooth }) => {
+                    bluetooth._getDevices().forEach(d => {
+                        bluetooth._deviceRemoved(null, d);
+                        bluetooth._deviceAdded(null, d);
+                    });
                 });
             }
         }]],
