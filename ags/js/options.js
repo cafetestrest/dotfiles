@@ -28,7 +28,7 @@ export default {
     brightnessctlKBD: 'asus::kbd_backlight',
 
     dock: {
-        iconSize: 56,
+        iconSize: 16,
         pinnedApps: [
             'firefox',
             'org.wezfurlong.wezterm',

@@ -82,7 +82,7 @@ export default () => PopupWindow({
                 children: [
                     Row(
                         [
-                            VolumeWithoutPercent()
+                            VolumeWithoutPercent(),
                         ],
                         [
                             SinkSelector(),
@@ -90,7 +90,10 @@ export default () => PopupWindow({
                         ],
                     ),
                     // Row(
-                    //     [Brightness(), Microhone()],
+                    //     [
+                    //         // Brightness(),
+                    //         Microhone(),
+                    //     ],
                     // ),
                 ],
             })]),

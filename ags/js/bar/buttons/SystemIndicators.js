@@ -6,7 +6,7 @@ import icons from '../../icons.js';
 import { App, Widget } from '../../imports.js';
 import { Bluetooth, Audio, Notifications, Network } from '../../imports.js';
 
-import { PercentLabel, TypeIndicator } from '../../quicksettings/widgets/Volume.js';
+import { PercentLabel, VolumeIndicator } from '../../quicksettings/widgets/Volume.js';
 import { IdleIndicator } from '../../quicksettings/widgets/Idle.js';
 import { NightlightIndicator } from '../../quicksettings/widgets/NightLight.js';
 
@@ -111,7 +111,6 @@ export default () => PanelButton({
         children: [
             // Asusctl?.available && ProfileIndicator(),
             // Asusctl?.available && ModeIndicator(),
-            MicrophoneMuteIndicator(),
             DNDIndicator(),
             IdleIndicator(),
             NightlightIndicator(),
@@ -119,7 +118,7 @@ export default () => PanelButton({
             BluetoothIndicator(),
             NetworkIndicator(),
             // AudioIndicator(),
-            // MicrophoneIndicator(),
+            MicrophoneIndicator(),
             Widget.Box({
                 className: 'system-volume',
                 children: [
@@ -153,7 +152,7 @@ export default () => PanelButton({
                             className: classnameToDisplay,
                             children: [
                                 Widget.Label({ label: ' ', }),
-                                TypeIndicator()
+                                VolumeIndicator('speaker')
                             ]
                         }))
                         box.show_all()
