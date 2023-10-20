@@ -24,11 +24,20 @@ const ModeIndicator = () => Widget.Icon({
     }]],
 });
 
-const MicrophoneMuteIndicator = () => Widget.Icon({
-    icon: icons.audio.mic.muted,
+const MicrophoneIndicator = () => Widget.Icon({
     connections: [[Audio, icon => {
-        icon.visible = Audio.microphone?.isMuted;
-    }, 'microphone-changed']],
+        if (!Audio.microphone)
+            return;
+
+        const { muted, low, medium, high } = icons.audio.mic;
+        if (Audio.microphone.isMuted)
+            return icon.icon = muted;
+
+        icon.icon = [[67, high], [34, medium], [1, low], [0, muted]]
+            .find(([threshold]) => threshold <= Audio.microphone.volume * 100)[1];
+
+        icon.visible = Audio.recorders.length > 0 || Audio.microphone.isMuted;
+    }]],
 });
 
 const DNDIndicator = () => Widget.Icon({
@@ -110,6 +119,7 @@ export default () => PanelButton({
             BluetoothIndicator(),
             NetworkIndicator(),
             // AudioIndicator(),
+            // MicrophoneIndicator(),
             Widget.Box({
                 className: 'system-volume',
                 children: [
@@ -121,7 +131,7 @@ export default () => PanelButton({
                     let alreadyCreated = false;
                     let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
                     let classnameToDisplay = 'headset-icon';
-            
+
                     box.get_children().forEach(ch => {
                         if (ch.className == classnameToDisplay) {
                             if (isHeadsetSelected) {
@@ -129,15 +139,15 @@ export default () => PanelButton({
                             } else {
                                 ch.visible = false;
                             }
-            
+
                             alreadyCreated = true;
                         }
                     });
-            
+
                     if (alreadyCreated) {
                         return;
                     }
-            
+
                     if (isHeadsetSelected) {
                         box.add(Widget.Box({
                             className: classnameToDisplay,

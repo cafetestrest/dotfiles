@@ -6,16 +6,19 @@ import { Arrow } from '../ToggleButton.js';
 import { Menu } from '../ToggleButton.js';
 import { Audio, Widget, Utils } from '../../imports.js';
 
-export const TypeIndicator = () => Widget.Button({
-    onClicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
+export const VolumeIndicator = (type = 'speaker') => Widget.Button({
+    onClicked: () => Audio[type].isMuted = !Audio[type].isMuted,
     child: Widget.Icon({
         connections: [[Audio, icon => {
-            if (!Audio.speaker)
+            if (!Audio[type])
                 return;
 
-            icon.icon = getAudioTypeIcon(Audio.speaker.iconName);
-            icon.tooltipText = `Volume ${Math.floor(Audio.speaker.volume * 100)}%`;
-        }, 'speaker-changed']],
+            icon.icon = type === 'speaker'
+                ? getAudioTypeIcon(Audio[type].iconName)
+                : icons.audio.mic.high;
+
+            icon.tooltipText = `Volume ${Math.floor(Audio[type].volume * 100)}%`;
+        }, `${type}-changed`]],
     }),
 });
 
@@ -26,27 +29,27 @@ export const PercentLabel = () => Widget.Label({
     }, 'speaker-changed']],
 });
 
-const VolumeSlider = () => Widget.Slider({
+const VolumeSlider = (type = 'speaker') => Widget.Slider({
     hexpand: true,
     className: 'volumeslider',
     drawValue: false,
-    onChange: ({ value }) => Audio.speaker.volume = value,
+    onChange: ({ value }) => Audio[type].volume = value,
     connections: [[Audio, slider => {
-        slider.value = Audio.speaker?.volume;
-    }, 'speaker-changed']],
+        slider.value = Audio[type]?.volume;
+    }, `${type}-changed`]],
 });
 
 export const Volume = () => Widget.Box({
     className: 'slider',
     children: [
-        TypeIndicator(),
-        VolumeSlider(),
+        VolumeIndicator('speaker'),
+        VolumeSlider('speaker'),
         PercentLabel(),
         Arrow('sink-selector'),
         Widget.Box({
             child: Arrow('app-mixer'),
             connections: [[Audio, box => {
-                box.visible = Array.from(Audio.apps).length > 0;
+                box.visible = Audio.apps.length > 0;
             }]],
         }),
     ],
@@ -55,9 +58,18 @@ export const Volume = () => Widget.Box({
 export const VolumeWithoutPercent = () => Widget.Box({
     className: 'slider',
     children: [
-        TypeIndicator(),
+        VolumeIndicator('speaker'),
         VolumeSlider(),
         Arrow('sink-selector'),
+    ],
+});
+
+export const Microhone = () => Widget.Box({
+    className: 'slider',
+    binds: [['visible', Audio, 'recorders', r => r.length > 0]],
+    children: [
+        VolumeIndicator('microphone'),
+        VolumeSlider('microphone'),
     ],
 });
 
@@ -167,9 +179,7 @@ export const SinkSelector = () => Menu({
         children: [
             Widget.Box({
                 vertical: true,
-                connections: [[Audio, box => {
-                    box.children = Audio.speakers.map(SinkItem);
-                }, 'notify::speaker']],
+                binds: [['children', Audio, 'speakers', s => s.map(SinkItem)]],
             }),
             Separator({ orientation: 'horizontal' }),
             Widget.Box({

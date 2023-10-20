@@ -72,7 +72,7 @@ window#quicksettings .quicksettings {
         @include widget;
         padding: $spacing;
 
-        > box:last-child { margin-bottom: 0; }
+        > box { margin: 0; }
 
         .slider > * {
             margin-left: $spacing;
@@ -109,7 +109,7 @@ window#quicksettings .quicksettings {
 
     .menu {
         @include widget;
-        margin-bottom: $spacing;
+        margin: $spacing 0;
         padding: $spacing;
 
         separator { 
@@ -274,7 +274,7 @@ window#quicksettings .quicksettings {
     .bluetooth-devices {
         margin-bottom: 0.8em;
     }
-        
+
     .bluetooth-devices:last-child {
         margin-bottom: 0;
     }

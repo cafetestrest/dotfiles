@@ -4,6 +4,14 @@ import icons from './icons.js';
 import Theme from './services/theme/theme.js';
 import { Utils, App, Battery } from './imports.js';
 
+export function range(length, start = 1) {
+    return Array.from({ length }, (_, i) => i + start);
+}
+
+export function substitute(collection, item) {
+    return collection.find(([from]) => from === item)?.[1] || item;
+}
+
 export function forMonitors(widget) {
     const ws = JSON.parse(Utils.exec('hyprctl -j monitors'));
     return ws.map(mon => widget(mon.id));
@@ -76,4 +84,9 @@ export async function globalServices() {
     globalThis.btdevice = (await import('./services/btdevice.js')).default;
     globalThis.note = (await import('./services/note.js')).default;
     globalThis.weather = (await import('./services/weather.js')).default;
+}
+
+export function launchApp(app) {
+    Utils.execAsync(`hyprctl dispatch exec ${app.executable}`);
+    app.frequency += 1;
 }
