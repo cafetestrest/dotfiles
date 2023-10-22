@@ -38,7 +38,7 @@ export default {
         forMonitors(Notifications),
         forMonitors(Lockscreen),
         Applauncher(),
-        // Overview(),
+        Overview(),
         Dashboard(),
         Weather(),
         QSNotifications(),

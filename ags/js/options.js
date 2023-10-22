@@ -4,7 +4,7 @@ export default {
 
     // number of workspaces shown on panel and overview
     // set to 0 to make it dynamic
-    workspaces: 7,
+    workspaces: 10,
 
     battaryBar: {
         // wether to show percentage by deafult
