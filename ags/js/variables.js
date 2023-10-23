@@ -48,11 +48,11 @@ export const ram = Variable(0, {
         .splice(1, 2) || ['1', '1'])],
 });
 
-export const temp = Variable(0, {
-    poll: [intval, 'cat ' + options.temperature, n => {
-        return Number.parseInt(n) / 100_000;
-    }],
-});
+// export const temp = Variable(0, {
+//     poll: [intval, 'cat ' + options.temperature, n => {
+//         return Number.parseInt(n) / 100_000;
+//     }],
+// });
 
 export const ramGB = Variable(0, {
     poll: [options.systemFetchInterval, "free --giga -h", out => out.split('\n')
