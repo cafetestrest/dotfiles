@@ -85,6 +85,48 @@ const AudioIndicator = () => Widget.Icon({
     }, 'speaker-changed']],
 });
 
+const SpeakerIndicator = () => Widget.Box({
+    className: 'system-volume',
+    children: [
+        AudioIndicator(),
+        Widget.Label({ label: ' ' }),
+        PercentLabel(),
+    ],
+    connections: [[Audio, box => {
+        let alreadyCreated = false;
+        let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
+        let classnameToDisplay = 'headset-icon';
+
+        box.get_children().forEach(ch => {
+            if (ch.className == classnameToDisplay) {
+                if (isHeadsetSelected) {
+                    ch.visible = true;
+                } else {
+                    ch.visible = false;
+                }
+
+                alreadyCreated = true;
+            }
+        });
+
+        if (alreadyCreated) {
+            return;
+        }
+
+        if (isHeadsetSelected) {
+            box.add(Widget.Box({
+                className: classnameToDisplay,
+                children: [
+                    Widget.Label({ label: ' ', }),
+                    VolumeIndicator('speaker')
+                ]
+            }))
+            box.show_all()
+        }
+    }
+    ]],
+});
+
 export default () => PanelButton({
     className: 'quicksettings panel-button',
     onClicked: () => App.toggleWindow('quicksettings'),
@@ -111,47 +153,7 @@ export default () => PanelButton({
             NetworkIndicator(),
             // AudioIndicator(),
             MicrophoneIndicator(),
-            Widget.Box({
-                className: 'system-volume',
-                children: [
-                    AudioIndicator(),
-                    Widget.Label({ label: ' ' }),
-                    PercentLabel(),
-                ],
-                connections: [[Audio, box => {
-                    let alreadyCreated = false;
-                    let isHeadsetSelected = Audio.speaker?.iconName === 'audio-headset-analog-usb';
-                    let classnameToDisplay = 'headset-icon';
-
-                    box.get_children().forEach(ch => {
-                        if (ch.className == classnameToDisplay) {
-                            if (isHeadsetSelected) {
-                                ch.visible = true;
-                            } else {
-                                ch.visible = false;
-                            }
-
-                            alreadyCreated = true;
-                        }
-                    });
-
-                    if (alreadyCreated) {
-                        return;
-                    }
-
-                    if (isHeadsetSelected) {
-                        box.add(Widget.Box({
-                            className: classnameToDisplay,
-                            children: [
-                                Widget.Label({ label: ' ', }),
-                                VolumeIndicator('speaker')
-                            ]
-                        }))
-                        box.show_all()
-                    }
-                }
-                ]],
-            })
+            SpeakerIndicator(),
         ],
     }),
 });

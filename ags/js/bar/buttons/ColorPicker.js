@@ -19,7 +19,7 @@ export default () => PanelButton({
         if (!color)
             return;
 
-        execAsync(`copyq write ${color}`);
+        Utils.execAsync(`copyq write ${color}`);
 
         // wlCopy(color);
         const list = colors.value;
@@ -49,7 +49,7 @@ export default () => PanelButton({
             child: Widget.Label(color),
             style: `background-color: ${color}`,
             // onActivate: () => wlCopy(color),
-            onActivate: () => execAsync(`copyq write ${color}`)
+            onActivate: () => Utils.execAsync(`copyq write ${color}`)
         })),
     }).popup_at_widget(btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null) : false,
 });
