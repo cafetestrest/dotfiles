@@ -1,3 +1,5 @@
+'use strict';
+
 import TopBar from './js/bar/TopBar.js';
 import ScreenCorners from './js/screencorner/ScreenCorners.js';
 import Overview from './js/overview/Overview.js';
@@ -21,6 +23,7 @@ import Weather from './js/dashboard/Weather.js';
 // setup.warnOnLowBattery();
 setup.scssWatcher();
 setup.globalServices();
+setup.activePlayer();
 
 export default {
     maxStreamVolume: 1.05,
