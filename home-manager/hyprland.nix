@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland-nvidia;
   plugins = inputs.hyprland-plugins.packages.${pkgs.system};
 
   launcher = pkgs.writeShellScriptBin "hypr" ''
@@ -99,6 +99,7 @@ in
 		(f "xdg-desktop-portal")
 		(f "xdg-desktop-portal-gnome")
 		(f "transmission-gtk")
+		(f "com.github.Aylur.ags")
 		"workspace 7, title:Spotify"
       ];
 
@@ -111,6 +112,10 @@ in
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
         e = "exec, ags -b hypr";
         arr = [1 2 3 4 5 6 7 8 9];
+        yt = pkgs.writeShellScriptBin "yt" ''
+            notify-send "Opening video" "$(wl-paste)"
+            mpv "$(wl-paste)"
+        '';
       in [
         "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
         "SUPER, R,       ${e} -t applauncher"
@@ -119,9 +124,12 @@ in
         ", XF86Launch4,  ${e} -r 'recorder.start()'"
         ",Print,         ${e} -r 'recorder.screenshot()'"
         "SHIFT,Print,    ${e} -r 'recorder.screenshot(true)'"
-        "SUPER, Return, exec, blackbox"
+        "SUPER, Return, exec, xterm" # xterm is a symlink, not actually xterm
         "SUPER, W, exec, firefox"
         "SUPER, E, exec, wezterm -e lf"
+
+        # youtube
+        ", XF86Launch1,  exec, ${yt}/bin/yt"
 
         "ALT, Tab, focuscurrentorlast"
         "CTRL ALT, Delete, exit"
@@ -161,11 +169,11 @@ in
       ];
 
       bindl = let e = "exec, ags -b hypr -r"; in [
-        ",XF86AudioPlay,    ${e} 'mpris()?.playPause()'"
-        ",XF86AudioStop,    ${e} 'mpris()?.stop()'"
-        ",XF86AudioPause,   ${e} 'mpris()?.pause()'"
-        ",XF86AudioPrev,    ${e} 'mpris()?.previous()'"
-        ",XF86AudioNext,    ${e} 'mpris()?.next()'"
+        ",XF86AudioPlay,    ${e} 'mpris?.playPause()'"
+        ",XF86AudioStop,    ${e} 'mpris?.stop()'"
+        ",XF86AudioPause,   ${e} 'mpris?.pause()'"
+        ",XF86AudioPrev,    ${e} 'mpris?.previous()'"
+        ",XF86AudioNext,    ${e} 'mpris?.next()'"
         ",XF86AudioMicMute, ${e} 'audio.microphone.isMuted = !audio.microphone.isMuted'"
       ];
 

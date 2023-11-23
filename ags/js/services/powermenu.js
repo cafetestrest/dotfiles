@@ -1,4 +1,5 @@
-import { App, Service, Utils } from '../imports.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Service from 'resource:///com/github/Aylur/ags/service.js';
 
 class PowerMenu extends Service {
     static {
@@ -8,11 +9,15 @@ class PowerMenu extends Service {
         });
     }
 
-    get title() { return this._title || ''; }
-    get cmd() { return this._cmd || ''; }
+    #title = '';
+    #cmd = '';
 
+    get title() { return this.#title; }
+    get cmd() { return this.#cmd; }
+
+    /** @param {'sleep' | 'reboot' | 'logout' | 'shutdown'} action */
     action(action) {
-        [this._cmd, this._title] = {
+        [this.#cmd, this.#title] = {
             'lock': [`/home/${Utils.USER}/.config/scripts/idle.sh l`, 'Lock'],
             'sleep': [`/home/${Utils.USER}/.config/scripts/idle.sh s`, 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
@@ -25,7 +30,7 @@ class PowerMenu extends Service {
         this.emit('changed');
         App.closeWindow('powermenu');
         // App.openWindow('verification');
-        Utils.exec(this._cmd);
+        Utils.exec(this.#cmd);
     }
 }
 

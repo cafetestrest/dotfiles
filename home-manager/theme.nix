@@ -18,16 +18,21 @@ let
     "Mononoki"
   ]; });
 
-  theme = type: pkg: name: {
-    ".local/share/${type}s/${name}".source = "${pkgs.${pkg}}/share/${type}s/${name}";
-  };
-
   cursor-theme = "Qogir";
   cursor-package = pkgs.qogir-icon-theme;
 in
 {
   home = {
-    packages = [ nerdfonts moreWaita ];
+    packages = with pkgs; [
+      font-awesome
+      papirus-icon-theme
+      qogir-icon-theme
+      whitesur-icon-theme
+      colloid-icon-theme
+      adw-gtk3
+      nerdfonts
+      moreWaita
+    ];
     sessionVariables.XCURSOR_THEME = cursor-theme;
     pointerCursor = {
       package = cursor-package;
@@ -56,13 +61,7 @@ in
       ".local/share/icons/MoreWaita" = {
         source = "${moreWaita}/share/icons";
       };
-    } //
-    theme "icon" "papirus-icon-theme" "Papirus" //
-    theme "icon" "qogir-icon-theme" "Qogir" //
-    theme "icon" "whitesur-icon-theme" "WhiteSur" //
-    theme "icon" "colloid-icon-theme" "Colloid" //
-    theme "theme" "adw-gtk3" "adw-gtk3" //
-    theme "theme" "adw-gtk3" "adw-gtk3-dark";
+    };
   };
 
   gtk = {

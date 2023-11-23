@@ -1,96 +1,52 @@
-window#applauncher .applauncher{
+window#applauncher .window-content {
     @include floating_widget;
-    padding: 0; //padding around window
-    background-color: transparentize($color: $bg_color, $amount: 0.05); //trasparent background
-    border-radius: $radii;
 
-    .header {
-        margin: $spacing $spacing $spacing / 2 $spacing;
+    entry {
+        @include button;
+        padding: $padding;
+        margin-bottom: $spacing;
 
-        image, entry {
-            @include widget;
-            padding: $spacing/2;
-
-            // remove background and border
-            background-color: transparent;
-            border: none;
-            caret-color: $fg_color;
-        }
-
-        entry {
-            padding-left: $spacing;
-        }
-
-        image {
-            margin-right: $spacing;
-            -gtk-icon-transform: scale(0.8);
-            font-size: $font-size * 1.6;
+        label, image {
+            color: $fg-color;
         }
     }
 
-    .separator {
+    separator {
         min-height: 1px;
         background-color: $hover;
-        margin: $spacing/2;
     }
 
     scrolledwindow {
-        @include scrollbar;
-        padding: 0 0.1em $popover_padding / 2 $popover_padding;
-        min-width: 37.5em;
-        min-height: 23em;
+        @include scrollable;
+        min-width: $applauncher-width;
+        min-height: $applauncher-height;
     }
 
-    // list of apps
-    .scrollable {
-        padding-top: $spacing / 2;
-    }
-
-    .header-separator {
-        background-color: $hover;
-    }
-
-    .app-separator {
-        background-color: transparent;
-    }
-
-    .math-result,
-    .placeholder {
-        margin-top: $spacing * 2;
-        color: $fg_color;
-        font-size: 1.2em;
-    }
-
-    .app {
-        all: unset;
+    button.app-item {
+        @include button($flat: true, $reactive: false);
+        > box { @include spacing(0.5); }
         transition: $transition;
-        padding: $spacing / 2;
-        margin-right: $spacing * 2; //from scroll wheel
-        border-radius: $radii / 2;
+        padding: $padding;
 
         label {
             transition: $transition;
 
             &.title {
-                color: $fg_color;
+                color: $fg-color;
             }
 
             &.description {
-                color: transparentize($fg_color, 0.3);
-                font-size: small;
+                color: transparentize($fg-color, 0.3);
             }
         }
 
         image {
             transition: $transition;
-            margin-right: $spacing;
         }
 
         &:hover, &:focus {
-            background-color: #0059D1;
-
             .title {
-                // color: $accent;
+                color: $accent;
             }
 
             image {
@@ -101,10 +57,10 @@ window#applauncher .applauncher{
         &:active {
             background-color: transparentize($accent, 0.5);
             border-radius: $radii;
-            box-shadow: inset 0 0 0 $border_width $border_color;
+            box-shadow: inset 0 0 0 $border-width $border-color;
 
             .title {
-                color: $fg_color;
+                color: $fg-color;
             }
         }
     }

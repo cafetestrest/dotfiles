@@ -1,7 +1,8 @@
 export default {
-    settings: 'emblem-system-symbolic',
-    tick: 'object-select-symbolic',
     lock: 'system-lock-screen-symbolic',
+    fallback: {
+        executable: 'application-x-executable-symbolic',
+    },
     audio: {
         mic: {
             muted: 'microphone-disabled-symbolic',
@@ -91,6 +92,12 @@ export default {
         previcon: 'go-previous-symbolic',
     },
     ui: {
+        close: 'window-close-symbolic',
+        info: 'info-symbolic',
+        menu: 'open-menu-symbolic',
+        link: 'external-link-symbolic',
+        settings: 'emblem-system-symbolic',
+        tick: 'object-select-symbolic',
         arrow: {
             right: 'pan-end-symbolic',
             left: 'pan-start-symbolic',
@@ -102,6 +109,19 @@ export default {
         cpu: 'org.gnome.SystemMonitor-symbolic',
         ram: 'drive-harddisk-solidstate-symbolic',
         temp: 'temperature-symbolic',
+    },
+    dialog: {
+        Search: '',
+        Applauncher: '󰵆',
+        Bar: '',
+        Border: '󰃇',
+        Color: '󰏘',
+        Desktop: '',
+        Font: '',
+        General: '󰒓',
+        Miscellaneous: '󰠱',
+        Theme: '󰃟',
+        Notifications: '󰂚 ',
     },
     idle: {
         on: 'view-reveal-symbolic',
