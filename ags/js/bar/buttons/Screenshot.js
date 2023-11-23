@@ -1,7 +1,8 @@
 import icons from '../../icons.js';
 import PanelButton from '../PanelButton.js';
 
-import { Widget, Utils } from '../../imports.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 export default () => PanelButton({
     className: 'panel-button screenshot',

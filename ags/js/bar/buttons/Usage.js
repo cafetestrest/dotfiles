@@ -1,7 +1,7 @@
 import FontIcon from '../../misc/FontIcon.js';
 import * as vars from '../../variables.js';
 
-import { Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 const UsagePercentageLabel = (type, title, unit) => Widget.Label({
     className: `label ${type}`,

@@ -2,7 +2,8 @@ import icons from '../../icons.js';
 import PanelButton from '../PanelButton.js';
 // import Note from '../../services/note.js';
 
-import { Widget, Utils } from '../../imports.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 // let first = false;
 

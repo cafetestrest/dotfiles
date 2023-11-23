@@ -1,5 +1,5 @@
-import { Widget } from '../../imports.js';
-import { Bluetooth } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Bluetooth from 'resource:///com/github/Aylur/ags/service/bluetooth.js';
 
 // This one is relying on ags Bluetooth service to provice information and is quicker but does not show battery percentage without gnome
 export default () => Widget.Box({

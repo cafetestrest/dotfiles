@@ -1,7 +1,7 @@
 import ScreenRecord from '../../services/screenrecord.js';
 import { ArrowToggleButton, Menu, opened } from '../ToggleButton.js';
 import icons from '../../icons.js';
-import { Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 // todo remove after
 import Lockscreen from '../../services/lockscreen.js';

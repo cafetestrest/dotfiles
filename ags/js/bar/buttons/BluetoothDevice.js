@@ -1,4 +1,4 @@
-import { Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Btdevice from '../../services/btdevice.js';
 
 // This one is a custom scrips that looks for data in bluetoothctl, it is slower and is refreshed once every 10 seconds

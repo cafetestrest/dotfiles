@@ -1,7 +1,7 @@
 import Nightlight from '../../services/nightlight.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 import icons from '../../icons.js';
-import { Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 export const NightlightIndicator = () => Widget.Icon({
     connections: [[Nightlight, icon => {

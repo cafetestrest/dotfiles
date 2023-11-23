@@ -1,5 +1,6 @@
 import Weather from '../../services/weather.js';
-import { App, Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
 
 export const TemperatureIndicator = ({
     disabled = null,
