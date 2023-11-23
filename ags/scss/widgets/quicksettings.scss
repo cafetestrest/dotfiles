@@ -200,6 +200,7 @@ window#quicksettings .window-content {
           border-radius: $radii * 1.5;
         }
       }
+    }
 
     .simple-toggle {
         @include button;
