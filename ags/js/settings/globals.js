@@ -9,9 +9,9 @@ export async function globals() {
     globalThis.brightness = (await import('../services/brightness.js')).default;
     globalThis.indicator = (await import('../services/onScreenIndicator.js')).default;
 
-    globalThis.btdevice = (await import('../services/btdevice.js')).default;//todo global services
+    globalThis.btdevice = (await import('../services/btdevice.js')).default;
     // globalThis.note = (await import('../services/note.js')).default;
-    // globalThis.weather = (await import('../services/weather.js')).default;
+    globalThis.weather = (await import('../services/weather.js')).default;
 
     Mpris.players.forEach(player => {
         player.connect('changed', player => {

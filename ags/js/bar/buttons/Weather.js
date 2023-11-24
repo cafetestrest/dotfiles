@@ -360,7 +360,7 @@ export const PopupContent = () => Widget.Box({
         Widget.Box({
             vertical: true,
             children: [
-                Forecast({ class_name: 'datemenu', }),
+                Forecast(),
                 RefreshButton({ class_name: 'header panel-button', }),
             ]
         })
