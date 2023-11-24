@@ -94,7 +94,7 @@ const AudioIndicator = () => Widget.Icon({
 });
 
 const SpeakerIndicator = () => Widget.Box({
-    className: 'system-volume',
+    class_name: 'system-volume',
     children: [
         AudioIndicator(),
         Widget.Label({ label: ' ' }),
@@ -123,7 +123,7 @@ const SpeakerIndicator = () => Widget.Box({
 
         if (isHeadsetSelected) {
             box.add(Widget.Box({
-                className: classnameToDisplay,
+                class_name: classnameToDisplay,
                 children: [
                     Widget.Label({ label: ' ', }),
                     VolumeIndicator('speaker')

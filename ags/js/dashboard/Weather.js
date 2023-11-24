@@ -7,7 +7,7 @@
 //     layout,
 //     anchor,
 //     content: Widget.Box({
-//         className: 'dashboard',
+//         class_name: 'dashboard',
 //         children: [
 //             PopupContent(),
 //         ],

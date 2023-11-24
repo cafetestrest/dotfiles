@@ -5,7 +5,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 export default () => PanelButton({
-    className: 'panel-button screenshot',
+    class_name: 'panel-button screenshot',
     content: Widget.Icon({
         icon: icons.screenshot,
     }),

@@ -52,7 +52,7 @@ const Applauncher = () => {
         children: [
             entry,
             Widget.Scrollable({
-                className: 'scrollable',
+                class_name: 'scrollable',
                 hscroll: 'never',
                 child: list,
             }),

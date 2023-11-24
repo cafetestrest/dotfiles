@@ -38,7 +38,7 @@ const AppButton = ({ icon, pinned = false, ...rest }) => {
 };
 
 export const Taskbar = () => Widget.Box({
-    className: 'taskbar',
+    class_name: 'taskbar',
     binds: [['children', Hyprland, 'clients', c => c.map(client => {
         const iconNames = {
             'jetbrains-phpstorm': 'phpstorm',

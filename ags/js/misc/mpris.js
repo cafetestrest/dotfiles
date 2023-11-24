@@ -73,28 +73,24 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Widget
     class_name: 'player-icon',
     tooltip_text: player.identity || '',
     connections: [[player, icon => {
+        let selectedIcon = '';
+
         const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
         Utils.lookUpIcon(name)
-            ? icon.icon = name
-            : icon.icon = icons.mpris.fallback;
-
-        // let selectedIcon = null;
-        // const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
-        // Utils.lookUpIcon(name)
-        //     ? selectedIcon = name
-        //     : selectedIcon = icons.mpris.pause;
+            ? selectedIcon = name
+            : selectedIcon = icons.mpris.pause;
 
         // //check if media is playing, if not them remove media icon
-        // if (player && player.position && player.position === -1) {
-        //     selectedIcon = null;
-        // }
+        if (player && player.position && player.position === -1) {
+            selectedIcon = '';
+        }
 
         // //check if media is paused, update the icon is it is
-        // if (player && player.playBackStatus === 'Paused') {
-        //     selectedIcon = icons.mpris.play;
-        // }
+        if (player && player.playBackStatus === 'Paused') {
+            selectedIcon = icons.mpris.play;
+        }
 
-        // icon.icon = selectedIcon;//todo add this not what is visible
+        icon.icon = selectedIcon;
     }]],
 });
 

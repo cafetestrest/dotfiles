@@ -3,7 +3,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 
 export default () => Widget.Box({
-    className: 'hyprworkspaces panel-button',
+    class_name: 'hyprworkspaces panel-button',
     connections: [[Hyprland, box => {
         // remove every children
         box.get_children().forEach(ch => ch.destroy());
@@ -26,7 +26,7 @@ export default () => Widget.Box({
                 onScrollUp: () => Utils.execAsync(`hyprctl dispatch workspace +1`).catch(print),
                 onScrollDown: () => Utils.execAsync(`hyprctl dispatch workspace -1`).catch(print),
                 child: Widget.Label(`${wsnum.toString()}`),
-                className: Hyprland.active.workspace.id == i ? 'focused' : '',
+                class_name: Hyprland.active.workspace.id == i ? 'focused' : '',
             }));
         }
 

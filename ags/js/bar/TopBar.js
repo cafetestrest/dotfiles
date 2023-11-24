@@ -23,6 +23,11 @@ import options from '../options.js';
 
 import { Taskbar } from '../dock/Dock.js';
 import WorkspacesHypr from './buttons/WorkspacesHypr.js';
+import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
+import Screenshot from './buttons/Screenshot.js';
+import Note from './buttons/Note.js';
+import BluetoothDevice from './buttons/BluetoothDevices.js';//todo change to other one
+import { TemperatureIndicator } from './buttons/Weather.js';
 
 const submenuItems = Variable(1);
 SystemTray.connect('changed', () => {
@@ -57,18 +62,15 @@ const Start = () => Widget.Box({
     children: [
         OverviewButton(),
         SeparatorDot(),
-        Workspaces(),
-        // Taskbar([]),todo
+        // Workspaces(),
+        Taskbar(),
         SeparatorDot(),
-        // WorkspacesHypr(),todo
-        // SeparatorDot(),
+        WorkspacesHypr(),
+        SeparatorDot(),
         // FocusedClient(),
         Widget.Box({ hexpand: true }),
-        NotificationIndicator(),
-        SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
-
-        // MediaIndicator(),
-        // SeparatorDot(Mpris, m => m.players.length > 0),
+        MediaIndicator({ direction: 'left' }),
+        SeparatorDot(Mpris, m => m.players.length > 0),
     ],
 });
 
@@ -76,32 +78,43 @@ const Center = () => Widget.Box({
     class_name: 'center',
     children: [
         DateButton(),
+        TemperatureIndicator(),
     ],
 });
 
 const End = () => Widget.Box({
     class_name: 'end',
     children: [
-        // NotificationIndicator({ direction: 'right' }),
-        // SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
-
-        SeparatorDot(Mpris, m => m.players.length > 0),
-        MediaIndicator(),
+        SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
+        NotificationIndicator({ direction: 'right' }),
         Widget.Box({ hexpand: true }),
 
-        SubMenu({
-            items: submenuItems,
-            children: [
-                SysTray(),
-                ColorPicker(),
-            ],
-        }),
+        UsageCPU(),
+        UsageRAM(),
+        UsageDisk(),
+        BluetoothDevice(),//todo
+        SeparatorDot(),
+        SysTray(),
+        ColorPicker(),
+
+        // SubMenu({
+        //     items: submenuItems,
+        //     children: [
+        //         SysTray(),
+        //         ColorPicker(),
+        //     ],
+        // }),
 
         SeparatorDot(),
         ScreenRecord(),
         SeparatorDot(Recorder, r => r.recording),
+
+        Note(),
+        Screenshot(),
+        SeparatorDot(),
+
         SystemIndicators(),
-        SeparatorDot(Battery, b => b.available),
+        // SeparatorDot(Battery, b => b.available),
         BatteryBar(),
         SeparatorDot(),
         PowerMenu(),

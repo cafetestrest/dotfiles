@@ -4,7 +4,7 @@ import * as vars from '../../variables.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 const UsagePercentageLabel = (type, title, unit) => Widget.Label({
-    className: `label ${type}`,
+    class_name: `label ${type}`,
     connections: [[vars[type], label => {
         const percentage = Math.floor(vars[type].value * 100);
 
@@ -13,17 +13,17 @@ const UsagePercentageLabel = (type, title, unit) => Widget.Label({
 });
 
 const UsageLabel = (type, title, unit) => Widget.Label({
-    className: `label ${type}`,
+    class_name: `label ${type}`,
     connections: [[vars[type], label => {
         label.label = `${title}${vars[type].value}${unit}`;
     }]],
 });
 
 export const UsageCPU = () => Widget.Box({
-    className: 'cpu usage panel-button',
+    class_name: 'cpu usage panel-button',
     children: [
         FontIcon({
-            className: 'icon',
+            class_name: 'icon',
             icon: '︁',
         }),
         UsagePercentageLabel('cpu', '', '%'),
@@ -31,10 +31,10 @@ export const UsageCPU = () => Widget.Box({
 });
 
 export const UsageRAM = () => Widget.Box({
-    className: 'ram usage panel-button',
+    class_name: 'ram usage panel-button',
     children: [
         FontIcon({
-            className: 'icon',
+            class_name: 'icon',
             icon: '︁',
         }),
         UsageLabel('ramGB', '', ''),
@@ -42,10 +42,10 @@ export const UsageRAM = () => Widget.Box({
 });
 
 export const UsageDisk = () => Widget.Box({
-    className: 'disk usage panel-button',
+    class_name: 'disk usage panel-button',
     children: [
         FontIcon({
-            className: 'icon',
+            class_name: 'icon',
             icon: '',
         }),
         UsagePercentageLabel('disk', '', '%'),

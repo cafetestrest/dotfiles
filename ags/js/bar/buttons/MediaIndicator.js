@@ -35,7 +35,7 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
 
         function truncateString(inputString, maxLength) {
             if (!inputString) {
-                return '';
+                return inputString;
             }
 
             if (inputString.length > maxLength) {
@@ -45,11 +45,11 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
             }
         }
 
-        if (revealer._current === truncateString(player.trackTitle, 50))
-            return;
+        // if (revealer._current === truncateString(player.track_title, 50))//todo check what this used to do
+            // return;
 
         // revealer._current = player.track_title;
-        revealer._current = truncateString(player.trackTitle, 50);
+        revealer._current = truncateString(player.track_title, 50);
 
         revealer.reveal_child = true;
         Utils.timeout(3000, () => {
@@ -88,7 +88,7 @@ export default ({ direction = 'right' } = {}) => {
 
     //todo missing mpris.PreviousButton(player), and next
     return Widget.Box({
-        className: 'media-player',
+        class_name: 'media-player',
         connections: [
             [options.mpris.preferred, update],
             [Mpris, update, 'notify::players'],

@@ -8,7 +8,7 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 // let first = false;
 
 export default () => PanelButton({
-    className: 'panel-button note',
+    class_name: 'panel-button note',
     content: Widget.Icon({
         icon: icons.note,
     }),
