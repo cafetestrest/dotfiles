@@ -16,21 +16,26 @@ import { init } from './settings/setup.js';
 import { forMonitors } from './utils.js';
 import options from './options.js';
 
+import QSNotifications from './dashboard/Notifications.js';
+import Weather from './dashboard/Weather.js';
+
 const windows = () => [
-    forMonitors(Desktop),
-    forMonitors(FloatingDock),
+    // forMonitors(Desktop),
+    // forMonitors(FloatingDock),
     forMonitors(Lockscreen),
     forMonitors(Notifications),
     forMonitors(OSD),
-    forMonitors(ScreenCorners),
+    // forMonitors(ScreenCorners),
     forMonitors(TopBar),
     Applauncher(),
     Dashboard(),
     Overview(),
     PowerMenu(),
     QuickSettings(),
-    Verification(),
-    About(),
+    // Verification(),
+    // About(),
+    Weather(),
+    QSNotifications(),
 ];
 
 export default {

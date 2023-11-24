@@ -51,7 +51,7 @@ export default () => PopupWindow({
                         [SinkSelector(), AppMixer()],
                     ),
                     Microhone(),
-                    Brightness(),
+                    // Brightness(),
                 ],
             }),
             Row(

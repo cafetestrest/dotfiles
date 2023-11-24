@@ -21,6 +21,9 @@ import Recorder from '../services/screenrecord.js';
 // import Taskbar from './buttons/Taskbar.js';
 import options from '../options.js';
 
+import { Taskbar } from '../dock/Dock.js';
+import WorkspacesHypr from './buttons/WorkspacesHypr.js';
+
 const submenuItems = Variable(1);
 SystemTray.connect('changed', () => {
     submenuItems.setValue(SystemTray.items.length + 1);
@@ -55,11 +58,17 @@ const Start = () => Widget.Box({
         OverviewButton(),
         SeparatorDot(),
         Workspaces(),
+        // Taskbar([]),todo
         SeparatorDot(),
-        FocusedClient(),
+        // WorkspacesHypr(),todo
+        // SeparatorDot(),
+        // FocusedClient(),
         Widget.Box({ hexpand: true }),
         NotificationIndicator(),
         SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
+
+        // MediaIndicator(),
+        // SeparatorDot(Mpris, m => m.players.length > 0),
     ],
 });
 
@@ -73,6 +82,9 @@ const Center = () => Widget.Box({
 const End = () => Widget.Box({
     class_name: 'end',
     children: [
+        // NotificationIndicator({ direction: 'right' }),
+        // SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
+
         SeparatorDot(Mpris, m => m.players.length > 0),
         MediaIndicator(),
         Widget.Box({ hexpand: true }),
