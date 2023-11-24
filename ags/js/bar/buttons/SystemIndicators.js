@@ -137,7 +137,7 @@ const SpeakerIndicator = () => Widget.Box({
 
 export default () => PanelButton({
     class_name: 'quicksettings panel-button',
-    onClicked: () => App.toggleWindow('quicksettings'),
+    on_clicked: () => App.toggleWindow('quicksettings'),
     onScrollUp: () => {
         Audio.speaker.volume += 0.02;
         Indicator.speaker();

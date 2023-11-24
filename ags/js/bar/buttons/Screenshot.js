@@ -9,10 +9,10 @@ export default () => PanelButton({
     content: Widget.Icon({
         icon: icons.screenshot,
     }),
-    onClicked: () => {
+    on_clicked: () => {
         Utils.execAsync(['bash', '-c', "~/.config/scripts/screenshot.sh 1"]).catch(print);
     },
-    onSecondaryClick: () => {
+    on_secondary_click: () => {
         Utils.execAsync(['bash', '-c', "~/.config/scripts/screenshot.sh"]).catch(print);
     },
 });

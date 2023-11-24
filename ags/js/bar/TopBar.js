@@ -77,7 +77,7 @@ const Start = () => Widget.Box({
 const Center = () => Widget.Box({
     class_name: 'center',
     children: [
-        DateButton(),
+        DateButton({ format: '%a %b %e   %H:%M:%S' }),
         TemperatureIndicator(),
     ],
 });

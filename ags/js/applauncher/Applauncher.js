@@ -41,10 +41,50 @@ const Applauncher = () => {
                 launchApp(list[0]);
             }
         },
-        on_change: ({ text }) => list.children.map(item => {
-            if (item.app)
-                item.visible = item.app.match(text);
-        }),
+        on_change: ({ text }) => {
+            function containsMathOperation(text) {
+                // Define a regular expression to match mathematical operators
+                const mathOperationRegex = /[+\-*/]/;
+
+                // Use the test method to check if the text contains a math operation
+                return mathOperationRegex.test(text);
+            }
+
+            let mathResult = null;
+
+            if (containsMathOperation(text)) {
+                try {
+                    mathResult = eval(text);
+                } catch (error) {
+                    // do nothing
+                }
+            }
+
+            list.children.map(item => {
+                if (item.app)
+                    item.visible = item.app.match(text);
+
+                // remove old records
+                if (item.class_name === 'math-result')
+                    item.destroy()
+            });
+
+            if (containsMathOperation(text) && mathResult) {
+                list.add(Widget.Label({
+                    className: 'math-result',
+                    label: 'Result: ' + text + ' = ' + mathResult,
+                }));
+
+                // logic to go over all items in the list, if it contains class math-result it should be visible
+                list.children.map(item => {
+                    if (item.class_name !== 'math-result') {
+                        item.visible = false;
+                    } else {
+                        item.visible = true;
+                    }
+                });
+            }
+        }
     });
 
     return Widget.Box({
@@ -52,7 +92,7 @@ const Applauncher = () => {
         children: [
             entry,
             Widget.Scrollable({
-                class_name: 'scrollable',
+                className: 'scrollable',
                 hscroll: 'never',
                 child: list,
             }),

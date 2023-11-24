@@ -24,7 +24,7 @@ export const PannelButton = props => Widget.Button({
     ...props,
     class_name: 'weather panel-button',
     child: Temperature(),
-    onClicked: () => App.toggleWindow('weather'),
+    on_clicked: () => App.toggleWindow('weather'),
     connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'weather' && visible);
     }]],
@@ -374,7 +374,7 @@ export const RefreshButton = props => Widget.Button({
         icon: 'view-refresh-symbolic',
         halign: 'end',
     }),
-    onClicked: () => {
+    on_clicked: () => {
         Weather.weatherData
     },
 });

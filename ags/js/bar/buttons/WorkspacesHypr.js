@@ -22,7 +22,7 @@ export default () => Widget.Box({
             }
 
             box.add(Widget.Button({
-                onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+                on_clicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
                 onScrollUp: () => Utils.execAsync(`hyprctl dispatch workspace +1`).catch(print),
                 onScrollDown: () => Utils.execAsync(`hyprctl dispatch workspace -1`).catch(print),
                 child: Widget.Label(`${wsnum.toString()}`),

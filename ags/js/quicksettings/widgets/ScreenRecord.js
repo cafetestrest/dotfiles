@@ -47,7 +47,7 @@ export const ScreenRecordSelector = () => Menu({
         vertical: true,
         children: recorders.map(({ name, icon, click }) => Widget.Button({
             hexpand: true,
-            onClicked: click,
+            on_clicked: click,
             child: Widget.Box({
                 children: [
                     Widget.Icon(icon),

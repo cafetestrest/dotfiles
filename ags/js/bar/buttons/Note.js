@@ -12,10 +12,10 @@ export default () => PanelButton({
     content: Widget.Icon({
         icon: icons.note,
     }),
-    onClicked: () => {
+    on_clicked: () => {
         Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
-    onSecondaryClick: () => {
+    on_secondary_click: () => {
         Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
     },
     // connections: [[60000, button => {
