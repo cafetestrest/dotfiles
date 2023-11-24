@@ -8,7 +8,7 @@ export default () => PanelButton({
     class_name: 'overview',
     window: 'overview',
     on_clicked: () => App.toggleWindow('applauncher'),
-    // on_clicked: () => App.toggleWindow('applauncher'),//todo add secondary => overview
+    on_secondary_click: () => App.toggleWindow('overview'),
     content: FontIcon({
         binds: [['icon', options.bar.icon, 'value', v => {
             return v === 'distro-icon' ? distroIcon : v;
