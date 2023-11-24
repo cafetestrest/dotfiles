@@ -13,20 +13,20 @@ import Gtk from 'gi://Gtk';
 
 export function init() {
     App.connect('config-parsed', () => {
-        initWallpaper();
+        // initWallpaper();
         notificationBlacklist();
-        warnOnLowBattery();
+        // warnOnLowBattery();
         globals();
-        tmux();
+        // tmux();
         gsettigsColorScheme();
         gtkFontSettings();
         scssWatcher();
         dependandOptions();
 
         reloadScss();
-        hyprlandInit();
-        setupHyprland();
-        wallpaper();
+        // hyprlandInit();
+        // setupHyprland();
+        // wallpaper();
         showAbout();
     });
 }
