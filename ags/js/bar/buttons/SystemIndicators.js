@@ -106,7 +106,7 @@ const SpeakerIndicator = () => Widget.Box({
         let classnameToDisplay = 'headset-icon';
 
         box.get_children().forEach(ch => {
-            if (ch.className == classnameToDisplay) {
+            if (ch.class_name == classnameToDisplay) {
                 if (isHeadsetSelected) {
                     ch.visible = true;
                 } else {
