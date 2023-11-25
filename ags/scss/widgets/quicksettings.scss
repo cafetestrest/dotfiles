@@ -1,5 +1,5 @@
-$buttonMinHeight: 3.5em;
-$buttonMinWidth: 12em;
+$buttonMinHeight: 3.2em;
+$buttonMinWidth: 11em;
 // min height of the volume slider
 $sliderVolumeMinHeight: 2em;
 // min width of the volume (to not become invisible)
@@ -8,6 +8,9 @@ $sliderTroughMinWidth: 2em;
 window#quicksettings .window-content {
     @include floating-widget;
     @include spacing;
+
+    // adds padding around whole panel
+    padding: 0.8em;
 
     .avatar {
         @include widget;
@@ -23,7 +26,6 @@ window#quicksettings .window-content {
 
         padding: $padding;
 
-
         button, .uptime {
             @include button;
             padding: $padding;
@@ -34,6 +36,14 @@ window#quicksettings .window-content {
             image {
                 font-size: 1.2em;
             }
+        }
+    }
+
+    .system-info {
+        .system-info-spacing {
+            margin: 0 0.3em;
+            // border: 11px solid red;
+        // @include spacing;
         }
     }
 
@@ -111,26 +121,26 @@ window#quicksettings .window-content {
 
         button {
             @include button($flat: true);
-            padding: $padding / 2;
+            padding: $padding / 2;            
         }
 
         switch {
-            @include switch;
+            // @include switch;
         }
 
         slider {
-            margin: 0;
+            // margin: 0;
         }
     }
 
     .button-spacing{
-        margin-right: $spacing;
+        // margin-right: $spacing;
     }
 
     .simple-toggle {
         @include button;
 
-        padding: $padding;
+        // padding: $padding;
 
         // text spacing
         label {
@@ -157,12 +167,13 @@ window#quicksettings .window-content {
         min-height: $buttonMinHeight;
         min-width: $buttonMinWidth;
         border-radius: $radii * 1.5;
-        margin-bottom: $spacing;
+        // margin-bottom: $spacing;
 
       //   label {
     //    margin-left: $spacing/2;
     //   }
         .label-box {
+            //spacing label on some toggles
             @include spacing(.5);
         }
 

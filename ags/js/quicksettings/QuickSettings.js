@@ -80,7 +80,7 @@ export default () => PopupWindow({
                 [
                     // NetworkToggle(),
                     BluetoothToggle(),
-                    Widget.Box({ class_name: 'button-spacing' }),
+                    // Widget.Box({ class_name: 'button-spacing' }),
                     IdleToggle(),
                 ],
                 [
@@ -91,14 +91,14 @@ export default () => PopupWindow({
             Row(
                 [
                     DND(),
-                    Widget.Box({ class_name: 'button-spacing' }),
+                    // Widget.Box({ class_name: 'button-spacing' }),
                     NightlightToggle()
                 ],
             ),
             Row(
                 [
                     ThemeToggle(),
-                    Widget.Box({ class_name: 'button-spacing' }),
+                    // Widget.Box({ class_name: 'button-spacing' }),
                     // MicMute(),
                     ScreenRecordToggle()
                 ],
@@ -135,14 +135,17 @@ export default () => PopupWindow({
                         class_name: 'system-info',
                         children: [
                             SysProgress('cpu', 'Cpu', '%'),
+                            Widget.Box({ class_name: 'system-info-spacing' }),
                             SysProgress('ram', 'Ram', '%'),
+                            Widget.Box({ class_name: 'system-info-spacing' }),
                             SysProgress('disk', 'Disk', '%'),
+                            // Widget.Box({ class_name: 'system-info-spacing' }),
                             // SysProgress('temp', 'Temperature', '°'),
                         ],
                     }),
                 ],
             ),
-            QSWidget(),
+            // QSWidget(),
         ],
     }),
 });
