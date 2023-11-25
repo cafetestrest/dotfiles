@@ -4,7 +4,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 class Nightlight extends Service {
     static { Service.register(this); }
 
-    _mode = null;
+    _mode = '';
 
     get mode() { return this._mode; }
 

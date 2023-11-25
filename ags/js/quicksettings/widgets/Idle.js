@@ -12,11 +12,15 @@ export const IdleIndicator = () => Widget.Icon({
 });
 
 export const IdleToggle = () => SimpleToggleButton({
-    icon: IdleIndicator(),
-    label: Widget.Label({
-        connections: [[Idle, label => {
-            label.label = Idle.mode == 'on' ? 'Timeout' : 'Always On';
-        }]],
+    icon: Widget.Box({
+        children: [
+            IdleIndicator(),
+            Widget.Label({
+                connections: [[Idle, label => {
+                    label.label = Idle.mode == 'on' ? 'Timeout' : 'Always On';
+                }]],
+            }),
+        ]
     }),
     toggle: () => {
         if (Idle.mode == 'on') {

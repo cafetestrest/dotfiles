@@ -10,20 +10,24 @@ export const NightlightIndicator = () => Widget.Icon({
 });
 
 export const NightlightToggle = () => SimpleToggleButton({
-    icon: NightlightIndicator(),
-    label: Widget.Label({
-        connections: [[Nightlight, label => {
-            let mode = Nightlight.mode;
-            let text;
-            if (mode === 'auto') {
-                text = 'Auto';
-            } else if (mode === 'on') {
-                text = 'Enabled';
-            } else {
-                text = 'Disabled';
-            }
-            label.label = text;
-        }]],
+    icon: Widget.Box({
+        children: [
+            NightlightIndicator(),
+            Widget.Label({
+                connections: [[Nightlight, label => {
+                    let mode = Nightlight.mode;
+                    let text;
+                    if (mode === 'auto') {
+                        text = 'Auto';
+                    } else if (mode === 'on') {
+                        text = 'Enabled';
+                    } else {
+                        text = 'Disabled';
+                    }
+                    label.label = text;
+                }]],
+            }),
+        ]
     }),
     toggle: () => {
         if (Nightlight.mode === "auto") {
