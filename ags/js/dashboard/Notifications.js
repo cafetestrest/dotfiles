@@ -15,9 +15,9 @@ export default () => PopupWindow({
             self.transition = 'slide_up';
     }]],
     child: Widget.Box({
+        class_name: 'dashboard',
         children: [
             NotificationColumn(),
         ],
     }),
 });
-//todo just updated?
