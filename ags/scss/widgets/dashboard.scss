@@ -63,7 +63,8 @@ window#dashboard .window-content {
         }
 
         .notification-list {
-            margin-right: $spacing;
+            //fixes weird spacing bug on notification panel - release4
+            // margin-right: $spacing;
         }
 
         .notification {
