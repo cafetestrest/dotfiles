@@ -7,12 +7,15 @@ class BtDeviceInfo extends Service {
     constructor() {
         super();
         this._data = null;
-
-        this.call();
+        // this.call();
     }
 
     call() {
-        Utils.execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(console.error);
+        if (!this._data) {
+            Utils.execAsync(['bash', '-c', "sleep 5 && ~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(console.error);
+        } else {
+            Utils.execAsync(['bash', '-c', "~/.config/scripts/bluetoothbatterypercentage.sh ags"]).catch(console.error);
+        }
     }
 
     get callBtDeviceInfoScript() {
