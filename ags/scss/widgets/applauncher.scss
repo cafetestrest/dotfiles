@@ -1,10 +1,17 @@
 window#applauncher .window-content {
     @include floating_widget;
+    padding: 0; //padding around window
+    background-color: transparentize($color: $bg_color, $amount: 0.05); //trasparent background
+    border-radius: $radii;
 
     entry {
-        @include button;
-        padding: $padding;
-        margin-bottom: $spacing;
+        margin: $spacing $spacing $spacing / 2 $spacing;
+
+        // @include button;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding-left: $padding;
 
         label, image {
             color: $fg-color;
@@ -16,17 +23,31 @@ window#applauncher .window-content {
         background-color: $hover;
     }
 
+    .header-separator {
+        background-color: $hover;
+    }
+
+    .math-result,
+    .placeholder {
+        margin-top: $spacing * 2;
+        color: $fg_color;
+        font-size: 1.2em;
+    }
+
     scrolledwindow {
         @include scrollable;
-        min-width: $applauncher-width;
-        min-height: $applauncher-height;
+        min-width: 36em;
+        min-height: 22em;
     }
 
     button.app-item {
         @include button($flat: true, $reactive: false);
         > box { @include spacing(0.5); }
         transition: $transition;
-        padding: $padding;
+        padding: $padding / 2;
+        padding-left: $padding * 2;
+        margin-right: $padding; //from scroll wheel
+        border-radius: $radii / 2;
 
         label {
             transition: $transition;
@@ -37,6 +58,7 @@ window#applauncher .window-content {
 
             &.description {
                 color: transparentize($fg-color, 0.3);
+                font-size: small;
             }
         }
 
@@ -45,8 +67,10 @@ window#applauncher .window-content {
         }
 
         &:hover, &:focus {
+            background-color: #0059D1;
+
             .title {
-                color: $accent;
+                // color: $accent;
             }
 
             image {

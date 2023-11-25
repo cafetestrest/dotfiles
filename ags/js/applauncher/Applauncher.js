@@ -13,14 +13,14 @@ const Applauncher = () => {
         ...Applications.query('').flatMap(app => {
             const item = AppItem(app);
             return [
-                Widget.Separator({
-                    hexpand: true,
-                    binds: [['visible', item, 'visible']],
-                }),
+                // Widget.Separator({
+                //     hexpand: true,
+                //     binds: [['visible', item, 'visible']],
+                // }),
                 item,
             ];
         }),
-        Widget.Separator({ hexpand: true }),
+        // Widget.Separator({ hexpand: true }),
     ];
 
     const list = Widget.Box({
@@ -92,6 +92,9 @@ const Applauncher = () => {
         vertical: true,
         children: [
             entry,
+            Widget.Box({
+                className: 'header-separator',
+            }),
             Widget.Scrollable({
                 className: 'scrollable',
                 hscroll: 'never',
