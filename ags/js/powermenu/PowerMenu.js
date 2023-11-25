@@ -12,7 +12,10 @@ const SysButton = (action, label) => Widget.Button({
     child: Widget.Box({
         vertical: true,
         children: [
-            Widget.Icon(icons.powermenu[action]),
+            Widget.Icon({
+                icon: icons.powermenu[action],
+                size: 35,
+            }),
             // Widget.Label(label),
         ],
     }),

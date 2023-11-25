@@ -88,6 +88,7 @@ const Applauncher = () => {
     });
 
     return Widget.Box({
+        className: 'applauncher',
         vertical: true,
         children: [
             entry,

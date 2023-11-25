@@ -39,25 +39,13 @@ window#powermenu .window-content {
     border-radius: if($radii == 0, 0, $popover-radius + ($popover-padding + $spacing * 1.5));
 
     button {
-    ////  TODO used to be like:
-    //@include common;
-    //
-    //  image {
-    //    @include button;
-    //    margin: $popover_padding;
-    //    margin-bottom: $popover_padding/2;
-    //    // border-radius: $radii*2; //override
-    //    border-radius: 50%;
-    //    min-width: 120px;
-    //    min-height: 120px;
-    //    // font-size: 68px;
-    //    font-size: 35px;
-    //  }
         @include unset;
 
         image {
             @include button;
-            border-radius: $popover-radius;
+            // border-radius: $popover-radius;
+            border-radius: 50%;
+
             min-width: 1.7em;
             min-height: 1.7em;
             font-size: 4em;

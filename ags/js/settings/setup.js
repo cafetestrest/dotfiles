@@ -18,7 +18,7 @@ export function init() {
         // warnOnLowBattery();
         globals();
         // tmux();
-        gsettigsColorScheme();
+        // gsettigsColorScheme();
         gtkFontSettings();
         scssWatcher();
         dependandOptions();

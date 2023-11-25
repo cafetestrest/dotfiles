@@ -122,7 +122,7 @@ export class Opt extends Service {
 
             if (reload && !this.noReload) {
                 reloadScss();
-                setupHyprland();
+                // setupHyprland();
             }
         }
     }

@@ -83,7 +83,11 @@ export default ({ direction = 'right' } = {}) => {
             return;
 
         current = player;
-        box.children = [Indicator({ player, direction })];
+        box.children = [
+            mpris.PreviousButton(player),
+            Indicator({ player, direction }),
+            mpris.NextButton(player),
+        ];
     };
 
     //todo missing mpris.PreviousButton(player), and next
