@@ -344,7 +344,6 @@ export const Forecast = () => Widget.Box({
     children: [
         Widget.Box({
             class_name: 'tooltip',
-            halign: 'center',
             children: [
                 ResetTimer(),
                 Tooltip(),
@@ -372,7 +371,7 @@ export const RefreshButton = props => Widget.Button({
     class_name: 'weather-refresh',
     child: Widget.Icon({
         icon: 'view-refresh-symbolic',
-        halign: 'end',
+        hpack: 'end',
     }),
     on_clicked: () => {
         Weather.weatherData
