@@ -73,19 +73,18 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Widget
     class_name: 'player-icon',
     tooltip_text: player.identity || '',
     connections: [[player, icon => {
-        let selectedIcon = '';
-
+        let selectedIcon = null;
         const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
         Utils.lookUpIcon(name)
             ? selectedIcon = name
             : selectedIcon = icons.mpris.pause;
 
-        // //check if media is playing, if not them remove media icon
+        //check if media is playing, if not them remove media icon
         if (player && player.position && player.position === -1) {
             selectedIcon = '';
         }
 
-        // //check if media is paused, update the icon is it is
+        //check if media is paused, update the icon is it is
         if (player && player.playBackStatus === 'Paused') {
             selectedIcon = icons.mpris.play;
         }

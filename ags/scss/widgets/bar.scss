@@ -296,3 +296,8 @@ $bar-spacing: 0px;
     padding: 0;
     background-color: transparent;
 }
+
+.media.panel-button:hover box {
+    box-shadow: none;
+    background-color: transparent;
+}
