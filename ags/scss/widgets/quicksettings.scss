@@ -103,8 +103,11 @@ window#quicksettings .window-content {
         }
 
         separator {
+            // background-color: $border_color;
             margin: 0 $radii / 2;
         }
+
+        // label { margin-left: $spacing; }
 
         button {
             @include button($flat: true);
@@ -126,6 +129,8 @@ window#quicksettings .window-content {
 
     .simple-toggle {
         @include button;
+
+        padding: $padding;
 
         // text spacing
         label {
@@ -149,15 +154,14 @@ window#quicksettings .window-content {
         @include button;
         font-weight: bold;
 
-      ////todo used to be like
-      //min-height: $buttonMinHeight;
-      //min-width: $buttonMinWidth;
-      //border-radius: $radii * 1.5;
-      //margin-bottom: $spacing;
-      //
-      //label {
-      //  margin-left: $spacing/2;
-      //}
+        min-height: $buttonMinHeight;
+        min-width: $buttonMinWidth;
+        border-radius: $radii * 1.5;
+        margin-bottom: $spacing;
+
+      //   label {
+    //    margin-left: $spacing/2;
+    //   }
         .label-box {
             @include spacing(.5);
         }
@@ -202,10 +206,13 @@ window#quicksettings .window-content {
       }
     }
 
-    .simple-toggle {
-        @include button;
-        padding: $padding;
-    }
+    // .simple-toggle {
+    //     @include button;
+
+    //     border: 1px solid green;
+
+    //     padding: $padding;
+    // }
 
     .media {
         @include spacing;
@@ -301,3 +308,4 @@ window#quicksettings .window-content {
         }
     }
 }
+ 

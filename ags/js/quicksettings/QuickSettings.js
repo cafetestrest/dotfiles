@@ -1,7 +1,7 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Header from './widgets/Header.js';
 import PopupWindow from '../misc/PopupWindow.js';
-import { Volume, Microhone, SinkSelector, AppMixer } from './widgets/Volume.js';
+import { VolumeWithoutPercent, Volume, Microhone, SinkSelector, AppMixer } from './widgets/Volume.js';
 import { NetworkToggle, WifiSelection } from './widgets/Network.js';
 import { BluetoothToggle, BluetoothDevices } from './widgets/Bluetooth.js';
 import { ThemeToggle, ThemeSelector } from './widgets/Theme.js';
@@ -11,6 +11,12 @@ import Brightness from './widgets/Brightness.js';
 import DND from './widgets/DND.js';
 import MicMute from './widgets/MicMute.js';
 import options from '../options.js';
+
+import { IdleToggle } from './widgets/Idle.js';
+import { NightlightToggle } from './widgets/NightLight.js';
+import { SysProgress } from '../dashboard/DateColumn.js';
+import { QSWidget } from '../bar/buttons/Weather.js';
+import { ScreenRecordToggle, ScreenRecordSelector } from './widgets/ScreenRecord.js';
 
 const Row = (toggles = [], menus = []) => Widget.Box({
     vertical: true,
@@ -40,32 +46,103 @@ export default () => PopupWindow({
     }]],
     child: Widget.Box({
         vertical: true,
+        // children: [
+        //     Header(),
+        //     Widget.Box({
+        //         class_name: 'sliders-box vertical',
+        //         vertical: true,
+        //         children: [
+        //             Row(
+        //                 [Volume()],
+        //                 [SinkSelector(), AppMixer()],
+        //             ),
+        //             Microhone(),
+        //             // Brightness(),
+        //         ],
+        //     }),
+        //     Row(
+        //         [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
+        //         [
+        //             // WifiSelection(), 
+        //             BluetoothDevices()
+        //         ],
+        //     ),
+        //     Row(
+        //         [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
+        //         [ProfileSelector(), ThemeSelector()],
+        //     ),
+        //     Media(),
+        // ],
+
         children: [
-            Header(),
-            Widget.Box({
-                class_name: 'sliders-box vertical',
+            // Header(),
+            Row(
+                [
+                    // NetworkToggle(),
+                    BluetoothToggle(),
+                    Widget.Box({ class_name: 'button-spacing' }),
+                    IdleToggle(),
+                ],
+                [
+                    // WifiSelection(),
+                    BluetoothDevices(),
+                ],
+            ),
+            Row(
+                [
+                    DND(),
+                    Widget.Box({ class_name: 'button-spacing' }),
+                    NightlightToggle()
+                ],
+            ),
+            Row(
+                [
+                    ThemeToggle(),
+                    Widget.Box({ class_name: 'button-spacing' }),
+                    // MicMute(),
+                    ScreenRecordToggle()
+                ],
+                [
+                    // ProfileSelector(),
+                    ThemeSelector(),
+                    // ScreenRecordSelector(),//todo this one?
+                ],
+            ),
+            Row([Widget.Box({
+                class_name: 'qsvolume',
                 vertical: true,
                 children: [
                     Row(
-                        [Volume()],
-                        [SinkSelector(), AppMixer()],
+                        [
+                            VolumeWithoutPercent(),
+                        ],
+                        [
+                            SinkSelector(),
+                            AppMixer()
+                        ],
                     ),
-                    Microhone(),
-                    // Brightness(),
+                    // Row(
+                    //     [
+                    //         // Brightness(),
+                    //         Microhone(),
+                    //     ],
+                    // ),
                 ],
-            }),
+            })]),
             Row(
-                [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
                 [
-                    // WifiSelection(), 
-                    BluetoothDevices()
+                    Widget.Box({
+                        class_name: 'system-info',
+                        children: [
+                            SysProgress('cpu', 'Cpu', '%'),
+                            SysProgress('ram', 'Ram', '%'),
+                            SysProgress('disk', 'Disk', '%'),
+                            // SysProgress('temp', 'Temperature', '°'),
+                        ],
+                    }),
                 ],
             ),
-            Row(
-                [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
-                [ProfileSelector(), ThemeSelector()],
-            ),
-            Media(),
+            QSWidget(),
         ],
     }),
 });
