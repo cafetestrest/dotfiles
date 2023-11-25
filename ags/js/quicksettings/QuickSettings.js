@@ -145,7 +145,7 @@ export default () => PopupWindow({
                     }),
                 ],
             ),
-            // QSWidget(),
+            QSWidget(),
         ],
     }),
 });

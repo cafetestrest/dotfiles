@@ -212,7 +212,7 @@ window#weather .tooltip {
     .qsweather-widget {
         margin: 0;
         padding: 0;
-        margin-top: $spacing * 1.5;
+        margin-top: $padding / 2;
         border-radius: $radii;
     }
 

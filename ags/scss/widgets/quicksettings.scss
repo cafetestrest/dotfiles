@@ -234,12 +234,13 @@ window#quicksettings .window-content {
     }
 
     .qsvolume {
+        padding-top: $padding / 2;
         // separate from buttons
-        margin: $spacing / 2 0;
+        // margin: $spacing;
 
         .menu {
-            margin-top: $spacing;
-            margin-bottom: 0;
+            // margin-top: $spacing;
+            // margin-bottom: 0;
 
             .sinkitem {
                 margin: $spacing 0;
