@@ -18,10 +18,10 @@ import ScreenRecord from './buttons/ScreenRecord.js';
 import BatteryBar from './buttons/BatteryBar.js';
 import SubMenu from './buttons/SubMenu.js';
 import Recorder from '../services/screenrecord.js';
-// import Taskbar from './buttons/Taskbar.js';
+import Taskbar from './buttons/Taskbar.js';
 import options from '../options.js';
 
-import { Taskbar } from '../dock/Dock.js';
+import * as Dock from '../dock/Dock.js';
 import WorkspacesHypr from './buttons/WorkspacesHypr.js';
 import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
 import Screenshot from './buttons/Screenshot.js';
@@ -64,6 +64,7 @@ const Start = () => Widget.Box({
         SeparatorDot(),
         // Workspaces(),
         Taskbar(),
+        // Dock.Taskbar(),
         SeparatorDot(),
         WorkspacesHypr(),
         SeparatorDot(),
