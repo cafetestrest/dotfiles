@@ -60,7 +60,7 @@ $bar-spacing: 0px;
     @if $bar-style == 'floating' {
         @include floating-widget;
         margin: $wm-gaps;
-        margin: $wm_gaps $wm_gaps 0 $wm_gaps;
+        margin: $wm_gaps $wm_gaps 0 $wm_gaps; //todo this is how it is on release3
         padding: 0;
     }
 
@@ -166,7 +166,14 @@ $bar-spacing: 0px;
 
     //new workspaces look
     .hyprworkspaces {
-        border: 0.3em solid transparent;
+        // border: 0.3em solid transparent;
+
+        .box-around-workspaces {
+            border: 0;
+            margin: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
 
         button {
             all: unset;

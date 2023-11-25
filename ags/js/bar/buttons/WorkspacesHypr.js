@@ -21,12 +21,17 @@ export default () => Widget.Box({
                 wsnum = 0;
             }
 
-            box.add(Widget.Button({
-                on_clicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
-                onScrollUp: () => Utils.execAsync(`hyprctl dispatch workspace +1`).catch(print),
-                onScrollDown: () => Utils.execAsync(`hyprctl dispatch workspace -1`).catch(print),
-                child: Widget.Label(`${wsnum.toString()}`),
-                class_name: Hyprland.active.workspace.id == i ? 'focused' : '',
+            box.add(Widget.Box({
+                class_name: 'box-around-workspaces',
+                children: [
+                    Widget.Button({
+                        on_clicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+                        onScrollUp: () => Utils.execAsync(`hyprctl dispatch workspace +1`).catch(print),
+                        onScrollDown: () => Utils.execAsync(`hyprctl dispatch workspace -1`).catch(print),
+                        child: Widget.Label(`${wsnum.toString()}`),
+                        class_name: Hyprland.active.workspace.id == i ? 'focused' : '',
+                    })
+                ]
             }));
         }
 

@@ -253,3 +253,8 @@ window#weather .tooltip {
         }
     }
 }
+
+// fix to keep topbar on the correct height - 29 (hyprctl layers), new on release4
+.weather.panel-button label{
+    font-size: 16px;
+}
