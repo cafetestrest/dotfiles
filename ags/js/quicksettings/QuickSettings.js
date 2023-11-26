@@ -105,7 +105,7 @@ export default () => PopupWindow({
                 [
                     // ProfileSelector(),
                     ThemeSelector(),
-                    // ScreenRecordSelector(),//todo this one?
+                    ScreenRecordSelector(),
                 ],
             ),
             Row([Widget.Box({

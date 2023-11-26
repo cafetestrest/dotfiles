@@ -32,7 +32,7 @@ const recorders = [
 export const ScreenRecordToggle = () => ArrowToggleButton({
     name: 'screenrecord',
     icon: Widget.Icon(icons.screenshot),
-    label: Widget.Label({ label: 'Screenshot' }),
+    label: Widget.Label({ label: 'Screenshot', class_name: 'screen-record-toggle-label', }),
     connection: [opened, () => opened.value === 'screenrecord'],
     activate: () => opened.setValue('screenrecord'),
     activateOnArrow: false,
@@ -43,17 +43,19 @@ export const ScreenRecordSelector = () => Menu({
     name: 'screenrecord',
     icon: Widget.Icon(icons.screenshot),
     title: Widget.Label('Screenrecord Selector'),
-    content: Widget.Box({
-        vertical: true,
-        children: recorders.map(({ name, icon, click }) => Widget.Button({
-            hexpand: true,
-            on_clicked: click,
-            child: Widget.Box({
-                children: [
-                    Widget.Icon(icon),
-                    Widget.Label(name),
-                ],
-            }),
-        }))
-    }),
+    content: [
+        Widget.Box({
+            vertical: true,
+            children: recorders.map(({ name, icon, click }) => Widget.Button({
+                hexpand: true,
+                on_clicked: click,
+                child: Widget.Box({
+                    children: [
+                        Widget.Icon(icon),
+                        Widget.Label(name),
+                    ],
+                }),
+            }))
+        }),
+    ]
 });

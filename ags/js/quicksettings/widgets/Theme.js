@@ -7,7 +7,7 @@ import { setTheme, openSettings } from '../../settings/theme.js';
 
 export const ThemeToggle = () => ArrowToggleButton({
     name: 'theme',
-    icon: Widget.Label({ binds: [['label', options.theme.icon]] }),
+    icon: Widget.Label({ binds: [['label', options.theme.icon]], class_name: 'theme-toggle-icon', }),
     label: Widget.Label({ binds: [['label', options.theme.name]] }),
     connection: [opened, () => opened.value === 'theme'],
     activate: () => opened.setValue('theme'),
