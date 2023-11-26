@@ -320,10 +320,12 @@ window#quicksettings .window-content {
         }
     }
 
+    //fixes spacing of label after icons so it looks unified
     .theme-toggle-icon {
         padding-right: $spacing;
     }
 
+    //fixes spacing of label after icons so it looks unified
     .screen-record-toggle-label {
         padding-left: $spacing / 2;
     }

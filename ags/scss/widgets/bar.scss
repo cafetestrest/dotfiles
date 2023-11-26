@@ -60,7 +60,7 @@ $bar-spacing: 0px;
     @if $bar-style == 'floating' {
         @include floating-widget;
         margin: $wm-gaps;
-        margin: $wm_gaps $wm_gaps 0 $wm_gaps; //todo this is how it is on release3
+        margin: $wm_gaps / 2 $wm_gaps / 2 0 $wm_gaps / 2; //floating bar correct spacing
         padding: 0;
     }
 

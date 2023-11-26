@@ -1,5 +1,6 @@
 @mixin button-focus() {
-    // box-shadow: inset 0 0 0 $border-width $accent;//todo this is changed on release3 like so maybe reset it?
+    //removes the shadow (blue highlight) on button focused (when tabbing trough buttons in QS) of 1px
+    // box-shadow: inset 0 0 0 $border-width $accent;
     background-color: $hover;
     color: $hover-fg;
 }

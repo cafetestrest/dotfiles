@@ -9,7 +9,7 @@ window.popup {
         background-color: $bg-color;
         padding: $popover-padding;
         border: $border-width solid $popover-border-color;
-        min-height: 20em;//todo this was added on release3 maybe remove it if not needed
+        min-height: 20em;//systray min height
 
         separator {
             background-color: $border-color;
@@ -17,8 +17,8 @@ window.popup {
 
         menuitem {
             @include button;
-            background-color: transparent;//todo this was added on release3 maybe remove it if not needed
-            box-shadow: none;//todo this was added on release3 maybe remove it if not needed
+            background-color: transparent;//systray removed color of each item
+            box-shadow: none;
             padding: $spacing/2;
             margin: $spacing/2 0;
             &:first-child { margin-top: 0; }

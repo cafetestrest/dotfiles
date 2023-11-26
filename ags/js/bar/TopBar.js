@@ -26,7 +26,7 @@ import WorkspacesHypr from './buttons/WorkspacesHypr.js';
 import { UsageCPU, UsageDisk, UsageRAM } from './buttons/Usage.js';
 import Screenshot from './buttons/Screenshot.js';
 import Note from './buttons/Note.js';
-import BluetoothDevice from './buttons/BluetoothDevice.js';//todo change to other one
+import BluetoothDevice from './buttons/BluetoothDevice.js';
 import { TemperatureIndicator } from './buttons/Weather.js';
 
 const submenuItems = Variable(1);
@@ -93,7 +93,7 @@ const End = () => Widget.Box({
         UsageCPU(),
         UsageRAM(),
         UsageDisk(),
-        BluetoothDevice(),//todo
+        BluetoothDevice(),
         SeparatorDot(),
         SysTray(),
         ColorPicker(),

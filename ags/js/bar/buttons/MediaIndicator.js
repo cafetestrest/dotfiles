@@ -45,9 +45,6 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
             }
         }
 
-        // if (revealer._current === truncateString(player.track_title, 50))//todo check what this used to do
-            // return;
-
         // revealer._current = player.track_title;
         revealer._current = truncateString(player.track_title, 50);
 
@@ -90,7 +87,6 @@ export default ({ direction = 'right' } = {}) => {
         ];
     };
 
-    //todo missing mpris.PreviousButton(player), and next
     return Widget.Box({
         class_name: 'media-player',
         connections: [

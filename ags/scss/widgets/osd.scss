@@ -1,15 +1,15 @@
 window.indicator .progress {
     @include floating-widget;
     padding: $padding / 2;
-    border-radius: if($radii == 0, 0, $radii + $padding / 2);
+    // border-radius: if($radii == 0, 0, $radii + $padding / 2);
 
     .fill {
-        border-radius: $radii;
+        border-radius: $radii + $padding / 2;
         background-color: $accent;
         color: $accent-fg;
 
         image {
-            -gtk-icon-transform: scale(0.7);
+            -gtk-icon-transform: scale(0.5);
         }
 
         .font-icon {
