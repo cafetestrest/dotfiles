@@ -93,7 +93,7 @@ export default {
     },
     ui: {
         close: 'window-close-symbolic',
-        info: 'info-symbolic',
+        info: 'dialog-information-symbolic',
         menu: 'open-menu-symbolic',
         link: 'insert-link-symbolic',
         settings: 'emblem-system-symbolic',
