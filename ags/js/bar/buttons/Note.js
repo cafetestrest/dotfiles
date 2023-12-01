@@ -13,10 +13,10 @@ export default () => PanelButton({
         icon: icons.note,
     }),
     on_clicked: () => {
-        Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
+        Utils.execAsync(['bash', '-c', "codium ~/Documents/note.md"]).catch(print);
     },
     on_secondary_click: () => {
-        Utils.execAsync(['bash', '-c', "codium ~/Documents/note"]).catch(print);
+        Utils.execAsync(['bash', '-c', "codium ~/Documents/note.md"]).catch(print);
     },
     // connections: [[60000, button => {
     //     if (!first) {
