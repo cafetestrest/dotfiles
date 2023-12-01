@@ -329,5 +329,10 @@ window#quicksettings .window-content {
     .screen-record-toggle-label {
         padding-left: $spacing / 2;
     }
+
+    // adds spacing to the quicksettings theme toggles menu - top label - title
+    .theme-menu-title {
+        padding-left: $spacing / 2;
+    }
 }
  

@@ -20,7 +20,7 @@ export const ThemeSelector = () => Menu({
     icon: Widget.Label({
         binds: [['label', options.theme.icon]],
     }),
-    title: Widget.Label('Theme Selector'),
+    title: Widget.Label({ label :'Theme Selector', class_name: 'theme-menu-title', }),
     content: [
         ...themes.map(({ name, icon }) => Widget.Button({
             on_clicked: () => setTheme(name),
