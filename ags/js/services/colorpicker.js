@@ -43,7 +43,8 @@ class Colors extends Service {
         if (!color)
             return;
 
-        this.wlCopy(color);
+        Utils.execAsync(`copyq write ${color}`);
+        // this.wlCopy(color);
         const list = this.#colors.value;
         if (!list.includes(color)) {
             list.push(color);
@@ -55,12 +56,12 @@ class Colors extends Service {
                 .catch(err => console.error(err));
         }
 
-        this.#notifID = Notifications.Notify(
-            'Color Picker',
-            this.#notifID,
-            'color-select-symbolic',
-            color, '', [], {},
-        );
+        // this.#notifID = Notifications.Notify(
+        //     'Color Picker',
+        //     this.#notifID,
+        //     'color-select-symbolic',
+        //     color, '', [], {},
+        // );
     }
 }
 
