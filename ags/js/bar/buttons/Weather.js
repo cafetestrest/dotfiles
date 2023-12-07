@@ -243,8 +243,37 @@ export const Tooltip = () => Widget.Box({
             let now = false;
             let widget = null;
             let prevDayName = null;
-            let numOfWidgets = 3;
+            let numOfWidgets = 0;
             let emptyDayWeather = count;
+
+            let temperatureDataPerDay = {};
+
+            tooltip.forEach(w => {
+                // get number of widgets to display
+                if (w.date !== prevDayName) {
+                    prevDayName = w.date;
+                    numOfWidgets += 1;
+                }
+
+                // used to retrieve min/max temp per day
+                const date = w.date.substring(0, 3).toUpperCase();
+                const temperature = parseInt(w.temperature);
+
+                // If the date is not already in the object, initialize it
+                if (!temperatureDataPerDay[date]) {
+                    temperatureDataPerDay[date] = {
+                    minTemp: temperature,
+                    maxTemp: temperature,
+                    };
+                } else {
+                    // Update min and max temperatures if necessary
+                    temperatureDataPerDay[date].minTemp = Math.min(temperatureDataPerDay[date].minTemp, temperature);
+                    temperatureDataPerDay[date].maxTemp = Math.max(temperatureDataPerDay[date].maxTemp, temperature);
+                }
+            });
+
+            // clear for next loop
+            prevDayName = null;
 
             tooltip.forEach(w => {
                 if (numOfWidgets > 0 && w.date !== prevDayName) {
