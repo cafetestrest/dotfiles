@@ -1,4 +1,5 @@
 $bar-spacing: $spacing / 2;
+$button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $radii);
 $bar-spacing: 0px;
 
 @mixin panel-button($flat: $bar-flat-buttons, $reactive: true){
@@ -32,7 +33,11 @@ $bar-spacing: 0px;
         }
     } @else {
         @include accs-button($flat, $reactive);
-        > * { margin: $bar-spacing; }
+
+        > * {
+            border-radius: $button-radius;
+            margin: $bar-spacing;
+        }
     }
 
     label, image {
@@ -59,6 +64,7 @@ $bar-spacing: 0px;
 
     @if $bar-style == 'floating' {
         @include floating-widget;
+        border-radius: $radii;
         margin: $wm-gaps;
         margin: $wm_gaps / 2 $wm_gaps / 2 0 $wm_gaps / 2; //floating bar correct spacing
         padding: 0;
@@ -164,98 +170,83 @@ $bar-spacing: 0px;
         &:active { @include color($accent-fg) }
     }
 
-    //new workspaces look
-    .hyprworkspaces {
-        // border: 0.3em solid transparent;
+    .workspaces button {
+        all: unset;
 
-        .box-around-workspaces {
-            border: 0;
-            margin: 0;
-            padding-left: 0;
-            padding-right: 0;
+        .indicator {
+            font-size: 0;
+            min-width: 8px;
+            min-height: 8px;
+            border-radius: $radii*0.6;
+            box-shadow: inset 0 0 0 $border-width $border-color;
+            margin: 0 $padding/2;
+            transition: $transition/2;
+            background-color: transparentize($fg-color, 0.8);
         }
 
-        button {
-            all: unset;
-            background-color: transparent;
-            color: $fg-color;
-            padding-left: 15px;
-            padding-right: 15px;
-            border-radius: 6px;
-            margin-left: 5px;
-            margin-right: 5px;
+        &:last-child .indicator { margin-right: $padding; }
+        &:first-child .indicator { margin-left: $padding; }
+
+        &.occupied .indicator {
+            background-color: transparentize($fg-color, 0.2);
+            min-width: 10px;
+            min-height: 10px;
         }
 
-        // on hover
-        button:hover {
-            background-color: transparentize($color: $fg_color, $amount: 0.9);
-            color: $fg_color;
+        &:hover .indicator {
+            box-shadow: inset 0 0 0 10px transparentize($fg-color, 0.8);
         }
 
-        // on click
-        button:active {
-            background-color: transparentize($color: $fg_color, $amount: 0.8);
-            color: $fg_color;
+        &.active .indicator, &:active .indicator {
+            background-color: $accent;
         }
 
-        // current one
-        button.focused {
-            background-color: $fg_color;
-            color: $bg_color;
+        &.active .indicator {
+            min-width: 24px;
+            min-height: 16px;
         }
     }
 
-    .workspaces {
-        > * { padding: 0; }
+  //new workspaces look
+  .hyprworkspaces {
+    // border: 0.3em solid transparent;
 
-        .eventbox {
-            transition: $transition;
-
-            @if $bar-style == 'separated' {
-                border-radius: max($radii - $border-width, 0);
-                &:hover { background-color: $hover; }
-            } @else {
-                @include button($flat: true);
-            }
-        }
-
-        button {
-            all: unset;
-
-            .indicator {
-                font-size: 0;
-                min-width: 8px;
-                min-height: 8px;
-                border-radius: $radii*0.6;
-                box-shadow: inset 0 0 0 $border-width $border-color;
-                margin: 0 $padding/2;
-                transition: $transition/2;
-                background-color: transparentize($fg-color, 0.8);
-            }
-
-            &:last-child .indicator { margin-right: $padding; }
-            &:first-child .indicator { margin-left: $padding; }
-
-            &.occupied .indicator {
-                background-color: transparentize($fg-color, 0.2);
-                min-width: 10px;
-                min-height: 10px;
-            }
-
-            &:hover .indicator {
-                box-shadow: inset 0 0 0 10px transparentize($fg-color, 0.8);
-            }
-
-            &.active .indicator, &:active .indicator {
-                background-color: $accent;
-            }
-
-            &.active .indicator {
-                min-width: 24px;
-                min-height: 16px;
-            }
-        }
+    .box-around-workspaces {
+      border: 0;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
+
+    button {
+      all: unset;
+      background-color: transparent;
+      color: $fg-color;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 6px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    // on hover
+    button:hover {
+      background-color: transparentize($color: $fg_color, $amount: 0.9);
+      color: $fg_color;
+    }
+
+    // on click
+    button:active {
+      background-color: transparentize($color: $fg_color, $amount: 0.8);
+      color: $fg_color;
+    }
+
+    // current one
+    button.focused {
+      background-color: $fg_color;
+      color: $bg_color;
+    }
+  }
 
     .taskbar {
        button {
