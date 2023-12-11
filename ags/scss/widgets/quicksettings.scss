@@ -42,7 +42,7 @@ window#quicksettings .window-content {
         .system-info-spacing {
             margin: 0 0.3em;
             // border: 11px solid red;
-        // @include spacing;
+            // @include spacing;
         }
     }
 
@@ -153,7 +153,7 @@ window#quicksettings .window-content {
     // button shadow on focus by keyboard - tab
     .toggle-button.simple-toggle:focus {
         box-shadow: inset 0 0 0 $border_width $border_color,
-            inset 0 0 0 99px $hover;
+        inset 0 0 0 99px $hover;
     }
 
     .toggle-button {
@@ -165,9 +165,9 @@ window#quicksettings .window-content {
         border-radius: $radii * 1.5;
         // margin-bottom: $spacing;
 
-      //   label {
-    //    margin-left: $spacing/2;
-    //   }
+        //   label {
+        //    margin-left: $spacing/2;
+        //   }
         .label-box {
             //spacing label on some toggles
             @include spacing(.5);
@@ -204,22 +204,19 @@ window#quicksettings .window-content {
             border-radius: $radii * 1.5;
         }
 
-    .simple-toggle {
-        @include button;
-        padding: $padding $padding * 1.1;
-      &:active, &.on, &.active, &:checked {
-        border-radius: $radii * 1.5;
+        &:active, &.on, &.active, &:checked {
+            border-radius: $radii * 1.5;
 
-        &:hover {
-          border-radius: $radii * 1.5;
+            &:hover {
+                border-radius: $radii * 1.5;
+            }
         }
-      }
     }
 
-      //.simple-toggle {
-      //  @include button;
-      //  padding: $padding $padding * 1.1;
-      //}
+    //.simple-toggle {
+    //  @include button;
+    //  padding: $padding $padding * 1.1;
+    //}
 
     .media {
         @include spacing;
@@ -279,7 +276,7 @@ window#quicksettings .window-content {
                 highlight:hover,
                 highlight:focus {
                     box-shadow: inset 0 0 0 $border_width $border_color,
-                            inset 0 0 0 99px $hover;
+                    inset 0 0 0 99px $hover;
                 }
             }
         }
