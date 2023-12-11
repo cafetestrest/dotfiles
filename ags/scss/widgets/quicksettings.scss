@@ -18,16 +18,9 @@ window#quicksettings .window-content {
     }
 
     .header {
-        @include spacing;
-    }
-
-    .system-box {
-        @include widget;
         @include spacing($rec: true);
 
-        padding: $padding;
-
-        button, .uptime {
+        button, .uptime, .battery {
             @include button;
             padding: $padding;
             font-weight: bold;
@@ -38,6 +31,11 @@ window#quicksettings .window-content {
                 font-size: 1.2em;
             }
         }
+
+        .battery {
+            @include spacing($multiplier: 0.5);
+        }
+
     }
 
     .system-info {
@@ -114,15 +112,12 @@ window#quicksettings .window-content {
         }
 
         separator {
-            // background-color: $border_color;
             margin: 0 $radii / 2;
         }
 
-        // label { margin-left: $spacing; }
-
         button {
             @include button($flat: true);
-            padding: $padding / 2;            
+            padding: $padding / 2;
         }
 
         switch {
@@ -209,6 +204,9 @@ window#quicksettings .window-content {
             border-radius: $radii * 1.5;
         }
 
+    .simple-toggle {
+        @include button;
+        padding: $padding $padding * 1.1;
       &:active, &.on, &.active, &:checked {
         border-radius: $radii * 1.5;
 
@@ -218,13 +216,10 @@ window#quicksettings .window-content {
       }
     }
 
-    // .simple-toggle {
-    //     @include button;
-
-    //     border: 1px solid green;
-
-    //     padding: $padding;
-    // }
+      //.simple-toggle {
+      //  @include button;
+      //  padding: $padding $padding * 1.1;
+      //}
 
     .media {
         @include spacing;
@@ -336,4 +331,3 @@ window#quicksettings .window-content {
         padding-left: $spacing / 2;
     }
 }
- 
