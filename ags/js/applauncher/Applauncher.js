@@ -9,23 +9,27 @@ import { launchApp } from '../utils.js';
 const WINDOW_NAME = 'applauncher';
 
 const Applauncher = () => {
-    const children = () => [
-        ...Applications.query('').flatMap(app => {
-            const item = AppItem(app);
-            return [
-                // Widget.Separator({
-                //     hexpand: true,
-                //     binds: [['visible', item, 'visible']],
-                // }),
-                item,
-            ];
-        }),
-        // Widget.Separator({ hexpand: true }),
+    const mkItems = () => [
+        Widget.Separator({ hexpand: true }),
+        ...Applications.query('').flatMap(app => Widget.Revealer({
+            setup: w => w.attribute = { app, revealer: w },
+            child: Widget.Box({
+                vertical: true,
+                children: [
+                    Widget.Separator({ hexpand: true }),
+                    AppItem(app),
+                    Widget.Separator({ hexpand: true }),
+                ],
+            }),
+        })),
+        Widget.Separator({ hexpand: true }),
     ];
+
+    let items = mkItems();
 
     const list = Widget.Box({
         vertical: true,
-        children: children(),
+        children: items,
     });
 
     const entry = Widget.Entry({
@@ -41,50 +45,12 @@ const Applauncher = () => {
                 launchApp(list[0]);
             }
         },
-        on_change: ({ text }) => {
-            function containsMathOperation(text) {
-                // Define a regular expression to match mathematical operators
-                const mathOperationRegex = /[+\-*/]/;
-
-                // Use the test method to check if the text contains a math operation
-                return mathOperationRegex.test(text);
+        on_change: ({ text }) => items.map(item => {
+            if (item.attribute) {
+                const { app, revealer } = item.attribute;
+                revealer.reveal_child = app.match(text);
             }
-
-            let mathResult = null;
-
-            if (containsMathOperation(text)) {
-                try {
-                    mathResult = eval(text);
-                } catch (error) {
-                    // do nothing
-                }
-            }
-
-            list.children.map(item => {
-                if (item.app)
-                    item.visible = item.app.match(text);
-
-                // remove old records
-                if (item.class_name === 'math-result')
-                    item.destroy()
-            });
-
-            if (containsMathOperation(text) && mathResult) {
-                list.add(Widget.Label({
-                    className: 'math-result',
-                    label: 'Result: ' + text + ' = ' + mathResult,
-                }));
-
-                // logic to go over all items in the list, if it contains class math-result it should be visible
-                list.children.map(item => {
-                    if (item.class_name !== 'math-result') {
-                        item.visible = false;
-                    } else {
-                        item.visible = true;
-                    }
-                });
-            }
-        }
+        }),
     });
 
     return Widget.Box({
@@ -101,16 +67,19 @@ const Applauncher = () => {
                 child: list,
             }),
         ],
-        connections: [[App, (_, name, visible) => {
-            if (name !== WINDOW_NAME)
+        setup: self => self.hook(App, (_, win, visible) => {
+            if (win !== WINDOW_NAME)
                 return;
 
             entry.text = '';
-            if (visible)
+            if (visible) {
                 entry.grab_focus();
-            else
-                list.children = children();
-        }]],
+            }
+            else {
+                items = mkItems();
+                list.children = items;
+            }
+        }),
     });
 };
 

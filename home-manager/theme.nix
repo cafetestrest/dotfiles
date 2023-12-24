@@ -1,5 +1,7 @@
 { pkgs, inputs, ... }:
 let
+  gtk-theme = "adw-gtk3-dark";
+
   moreWaita = pkgs.stdenv.mkDerivation {
     name = "MoreWaita";
     src = inputs.more-waita;
@@ -33,7 +35,11 @@ in
       nerdfonts
       moreWaita
     ];
-    sessionVariables.XCURSOR_THEME = cursor-theme;
+    sessionVariables = {
+      XCURSOR_THEME = cursor-theme;
+      XCURSOR_SIZE = "24";
+      GTK_THEME = gtk-theme;
+    };
     pointerCursor = {
       package = cursor-package;
       name = cursor-theme;
@@ -67,7 +73,7 @@ in
   gtk = {
     enable = true;
     font.name = "Ubuntu Nerd Font";
-    theme.name = "adw-gtk3";
+    theme.name = gtk-theme;
     cursorTheme = {
       name = cursor-theme;
       package = cursor-package;

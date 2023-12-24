@@ -39,8 +39,9 @@ in
       ];
 
       monitor = [
-        "eDP-1, 1920x1080, 0x0, 1"
-        "HDMI-A-1, 2560x1440, 1920x0, 1"
+        # "eDP-1, 1920x1080, 0x0, 1"
+        # "HDMI-A-1, 2560x1440, 1920x0, 1"
+        ",preferred,auto,1"
       ];
 
       general = {
@@ -78,8 +79,7 @@ in
       };
 
       gestures = {
-        workspace_swipe = "on";
-        workspace_swipe_direction_lock = false;
+        workspace_swipe = true;
         workspace_swipe_forever = true;
         workspace_swipe_numbered = true;
       };
