@@ -10,19 +10,19 @@ const WINDOW_NAME = 'applauncher';
 
 const Applauncher = () => {
     const mkItems = () => [
-        Widget.Separator({ hexpand: true }),
+        // Widget.Separator({ hexpand: true }),
         ...Applications.query('').flatMap(app => Widget.Revealer({
             setup: w => w.attribute = { app, revealer: w },
             child: Widget.Box({
                 vertical: true,
                 children: [
-                    Widget.Separator({ hexpand: true }),
+                    // Widget.Separator({ hexpand: true }),
                     AppItem(app),
-                    Widget.Separator({ hexpand: true }),
+                    // Widget.Separator({ hexpand: true }),
                 ],
             }),
         })),
-        Widget.Separator({ hexpand: true }),
+        // Widget.Separator({ hexpand: true }),
     ];
 
     let items = mkItems();
@@ -46,6 +46,49 @@ const Applauncher = () => {
             }
         },
         on_change: ({ text }) => items.map(item => {
+            function containsMathOperation(text) {
+                // Define a regular expression to match mathematical operators
+                const mathOperationRegex = /[+\-*/]/;
+
+                // Use the test method to check if the text contains a math operation
+                return mathOperationRegex.test(text);
+            }
+
+            let mathResult = null;
+
+            if (containsMathOperation(text)) {
+                try {
+                    mathResult = eval(text);
+                } catch (error) {
+                    // do nothing
+                }
+            }
+
+            list.children.map(item => {
+                if (item.app)
+                    item.visible = item.app.match(text);
+
+                // remove old records
+                if (item.class_name === 'math-result')
+                    item.destroy()
+            });
+
+            if (containsMathOperation(text) && mathResult) {
+                list.add(Widget.Label({
+                    className: 'math-result',
+                    label: 'Result: ' + text + ' = ' + mathResult,
+                }));
+
+                // logic to go over all items in the list, if it contains class math-result it should be visible
+                list.children.map(item => {
+                    if (item.class_name !== 'math-result') {
+                        item.visible = false;
+                    } else {
+                        item.visible = true;
+                    }
+                });
+            }
+
             if (item.attribute) {
                 const { app, revealer } = item.attribute;
                 revealer.reveal_child = app.match(text);
@@ -72,6 +115,7 @@ const Applauncher = () => {
                 return;
 
             entry.text = '';
+
             if (visible) {
                 entry.grab_focus();
             }
