@@ -129,7 +129,11 @@ export default () => PanelButton({
             self.toggleClassName('active', win === 'quicksettings' && visible);
         }),
     on_scroll_up: () => {
-        Audio.speaker.volume += 0.02;
+        if (Audio.speaker.volume < 0.99) {
+            Audio.speaker.volume += 0.02;
+        } else {
+            Audio.speaker.volume = 1.0;
+        }
         Indicator.speaker();
     },
     on_scroll_down: () => {
