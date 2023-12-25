@@ -282,7 +282,6 @@ $bar-spacing: 0px;
     margin-left: 0.5em;
 
     label {
-        margin: 0;
         padding: 0;
         margin-right: 0.5em;
     }
@@ -293,7 +292,6 @@ $bar-spacing: 0px;
 // bt devices connected instead in QS inidcators, added next to systray
 .bluetooth-indicator.panel-button box,
 .bluetooth-indicator.panel-button label {
-   margin: 0;
    padding: 0;
    margin-left:0.4em;
 }
