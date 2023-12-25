@@ -66,10 +66,10 @@ export default ({ direction = 'right' } = {}) => {
         const player = getPlayer();
         box.visible = !!player;
 
-        if (player && player.position && player.position === -1) {
-            box.visible = false;
-            return;
-        }
+        // if (player && player.position && player.position === -1) {
+        //     box.visible = false;
+        //     return;
+        // }
 
         if (!player) {
             current = null;
