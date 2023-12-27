@@ -221,8 +221,9 @@ export const WeatherInfo = (weatherData) => Widget.Box({
         Widget.Label({ label: weatherData.hour + 'h', }),
         Widget.Label({ label: weatherData.icon, class_name: 'weather-icon', }),
         Widget.Label({ label: weatherData.temperature, class_name: 'weather-temperature' }),
-        Widget.Label({ label: "☔ " + weatherData.rain, }),
-        Widget.Label({ label: " " + weatherData.wind, }),
+        Widget.Box({ vexpand: true }),
+        weatherData.rain !== '0 mm' ? Widget.Label({ label: "☔ " + weatherData.rain, }) : null,
+        // Widget.Label({ label: " " + weatherData.wind, }),
         // Widget.Label({ label: weatherData.humidity, }),
         Widget.Label({ label: '↑ ' + weatherData.maxTemp, }),
         Widget.Label({ label: '↓ ' + weatherData.minTemp, }),
@@ -248,27 +249,47 @@ export const Tooltip = () => Widget.Box({
 
             let temperatureDataPerDay = {};
 
+            let weatherStatusIconArray = [];
+            let daysOfForecast = 3;
+
+            function getMostCommon(arr){
+                return arr.sort((a,b) =>
+                      arr.filter(v => v===a).length
+                    - arr.filter(v => v===b).length
+                ).pop();
+            }
+
             tooltip.forEach(w => {
-                // get number of widgets to display
                 if (w.date !== prevDayName) {
+                    weatherStatusIconArray = [];
                     prevDayName = w.date;
-                    numOfWidgets += 1;
                 }
 
                 // used to retrieve min/max temp per day
                 const date = w.date.substring(0, 3).toUpperCase();
                 const temperature = parseInt(w.temperature);
 
+                const rain = w.rain.replace(/ mm$/, '');
+
                 // If the date is not already in the object, initialize it
                 if (!temperatureDataPerDay[date]) {
                     temperatureDataPerDay[date] = {
                     minTemp: temperature,
                     maxTemp: temperature,
+                    rain: rain,
+                    icons: []
                     };
                 } else {
                     // Update min and max temperatures if necessary
                     temperatureDataPerDay[date].minTemp = Math.min(temperatureDataPerDay[date].minTemp, temperature);
                     temperatureDataPerDay[date].maxTemp = Math.max(temperatureDataPerDay[date].maxTemp, temperature);
+                    temperatureDataPerDay[date].rain = Math.max(temperatureDataPerDay[date].rain, rain);
+                    temperatureDataPerDay[date].icons = weatherStatusIconArray;
+                }
+
+                // add icon to the array in between somewhat sunny hours, used to later get most common icon for main widget days
+                if (w.hour >= 7 && w.hour <= 19) {
+                    weatherStatusIconArray.push(w.icon);
                 }
             });
 
@@ -276,14 +297,20 @@ export const Tooltip = () => Widget.Box({
             prevDayName = null;
 
             tooltip.forEach(w => {
-                if (numOfWidgets > 0 && w.date !== prevDayName) {
-                    numOfWidgets = numOfWidgets - 1;
+                if ( w.date !== prevDayName) {
                     now = true;
+
+                    daysOfForecast = daysOfForecast - 1;
 
                     // if only one weather day info - empty widget
                     if (count > 0 && (count - 1 === emptyDayWeather || count - 2 === emptyDayWeather)) {
-                        now = false;
+                        // now = false;
                     }
+
+                    widget = Widget.Box({
+                        class_name: 'qs-weather-box-forecast',
+                        hexpand: true,
+                    });
 
                     emptyDayWeather = count;
 
@@ -301,33 +328,35 @@ export const Tooltip = () => Widget.Box({
 
                 prevDayName = w.date;
 
-                if (now === false) {
-                    widget.add(
-                        Widget.Box({
-                            class_name: 'qs-weather-box-child',
-                            vertical: true,
-                            hexpand: true,
-                            children: [
-                                // Widget.Label({ label: w.date.substring(0, 3).toUpperCase(), }),
-                                Widget.Label({ label: numOfWidgets <= 0 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', class_name: 'weather-hour', }),
-                                Widget.Label({ label: w.icon, class_name: 'weather-icon', }),
-                                Widget.Label({ label: w.temperature, class_name: 'weather-temperature' }),
-                                Widget.Label({ label: w.rain, class_name: 'weather-rain', }),
-                                Widget.Label({ label: numOfWidgets <= 0 ? '↑ ' + w.maxTemp : " " + w.wind, }),
-                                Widget.Label({ label: numOfWidgets <= 0 ? '↓ ' + w.minTemp : '↑ ' + w.maxTemp, }),
-                                // Widget.Label({ label: '↓ ' + w.minTemp, }),
-                            ],
-                        }),
-                    );
-                }
+                // this is weather forecase per hour
+                widget.add(
+                    Widget.Box({
+                        class_name: 'qs-weather-box-child',
+                        vertical: true,
+                        hexpand: true,
+                        children: [
+                            // Widget.Label({ label: w.date.substring(0, 3).toUpperCase(), }),
+                            Widget.Label({ label: w.hour + 'h', class_name: 'weather-hour', }),
+                            Widget.Label({ label: w.icon, class_name: 'weather-icon', }),
+                            Widget.Label({ label: w.temperature, class_name: 'weather-temperature' }),
+                            Widget.Box({ vexpand: true }),
+                            w.rain !== '0 mm' ? Widget.Label({ label: w.rain, class_name: 'weather-rain', }) : null,
+                            Widget.Label({ label: "  " + w.wind, class_name: 'weather-wind', }),
+                            // Widget.Label({ label: '↓ ' + w.minTemp, }),
+                        ],
+                    }),
+                );
 
-                if (now) {
+                // this one creates main one
+                if (daysOfForecast > 0 && now) {
                     now = false;
 
-                    widget = Widget.Box({
-                        class_name: 'qs-weather-box-forecast',
-                        hexpand: true,
-                    });
+                    const rain = temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].rain;
+                    let icon = getMostCommon(temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].icons);
+
+                    if (!icon) {
+                        icon = w.icon;
+                    }
 
                     box.add(
                         Widget.Box({
@@ -338,11 +367,12 @@ export const Tooltip = () => Widget.Box({
                                 Widget.Box({
                                     class_name: 'qs-weather-box-main',
                                     children: [
-                                        Widget.Label({ label: w.temperature, class_name: 'weather-temperature' }),
-                                        Widget.Label({ label: w.icon, class_name: 'weather-icon', }),
+                                        Widget.Label({ label: icon, class_name: 'weather-icon', }),
                                         Widget.Box({ hexpand: true }),
-                                        Widget.Label({ label: "☔ " + w.rain, class_name: 'weather-rain', }),
-                                        Widget.Label({ label: numOfWidgets <= 1 ? w.date.substring(0, 3).toUpperCase() : w.hour + 'h', class_name: 'weather-hour', }),
+                                        rain != 0 ? Widget.Label({ label: "☔ " + rain + 'mm', class_name: 'weather-rain', }): null,
+                                        Widget.Label({ label: '↑ ' + temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].maxTemp + '  ', class_name: 'weather-max', }),
+                                        Widget.Label({ label: '↓ ' + temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].minTemp + '   ', class_name: 'weather-max', }),
+                                        Widget.Label({ label: w.date.substring(0, 3).toUpperCase(), class_name: 'weather-hour', }),
                                     ]
                                 }),
                                 widget,
@@ -352,6 +382,10 @@ export const Tooltip = () => Widget.Box({
                             }]]
                         }),
                     );
+                }
+
+                if (daysOfForecast <= 0) {
+                    box.add(WeatherInfo(w))
                 }
 
                 count = count + 1;

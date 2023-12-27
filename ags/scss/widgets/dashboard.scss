@@ -111,9 +111,18 @@ window#dashboard .window-content {
     }
 
     //weather popup
-    .weather-info .weather-icon{
-        font-size: 2em;
-        margin: 0.1em 0;
+    .weather-info {
+        .weather-icon{
+            font-size: 1.5em;
+            margin-top: 0.3em;
+            margin-bottom: 0.15em;
+        }
+
+        .weather-temperature {
+            all: unset;
+            font-size: 1.2em;
+            margin-left: 0.5em;
+        }
     }
 }
 
@@ -146,9 +155,9 @@ window#notification .dashboard {
     background-color: rgba(81, 164, 231, 0.76);
     border-radius: 16px;
     padding: 10px;
-    margin: 0 5px;
+    // margin: 0 5px;
 
-    min-width: 4.8em;
+    min-width: 5em;
     min-height: 10em;
 
     margin-bottom: 5px;
@@ -199,6 +208,10 @@ window#weather .weather .tooltip {
 
     .qs-weather-box-child {
         min-width: 5em;
+
+        .weather-icon {
+            font-size: 1.5em;
+        }
     }
 
     .qs-weather-box-main {
@@ -220,13 +233,13 @@ window#weather .tooltip {
         margin: 0.5em;
 
         .weather-icon {
-            font-size: 42px;
+            font-size: 2.42em;
             margin-left: 0.5em;
         }
 
         .weather-temperature {
             all: unset;
-            font-size: 28px;
+            font-size: 1.6em;
             margin-left: 0.5em;
         }
 
