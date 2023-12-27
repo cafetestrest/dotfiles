@@ -244,11 +244,7 @@ export const Tooltip = () => Widget.Box({
             let now = false;
             let widget = null;
             let prevDayName = null;
-            let numOfWidgets = 0;
-            let emptyDayWeather = count;
-
             let temperatureDataPerDay = {};
-
             let weatherStatusIconArray = [];
             let daysOfForecast = 3;
 
@@ -299,20 +295,12 @@ export const Tooltip = () => Widget.Box({
             tooltip.forEach(w => {
                 if ( w.date !== prevDayName) {
                     now = true;
-
                     daysOfForecast = daysOfForecast - 1;
-
-                    // if only one weather day info - empty widget
-                    if (count > 0 && (count - 1 === emptyDayWeather || count - 2 === emptyDayWeather)) {
-                        // now = false;
-                    }
 
                     widget = Widget.Box({
                         class_name: 'qs-weather-box-forecast',
                         hexpand: true,
                     });
-
-                    emptyDayWeather = count;
 
                     // adds spacing
                     if (count > 0 && now) {
@@ -335,14 +323,12 @@ export const Tooltip = () => Widget.Box({
                         vertical: true,
                         hexpand: true,
                         children: [
-                            // Widget.Label({ label: w.date.substring(0, 3).toUpperCase(), }),
                             Widget.Label({ label: w.hour + 'h', class_name: 'weather-hour', }),
                             Widget.Label({ label: w.icon, class_name: 'weather-icon', }),
                             Widget.Label({ label: w.temperature, class_name: 'weather-temperature' }),
                             Widget.Box({ vexpand: true }),
                             w.rain !== '0 mm' ? Widget.Label({ label: w.rain, class_name: 'weather-rain', }) : null,
                             Widget.Label({ label: "  " + w.wind, class_name: 'weather-wind', }),
-                            // Widget.Label({ label: '↓ ' + w.minTemp, }),
                         ],
                     }),
                 );
