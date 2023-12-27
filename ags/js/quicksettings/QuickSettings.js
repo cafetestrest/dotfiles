@@ -15,7 +15,7 @@ import options from '../options.js';
 import { IdleToggle } from './widgets/Idle.js';
 import { NightlightToggle } from './widgets/NightLight.js';
 import { SysProgress } from '../dashboard/DateColumn.js';
-import { QSWidget } from '../bar/buttons/Weather.js';
+import { Tooltip } from '../bar/buttons/Weather.js';
 import { ScreenRecordToggle, ScreenRecordSelector } from './widgets/ScreenRecord.js';
 
 const Row = (toggles = [], menus = []) => Widget.Box({
@@ -145,7 +145,8 @@ export default () => PopupWindow({
                     }),
                 ],
             ),
-            QSWidget(),
+            // QSWidget(),
+            Tooltip(5),
         ],
     }),
 });
