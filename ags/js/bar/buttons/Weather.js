@@ -25,6 +25,7 @@ export const PannelButton = props => Widget.Button({
     class_name: 'weather panel-button',
     child: Temperature(),
     on_clicked: () => App.toggleWindow('weather'),
+    on_secondary_click: () => Weather.weatherData,
     connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'weather' && visible);
     }]],
@@ -474,7 +475,7 @@ export const PopupContent = () => Widget.Box({
             vertical: true,
             children: [
                 Forecast(),
-                RefreshButton({ class_name: 'header panel-button', }),
+                // RefreshButton({ class_name: 'header panel-button', }),
             ]
         })
     ]

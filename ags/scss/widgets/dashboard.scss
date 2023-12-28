@@ -154,13 +154,11 @@ window#notification .dashboard {
 .weather-info {
     background-color: rgba(81, 164, 231, 0.76);
     border-radius: 16px;
-    padding: 10px;
+    padding: 0.55em;
     // margin: 0 5px;
 
     min-width: 5em;
     min-height: 10em;
-
-    margin-bottom: 5px;
 }
 
 .weather-temperature {
@@ -215,7 +213,7 @@ window#weather .weather .tooltip {
     }
 
     .qs-weather-box-main {
-        min-width: 20em;
+        min-width: 15em;
     }
 }
 
@@ -253,7 +251,7 @@ window#weather .tooltip {
     }
 
     .qs-weather-box-child {
-        margin-bottom: 1em;
+        padding-bottom: 0.7em;
 
         .weather-icon {
             margin-top: 0.3em;
