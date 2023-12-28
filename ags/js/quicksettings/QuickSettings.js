@@ -79,20 +79,20 @@ export default () => PopupWindow({
             Row(
                 [
                     // NetworkToggle(),
-                    BluetoothToggle(),
+                    NightlightToggle(),
                     // Widget.Box({ class_name: 'button-spacing' }),
                     IdleToggle(),
-                ],
-                [
-                    // WifiSelection(),
-                    BluetoothDevices(),
                 ],
             ),
             Row(
                 [
                     DND(),
+                    BluetoothToggle(),
                     // Widget.Box({ class_name: 'button-spacing' }),
-                    NightlightToggle()
+                ],
+                [
+                    // WifiSelection(),
+                    BluetoothDevices(),
                 ],
             ),
             Row(
