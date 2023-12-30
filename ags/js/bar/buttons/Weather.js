@@ -351,7 +351,7 @@ export const Tooltip = (total) => Widget.Box({
                 // If the date is not already in the object, initialize it
                 if (!temperatureDataPerDay[date]) {
                     temperatureDataPerDay[date] = {
-                    minTemp: 123,
+                    minTemp: temperature,
                     maxTemp: temperature,
                     rain: rain,
                     icons: [],
