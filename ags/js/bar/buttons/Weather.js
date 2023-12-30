@@ -304,14 +304,15 @@ export const Tooltip = (total) => Widget.Box({
             let prevDayName = null;
             let temperatureDataPerDay = {};
             let weatherStatusIconArray = [];
-            let daysOfForecast = 3;
 
             let totalWeatherForecasts = total;
+            let forecastWidgetsNumber = 0;
 
             tooltip.forEach(w => {
                 if (w.date !== prevDayName) {
                     weatherStatusIconArray = [];
                     prevDayName = w.date;
+                    forecastWidgetsNumber = 0;
                 }
 
                 // used to retrieve min/max temp per day
@@ -319,6 +320,7 @@ export const Tooltip = (total) => Widget.Box({
                 const temperature = parseInt(w.temperature);
 
                 const rain = w.rain.replace(/ mm$/, '');
+                forecastWidgetsNumber = forecastWidgetsNumber + 1;
 
                 // If the date is not already in the object, initialize it
                 if (!temperatureDataPerDay[date]) {
@@ -326,6 +328,7 @@ export const Tooltip = (total) => Widget.Box({
                     minTemp: temperature,
                     maxTemp: temperature,
                     rain: rain,
+                    widgetsNumber: forecastWidgetsNumber,
                     icons: []
                     };
                 } else {
@@ -334,6 +337,7 @@ export const Tooltip = (total) => Widget.Box({
                     temperatureDataPerDay[date].maxTemp = Math.max(temperatureDataPerDay[date].maxTemp, temperature);
                     temperatureDataPerDay[date].rain = Math.max(temperatureDataPerDay[date].rain, rain);
                     temperatureDataPerDay[date].icons = weatherStatusIconArray;
+                    temperatureDataPerDay[date].widgetsNumber = forecastWidgetsNumber;
                 }
 
                 // add icon to the array in between somewhat sunny hours, used to later get most common icon for main widget days
@@ -367,6 +371,8 @@ export const Tooltip = (total) => Widget.Box({
                     const rain = temperatureDataPerDay[widgetDate.substring(0, 3).toUpperCase()].rain;
 
                     if (totalWeatherForecasts === 0) {
+                        widget = null;
+
                         box.add(
                             WeatherMainWidget(widget, widgetIcon, widgetDate, rain, temperatureDataPerDay)
                         );
@@ -392,7 +398,6 @@ export const Tooltip = (total) => Widget.Box({
                 // if provided date differs to previous day name, by default prevDayName is null
                 if ( w.date !== prevDayName) {
                     now = true; //creates main widget - WeatherMainWidget
-                    daysOfForecast = daysOfForecast - 1; //used to determine after how many widgets it starts showing small ones (forecast by day)
 
                     widget = Widget.Box({
                         class_name: 'qs-weather-box-forecast',
@@ -416,8 +421,15 @@ export const Tooltip = (total) => Widget.Box({
                 // this is weather forecast per hour
                 createForecastWidget(w, widget);
 
+                if (temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].widgetsNumber === 1) {
+                    box.add(WeatherInfo(w));
+                    widget = null;
+                    count = count + 1;
+                    continue;
+                }
+
                 // this one creates main one
-                if (daysOfForecast > 0 && now) {
+                if (now) {
                     now = false;
 
                     const rain = temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].rain;
@@ -433,11 +445,6 @@ export const Tooltip = (total) => Widget.Box({
                     box.add(
                         WeatherMainWidget(widget, widgetIcon, widgetDate, rain, temperatureDataPerDay)
                     );
-                }
-
-                //this one creates small widgets / forecast by day
-                if (daysOfForecast <= 0) {
-                    box.add(WeatherInfo(w))
                 }
 
                 count = count + 1;
