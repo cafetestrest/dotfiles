@@ -145,7 +145,6 @@ export default () => PopupWindow({
                     }),
                 ],
             ),
-            // QSWidget(),
             Tooltip(5),
         ],
     }),
