@@ -255,21 +255,35 @@ export const WeatherBoxChild = (w) => Widget.Box({
     ],
 });
 
-export const WeatherBoxChildWrapper = (w, temperatureDataPerDay) => Widget.Box({
+export const WeatherBoxChildWrapper = (w, temperatureDataPerDay, totalWeatherForecastDataArray) => Widget.Box({
     class_name: 'qs-weather-box-child-wrapper',
     hexpand: true,
     children: [
     ],
     connections: [[Weather, box => {
-        temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].data.forEach(el => {
-            box.add(
-                WeatherBoxChild(el),
-            )
-        })
+        let useTotalInstead = false;
+
+        if (totalWeatherForecastDataArray.length) {
+            useTotalInstead = true;
+
+            totalWeatherForecastDataArray.forEach(totalEl => {
+                box.add(
+                    WeatherBoxChild(totalEl),
+                )
+            })
+        }
+
+        if (false === useTotalInstead && w && temperatureDataPerDay && temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].data.length) {
+            temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].data.forEach(el => {
+                box.add(
+                    WeatherBoxChild(el),
+                )
+            })            
+        }
     }]]
 });
 
-export const WeatherMainWidget = (widget, widgetIcon, widgetDate, rain, temperatureDataPerDay, w) => Widget.Box({
+export const WeatherMainWidget = (widgetIcon, widgetDate, rain, temperatureDataPerDay, w, totalWeatherForecastDataArray = []) => Widget.Box({
     class_name: 'qsweather-widget',
     vertical: true,
     hexpand: true,
@@ -285,8 +299,7 @@ export const WeatherMainWidget = (widget, widgetIcon, widgetDate, rain, temperat
                 Widget.Label({ label: widgetDate.substring(0, 3).toUpperCase(), class_name: 'weather-hour', }),
             ]
         }),
-        widget,
-        WeatherBoxChildWrapper(w, temperatureDataPerDay)
+        WeatherBoxChildWrapper(w, temperatureDataPerDay, totalWeatherForecastDataArray)
 
     ],
     connections: [[Weather, box => {
@@ -303,13 +316,14 @@ export const Tooltip = (total) => Widget.Box({
 
             let count = 0;
             let now = false;
-            let widget = null;
             let prevDayName = null;
             let temperatureDataPerDay = {};
             let weatherStatusIconArray = [];
             let weatherForecastDataArray = [];
+            let totalWeatherForecastDataArray = [];
 
             let totalWeatherForecasts = total;
+            let totalWeatherForecastsCounter = total;
             let forecastWidgetsNumber = 0;
 
             tooltip.forEach(w => {
@@ -328,6 +342,11 @@ export const Tooltip = (total) => Widget.Box({
                 forecastWidgetsNumber = forecastWidgetsNumber + 1;
 
                 weatherForecastDataArray.push(w);
+
+                if (totalWeatherForecasts && totalWeatherForecastsCounter > 0) {
+                    totalWeatherForecastDataArray.push(w);
+                    totalWeatherForecastsCounter = totalWeatherForecastsCounter - 1;
+                }
 
                 // If the date is not already in the object, initialize it
                 if (!temperatureDataPerDay[date]) {
@@ -369,6 +388,7 @@ export const Tooltip = (total) => Widget.Box({
 
                 // used to limit forecast to specified amount
                 if (totalWeatherForecasts >= 0) {
+
                     if (!widgetIcon) {
                         widgetIcon = w.icon;
                     }
@@ -379,28 +399,10 @@ export const Tooltip = (total) => Widget.Box({
 
                     const rain = temperatureDataPerDay[widgetDate.substring(0, 3).toUpperCase()].rain;
 
-                    if (totalWeatherForecasts === 0) {
-                        widget = null;
-
-                        box.add(
-                            WeatherMainWidget(widget, widgetIcon, widgetDate, rain, temperatureDataPerDay)
-                        );
-                        break;
-                    }
-
-                    if (!widget) {
-                        widget = Widget.Box({
-                            class_name: 'qs-weather-box-forecast',
-                            hexpand: true,
-                        });
-                    }
-
-                    widget.add(
-                        WeatherBoxChild(w)
+                    box.add(
+                        WeatherMainWidget(widgetIcon, widgetDate, rain, temperatureDataPerDay, w, totalWeatherForecastDataArray)
                     );
-
-                    totalWeatherForecasts = totalWeatherForecasts - 1;
-                    continue;
+                    break;
                 }
 
                 // if provided date differs to previous day name, by default prevDayName is null
@@ -442,7 +444,7 @@ export const Tooltip = (total) => Widget.Box({
                     widgetIcon = icon;
 
                     box.add(
-                        WeatherMainWidget(widget, widgetIcon, widgetDate, rain, temperatureDataPerDay, w)
+                        WeatherMainWidget(widgetIcon, widgetDate, rain, temperatureDataPerDay, w)
                     );
                 }
 
