@@ -307,22 +307,19 @@ export const WeatherMainWidget = (widgetIcon, widgetDate, rain, temperatureDataP
     }]]
 });
 
-export const Tooltip = (total) => Widget.Box({
+export const Tooltip = (total = null) => Widget.Box({
     connections: [[Weather, box => {
         let tooltip = Weather.tooltip;
 
         if (tooltip) {
             box.get_children().forEach(ch => ch.destroy());
 
-            let count = 0;
-            let now = false;
             let prevDayName = null;
             let temperatureDataPerDay = {};
             let weatherStatusIconArray = [];
             let weatherForecastDataArray = [];
             let totalWeatherForecastDataArray = [];
 
-            let totalWeatherForecasts = total;
             let totalWeatherForecastsCounter = total;
             let forecastWidgetsNumber = 0;
 
@@ -343,7 +340,7 @@ export const Tooltip = (total) => Widget.Box({
 
                 weatherForecastDataArray.push(w);
 
-                if (totalWeatherForecasts && totalWeatherForecastsCounter > 0) {
+                if (total && totalWeatherForecastsCounter && totalWeatherForecastsCounter > 0) {
                     totalWeatherForecastDataArray.push(w);
                     totalWeatherForecastsCounter = totalWeatherForecastsCounter - 1;
                 }
@@ -387,7 +384,7 @@ export const Tooltip = (total) => Widget.Box({
                 // console.log('loop ' + w.date + ' h ' + w.hour + ' i ' + w.icon )
 
                 // used to limit forecast to specified amount
-                if (totalWeatherForecasts >= 0) {
+                if (total && total >= 0) {
 
                     if (!widgetIcon) {
                         widgetIcon = w.icon;
@@ -406,11 +403,9 @@ export const Tooltip = (total) => Widget.Box({
                 }
 
                 // if provided date differs to previous day name, by default prevDayName is null
-                if ( w.date !== prevDayName) {
-                    now = true; //creates main widget - WeatherMainWidget
-
+                if (w.date !== prevDayName) {
                     // adds spacing
-                    if (count > 0 && now) {
+                    if (i > 0) {
                         box.add(
                             Widget.Box({
                                 children: [
@@ -421,18 +416,15 @@ export const Tooltip = (total) => Widget.Box({
                     }
                 }
 
-                prevDayName = w.date;
-
                 if (temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].widgetsNumber === 1) {
+                    prevDayName = w.date;
+
                     box.add(WeatherInfo(w));
-                    count = count + 1;
                     continue;
                 }
 
                 // this one creates main one
-                if (now) {
-                    now = false;
-
+                if (w.date !== prevDayName) {
                     const rain = temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].rain;
                     let icon = getMostCommon(temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].icons);
                     widgetDate = w.date;
@@ -448,7 +440,7 @@ export const Tooltip = (total) => Widget.Box({
                     );
                 }
 
-                count = count + 1;
+                prevDayName = w.date;
             };
         }
     }]],
