@@ -383,7 +383,7 @@ export const Tooltip = (total = null) => Widget.Box({
 
                 // console.log('loop ' + w.date + ' h ' + w.hour + ' i ' + w.icon )
 
-                // used to limit forecast to specified amount
+                // used to limit forecast to specified amount (if total variable is provided, it will display that amount of forecast widgets on a main one)
                 if (total && total >= 0) {
 
                     if (!widgetIcon) {
@@ -403,19 +403,18 @@ export const Tooltip = (total = null) => Widget.Box({
                 }
 
                 // if provided date differs to previous day name, by default prevDayName is null
-                if (w.date !== prevDayName) {
-                    // adds spacing
-                    if (i > 0) {
-                        box.add(
-                            Widget.Box({
-                                children: [
-                                    Widget.Label({ label: ' ', class_name: 'weather-spacing' }),
-                                ],
-                            }),
-                        );
-                    }
+                if (w.date !== prevDayName && i > 0) {
+                    // adds spacing to the widgets
+                    box.add(
+                        Widget.Box({
+                            children: [
+                                Widget.Label({ label: ' ', class_name: 'weather-spacing' }),
+                            ],
+                        }),
+                    );
                 }
 
+                // logic that determines if the widget contains just 1 forecast widget, if so it will display it in a smaller widget - like the one for the forecast days
                 if (temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].widgetsNumber === 1) {
                     prevDayName = w.date;
 
@@ -423,7 +422,7 @@ export const Tooltip = (total = null) => Widget.Box({
                     continue;
                 }
 
-                // this one creates main one
+                // this one creates main one - wide weather widget that contains smaller forecast widgets
                 if (w.date !== prevDayName) {
                     const rain = temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].rain;
                     let icon = getMostCommon(temperatureDataPerDay[w.date.substring(0, 3).toUpperCase()].icons);
