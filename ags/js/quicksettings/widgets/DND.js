@@ -3,22 +3,10 @@ import Notifications from 'resource:///com/github/Aylur/ags/service/notification
 import icons from '../../icons.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 
+// todo add label
 export default () => SimpleToggleButton({
-    icon: Widget.Box({
-        children: [
-            Widget.Icon({
-                connections: [[Notifications, icon => {
-                    icon.icon = Notifications.dnd
-                        ? icons.notifications.silent
-                        : icons.notifications.noisy;
-                }, 'notify::dnd']],
-            }),
-            Widget.Label({
-                connections: [[Notifications, label => {
-                    label.label = Notifications.dnd ? 'Silent' : 'Noisy';
-                }]],
-            }),
-        ]
+    icon: Widget.Icon({
+        icon: Notifications.bind('dnd').transform(dnd => icons.notifications[dnd ? 'silent' : 'noisy']),
     }),
     toggle: () => Notifications.dnd = !Notifications.dnd,
     connection: [Notifications, () => Notifications.dnd],

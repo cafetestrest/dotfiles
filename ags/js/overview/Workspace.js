@@ -22,9 +22,9 @@ export default index => {
             min-width: ${3840 * SCALE}px;
             min-height: ${2160 * SCALE}px;
         `,
-        connections: [[Hyprland, box => {
+        setup: box => box.hook(Hyprland, () => {
             box.toggleClassName('active', Hyprland.active.workspace.id === index);
-        }]],
+        }),
         child: Widget.EventBox({
             hexpand: true,
             vexpand: true,

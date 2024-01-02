@@ -25,34 +25,36 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
         vexpand: true,
         truncate: 'end',
         max_width_chars: 40,
-        connections: [[player, label => {
-            label.label = `${player.track_artists.join(', ')}   ${player.track_title}   `;
-        }]],
+        label: player.bind('track_title').transform(() =>
+            `${player.track_artists.join(', ')}   ${player.track_title}   `),
     }),
-    connections: [[player, revealer => {
-        if (revealer._current === player.track_title)
-            return;
+    setupRevealer: self => {
+        let current = '';
+        self.hook(player, () => {
+            if (current === player.track_title)
+                return;
 
-        function truncateString(inputString, maxLength) {
-            if (!inputString) {
-                return inputString;
+            function truncateString(inputString, maxLength) {
+                if (!inputString) {
+                    return inputString;
+                }
+
+                if (inputString.length > maxLength) {
+                    return inputString.slice(0, maxLength);
+                } else {
+                    return inputString;
+                }
             }
 
-            if (inputString.length > maxLength) {
-                return inputString.slice(0, maxLength);
-            } else {
-                return inputString;
-            }
-        }
+            // current = player.track_title;
+            current = truncateString(player.track_title, 50);
 
-        // revealer._current = player.track_title;
-        revealer._current = truncateString(player.track_title, 50);
-
-        revealer.reveal_child = true;
-        Utils.timeout(3000, () => {
-            revealer.reveal_child = false;
+            self.reveal_child = true;
+            Utils.timeout(3000, () => {
+                self.reveal_child = false;
+            });
         });
-    }]],
+    },
 });
 
 /**
@@ -65,11 +67,6 @@ export default ({ direction = 'right' } = {}) => {
     const update = box => {
         const player = getPlayer();
         box.visible = !!player;
-
-        // if (player && player.position && player.position === -1) {
-        //     box.visible = false;
-        //     return;
-        // }
 
         if (!player) {
             current = null;
@@ -87,11 +84,7 @@ export default ({ direction = 'right' } = {}) => {
         ];
     };
 
-    return Widget.Box({
-        class_name: 'media-player',
-        connections: [
-            [options.mpris.preferred, update],
-            [Mpris, update, 'notify::players'],
-        ],
-    });
+    return Widget.Box({ class_name: 'media-player', })
+        .hook(options.mpris.preferred, update)
+        .hook(Mpris, update, 'notify::players');
 };

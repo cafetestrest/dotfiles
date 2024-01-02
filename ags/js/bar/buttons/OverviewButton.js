@@ -10,8 +10,8 @@ export default () => PanelButton({
     on_clicked: () => App.toggleWindow('applauncher'),
     on_secondary_click: () => App.toggleWindow('overview'),
     content: FontIcon({
-        binds: [['icon', options.bar.icon, 'value', v => {
+        label: options.bar.icon.bind('value').transform(v => {
             return v === 'distro-icon' ? distroIcon : v;
-        }]],
+        }),
     }),
 });

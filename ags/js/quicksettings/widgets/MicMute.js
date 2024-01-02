@@ -3,20 +3,14 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import icons from '../../icons.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 
+// todo add label
 export default () => SimpleToggleButton({
-    icon: Widget.Icon({
-        connections: [[Audio, icon => {
-            icon.icon = Audio.microphone?.is_muted
+    icon: Widget.Icon()
+        .hook(Audio, self => {
+            self.icon = Audio.microphone?.is_muted
                 ? icons.audio.mic.muted
                 : icons.audio.mic.high;
-        }, 'microphone-changed']],
-    }),
-    label: Widget.Label({
-        connections: [[Audio, label => {
-            label.label = Audio.microphone?.isMuted
-                ? 'Muted' : 'Unmuted';
-        }, 'microphone-changed']],
-    }),
+        }, 'microphone-changed'),
     toggle: () => Audio.microphone.is_muted = !Audio.microphone.is_muted,
-    connection: [Audio, () => Audio.microphone?.is_muted],
+    connection: [Audio, () => Audio.microphone?.is_muted || false],
 });
