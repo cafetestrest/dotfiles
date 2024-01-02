@@ -3,7 +3,6 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import icons from '../../icons.js';
 import { SimpleToggleButton } from '../ToggleButton.js';
 
-// todo add label
 export default () => SimpleToggleButton({
     icon: Widget.Icon()
         .hook(Audio, self => {

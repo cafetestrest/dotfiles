@@ -3,10 +3,6 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import icons from '../../icons.js';
 import { Menu, ArrowToggleButton } from '../ToggleButton.js';
 
-//todo add numOfTries
-const path = 'resource:///com/github/Aylur/ags/service/bluetooth.js';
-let numOfTries = 0;
-
 export const BluetoothToggle = () => ArrowToggleButton({
     name: 'bluetooth',
     icon: Widget.Icon({
