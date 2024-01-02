@@ -80,6 +80,7 @@
 
     .controls button {
         @include unset;
+        min-width: 2.1em;
 
         label {
             font-size: 2em;
