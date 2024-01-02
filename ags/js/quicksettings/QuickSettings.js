@@ -145,6 +145,7 @@ export default () => PopupWindow({
                     }),
                 ],
             ),
+            Media(),
             Tooltip(5),
         ],
     }),

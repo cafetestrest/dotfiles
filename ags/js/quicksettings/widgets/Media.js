@@ -75,6 +75,15 @@ const PlayerBox = player => Widget.Box({
             ],
         }),
     }),
+    connections: [
+        [5000, box => {
+            if (player && player.length && player.position !== -1) {
+                box.visible = true;
+            } else {
+                box.visible = false;
+            }
+        }],
+    ],
 });
 
 export default () => Widget.Box({

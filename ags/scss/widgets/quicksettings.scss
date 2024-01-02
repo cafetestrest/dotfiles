@@ -219,9 +219,12 @@ window#quicksettings .window-content {
     //}
 
     .media {
-        @include spacing;
+        margin: 0;
+        // @include spacing;
 
         .player {
+            margin-top: $padding;
+            margin-bottom: $padding / 2;
             @include media;
         }
     }
