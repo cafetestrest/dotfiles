@@ -5,6 +5,9 @@ import * as vars from '../variables.js';
 import options from '../options.js';
 
 import FontIcon from '../misc/FontIcon.js';
+import LedLightColorSwitcher from './LedLightColorSwitcher.js';
+import SubMenu from '../bar/buttons/SubMenu.js';
+import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 
 /**
  * @param {'cpu' | 'ram' | 'temp'} type
@@ -61,5 +64,12 @@ export default () => Widget.Box({
         //         SysProgress('temp', 'Temperature', '°'),
         //     ],
         // }),
+        SubMenu({
+            items: Variable(1),
+            direction: 'down',
+            children: [
+                LedLightColorSwitcher(),
+            ],
+        }),
     ],
 });
