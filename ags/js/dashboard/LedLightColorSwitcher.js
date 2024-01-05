@@ -12,6 +12,7 @@ const ToggleLights = () => Widget.Box({
                     .catch(console.error);
             },
             child: Widget.Box({
+                class_name: 'on-inner',
                 children: [
                     Widget.Label('ON'),
                 ],
@@ -24,6 +25,7 @@ const ToggleLights = () => Widget.Box({
                     .catch(console.error);
             },
             child: Widget.Box({
+                class_name: 'off-inner',
                 children: [
                     Widget.Label('OFF'),
 

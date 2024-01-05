@@ -310,11 +310,12 @@ window#dashboard .datemenu .sub-menu {
     }
 
     .on {
-        box-shadow: inset 0px 10px 14px -6px rgba(0, 0, 0, 0.77);
+        box-shadow: inset 0px -20px 2px 2px rgba(0, 0, 0, 0.2);
         margin-right: 0.5em;
     }
+
     .off {
-        box-shadow: inset 0px -10px 14px -6px rgba(0, 0, 0, 0.77);
+        box-shadow: inset 0px 20px 2px 2px rgba(0, 0, 0, 0.2);
     }
 
     .slider {
@@ -347,7 +348,7 @@ window#dashboard .datemenu .sub-menu {
         progress {
             &:focus,
             &:hover{
-                box-shadow: inset 0 0 4px 4px $accent,
+                box-shadow: inset 0 0 3px 3px $accent,
                     inset 0 0 0 99px $widget_bg;
 
                 border: $accent;
@@ -370,7 +371,7 @@ window#dashboard .datemenu .sub-menu {
 
         highlight,
         progress {
-            box-shadow: inset 0px 0px 2px 1px $accent-fg;
+            box-shadow: inset 0px 0px 2px 1px black;
         }
     }
 
@@ -389,7 +390,7 @@ window#dashboard .datemenu .sub-menu {
 
         highlight,
         progress {
-            box-shadow: inset 0px 0px 2px 1px $accent-fg;
+            box-shadow: inset 0px 0px 2px 1px black;
         }
     }
 
