@@ -53,7 +53,7 @@ const ColorTempSlider = () => Widget.Slider({
             // Check if the flat number is within the range or equal to (1700 to 6500) and a multiple of 20
             if ((flatNumber === 1700 || flatNumber === 6500) ||
                 (flatNumber >= 1700 && flatNumber <= 6500 && flatNumber % 20 === 0)) {
-                console.log('temp ' + flatNumber)
+                // console.log('temp ' + flatNumber)
 
                 Utils.execAsync(['bash', '-c', `~/Public/yeelight-shell-scripts/yeelight-colortemp.sh 0 ${flatNumber}`]).catch(console.error);   
             }
@@ -82,7 +82,8 @@ const HueSlider = () => Widget.Slider({
           
             // Check if the flat number is within the range (0 to 359) and a multiple of 6 to lower down spam to lights
             if (flatNumber >= 0 && flatNumber <= 359 && flatNumber % 6 === 0) {
-                console.log('hue ' + flatNumber)
+                // console.log('hue ' + flatNumber)
+
                 Utils.execAsync(['bash', '-c', `~/Public/yeelight-shell-scripts/yeelight-hue.sh 0 ${flatNumber} 100`]).catch(console.error);   
             }
         }
@@ -108,7 +109,7 @@ const BrightnessSlider = () => Widget.Slider({
             // Check if the flat number is within the range or equal to (0 to 100) and a multiple of 10
             if ((flatNumber === 0 || flatNumber === 100) ||
                 (flatNumber >= 0 && flatNumber <= 100 && flatNumber % 10 === 0)) {
-                console.log('brightness ' + flatNumber)
+                // console.log('brightness ' + flatNumber)
 
                 Utils.execAsync(['bash', '-c', `~/Public/yeelight-shell-scripts/yeelight-brightness.sh 0 ${flatNumber}`]).catch(console.error);   
             }
