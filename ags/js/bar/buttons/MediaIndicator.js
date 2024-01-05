@@ -31,8 +31,15 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
     setupRevealer: self => {
         let current = '';
         self.hook(player, () => {
-            if (current === player.track_title)
+            if (current === player.track_title) {
+                if (current === "" && "" === player.track_title) {
+                    self.get_children().forEach(ch => {
+                        ch.label = null;
+                    });
+                }
+
                 return;
+            }
 
             function truncateString(inputString, maxLength) {
                 if (!inputString) {

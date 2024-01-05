@@ -60,7 +60,7 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Widget
         const name = `${player.entry}${symbolic ? '-symbolic' : ''}`;
         Utils.lookUpIcon(name)
             ? selectedIcon = name
-            : selectedIcon = icons.mpris.fallback;
+            : selectedIcon = icons.mpris.pause;
 
         //check if media is playing, if not them remove media icon
         if (player && player.position && player.position === -1) {
