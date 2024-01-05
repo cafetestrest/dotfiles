@@ -78,17 +78,12 @@ export default () => PopupWindow({
             // Header(),
             Row(
                 [
-                    // NetworkToggle(),
-                    NightlightToggle(),
-                    // Widget.Box({ class_name: 'button-spacing' }),
-                    IdleToggle(),
-                ],
-            ),
-            Row(
-                [
-                    DND(),
-                    BluetoothToggle(),
-                    // Widget.Box({ class_name: 'button-spacing' }),
+                    Homogeneous([
+                        BluetoothToggle(),
+                        IdleToggle(),
+                        // NetworkToggle(),
+                        // Widget.Box({ class_name: 'button-spacing' }),
+                    ]),
                 ],
                 [
                     // WifiSelection(),
@@ -97,15 +92,29 @@ export default () => PopupWindow({
             ),
             Row(
                 [
-                    ThemeToggle(),
-                    // Widget.Box({ class_name: 'button-spacing' }),
-                    // MicMute(),
-                    ScreenRecordToggle()
+                    Homogeneous([
+                        NightlightToggle(),
+                        ScreenRecordToggle()
+                        // Widget.Box({ class_name: 'button-spacing' }),
+                    ]),
+                ],
+                [
+                    // ProfileSelector(),
+                    ScreenRecordSelector(),
+                ],
+            ),
+            Row(
+                [
+                    Homogeneous([
+                        DND(),
+                        ThemeToggle(),
+                        // Widget.Box({ class_name: 'button-spacing' }),
+                        // MicMute(),
+                    ]),
                 ],
                 [
                     // ProfileSelector(),
                     ThemeSelector(),
-                    ScreenRecordSelector(),
                 ],
             ),
             Row([Widget.Box({

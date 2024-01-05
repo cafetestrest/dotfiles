@@ -1,9 +1,9 @@
-$buttonMinHeight: 3.2em;
-$buttonMinWidth: 11em;
+$buttonMinHeight: $spacing * 6.2;
+$buttonMinWidth: $spacing * 21;
 // min height of the volume slider
-$sliderVolumeMinHeight: 2em;
+$sliderVolumeMinHeight: $spacing * 4;
 // min width of the volume (to not become invisible)
-$sliderTroughMinWidth: 2em;
+$sliderTroughMinWidth: $spacing * 4;
 
 window#quicksettings .window-content {
     @include floating-widget;
