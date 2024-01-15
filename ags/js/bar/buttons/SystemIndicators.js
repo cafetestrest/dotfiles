@@ -58,7 +58,8 @@ const BluetoothIndicator = () => Widget.Icon({
 });
 
 const NetworkIndicator = () => Widget.Icon().hook(Network, self => {
-    const icon = Network[Network.primary || 'wifi']?.iconName;
+    // const icon = Network[Network.primary || 'wifi']?.iconName;
+    const icon = Network[Network.primary || '']?.iconName;
     self.icon = icon || '';
     self.visible = !!icon;
 });
