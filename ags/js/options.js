@@ -157,7 +157,7 @@ export default {
     applauncher: {
         width: Option(500),
         height: Option(500),
-        anchor: Option(['center']),
+        anchor: Option(['top']),
         icon_size: Option(24),
     },
 
@@ -273,7 +273,8 @@ export default {
             ['transmission-gtk', 'transmission'],
             ['blueberry.py', 'bluetooth'],
             ['Caprine', 'facebook-messenger'],
-            ['', 'preferences-desktop-display'],
+            ['', 'preferences-desktop-apps'],
+            ['com.github.Aylur.ags', 'preferences-desktop-apps'],
             ['Chromium-browser', 'chromium'],
             ['VSCodium', 'vscodium'],
             ['jetbrains-phpstorm', 'phpstorm'],
